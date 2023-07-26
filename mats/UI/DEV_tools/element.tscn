@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt0p2so44154f"]
+
+[ext_resource type="Script" path="res://mats/UI/DEV_tools/element.gd" id="1_418c6"]
+
+[node name="e" type="VBoxContainer"]
+script = ExtResource("1_418c6")
+
+[node name="txt" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="t" type="RichTextLabel" parent="txt"]
+custom_minimum_size = Vector2(95, 45)
+layout_mode = 2
+text = "summon enemys"
+scroll_active = false
+
+[node name="bcont" type="Control" parent="txt"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="b" type="Button" parent="txt/bcont"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="sb" type="SpinBox" parent="."]
+layout_mode = 2
+
+[connection signal="value_changed" from="sb" to="." method="_on_spin_box_value_changed"]
