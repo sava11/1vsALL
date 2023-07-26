@@ -6,14 +6,14 @@ extends Node2D
 @export_range(1,100) var dif:int=1
 @onready var est=$enemy_summon_timer
 
-func _physics_process(delta):
-	$cl/Control/stats/mny.text="money: "+str(fnc.get_hero().money)
-	$cl/Control/stats/exp.text="exp: "+str(fnc.get_hero().exp)
+#func _physics_process(delta):
+	#$cl/Control/stats/mny.text="money: "+str(fnc.get_hero().money)
+	#$cl/Control/stats/exp.text="exp: "+str(fnc.get_hero().exp)
 
 func summon():
 	var enemys_count=randi_range(enemys_count_from,enemys_count_to)
 	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/test/enemy.tscn").instantiate()
+		var e=preload("res://mats/enemys/e1/enemy.tscn").instantiate()
 		var x=0
 		var y=0
 		var x1=0
@@ -43,10 +43,10 @@ func summon1():
 		enemys_count=$cl/Control/panel/cont/e/sb.value
 	if $cl/Control/panel/cont/e/sb.value==0:
 		for e in $world.get_children():
-			if e is skeletV1:
+			if e != fnc.get_hero():
 				e.queue_free()
 	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/test/enemy.tscn").instantiate()
+		var e=preload("res://mats/enemys/e1/enemy.tscn").instantiate()
 		var x=0
 		var y=0
 		var x1=0

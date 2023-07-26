@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://mats/world.gd" id="1_kbywa"]
 [ext_resource type="Texture2D" uid="uid://b5cnjupnwx1lj" path="res://mats/Tileset.png" id="2_kc65e"]
 [ext_resource type="Texture2D" uid="uid://c7tfvhbmccb17" path="res://mats/DirtTileset.png" id="3_dw0g6"]
-[ext_resource type="PackedScene" path="res://mats/boxes/hurt_box.tscn" id="5_my6wo"]
+[ext_resource type="PackedScene" uid="uid://cme1lv1g3bkqq" path="res://mats/enemys/e1/enemy.tscn" id="5_gr1my"]
 [ext_resource type="Script" path="res://mats/UI/panel.gd" id="6_d4hlp"]
 [ext_resource type="PackedScene" uid="uid://dt0p2so44154f" path="res://mats/UI/DEV_tools/element.tscn" id="7_2o1ld"]
 
@@ -818,23 +818,13 @@ format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 196609, 65536, 1, 262145, 65536, 1, 262146, 65536, 1, 196610, 65536, 1, 131074, 65536, 1, 65538, 65536, 1, 65537, 65536, 1, 1, 65536, 0, 131073, 65536, 1, 2, 65536, 0, 262144, 0, 1, 262147, 65536, 1, 327681, 65536, 1, 327682, 65536, 1, 327683, 65536, 1, 327684, 65536, 1, 262148, 65536, 1, 262149, 65536, 1, 327680, 0, 1, 196611, 65536, 1, 131075, 65536, 1, 65539, 65536, 1, 65540, 65536, 1, 131076, 65536, 1, 3, 65536, 0, 196612, 65536, 1, 4, 65536, 0, 131077, 65536, 1, 65541, 65536, 1, 65542, 131072, 1, 131078, 131072, 1, 196613, 65536, 1, 5, 65536, 0, 196614, 131072, 1, 262150, 131072, 1, 327686, 131072, 1, 327685, 65536, 1, 6, 131072, 0, 393216, 0, 2, 393217, 65536, 2, 393218, 65536, 2, 393219, 65536, 2, 393220, 65536, 2, 393221, 65536, 2, 393222, 131072, 2)
 
 [node name="cam" type="Camera2D" parent="."]
-position = Vector2(55, 55)
 
 [node name="world" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="player" parent="world" instance=ExtResource("1_gsuyc")]
-position = Vector2(55, 55)
 
-[node name="rt" type="RemoteTransform2D" parent="world/player"]
-remote_path = NodePath("../../../cam")
-
-[node name="hurt_box" parent="world" instance=ExtResource("5_my6wo")]
-position = Vector2(120, 56)
-m_he = 10
-
-[node name="col" parent="world/hurt_box" index="0"]
-polygon = PackedVector2Array(-8, -32, -8, 8, 16, 8, 8, -32)
+[node name="RigidBody2D" parent="world" instance=ExtResource("5_gr1my")]
 
 [node name="cl" type="CanvasLayer" parent="."]
 
@@ -960,5 +950,3 @@ wait_time = 8.0
 [connection signal="gui_input" from="cl/Control/panel/Panel" to="cl/Control/panel" method="_on_panel_gui_input" flags=18]
 [connection signal="button_down" from="cl/Control/panel/close" to="cl/Control/panel" method="_on_close_button_down" flags=18]
 [connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout"]
-
-[editable path="world/hurt_box"]
