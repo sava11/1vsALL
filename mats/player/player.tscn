@@ -1648,6 +1648,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [&"walk_down"]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("c:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_dl4te"]
 resource_name = "roll_left"
@@ -1738,6 +1750,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"walk_left"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("c:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_0x8bo"]
@@ -1830,6 +1854,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [&"walk_right"]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("c:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_qkyqt"]
 resource_name = "roll_up"
@@ -1920,6 +1956,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"walk_up"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("c:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_a8lga"]
@@ -2430,8 +2478,7 @@ show_percentage = false
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53mpi")
-animation = &"idle_right"
-frame = 2
+animation = &"walk_down"
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="."]
@@ -2459,20 +2506,23 @@ rotation = 1.5708
 shape = SubResource("CircleShape2D_dss2x")
 
 [node name="hurt_box" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
 script = ExtResource("10_yv63u")
 tspeed = 2.0
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]
+visible = false
 rotation = 1.5708
 shape = SubResource("CircleShape2D_12hft")
 
 [node name="Timer" type="Timer" parent="hurt_box"]
 
 [node name="hirtbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 4
+collision_mask = 0
 monitoring = false
 monitorable = false
 script = ExtResource("11_q38bs")
@@ -2487,6 +2537,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="c" type="CollisionShape2D" parent="get_money_area"]
+visible = false
 shape = SubResource("CircleShape2D_2g46u")
 
 [node name="rt" type="RemoteTransform2D" parent="."]

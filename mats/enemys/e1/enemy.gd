@@ -1,4 +1,4 @@
-class_name enemy extends RigidBody2D
+extends RigidBody2D
 @export_group("parametrs")
 @export var attack_range:float=40
 @export var run_speed:float=80.0
@@ -19,7 +19,7 @@ func _ready():
 	hb.s_m_h(life_points)
 	hb.set_he(life_points)
 	$hirtbox.damage=damage
-	#at.active=true
+	at.active=true
 	at["parameters/conditions/death"]=false
 	var pol=PackedVector2Array([])
 	var tang=abs(angle_from)+abs(angle_to)
@@ -58,26 +58,20 @@ var die=false
 @onready var hero=fnc.get_hero()
 func _physics_process(_delta):
 	if die==false:
-		mvd=Vector2.ZERO#get_input(hero.global_position)
+		mvd=get_input(hero.global_position)
 		if mvd!=Vector2.ZERO:
 			last_mvd=mvd
 		attak=false
 		var nearest_hero_pos=hero.global_position-global_position
 		if fnc.angle(nearest_hero_pos)>$hirtbox.rotation_degrees+angle_from and fnc.angle(nearest_hero_pos)<=$hirtbox.rotation_degrees+angle_to:
 			attak=fnc._sqrt(nearest_hero_pos)<=attack_range
-
-		vec=mvd*run_speed
-		$hirtbox.rotation_degrees=fnc.angle(last_mvd)
+		if attak==false:
+			vec=mvd*run_speed
+			$hirtbox.rotation_degrees=fnc.angle(last_mvd)
+		else:vec=Vector2.ZERO
 		set_linear_velocity(vec)
 	#print(state)
-func _freeze():
-	freeze=true
-	set_linear_velocity(Vector2.ZERO)
-func _unfreeze():
-	#print("unfrezd")
-	freeze=false
-func _exit_from_anim():
-	_unfreeze()
+
 func _upd_anim_params():
 	at["parameters/conditions/idle"]=mvd==Vector2.ZERO and die==false
 	at["parameters/conditions/run"]=mvd!=Vector2.ZERO and die==false
@@ -90,4 +84,6 @@ func _upd_anim_params():
 func delete():
 	queue_free()
 func _on_hurt_box_no_he():
+	set_deferred("freeze",true)
+	set_linear_velocity(Vector2.ZERO)
 	die=true

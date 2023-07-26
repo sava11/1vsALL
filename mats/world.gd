@@ -6,9 +6,9 @@ extends Node2D
 @export_range(1,100) var dif:int=1
 @onready var est=$enemy_summon_timer
 
-#func _physics_process(delta):
-	#$cl/Control/stats/mny.text="money: "+str(fnc.get_hero().money)
-	#$cl/Control/stats/exp.text="exp: "+str(fnc.get_hero().exp)
+func _physics_process(delta):
+	$cl/Control/stats/mny.text="money: "+str(fnc.get_hero().money)
+	$cl/Control/stats/exp.text="exp: "+str(fnc.get_hero().exp)
 
 func summon():
 	var enemys_count=randi_range(enemys_count_from,enemys_count_to)

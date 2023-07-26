@@ -36,7 +36,6 @@ func _ready():
 	var tang=abs(angle_from)+abs(angle_to)
 	var dots=6
 	var ang=tang/dots
-	print(ang)
 	if pos_from==pos_to and pos_to==0:
 		pol.append(Vector2.ZERO)
 	else:
@@ -72,7 +71,7 @@ func _physics_process(_delta):
 	roll=Input.is_action_just_pressed("roll")
 	attak=false
 	for e in fnc.get_world_node().get_children():
-		if e!=self:
+		if e!=self and e.die==false:
 			var nearest_enemy_pos=e.global_position-global_position
 			if fnc.angle(nearest_enemy_pos)>$hirtbox.rotation_degrees+angle_from and fnc.angle(nearest_enemy_pos)<=$hirtbox.rotation_degrees+angle_to:
 				attak=fnc._sqrt(nearest_enemy_pos)<=attack_range
