@@ -13,7 +13,7 @@ func _physics_process(delta):
 func summon():
 	var enemys_count=randi_range(enemys_count_from,enemys_count_to)
 	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/e1/enemy.tscn").instantiate()
+		var e=preload("res://mats/enemys/e1/enemy1.tscn").instantiate()
 		var x=0
 		var y=0
 		var x1=0
@@ -32,7 +32,7 @@ func summon():
 			y=win.y/2
 			y1=win.y/2+fnc.get_hero().run_speed*1.2+e.image_height
 		e.global_position=Vector2(randf_range(x,x1),randf_range(y,y1))+fnc.get_camera().global_position
-		e.target_path=fnc.get_hero().get_path()
+		#e.target_path=fnc.get_hero().get_path()
 		$world.add_child(e)
 
 func summon1():
@@ -46,7 +46,7 @@ func summon1():
 			if e != fnc.get_hero():
 				e.queue_free()
 	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/e1/enemy.tscn").instantiate()
+		var e=preload("res://mats/enemys/e1/enemy1.tscn").instantiate()
 		var x=0
 		var y=0
 		var x1=0

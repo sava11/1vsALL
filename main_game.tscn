@@ -1,10 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://jwd0kp3nrwl1"]
+[gd_scene load_steps=27 format=3 uid="uid://jwd0kp3nrwl1"]
 
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/player.tscn" id="1_gsuyc"]
 [ext_resource type="Script" path="res://mats/world.gd" id="1_kbywa"]
 [ext_resource type="Texture2D" uid="uid://b5cnjupnwx1lj" path="res://mats/Tileset.png" id="2_kc65e"]
 [ext_resource type="Texture2D" uid="uid://c7tfvhbmccb17" path="res://mats/DirtTileset.png" id="3_dw0g6"]
-[ext_resource type="PackedScene" uid="uid://bd24ia8p2suh3" path="res://mats/enemys/e1/enemy1.tscn" id="5_fk2mk"]
 [ext_resource type="Script" path="res://mats/UI/panel.gd" id="6_d4hlp"]
 [ext_resource type="PackedScene" uid="uid://dt0p2so44154f" path="res://mats/UI/DEV_tools/element.tscn" id="7_2o1ld"]
 
@@ -804,8 +803,9 @@ Button/styles/pressed = SubResource("StyleBoxFlat_sw351")
 [node name="game" type="Node2D"]
 editor_description = "проблеммы с анимациями"
 script = ExtResource("1_kbywa")
-enemys_count_from = 1
-enemys_count_to = 2
+time_periond_from = 5.0
+time_periond_to = 8.0
+enemys_count_to = 12
 
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_6vw5y")
@@ -823,9 +823,6 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608,
 y_sort_enabled = true
 
 [node name="player" parent="world" instance=ExtResource("1_gsuyc")]
-
-[node name="enemy" parent="world" instance=ExtResource("5_fk2mk")]
-position = Vector2(124, 44)
 
 [node name="cl" type="CanvasLayer" parent="."]
 
@@ -946,7 +943,8 @@ offset_bottom = 72.0
 text = "asd"
 
 [node name="enemy_summon_timer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 3.0
+autostart = true
 
 [connection signal="gui_input" from="cl/Control/panel/Panel" to="cl/Control/panel" method="_on_panel_gui_input" flags=18]
 [connection signal="button_down" from="cl/Control/panel/close" to="cl/Control/panel" method="_on_close_button_down" flags=18]

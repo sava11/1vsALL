@@ -18,8 +18,7 @@ var attak:bool=false
 
 #НЕ ЗАБЫВАЙ ПОСЛЕ ОБНОВЛЕНИЯ ВРЕМЕНИ АНИМАЦИИ ОБНАВЛЯТЬ ТАЙМЕРЫ!!!!!!!!!!!!!
 var timer=0
-@onready var roll_timer=0.6
-@onready var fast_attak_timer=0.44
+@onready var roll_timer=0.4
 var money=0
 var exp=0
 var lvl=0
@@ -44,6 +43,7 @@ func _ready():
 	for e in range(dots+1):
 		pol.append(fnc.move(e*ang+angle_from)*attack_range)
 	$hirtbox/col.polygon=pol
+	$get_enemy_area/c.polygon=pol
 
 #enum{idle,move,rolling,attak_fast,die}
 #var state:int=0
@@ -64,45 +64,31 @@ var last_mvd:Vector2=mvd
 var freezed_mvd:Vector2=mvd
 var vec=Vector2.ZERO
 var rolling=false
+var die=false
 func _physics_process(_delta):
-	mvd=get_input()
-	if mvd!=Vector2.ZERO:
-		last_mvd=mvd
-	roll=Input.is_action_just_pressed("roll")
-	attak=false
-	for e in fnc.get_world_node().get_children():
-		if e!=self and e.die==false:
-			var nearest_enemy_pos=e.global_position-global_position
-			if fnc.angle(nearest_enemy_pos)>$hirtbox.rotation_degrees+angle_from and fnc.angle(nearest_enemy_pos)<=$hirtbox.rotation_degrees+angle_to:
-				attak=fnc._sqrt(nearest_enemy_pos)<=attack_range
-	
-	
-	
-	if roll:
-		freezed_mvd=last_mvd
-		rolling=true
-	if rolling:
-		vec=freezed_mvd*roll_speed
-		timer+=_delta
-		if timer>=roll_timer:
-			timer=0
-			hb.monitorable=true
-			hb.monitoring=true
-			_exit_from_anim()
-			rolling=false
-	else:
-		vec=mvd*run_speed
-		$hirtbox.rotation_degrees=fnc.angle(last_mvd)
-	set_linear_velocity(vec)
+	if die==false:
+		mvd=get_input()
+		if mvd!=Vector2.ZERO:
+			last_mvd=mvd
+		roll=Input.is_action_just_pressed("roll")
+		attak=bs!=[]
+		if roll:
+			freezed_mvd=last_mvd
+			rolling=true
+		if rolling:
+			vec=freezed_mvd*roll_speed
+			timer+=_delta
+			if timer>=roll_timer:
+				timer=0
+				hb.monitorable=true
+				hb.monitoring=true
+				rolling=false
+		else:
+			vec=mvd*run_speed
+			$hirtbox.rotation_degrees=fnc.angle(last_mvd)
+			$get_enemy_area/c.rotation_degrees=$hirtbox.rotation_degrees
+		set_linear_velocity(vec)
 	#print(state)
-func _freeze():
-	freeze=true
-	set_linear_velocity(Vector2.ZERO)
-func _unfreeze():
-	#print("unfrezd")
-	freeze=false
-func _exit_from_anim():
-	_unfreeze()
 func _upd_anim_params():
 	$pg.value=hb.he
 	$pg.max_value=hb.m_he
@@ -110,7 +96,7 @@ func _upd_anim_params():
 	at["parameters/conditions/run"]=mvd!=Vector2.ZERO and roll==false and rolling==false
 	at["parameters/conditions/attack1"]=attak
 	at["parameters/conditions/roll"]=rolling
-	at["parameters/conditions/death"]=false
+	at["parameters/conditions/death"]=die
 	at["parameters/run/blend_position"]=last_mvd
 	at["parameters/roll/blend_position"]=last_mvd
 	at["parameters/idle/blend_position"]=last_mvd
@@ -125,7 +111,9 @@ func _on_hurt_box_h_ch(v):
 		#state=idle
 
 func _on_hurt_box_no_he():
-	pass
+	set_deferred("freeze",true)
+	set_linear_velocity(Vector2.ZERO)
+	die=true
 
 
 func _on_get_money_area_area_entered(area):
@@ -136,9 +124,11 @@ func _on_get_money_area_area_entered(area):
 	area.queue_free()
 
 var bs=[]
-func _on_hirtbox_body_entered(b):
-	bs.append(b)
+func _on_body_entered(b):
+	if b!=self:
+		bs.append(b)
 
 
-func _on_hirtbox_body_exited(b):
-	bs.remove_at(fnc.i_search(bs,b))
+func _on_body_exited(b):
+	if b!=self:
+		bs.remove_at(fnc.i_search(bs,b))

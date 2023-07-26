@@ -38,7 +38,10 @@ func jos(a,b):
 		return b*round(a/b)
 	else:return 0
 func circ(a,mn,mx):
-	return a%(mx+1)+mn
+	return abs(a)%abs(mx+1)+mn
+func circf(a:float,mn,mx):
+	var inta=int(a)
+	return abs(inta)%abs(mx+1)+mn+float(a-inta)
 func i_search(a,i):
 	var inte=0
 	for k in a:

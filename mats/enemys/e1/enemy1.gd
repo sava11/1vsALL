@@ -1,5 +1,6 @@
 extends RigidBody2D
 @export_group("parametrs")
+@export var image_height:int=48
 @export var attack_range:float=40
 @export var run_speed:float=20.0
 @export_range(1,999999999) var life_points:float=2.0
@@ -11,7 +12,6 @@ extends RigidBody2D
 @export_range(-180,180) var angle_to:float=45
 @onready var at=$at
 @onready var hb=$hurt_box
-var attak:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hb.monitorable=true
@@ -24,7 +24,6 @@ func _ready():
 	var pol=PackedVector2Array([])
 	var tang=abs(angle_from)+abs(angle_to)
 	var dots=6
-	
 	var ang=tang/dots
 	if pos_from==pos_to and pos_to==0:
 		pol.append(Vector2.ZERO)
@@ -35,8 +34,6 @@ func _ready():
 		pol.append(fnc.move(e*ang+angle_from)*attack_range)
 	$hirtbox/col.polygon=pol
 
-#enum{idle,move,rolling,attak_fast,die}
-#var state:int=0
 func get_input(target):
 	var ang=45
 	return fnc.move(fnc.get_ang_move(fnc.angle(target-global_position)+180,ang)*ang)
@@ -48,13 +45,12 @@ func _process(_delta):
 	queue_redraw()
 	_upd_anim_params()
 
-
-
 var mvd:Vector2=Vector2.RIGHT
 var last_mvd:Vector2=mvd
-var vec=Vector2.ZERO
-var die=false
-@onready var hero=fnc.get_hero()
+var vec:Vector2=Vector2.ZERO
+var die:bool=false
+var attak:bool=false
+@onready var hero = fnc.get_hero()
 func _physics_process(_delta):
 	if die==false:
 		mvd=get_input(hero.global_position)
@@ -69,6 +65,8 @@ func _physics_process(_delta):
 			$hirtbox.rotation_degrees=fnc.angle(last_mvd)
 		else:vec=Vector2.ZERO
 		set_linear_velocity(vec)
+	else:
+		at["parameters/conditions/death"]=true
 	#print(state)
 func _upd_anim_params():
 	at["parameters/conditions/idle"]=mvd==Vector2.ZERO and die==false
@@ -85,3 +83,4 @@ func _on_hurt_box_no_he():
 	set_deferred("freeze",true)
 	set_linear_velocity(Vector2.ZERO)
 	die=true
+	
