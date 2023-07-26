@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://mats/world.gd" id="1_kbywa"]
 [ext_resource type="Texture2D" uid="uid://b5cnjupnwx1lj" path="res://mats/Tileset.png" id="2_kc65e"]
 [ext_resource type="Texture2D" uid="uid://c7tfvhbmccb17" path="res://mats/DirtTileset.png" id="3_dw0g6"]
-[ext_resource type="PackedScene" uid="uid://cme1lv1g3bkqq" path="res://mats/enemys/e1/enemy.tscn" id="5_gr1my"]
+[ext_resource type="PackedScene" uid="uid://bd24ia8p2suh3" path="res://mats/enemys/e1/enemy1.tscn" id="5_fk2mk"]
 [ext_resource type="Script" path="res://mats/UI/panel.gd" id="6_d4hlp"]
 [ext_resource type="PackedScene" uid="uid://dt0p2so44154f" path="res://mats/UI/DEV_tools/element.tscn" id="7_2o1ld"]
 
@@ -824,8 +824,8 @@ y_sort_enabled = true
 
 [node name="player" parent="world" instance=ExtResource("1_gsuyc")]
 
-[node name="RigidBody2D" parent="world" instance=ExtResource("5_gr1my")]
-position = Vector2(88, 72)
+[node name="enemy" parent="world" instance=ExtResource("5_fk2mk")]
+position = Vector2(124, 44)
 
 [node name="cl" type="CanvasLayer" parent="."]
 

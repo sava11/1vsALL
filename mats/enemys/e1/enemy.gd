@@ -1,7 +1,7 @@
 extends RigidBody2D
 @export_group("parametrs")
 @export var attack_range:float=40
-@export var run_speed:float=80.0
+@export var run_speed:float=20.0
 @export_range(1,999999999) var life_points:float=2.0
 @export_group("attack")
 @export_range(1,999999999) var damage:float=2.0
@@ -52,7 +52,6 @@ func _process(_delta):
 
 var mvd:Vector2=Vector2.RIGHT
 var last_mvd:Vector2=mvd
-var freezed_mvd:Vector2=mvd
 var vec=Vector2.ZERO
 var die=false
 @onready var hero=fnc.get_hero()
@@ -71,7 +70,6 @@ func _physics_process(_delta):
 		else:vec=Vector2.ZERO
 		set_linear_velocity(vec)
 	#print(state)
-
 func _upd_anim_params():
 	at["parameters/conditions/idle"]=mvd==Vector2.ZERO and die==false
 	at["parameters/conditions/run"]=mvd!=Vector2.ZERO and die==false
