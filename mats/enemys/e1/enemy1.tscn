@@ -2620,6 +2620,9 @@ lock_rotation = true
 freeze_mode = 1
 script = ExtResource("1_slc2g")
 attack_range = 20.0
+run_speed = 30.0
+pos_from = 0.0
+pos_to = 0.0
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a66wy")

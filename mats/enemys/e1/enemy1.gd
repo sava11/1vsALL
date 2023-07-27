@@ -1,11 +1,20 @@
-extends RigidBody2D
+class_name enemy extends RigidBody2D
 @export_group("parametrs")
 @export var image_height:int=48
+@export_range(0,100) var dif:float=0
 @export var attack_range:float=40
 @export var run_speed:float=20.0
-@export_range(1,999999999) var life_points:float=2.0
+@export_range(1,999999999) var life_points_from:float=1.0
+@export_range(1,999999999) var life_points_to:float=3.0
+@export_group("drop")
+@export var aditional_drop:PackedScene
+@export_range(0,999999999) var exp_from=4
+@export_range(0,999999999) var exp_to=10
+@export_range(0,999999999) var mny_from=2
+@export_range(0,999999999) var mny_to=6
 @export_group("attack")
-@export_range(1,999999999) var damage:float=2.0
+@export_range(1,999999999) var damage_from:float=1.0
+@export_range(1,999999999) var damage_to:float=2.0
 @export var pos_from:float=-10
 @export var pos_to:float=10
 @export_range(-180,180) var angle_from:float=-45
@@ -13,12 +22,19 @@ extends RigidBody2D
 @onready var at=$at
 @onready var hb=$hurt_box
 # Called when the node enters the scene tree for the first time.
+func _with_dific(v:float,dif:float):
+	return v+v*dif
 func _ready():
 	hb.monitorable=true
 	hb.monitoring=true
+	var life_points=_with_dific(randi_range(life_points_from,life_points_to),dif)
 	hb.s_m_h(life_points)
 	hb.set_he(life_points)
+	var damage=_with_dific(randi_range(damage_from,damage_to),dif)
 	$hirtbox.damage=damage
+	var def=_with_dific(randi_range(1,2),dif)
+	hb.s_m_d(def)
+	hb.set_def(def)
 	at.active=true
 	at["parameters/conditions/death"]=false
 	var pol=PackedVector2Array([])
@@ -39,7 +55,7 @@ func get_input(target):
 	return fnc.move(fnc.get_ang_move(fnc.angle(target-global_position)+180,ang)*ang)
 
 func _draw():
-	draw_arc(Vector2.ZERO,30.0,deg_to_rad($hirtbox.rotation_degrees+angle_to),deg_to_rad($hirtbox.rotation_degrees+angle_from),30,Color(1,0,0,0.5),2,true)
+	draw_arc(Vector2.ZERO,attack_range,deg_to_rad($hirtbox.rotation_degrees+angle_to),deg_to_rad($hirtbox.rotation_degrees+angle_from),30,Color(1,0,0,0.5),2,true)
 
 func _process(_delta):
 	queue_redraw()
@@ -78,6 +94,15 @@ func _upd_anim_params():
 	at["parameters/attack1/blend_position"]=last_mvd#-1+2*int(get_global_mouse_position().x>global_position.x)
 	at["parameters/death/blend_position"]=last_mvd
 func delete():
+	if mny_from!=mny_to and exp_from!=exp_to:
+		var v=preload("res://mats/ingame_value/value.tscn").instantiate()
+		v.type=randi_range(0,1)
+		if v.type==0:
+			v.value=randi_range(mny_from,mny_to)
+		else:
+			v.value=randi_range(exp_from,exp_to)
+		get_parent().add_child.call_deferred(v)
+		v.global_position=global_position
 	queue_free()
 func _on_hurt_box_no_he():
 	set_deferred("freeze",true)

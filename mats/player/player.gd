@@ -1,11 +1,13 @@
 extends RigidBody2D
+@export var player_type:gm.player_types
 @export_group("parametrs")
-@export var attack_range:float=40
+@export_range(0,99999) var max_roll_points:int=3
+@export_range(0.001,99999) var add_roll_point_time:float=1.2
 @export var run_speed:float=80.0
-@export var roll_speed:float=140.0
-@export var desh_speed:float=200.0
+@export var roll_speed:float=200.0
 @export_range(1,999999999) var life_points:float=10.0
 @export_group("attack")
+@export var attack_range:float=40
 @export_range(1,999999999) var damage:float=2.0
 @export var pos_from:float=-10
 @export var pos_to:float=10
@@ -18,16 +20,33 @@ var attak:bool=false
 
 #НЕ ЗАБЫВАЙ ПОСЛЕ ОБНОВЛЕНИЯ ВРЕМЕНИ АНИМАЦИИ ОБНАВЛЯТЬ ТАЙМЕРЫ!!!!!!!!!!!!!
 var timer=0
-@onready var roll_timer=0.4
+var roll_timer=0
 var money=0
 var exp=0
 var lvl=0
+var current_roll_points=max_roll_points
+var cd={}
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	cd=gm.objs["player"][player_type].duplicate()
+	roll_timer=cd["roll_timer"]
+	var roll_t=$ap.get_animation("roll_up").length/cd["roll_timer"]
+	for e in ["roll_up","roll_down","roll_left","roll_right"]:
+		var anim:Animation=$ap.get_animation(e)
+		anim.length=cd["roll_timer"]
+		var tc=anim.get_track_count()-1
+		for t in range(tc):
+			for k in range(anim.track_get_key_count(t)):
+				anim.track_set_key_time(t,k,anim.track_get_key_time(t,k)*roll_t)
+	run_speed=cd["run_speed"]
+	roll_speed=cd["roll_speed"]
+	life_points=cd["hp"]
 	hb.monitorable=true
 	hb.monitoring=true
 	hb.s_m_h(life_points)
 	hb.set_he(life_points)
+	hb.s_m_d(cd["def"])
+	hb.set_def(cd["def"])
 	$hirtbox.damage=damage
 	at.active=true
 	at["parameters/conditions/death"]=false
@@ -72,9 +91,10 @@ func _physics_process(_delta):
 			last_mvd=mvd
 		roll=Input.is_action_just_pressed("roll")
 		attak=bs!=[]
-		if roll:
+		if roll and int(current_roll_points)>0:
 			freezed_mvd=last_mvd
 			rolling=true
+			current_roll_points-=1
 		if rolling:
 			vec=freezed_mvd*roll_speed
 			timer+=_delta
@@ -84,6 +104,7 @@ func _physics_process(_delta):
 				hb.monitoring=true
 				rolling=false
 		else:
+			current_roll_points=clamp(current_roll_points+_delta*(1/add_roll_point_time),0,max_roll_points)
 			vec=mvd*run_speed
 			$hirtbox.rotation_degrees=fnc.angle(last_mvd)
 			$get_enemy_area/c.rotation_degrees=$hirtbox.rotation_degrees
@@ -125,10 +146,10 @@ func _on_get_money_area_area_entered(area):
 
 var bs=[]
 func _on_body_entered(b):
-	if b!=self:
+	if b!=self and b!=get_tree().current_scene.get_node("border"):
 		bs.append(b)
 
 
 func _on_body_exited(b):
-	if b!=self:
+	if b!=self and b!=get_tree().current_scene.get_node("border"):
 		bs.remove_at(fnc.i_search(bs,b))

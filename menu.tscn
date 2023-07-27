@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://c54d08vj25anr"]
+
+[ext_resource type="Script" path="res://mats/menu.gd" id="1_503lg"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_503lg")
+
+[node name="cont" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -68.0
+offset_right = 41.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="gname" type="RichTextLabel" parent="cont"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "   1vsALL"
+scroll_active = false
+
+[node name="buttons" type="VBoxContainer" parent="cont"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="play" type="Button" parent="cont/buttons"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "PLAY"
+
+[node name="settings" type="Button" parent="cont/buttons"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="credits" type="Button" parent="cont/buttons"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "CREDITS"
+
+[node name="exit" type="Button" parent="cont/buttons"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "EXIT"
+
+[node name="LinkButton" type="LinkButton" parent="."]
+self_modulate = Color(1, 1, 1, 0.45098)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -226.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "программист этого проекта"
+uri = "https://vk.com/sava11_project"
+
+[node name="LinkButton2" type="LinkButton" parent="."]
+self_modulate = Color(1, 1, 1, 0.45098)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -172.0
+offset_top = 24.0
+offset_bottom = 64.0
+grow_horizontal = 0
+text = "от кого идея проекта"
+uri = "https://vk.com/benny097"
+
+[connection signal="button_down" from="cont/buttons/play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="cont/buttons/credits" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="cont/buttons/exit" to="." method="_on_exit_button_down"]
