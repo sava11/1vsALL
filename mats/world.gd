@@ -84,7 +84,7 @@ func summon1():
 func _on_enemy_summon_timer_timeout():
 	wave_count+=1
 	summon()
-	dif+=0.01
+	dif+=0.1
 	var time=randf_range(time_periond_from,time_periond_to)
 	est.start(time+time*dif)
 

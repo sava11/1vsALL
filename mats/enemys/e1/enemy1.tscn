@@ -890,8 +890,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_x43ur"]
 resource_name = "attack1_down"
-length = 0.4
-step = 0.05
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -911,7 +910,7 @@ tracks/1/path = NodePath("hirtbox:monitorable")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -923,7 +922,7 @@ tracks/2/path = NodePath("hirtbox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -935,7 +934,7 @@ tracks/3/path = NodePath("sp:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -953,10 +952,9 @@ tracks/4/keys = {
 "values": [&"attack_down"]
 }
 
-[sub_resource type="Animation" id="Animation_fv1k3"]
+[sub_resource type="Animation" id="Animation_dpjdo"]
 resource_name = "attack1_left"
-length = 0.4
-step = 0.05
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -976,7 +974,7 @@ tracks/1/path = NodePath("hirtbox:monitorable")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -988,7 +986,7 @@ tracks/2/path = NodePath("hirtbox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1000,7 +998,7 @@ tracks/3/path = NodePath("sp:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -1018,10 +1016,9 @@ tracks/4/keys = {
 "values": [&"attack_left"]
 }
 
-[sub_resource type="Animation" id="Animation_ld2bv"]
+[sub_resource type="Animation" id="Animation_as5k4"]
 resource_name = "attack1_right"
-length = 0.4
-step = 0.05
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1041,7 +1038,7 @@ tracks/1/path = NodePath("hirtbox:monitorable")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1053,7 +1050,7 @@ tracks/2/path = NodePath("hirtbox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1065,7 +1062,7 @@ tracks/3/path = NodePath("sp:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -1083,10 +1080,9 @@ tracks/4/keys = {
 "values": [&"attack_right"]
 }
 
-[sub_resource type="Animation" id="Animation_8p3io"]
+[sub_resource type="Animation" id="Animation_etc2h"]
 resource_name = "attack1_up"
-length = 0.4
-step = 0.05
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1106,7 +1102,7 @@ tracks/1/path = NodePath("hirtbox:monitorable")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1118,7 +1114,7 @@ tracks/2/path = NodePath("hirtbox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1130,7 +1126,7 @@ tracks/3/path = NodePath("sp:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -2437,9 +2433,9 @@ tracks/4/keys = {
 resource_local_to_scene = true
 _data = {
 "attack1_down": SubResource("Animation_x43ur"),
-"attack1_left": SubResource("Animation_fv1k3"),
-"attack1_right": SubResource("Animation_ld2bv"),
-"attack1_up": SubResource("Animation_8p3io"),
+"attack1_left": SubResource("Animation_dpjdo"),
+"attack1_right": SubResource("Animation_as5k4"),
+"attack1_up": SubResource("Animation_etc2h"),
 "death_down": SubResource("Animation_lgocw"),
 "death_left": SubResource("Animation_l65ka"),
 "death_right": SubResource("Animation_ndji8"),
@@ -2626,7 +2622,7 @@ pos_to = 0.0
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a66wy")
-animation = &"attack_left"
+animation = &"attack_right"
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="."]
