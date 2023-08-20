@@ -1,7 +1,7 @@
 extends Area2D
 @export var m_he=1: set = s_m_h
-var def
 @export var m_def=1: set = s_m_d
+var def=m_def: set = set_def
 var he=m_he: set = set_he
 @export var tspeed:float=1.0
 @onready var t=$Timer
@@ -62,5 +62,10 @@ func _on_hurt_box_invi_started():
 
 
 func _on_area_entered(area):
-	var dmg=area.damage*area.scale_damage
-	set_he(he-dmg/def)
+	var dmg=area.damage
+	if fnc._with_chance(area.crit_chance):
+		dmg+=area.crit_damage
+		var crit=preload("res://mats/font/crit.tscn").instantiate()
+		get_tree().current_scene.ememys_path.add_child(crit)
+		crit.position=global_position+Vector2(-crit.size.x/2,-40)
+	set_he(he-float(dmg)/float(def))

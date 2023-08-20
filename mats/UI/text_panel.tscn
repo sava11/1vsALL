@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://kckdcywpbss6"]
+
+[ext_resource type="Script" path="res://mats/UI/text_panel.gd" id="1_xv5s0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfh7j"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="text_panel" type="Panel"]
+visible = false
+z_index = 1
+offset_right = 160.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+mouse_default_cursor_shape = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_hfh7j")
+script = ExtResource("1_xv5s0")
+
+[node name="t" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_active = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

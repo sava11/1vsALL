@@ -1,6 +1,6 @@
 extends Node
 func get_hero():
-	return get_tree().current_scene.get_node("world/player")
+	return get_tree().current_scene.get_node("world/ent/player")
 func get_world_node():
 	return get_tree().current_scene.get_node("world")
 func get_camera():
@@ -38,10 +38,10 @@ func jos(a,b):
 		return b*round(a/b)
 	else:return 0
 func circ(a,mn,mx):
-	return abs(a)%abs(mx+1)+mn
-func circf(a:float,mn,mx):
-	var inta=int(a)
-	return abs(inta)%abs(mx+1)+mn+float(a-inta)
+	return abs(mx+a)%abs(mx)+mn
+#func circf(a:float,mn,mx):
+#	var inta=int(a)
+#	return abs(inta)%abs(mx+1)+mn+float(a-inta)
 func i_search(a,i):
 	var inte=0
 	for k in a:
@@ -69,3 +69,19 @@ func get_ang_move(angle:float,ex:float):
 		for e in range(0,le):
 			if ang>=e*ang1 and ang<(e+1)*ang1:
 				return e
+func _with_dific(v:float,dific:float):
+	return v+v*dific
+func _with_chance(chance:float):
+	if gm.rnd.randf_range(0,1)>1-chance:
+		return true
+	return false
+
+func find_betwen_lines(point,lines:PackedVector2Array):
+	var curent=[]
+	for e in range(lines.size()):
+		if lines[e].x<=point and lines[e].y>point:
+			curent.append(e)
+	if curent==[]:
+		return -1
+	else:
+		return curent[gm.rnd.randi_range(0,curent.size()-1)]

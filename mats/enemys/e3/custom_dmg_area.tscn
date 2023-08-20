@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfe22bmixbbc5"]
+
+[ext_resource type="Script" path="res://mats/enemys/e3/custom_dmg_area.gd" id="1_3w7xb"]
+
+[node name="custom_dmg_area" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_3w7xb")

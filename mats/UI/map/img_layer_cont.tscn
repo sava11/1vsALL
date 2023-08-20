@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2rjlyq0tsatx"]
+
+[ext_resource type="Script" path="res://mats/UI/map/img_layer_cont.gd" id="1_6l2jh"]
+
+[node name="img_layer_cont" type="Control"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 60.0
+script = ExtResource("1_6l2jh")

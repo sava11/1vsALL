@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://cictpxl3reeqr"]
+
+[ext_resource type="Script" path="res://authors.gd" id="1_aj2yi"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aj2yi")
+
+[node name="auth" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="t1" type="RichTextLabel" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "TITLE_WHO_WHAT_DO_PROGRAMER"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="t1-1" type="LinkButton" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Voider101"
+uri = "https://vk.com/sava11_projects"
+
+[node name="t2" type="RichTextLabel" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "TITLE_WHO_WHAT_DO_PRODUCER"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="t2-1" type="LinkButton" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Anton "
+uri = "https://vk.com/benny097"
+
+[node name="t3" type="RichTextLabel" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "TITLE_KEY_HUMANS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="t3-1" type="LinkButton" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Anton "
+uri = "https://vk.com/benny097"
+
+[node name="t3-2" type="LinkButton" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Voider101"
+uri = "https://vk.com/sava11_projects"
+
+[node name="t4" type="RichTextLabel" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "TITLE_SPECIAL_THANKS_TO"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="t4-1" type="LinkButton" parent="auth"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Anton "
+uri = "https://vk.com/benny097"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -52.0
+offset_right = 120.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "BACK"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

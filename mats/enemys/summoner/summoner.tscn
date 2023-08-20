@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7qip7vx4s6gx"]
+
+[ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="1_8hym0"]
+[ext_resource type="Script" path="res://mats/enemys/summoner/sumoner.gd" id="1_krofs"]
+
+[sub_resource type="Curve" id="Curve_1hlri"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.134021, 0.389474), 0.0, 0.0, 0, 0, Vector2(0.190722, 0.968421), 0.0, 0.0, 0, 0, Vector2(0.314433, 0.421053), 0.0, 0.0, 0, 0, Vector2(0.402062, 0.863158), 2.89083e-07, 2.89083e-07, 0, 0, Vector2(0.505155, 0.494737), 0.0, 0.0, 0, 0, Vector2(0.587629, 0.694737), 0.0, 0.0, 0, 0, Vector2(0.685567, 0.336842), 0.0, 0.0, 0, 0, Vector2(0.747423, 0.789474), 0.0, 0.0, 0, 0, Vector2(0.835052, 0.210526), 0.0, 0.0, 0, 0, Vector2(0.902062, 0.978947), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 12
+
+[node name="summoner" type="Sprite2D"]
+position = Vector2(76, 39)
+rotation = 0.436332
+scale = Vector2(0.01, 0.01)
+skew = 0.698132
+texture = ExtResource("1_8hym0")
+script = ExtResource("1_krofs")
+time_curve = SubResource("Curve_1hlri")
+time = 2.5

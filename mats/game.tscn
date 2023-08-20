@@ -1,0 +1,371 @@
+[gd_scene load_steps=17 format=3 uid="uid://bla46yhexjifu"]
+
+[ext_resource type="Script" path="res://mats/world.gd" id="1_h267k"]
+[ext_resource type="PackedScene" uid="uid://bxgd1ewukcs5t" path="res://mats/lvls/lvl1.tscn" id="2_aratr"]
+[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_0jca1"]
+[ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="8_s3cml"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w576y"]
+bg_color = Color(0.258824, 0, 0.454902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0r5i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3la0"]
+bg_color = Color(0.168627, 0.188235, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmsdp"]
+bg_color = Color(0.129412, 0, 0.866667, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_leho8"]
+bg_color = Color(0.0627451, 0, 0.533333, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v43d8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3njk"]
+content_margin_left = 5.0
+content_margin_top = 0.0
+content_margin_right = 5.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0784314, 0, 0.145098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1rhv"]
+content_margin_left = 5.0
+content_margin_top = 0.0
+content_margin_right = 5.0
+content_margin_bottom = 0.0
+bg_color = Color(0.301961, 0, 0.478431, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33j16"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="Theme" id="Theme_vxiwi"]
+default_font_size = 16
+Button/styles/disabled = SubResource("StyleBoxFlat_w576y")
+Button/styles/focus = SubResource("StyleBoxFlat_a0r5i")
+Button/styles/hover = SubResource("StyleBoxFlat_e3la0")
+Button/styles/normal = SubResource("StyleBoxFlat_kmsdp")
+Button/styles/pressed = SubResource("StyleBoxFlat_leho8")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_v43d8")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_e3njk")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_l1rhv")
+Panel/styles/panel = SubResource("StyleBoxFlat_33j16")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0313l"]
+bg_color = Color(0, 0.372549, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1n5d6"]
+bg_color = Color(0, 0.172549, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[node name="game" type="Node2D"]
+editor_description = "проблеммы с анимациями"
+script = ExtResource("1_h267k")
+time_periond_from = 50.0
+time_periond_to = 60.0
+enemys_count_from = 15
+enemys_count_to = 20
+waves = 1
+dif = 0.0
+
+[node name="enemy_summon_timer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 3.0
+
+[node name="arena_timer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 3.0
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -304.0
+offset_top = -160.0
+offset_right = 304.0
+offset_bottom = 160.0
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(32, 56)
+zoom = Vector2(1.05, 1.05)
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="lvl" parent="world" instance=ExtResource("2_aratr")]
+
+[node name="ent" type="Node2D" parent="world"]
+process_mode = 1
+y_sort_enabled = true
+
+[node name="enemys" type="Node2D" parent="world/ent"]
+y_sort_enabled = true
+
+[node name="player" parent="world/ent" instance=ExtResource("5_0jca1")]
+position = Vector2(32, 56)
+
+[node name="rt" type="RemoteTransform2D" parent="world/ent/player"]
+remote_path = NodePath("../../../../cam")
+
+[node name="cl" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Control" type="Control" parent="cl"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vxiwi")
+
+[node name="stats" type="Panel" parent="cl/Control"]
+process_mode = 3
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 112.0
+mouse_filter = 2
+
+[node name="vc" type="VBoxContainer" parent="cl/Control/stats"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="mny" type="RichTextLabel" parent="cl/Control/stats/vc"]
+process_mode = 3
+custom_minimum_size = Vector2(112, 20)
+layout_mode = 2
+mouse_filter = 2
+text = "sad"
+scroll_active = false
+
+[node name="hp" type="RichTextLabel" parent="cl/Control/stats/vc"]
+process_mode = 3
+custom_minimum_size = Vector2(112, 20)
+layout_mode = 2
+mouse_filter = 2
+text = "asd"
+scroll_active = false
+
+[node name="xp" type="Control" parent="cl/Control/stats/vc"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/xp"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 28.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+show_percentage = false
+
+[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/xp/pg"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "	lvl - 0"
+
+[node name="stamina" type="Control" parent="cl/Control/stats/vc"]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/stamina"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.8
+offset_right = 28.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme_override_styles/background = SubResource("StyleBoxFlat_0313l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1n5d6")
+value = 50.0
+show_percentage = false
+
+[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/stamina/pg"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "	1"
+
+[node name="waves" type="RichTextLabel" parent="cl/Control"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_right = 60.0
+offset_bottom = 24.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="time" type="RichTextLabel" parent="cl/Control"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 140.0
+offset_top = 48.0
+offset_right = 292.0
+offset_bottom = 72.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="die" type="Control" parent="cl/Control"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="mm" type="RichTextLabel" parent="cl/Control/die"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -84.0
+offset_right = 66.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MEMENTO_MORI"
+scroll_active = false
+
+[node name="Button" type="Button" parent="cl/Control/die"]
+custom_minimum_size = Vector2(130, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -139.0
+offset_right = 65.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BACK_TO_TILTE"
+
+[node name="Panel" parent="cl" instance=ExtResource("8_s3cml")]
+process_mode = 3
+visible = false
+
+[node name="massanges" type="Control" parent="cl"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout" flags=18]
+[connection signal="timeout" from="arena_timer" to="." method="_on_arena_timer_timeout" flags=18]
+[connection signal="button_down" from="cl/Control/die/Button" to="." method="menu_exit"]

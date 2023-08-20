@@ -1,18 +1,19 @@
-class_name enemy extends RigidBody2D
+extends RigidBody2D
 @export_group("parametrs")
-@export var image_height:int=48
 @export_range(0,100) var dif:float=0
-@export var attack_range:float=40
-@export var run_speed:float=20.0
+@export var run_speed:float=30.0
 @export_range(1,999999999) var life_points_from:float=1.0
 @export_range(1,999999999) var life_points_to:float=3.0
+@export_range(1,999999999) var defence_from:float=0.5
+@export_range(1,999999999) var defence_to:float=1.0
 @export_group("drop")
 @export var aditional_drop:PackedScene
-@export_range(0,999999999) var exp_from=4
-@export_range(0,999999999) var exp_to=10
-@export_range(0,999999999) var mny_from=2
-@export_range(0,999999999) var mny_to=6
+@export_range(-999999999,999999999) var exp_from=4
+@export_range(-999999999,999999999) var exp_to=10
+@export_range(-999999999,999999999) var mny_from=2
+@export_range(-999999999,999999999) var mny_to=6
 @export_group("attack")
+@export var attack_range:float=20
 @export_range(1,999999999) var damage_from:float=1.0
 @export_range(1,999999999) var damage_to:float=2.0
 @export var pos_from:float=-10
@@ -22,17 +23,16 @@ class_name enemy extends RigidBody2D
 @onready var at=$at
 @onready var hb=$hurt_box
 # Called when the node enters the scene tree for the first time.
-func _with_dific(v:float,dif:float):
-	return v+v*dif
+
 func _ready():
 	hb.monitorable=true
 	hb.monitoring=true
-	var life_points=_with_dific(randi_range(life_points_from,life_points_to),dif)
+	var life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)
 	hb.s_m_h(life_points)
 	hb.set_he(life_points)
-	var damage=_with_dific(randi_range(damage_from,damage_to),dif)
+	var damage=fnc._with_dific(randf_range(damage_from,damage_to),dif)
 	$hirtbox.damage=damage
-	var def=_with_dific(randi_range(1,2),dif)
+	var def=fnc._with_dific(randf_range(defence_from,defence_to),dif)
 	hb.s_m_d(def)
 	hb.set_def(def)
 	at.active=true
@@ -49,10 +49,10 @@ func _ready():
 	for e in range(dots+1):
 		pol.append(fnc.move(e*ang+angle_from)*attack_range)
 	$hirtbox/col.polygon=pol
+	$get_hero_body/c.polygon=pol
 
 func get_input(target):
-	var ang=45
-	return fnc.move(fnc.get_ang_move(fnc.angle(target-global_position)+180,ang)*ang)
+	return (target-global_position).normalized()
 
 func _draw():
 	draw_arc(Vector2.ZERO,attack_range,deg_to_rad($hirtbox.rotation_degrees+angle_to),deg_to_rad($hirtbox.rotation_degrees+angle_from),30,Color(1,0,0,0.5),2,true)
@@ -72,15 +72,15 @@ func _physics_process(_delta):
 		mvd=get_input(hero.global_position)
 		if mvd!=Vector2.ZERO:
 			last_mvd=mvd
-		attak=false
-		var nearest_hero_pos=hero.global_position-global_position
-		if fnc.angle(nearest_hero_pos)>$hirtbox.rotation_degrees+angle_from and fnc.angle(nearest_hero_pos)<=$hirtbox.rotation_degrees+angle_to:
-			attak=fnc._sqrt(nearest_hero_pos)<=attack_range
+		attak=bs!=[]
 		if attak==false:
 			vec=mvd*run_speed
 			$hirtbox.rotation_degrees=fnc.angle(last_mvd)
-		else:vec=Vector2.ZERO
+			$get_hero_body.rotation_degrees=$hirtbox.rotation_degrees
+		else:
+			vec=Vector2.ZERO
 		set_linear_velocity(vec)
+		
 	else:
 		at["parameters/conditions/death"]=true
 	#print(state)
@@ -98,14 +98,25 @@ func delete():
 		var v=preload("res://mats/ingame_value/value.tscn").instantiate()
 		v.type=randi_range(0,1)
 		if v.type==0:
-			v.value=randi_range(mny_from,mny_to)
+			v.value=fnc._with_dific(randi_range(clamp(mny_from,0,999999999),clamp(mny_to,0,999999999)),dif)
 		else:
-			v.value=randi_range(exp_from,exp_to)
+			v.value=fnc._with_dific(randi_range(clamp(exp_from,0,999999999),clamp(exp_to,0,999999999)),dif)
 		get_parent().add_child.call_deferred(v)
 		v.global_position=global_position
 	queue_free()
+
+	
 func _on_hurt_box_no_he():
-	set_deferred("freeze",true)
 	set_linear_velocity(Vector2.ZERO)
 	die=true
 	
+
+var bs=[]
+func _on_get_hero_body_body_entered(b):
+	if b!=self and b.is_in_group("border")==false:
+		bs.append(b)
+
+
+func _on_get_hero_body_body_exited(b):
+	if b!=self and b.is_in_group("border")==false:
+		bs.remove_at(fnc.i_search(bs,b))

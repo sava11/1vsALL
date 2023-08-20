@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgyx8eln6idgc"]
+
+[ext_resource type="Script" path="res://mats/UI/map/button.gd" id="1_nbxky"]
+[ext_resource type="PackedScene" uid="uid://c2rjlyq0tsatx" path="res://mats/UI/map/img_layer_cont.tscn" id="2_ks20h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwy4c"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
+border_width_left = 1
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 5
+border_color = Color(0.278431, 0.278431, 0.278431, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaqf2"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.584314, 0.584314, 0.584314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jauy"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.584314, 0.584314, 0.584314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxo21"]
+bg_color = Color(0.317647, 0.317647, 0.317647, 1)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.584314, 0.584314, 0.584314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="Theme" id="Theme_aq1dw"]
+Button/styles/disabled = SubResource("StyleBoxFlat_bwy4c")
+Button/styles/hover = SubResource("StyleBoxFlat_yaqf2")
+Button/styles/normal = SubResource("StyleBoxFlat_1jauy")
+Button/styles/pressed = SubResource("StyleBoxFlat_wxo21")
+
+[node name="Button" type="Button"]
+offset_right = 110.0
+offset_bottom = 78.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_aq1dw")
+clip_text = true
+icon_alignment = 2
+expand_icon = true
+language = "ru_RU"
+script = ExtResource("1_nbxky")
+
+[node name="tcont" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="vb" type="HFlowContainer" parent="tcont"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -29.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+
+[node name="img_layer_cont" parent="tcont" instance=ExtResource("2_ks20h")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -25.0
+offset_right = 0.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+img_size = Vector2(32, 32)
+
+[node name="vs" type="VSlider" parent="tcont"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 71.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+focus_mode = 0
+mouse_filter = 1
+max_value = 1.0
+step = 0.05
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="value_changed" from="tcont/vs" to="." method="_on_vs_value_changed"]

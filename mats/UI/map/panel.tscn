@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3nmehkr0kwlj"]
+
+[ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_wj4hv"]
+[ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="2_t0a6j"]
+[ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/maney.png" id="3_kxbme"]
+[ext_resource type="PackedScene" uid="uid://dw82qadqqwww6" path="res://mats/UI/map/item.tscn" id="4_jk0f7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l34a"]
+resource_local_to_scene = true
+bg_color = Color(0.615686, 0.462745, 0, 0.501961)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Panel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 82.0
+offset_top = 8.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wj4hv")
+colums = 5
+rows = 5
+shop_count = 2
+
+[node name="areas" type="Node2D" parent="."]
+visible = false
+position = Vector2(8, 8)
+
+[node name="gc" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = 42.0
+offset_right = -4.0
+grow_vertical = 2
+
+[node name="gc" type="GridContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 16.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+
+[node name="hero_values" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -82.0
+offset_right = -4.0
+offset_bottom = 40.0
+
+[node name="cont" type="VBoxContainer" parent="hero_values"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="money" parent="hero_values/cont" instance=ExtResource("2_t0a6j")]
+layout_mode = 2
+img = ExtResource("3_kxbme")
+
+[node name="xp" type="Control" parent="hero_values/cont"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="pg" type="ProgressBar" parent="hero_values/cont/xp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 92.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.445, 0.445)
+size_flags_horizontal = 3
+value = 50.0
+show_percentage = false
+
+[node name="txt" type="RichTextLabel" parent="hero_values/cont/xp/pg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "	lvl - 1"
+scroll_active = false
+
+[node name="shop_cont" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="shop" type="GridContainer" parent="shop_cont"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+columns = 4
+
+[node name="item" parent="shop_cont/shop" instance=ExtResource("4_jk0f7")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l34a")
+item_name = "armor"
+
+[node name="Button" type="Button" parent="shop_cont"]
+custom_minimum_size = Vector2(95, 35)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -40.0
+offset_right = 99.0
+offset_bottom = -4.0
+grow_vertical = 0
+text = "SHOP_EXIT"
+
+[connection signal="in_shop" from="." to="." method="_on_in_shop"]
+[connection signal="button_down" from="shop_cont/Button" to="." method="_on_shop_exit_down"]
