@@ -181,7 +181,7 @@ func _upd_anim_params():
 func delete():
 	if mny_from!=mny_to and exp_from!=exp_to:
 		var v=preload("res://mats/ingame_value/value.tscn").instantiate()
-		v.type=randi_range(0,1)
+		v.type=0#randi_range(0,1)
 		if v.type==0:
 			v.value=randi_range(mny_from,mny_to)
 		else:

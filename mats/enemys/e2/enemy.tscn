@@ -2284,6 +2284,7 @@ life_points_from = 1.5
 life_points_to = 2.0
 exp_from = 6
 exp_to = 12
+mny_from = 0
 mny_to = 4
 attack_range = 150.0
 damage_from = 2.0

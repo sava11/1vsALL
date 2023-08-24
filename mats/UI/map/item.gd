@@ -6,7 +6,7 @@ var lvl=0
 var del_name
 # Called when the node enters the scene tree for the first time.
 func load_item(item_name:String):
-	sd=gm.objs.items[item_name]
+	sd=gm.objs.updates[item_name]
 	match lvl:
 		0:get("theme_override_styles/panel").bg_color=Color(0,0,0,0.5)
 		1:get("theme_override_styles/panel").bg_color=Color(0,0,0.5,0.5)

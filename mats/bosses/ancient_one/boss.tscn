@@ -2894,7 +2894,7 @@ damage_from = 6.0
 damage_to = 9.0
 angle_from = -30.0
 angle_to = 30.0
-point_per_sec = 2
+point_per_sec = 1.5
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1yhjr")

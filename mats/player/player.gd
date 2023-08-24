@@ -145,7 +145,7 @@ func _physics_process(_delta):
 		if roll and int(current_stamina)>0:
 			freezed_mvd=last_mvd
 			rolling=true
-			current_stamina-=cd.stats["do_roll_cost"]
+			current_stamina-=cd.prefs["do_roll_cost"]
 		if rolling:
 			vec=freezed_mvd*cd.prefs["roll_speed"]*cd.prefs["roll_scale"]
 			timer+=_delta
@@ -179,12 +179,15 @@ func delete():
 
 func _on_hurt_box_h_ch(v):
 	if v>0:
+		for e in $inv.get_children():
+			e.queue_free()
 		pass
 		#state=idle
 
 func _on_hurt_box_no_he():
 	set_deferred("freeze",true)
 	set_linear_velocity(Vector2.ZERO)
+	delete()
 	die=true
 
 

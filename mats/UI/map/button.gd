@@ -1,12 +1,15 @@
 extends Button
 @export_range(0,999) var min_range:int=0
 @export_range(0,999) var max_range:int=0
+@onready var map=get_parent().get_parent().get_parent()
 var sd={}
 var cd={}
 var ivents_imgs:PackedStringArray=[]
 var boss:PackedStringArray
+var enemys:PackedStringArray
 var shop:int=0
 func upd_stats():
+	$tcont/vb.position.y=0
 	sd.clear()
 	#$tcont/vs.value=0
 	$tcont/img_layer_cont.imgs_paths=ivents_imgs
@@ -19,7 +22,7 @@ func upd_stats():
 	for e in $tcont/vb.get_children():
 		e.queue_free()
 	var tt:Array=cd.keys()
-	if get_parent().get_parent().bst.get(get_index())==null:
+	if map.bst.get(get_index())==null:
 		var val=gm.rnd.randi_range(min_range,max_range)
 		for e in val:
 			var n=tt[gm.rnd.randi_range(0,len(tt)-1)]
@@ -39,9 +42,9 @@ func upd_stats():
 				e1.txt=str(v)
 			e1.show_popup_text=false
 			$tcont/vb.add_child(e1)
-		get_parent().get_parent().bst.merge({get_index():sd})
+		map.bst.merge({get_index():sd})
 	else:
-		sd=get_parent().get_parent().bst.get(get_index())
+		sd=map.bst.get(get_index())
 		for e in sd.keys():
 			var e1=preload("res://mats/UI/map/elems.tscn").instantiate()
 			e1.img=load(cd[e].i)
@@ -52,6 +55,7 @@ func upd_stats():
 				e1.txt=str(v)
 			$tcont/vb.add_child(e1)
 func _ready():
+	$tcont/vb.position.y=0
 	pass#upd_stats()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,23 +71,33 @@ func _process(delta):
 func _on_button_down():
 	#ps.status=st
 	var bid=get_index()
-	if shop==0 and fnc.i_search(get_parent().get_parent().map_execptions,bid)==-1 and boss.is_empty():
-		get_parent().get_parent()._upd_items_values()
-	if fnc.i_search(get_parent().get_parent().map_execptions,bid)==-1 and shop==0:
+	if shop==0 and fnc.i_search(map.map_execptions,bid)==-1 and boss.is_empty():
+		map._upd_items_values()
+	if fnc.i_search(map.map_execptions,bid)==-1 and shop==0:
 		fnc.get_hero().add_stats=sd
-		get_parent().get_parent().map_execptions.append(bid)
+		map.map_execptions.append(bid)
 		get_tree().current_scene.cur_boss=boss
 		#get_tree().current_scene.ivent_queue.append(gm.ivents.arena)
 		#get_tree().current_scene.ivent_queue.append(gm.ivents.stats_map)
 		get_tree().current_scene.show_lvls(false)
+		get_tree().current_scene.cur_enemys=gm.maps[get_tree().current_scene.lvl].enemys.duplicate()
 		get_tree().current_scene.start_game()
-	if shop==1 and get_parent().get_parent().posid==bid:
+	if shop==1 and map.posid==bid:
 		#get_tree().current_scene.ivent_queue.append(gm.ivents.shop)
-		get_parent().get_parent().emit_signal("in_shop")
-	get_parent().get_parent().posid=bid
-	get_parent().get_parent().upd(bid)
-	if get_parent().get_parent().max_column<bid%get_parent().get_parent().colums:
-		get_parent().get_parent().max_column=bid%get_parent().get_parent().colums
+		
+		map.emit_signal("in_shop")
+	map.posid=bid
+	map.upd(bid)
+	if shop==2:
+		get_tree().current_scene.cur_enemys=gm.maps[get_tree().current_scene.lvl].enemys.duplicate()#enemys
+		get_tree().current_scene.show_lvls(false)
+		get_tree().current_scene.start_game()
+		shop=1
+		$tcont/img_layer_cont.imgs_paths.clear()
+		$tcont/img_layer_cont.imgs_paths.append("res://mats/imgs/icons/maney.png")
+		$tcont/img_layer_cont._upd_()
+	if map.max_column<bid%map.colums:
+		map.max_column=bid%map.colums
 
 func vls():
 	return int($tcont.size.y/float($tcont/vb.get_child(0).size.y))

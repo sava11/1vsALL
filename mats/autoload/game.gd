@@ -3,7 +3,23 @@ enum player_types{war,nec,soc}
 var player_type:gm.player_types=0
 
 enum ivents{none,arena,upg_arena,boss_arena,stats_map,shop}
-
+var enemys={
+	"sk_sw":{
+		"s":"res://mats/enemys/e1/enemy1.tscn",
+		"i":"res://mats/imgs/icons/skelV1.png",
+		"ui":"res://mats/imgs/icons/skelV1_up.png",
+		},
+	"sk_bo":{
+		"s":"res://mats/enemys/e2/enemy.tscn",
+		"i":"res://mats/imgs/icons/skel_bow.png",
+		"ui":"res://mats/imgs/icons/skel_bow_up.png",
+		},
+	"gob_be":{
+		"s":"res://mats/enemys/e3/enemy.tscn",
+		"i":"res://mats/imgs/icons/X.png",
+		"ui":"res://mats/imgs/icons/X.png",
+		},
+}
 var maps={
 		0:{
 			"locs":{
@@ -14,12 +30,12 @@ var maps={
 			},
 			"ecount":Vector2(8,12),
 			"enemys":[
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e2/enemy.tscn",
+				"sk_sw",
+				"sk_sw",
+				"sk_sw",
+				"sk_sw",
+				"sk_sw",
+				"sk_bo",
 			]
 		},
 		1:{
@@ -31,11 +47,11 @@ var maps={
 				},
 			"ecount":Vector2(14,20),
 			"enemys":[
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e2/enemy.tscn",
-				"res://mats/enemys/e2/enemy.tscn",
+				"sk_sw",
+				"sk_sw",
+				"sk_sw",
+				"sk_bo",
+				"sk_bo",
 			]
 		},
 		2:{
@@ -47,13 +63,14 @@ var maps={
 				},
 			"ecount":Vector2(8,15),
 			"enemys":[
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e1/enemy1.tscn",
-				"res://mats/enemys/e2/enemy.tscn",
-				"res://mats/enemys/e3/enemy.tscn",
+				"sk_sw",
+				"sk_sw",
+				"gob_be",
+				"gob_be",
 			]
 		},
 	}
+
 var bosses={
 	0:[
 		{
@@ -76,7 +93,9 @@ var bosses={
 }
 
 var rnd=RandomNumberGenerator.new()
-var objs={
+var objs={}
+func upd_objs():
+	objs={
 	"player":{
 		player_types.war:{
 			"img":"res://mats/imgs/warrior/Down/WarriorDownIdle.png",
@@ -92,74 +111,18 @@ var objs={
 				"crit_dmg":2,
 				"%crit_dmg":0.01,
 				"+%att_speed":0.3,
-				"do_roll_cost":1,
 				"%sp":0,
 				"take_area":20
 				},
 			"prefs":{
 				"cur_hp":3000000,
+				"do_roll_cost":1,
 				"max_exp_start":40,
 				"max_exp_sc":1,
 				"run_speed":80,
 				"run_scale":1,
 				"roll_timer":0.4,
 				"roll_speed":140,
-				"roll_scale":1
-				},
-			},
-		player_types.nec:{
-			"img":"res://mats/imgs/necromancer/Down/NecromancerDownIdle.png",
-			"name":"Necromancer",
-			"hframes":6,
-			"stats":{
-				"hp":3,
-				"hp_rgen":0.1,
-				"def":1,
-				"dmg":1,
-				"crit_dmg":0,
-				"%crit_dmg":0,
-				"+%att_speed":0.3,
-				"max_roll_points":1,
-				"add_roll_point_time":3.0,
-				"%sp":0,
-				"take_area":20
-				},
-			"prefs":{
-				"max_exp_start":30,
-				"max_exp_sc":0.85,
-				"cur_hp":10,
-				"run_speed":100,
-				"run_scale":1,
-				"roll_timer":0.4,
-				"roll_speed":165,
-				"roll_scale":1
-				},
-			},
-		player_types.soc:{
-			"img":"res://mats/imgs/sorceress/Down/SorceressDownIdle.png",
-			"name":"Sorceress",
-			"hframes":6,
-			"stats":{
-				"hp":3,
-				"hp_rgen":0.1,
-				"def":1,
-				"dmg":1,
-				"crit_dmg":0,
-				"%crit_dmg":0,
-				"+%att_speed":0.3,
-				"max_roll_points":1,
-				"add_roll_point_time":3.0,
-				"%sp":0,
-				"take_area":20
-				},
-			"prefs":{
-				"cur_hp":10,
-				"max_exp_start":50,
-				"max_exp_sc":1.1,
-				"run_speed":100,
-				"run_scale":1,
-				"roll_timer":0.4,
-				"roll_speed":165,
 				"roll_scale":1
 				},
 			},
@@ -226,7 +189,7 @@ var objs={
 			"t":tr("COLLECTING")
 			}
 		},
-	"items":{
+	"updates":{
 		"the sword":{
 			"i":"res://mats/imgs/icons/X.png",
 			"unlocked":false,
@@ -263,11 +226,37 @@ var objs={
 			"unlocked":false,
 			"t":tr("item1_TEXT"),
 			"lvls":{
-				0:{"stats":{"%sp":0.05,"max_roll_points":-1},"rare":Vector2(0,0.5),"value":40},
+				0:{"stats":{"%sp":0.05,},"rare":Vector2(0,0.5),"value":40},
 				1:{"stats":{"%sp":0.07,"hp":2},"rare":Vector2(0.5,1.0),"value":100},
 				}
 			}
+	},
+	"items":{
+		"surikens":{
+			"i":"res://mats/imgs/icons/X.png",
+			"unlocked":false,
+			"t":tr("SURIKEN_TEXT"),
+			"scn":"res://mats/items/sur/sur/sur.tscn",
+			"lvls":{
+				0:{"stats":{
+					"dmg":1,
+					"crit_dmg":0,
+					"%crit_dmg":0,
+					"item_count":3,
+					"item_spawn_time":5,
+					},
+				"rare":Vector2(0,0.5),
+				"value":40
+				},
+			}
+		}
 	}
 }
+func get_item(item_name:String,lvl:int):
+	var stats=objs.items[item_name].lvls[lvl]
+	var s=load(objs.items[item_name].scn).instantiate()
+	s.set_stats(stats)
+	fnc.get_hero().get_node("lvls").add_child(s)
 func _ready():
+	upd_objs()
 	rnd.randomize()

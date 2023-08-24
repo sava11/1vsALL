@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2db3rab8yi1f"]
+
+[ext_resource type="Script" path="res://mats/bosses/gob_beast/fireball.gd" id="1_5kth6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y4j5q"]
+radius = 3.0
+
+[sub_resource type="Curve" id="Curve_ogl83"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.5, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_cai4g"]
+offsets = PackedFloat32Array(0, 0.0927152, 0.81457, 1)
+colors = PackedColorArray(1, 0.615686, 0.533333, 1, 1, 0.576471, 0, 1, 1, 0.215686, 0, 1, 0, 0, 0, 1)
+
+[node name="fb" type="Area2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_5kth6")
+
+[node name="c" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y4j5q")
+
+[node name="p" type="CPUParticles2D" parent="."]
+amount = 768
+lifetime = 0.7
+randomness = 0.5
+lifetime_randomness = 1.0
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_align_y = true
+gravity = Vector2(0, -98)
+tangential_accel_min = -30.0
+tangential_accel_max = 30.0
+damping_max = 50.0
+scale_amount_curve = SubResource("Curve_ogl83")
+color_ramp = SubResource("Gradient_cai4g")
+
+[connection signal="area_entered" from="." to="." method="delete"]

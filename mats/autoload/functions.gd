@@ -75,7 +75,10 @@ func _with_chance(chance:float):
 	if gm.rnd.randf_range(0,1)>1-chance:
 		return true
 	return false
-
+func _with_chance_custom_values(chance:float,Tvalue,Fvalue):
+	if gm.rnd.randf_range(0,1)>1-chance:
+		return Tvalue
+	return Fvalue
 func find_betwen_lines(point,lines:PackedVector2Array):
 	var curent=[]
 	for e in range(lines.size()):

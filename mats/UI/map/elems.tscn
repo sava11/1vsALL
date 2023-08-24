@@ -6,6 +6,7 @@
 [node name="hb" type="HBoxContainer"]
 offset_right = 21.0
 offset_bottom = 20.0
+mouse_default_cursor_shape = 16
 theme_override_constants/separation = 0
 script = ExtResource("1_3gaee")
 img = ExtResource("1_5lett")

@@ -1,9 +1,9 @@
 extends HBoxContainer
 @export var img:Texture
 @export var txt:String
-var show_popup_text:bool=true
+@export var show_popup_text:bool=true
 var text=null
-var popup_text=""
+@export var popup_text=""
 var show_time:float=0.5
 var showing_time:float=0
 
@@ -19,7 +19,7 @@ func _physics_process(delta):
 			showing_time+=delta
 		if showing_time>=show_time:
 			showing_time=0.0
-			text.global_position=get_global_mouse_position().clamp(Vector2(50,50),fnc.get_prkt_win()-Vector2(50,50))
+			text.global_position=get_global_mouse_position().clamp(Vector2(50,10),fnc.get_prkt_win()-Vector2(50,10))
 			text.show()
 		if !(Geometry2D.is_point_in_polygon(get_global_mouse_position(),PackedVector2Array([
 			global_position,

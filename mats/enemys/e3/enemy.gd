@@ -2,6 +2,8 @@ extends RigidBody2D
 @export_group("parametrs")
 @export_range(0,100) var dif:float=0
 @export var run_speed:float=30.0
+@export var fast_run_speed:float=50.0#
+@export var jump_speed:float=70.0
 @export_range(1,999999999) var life_points_from:float=1.0
 @export_range(1,999999999) var life_points_to:float=3.0
 @export_range(1,999999999) var defence_from:float=0.5
@@ -90,12 +92,16 @@ var calculated_landing_pos:Vector2=Vector2.ZERO
 var die:bool=false
 var attak:bool=false
 var attacking:bool=false
-var jumping:bool
 var not_move_time:float=3
 var not_move_timer:float=0
 var move_time:float=5
 var move_timer:float=0
-var moveing:bool=false
+var moveing:bool=true
+var jump:bool=false
+var jumping:bool=false
+var j_r:bool=false
+var j_j:bool=false
+var j_l:bool=false
 @onready var hero = fnc.get_hero()
 func _physics_process(_delta):
 	if die==false:
@@ -117,35 +123,49 @@ func _physics_process(_delta):
 			last_mvd=mvd
 		
 		if moveing :
-			attak=bs!=[] and !attacking and !at["parameters/conditions/idle"] and fnc._sqrt(hero.global_position-global_position)<attack_range
+			var get_back=hsqrt<attack_range/2 and !jump and !jumping
+			attak=bs!=[] and !jump and !jumping and !attacking and !at["parameters/conditions/idle"] and fnc._sqrt(hero.global_position-global_position)<attack_range
+		
 			if !attak and !attacking:
 				vec=mvd*run_speed
 				$get_hero_body.rotation_degrees=fnc.angle(get_input(hero.global_position))
 				$hirtbox.rotation_degrees=$get_hero_body.rotation_degrees
-			if hsqrt<attack_range/2:
+			if get_back:
 				attak=false
 				vec=fnc.move(fnc.angle(get_input(hero.global_position))-180)*run_speed*1.5
 			if attak==true:
 				attacking=true
 				vec=Vector2.ZERO
+			
+					
 		set_linear_velocity(vec)
 		
 	else:
 		at["parameters/conditions/death"]=true
 
 func out_of_attack():attacking=false
+
+
 func _upd_anim_params():
 	at["parameters/conditions/idle"]=mvd==Vector2.ZERO and die==false
 	at["parameters/conditions/run"]=mvd!=Vector2.ZERO and die==false
 	at["parameters/conditions/attack1"]=attacking and die==false
 	at["parameters/conditions/death"]=die
 	
+	at["parameters/conditions/frun"]=j_r and (jumping or jump) and !j_j and !j_l
+	at["parameters/conditions/jump"]=j_j and (jumping or jump) and !j_r and !j_l
+	at["parameters/conditions/landing"]=j_l and (jumping or jump) and !j_r and !j_j
+	
 	at["parameters/run/blend_position"]=last_mvd
 	at["parameters/idle/blend_position"]=last_mvd
 	if !attacking:
 		at["parameters/attack1/blend_position"]=last_mvd
 	at["parameters/death/blend_position"]=last_mvd
-
+	if !jumping:
+		at["parameters/frun/blend_position"]=last_mvd
+		at["parameters/jump/blend_position"]=last_mvd
+		at["parameters/landing/blend_position"]=last_mvd
+	
 func aiming():
 	var e=preload("res://mats/font/crit.tscn").instantiate()
 	e.texture=preload("res://mats/imgs/icons/aimed.png")
@@ -155,7 +175,7 @@ func aiming():
 func delete():
 	if mny_from!=mny_to and exp_from!=exp_to:
 		var v=preload("res://mats/ingame_value/value.tscn").instantiate()
-		v.type=randi_range(0,1)
+		v.type=0#randi_range(0,1)
 		if v.type==0:
 			v.value=fnc._with_dific(randi_range(mny_from,mny_to),dif)
 		else:

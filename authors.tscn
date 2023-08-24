@@ -25,7 +25,7 @@ grow_vertical = 2
 [node name="t1" type="RichTextLabel" parent="auth"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-text = "TITLE_WHO_WHAT_DO_PROGRAMER"
+text = "TITLE_WHO_WHAT_DO_PROGRAMMER"
 scroll_active = false
 shortcut_keys_enabled = false
 

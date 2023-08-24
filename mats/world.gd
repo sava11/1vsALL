@@ -16,7 +16,7 @@ extends Node2D
 var wave_count=1
 var cur_map_id=0
 var cur_boss:PackedStringArray
-var cur_enemys=[]
+var cur_enemys:PackedStringArray=[]
 var boss_killed=false
 @onready var ivent_queue=PackedInt32Array([gm.ivents.stats_map])
 signal end_arena()
@@ -33,9 +33,16 @@ func _ready():
 	#cur_enemys=gm.maps[lvl].enemys.duplicate()
 	connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
 	$cl/Control/die.hide()
-var current_item:int=0
+func un_pause():
+	if get_tree().paused==false:
+		get_tree().set_deferred("paused",true)
+	elif get_tree().paused==true:
+		get_tree().set_deferred("paused",false)
+func _process(_delta):
+	var paused=Input.is_action_just_pressed("esc")
+	if paused:un_pause()
 func _physics_process(_delta):
-	$cl/Control/stats/vc/mny.text="money: "+str(fnc.get_hero().money)
+	$cl/Control/stats/vc/mny_cont/mny.txt=str(fnc.get_hero().money)
 	$cl/Control/stats/vc/xp/pg.max_value=fnc.get_hero().cd.prefs["max_exp_start"]
 	$cl/Control/stats/vc/xp/pg.value=fnc.get_hero().exp
 	$cl/Control/stats/vc/xp/pg/t.text="\tlvl - "+str(fnc.get_hero().lvl)
@@ -61,7 +68,7 @@ func _physics_process(_delta):
 		at.stop()
 		for e in ememys_path.get_children():
 			e.queue_free()
-	if $cl/Panel.visible==true and ememys_path.get_child_count()>0:
+	if $cl/map.visible==true and ememys_path.get_child_count()>0:
 		for e in ememys_path.get_children():
 			e.queue_free()
 	
@@ -98,9 +105,8 @@ func summon(enemys_count=0):
 	var rpos=Vector2(-288,-128)
 	for ec in range(enemys_count):
 		var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
-		var ens=cur_enemys
-		ens.shuffle()
-		e.load_scene=load(ens[0])
+		var ens=cur_enemys.duplicate()
+		e.load_scene=load(gm.enemys[ens[gm.rnd.randi_range(0,ens.size()-1)]].s)
 		var x=0
 		var y=0
 		var x1=0
@@ -132,7 +138,7 @@ func _on_enemy_summon_timer_timeout():
 	wave_count+=1
 func menu_exit():
 	get_tree().change_scene_to_file("res://menu.tscn")
-#func _on_button_button_down():print("dssd")
+
 func boss_die():
 	at.start(10)
 	cur_boss.clear()
@@ -144,7 +150,6 @@ func _on_arena_timer_timeout():
 	#if hlvls_queue.is_empty():
 	show_lvls()
 	emit_signal("end_arena")
-	current_item+=1
 	#else:
 	#	pass
 	if boss_killed:
@@ -152,7 +157,7 @@ func _on_arena_timer_timeout():
 		upd_lvl(lvl)
 		boss_killed=false
 	else:
-		$cl/Panel.upd_stats()
+		$cl/map.upd_stats()
 	#get_tree().change_scene_to_file("res://mats/UI/map/panel.tscn")
 	
 func stop():
@@ -176,15 +181,14 @@ func show_lvls(b:bool=true):
 	if b==true:
 		$world.hide()
 		$cl/Control.hide()
-		$cl/Panel.show()
+		$cl/map.show()
 	else:
 		$world.show()
 		$cl/Control.show()
-		$cl/Panel.hide()
+		$cl/map.hide()
 func upd_lvl(lvl_id):
 	#cur_map_id=gm.fnc.randi_range(0,len(gm.maps[lvl_id].locs.keys())-1)
 	var lvl=load(gm.maps[lvl_id].locs[cur_map_id].l).instantiate()
-	cur_enemys=gm.maps[lvl_id].enemys.duplicate()
 	enemys_count_from=snapped(gm.maps[lvl_id].ecount.x,1)
 	enemys_count_to=snapped(gm.maps[lvl_id].ecount.y,1)
 	for n in fnc.get_world_node().get_children():
@@ -192,5 +196,5 @@ func upd_lvl(lvl_id):
 			n.queue_free()
 	fnc.get_world_node().add_child.call_deferred(lvl)
 	fnc.get_world_node().move_child.call_deferred(lvl,0)
-	$cl/Panel.upd_b_stats()
+	$cl/map.upd_b_stats()
 	#print(fnc.get_world_node().find_child(lvl.name))

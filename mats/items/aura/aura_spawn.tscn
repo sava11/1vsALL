@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvhfgl21g3stk"]
+
+[ext_resource type="Script" path="res://mats/items/aura/aura_spawn.gd" id="1_f5qgu"]
+
+[node name="aura_spwan" type="Node2D"]
+script = ExtResource("1_f5qgu")
+life_time_period = 3.0
+hp = 10.0

@@ -38,3 +38,14 @@ func _on_right_button_down():
 	gm.player_type=abs(gm.player_type+1)%len(gm.player_types)
 	$wis/img.texture=load(gm.objs.player[gm.player_type].img)
 	$wis/img.hframes=gm.objs.player[gm.player_type].hframes
+
+
+func _on_ru_button_down():
+	TranslationServer.set_locale("ru")
+	gm.upd_objs()
+	pass # Replace with function body.
+
+
+func _on_en_button_down():
+	TranslationServer.set_locale("en")
+	gm.upd_objs()

@@ -24,7 +24,7 @@ func _upd_():
 	if get_child_count()>0:
 		custom_minimum_size=get_child(imgs_paths.size()-1).position+get_child(imgs_paths.size()-1).size
 		size=custom_minimum_size
-		anchors_preset=8
+		anchors_preset=6
 func _ready():
 	_upd_()
 

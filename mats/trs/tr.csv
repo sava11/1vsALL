@@ -1,0 +1,33 @@
+﻿,en,ru
+PLAY,play,играть
+SETTINGS,settings,настройки
+AUTHORS,authors,авторы
+EXIT,exit,выход
+
+TITLE_WHO_WHAT_DO_PROGRAMMER,programmer:,программист:
+TITLE_WHO_WHAT_DO_PRODUCER,producer:,продюсер:
+TITLE_KEY_HUMANS,key people:,ключевые люди:
+TITLE_SPECIAL_THANKS_TO,special thanks to:,большое спасибо:
+BACK,back,назад
+
+MEMENTO_MORI,end of the story,конец истории
+BACK_TO_TILTE,to main menu,вернуться в главное меню
+
+HP,health points (HP),жизненная сила (ЖЗ)
+HP_REGEN,heals HP per second,лечение ЖЗ за секунду
+DMG,attack damage, уронон атаки
+CRIT_DMG,critical damage,критический урон
+%CRIT_DMG,chance of critical damage,шанс критического удара
+%ATT_SPEED,speed of attack,скорость атаки
+DEF,defnce,защита
+MAX_STAMINA_VALUE,stamina,выносливось
+STAMINA_REGEN_VALUE,regenration of stamina per second,восполнение выносливости в секунду
+%SPEED,movement speed,скорость движения
+COLLECTING,item collecting range,расстояние сбора предметов
+
+THE_SWORD_TEXT,sword upgrade,улучшение меча
+ARMOR_TEXT,armor upgrade,улучшение брони
+BOOTS_TEXT,boots upgrade,улучшение обуви
+item1_TEXT,test upgrade. Don't buy it.,тестовое улучшение. Не покупай его.
+
+SURIKEN_TEXT,stealth assassin throwing weapon,метательное оружие скрытных убийц

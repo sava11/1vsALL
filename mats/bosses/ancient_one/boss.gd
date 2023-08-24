@@ -22,7 +22,7 @@ extends RigidBody2D
 @export_range(-180,180) var angle_from:float=-25
 @export_range(-180,180) var angle_to:float=25
 @export_group("healself")
-@export_range(0.01,100)var point_per_sec=1
+@export_range(0.01,100) var point_per_sec:float=1
 @onready var at=$at
 @onready var hb=$hurt_box
 # Called when the node enters the scene tree for the first time.
@@ -34,7 +34,7 @@ var max_heal_points=2
 var current_heal_points=max_heal_points
 signal dead
 func _ready():
-	#get_tree().current_scene.summon(15)
+	get_tree().current_scene.summon(15)
 	connect("dead",Callable(get_tree().current_scene,"boss_die"))
 	hb.monitorable=true
 	hb.monitoring=true
@@ -98,7 +98,7 @@ func _process(_delta):
 		if heal and healing==false:
 			heal_time=0
 			healing=true
-			#get_tree().current_scene.summon(20)
+			get_tree().current_scene.summon(20)
 			heal_stages.remove_at(len(heal_stages)-1)
 			vec=Vector2.ZERO
 		if healing :
@@ -148,7 +148,7 @@ func _upd_anim_params():
 func delete():
 	if mny_from!=mny_to and exp_from!=exp_to:
 		var v=preload("res://mats/ingame_value/value.tscn").instantiate()
-		v.type=randi_range(0,1)
+		v.type=0#randi_range(0,1)
 		if v.type==0:
 			v.value=randi_range(mny_from,mny_to)
 		else:

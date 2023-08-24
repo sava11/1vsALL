@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=3 uid="uid://shpfq3okltdw"]
+[gd_scene load_steps=187 format=3 uid="uid://shpfq3okltdw"]
 
 [ext_resource type="Script" path="res://mats/player/player.gd" id="1_lbo3s"]
 [ext_resource type="Texture2D" uid="uid://bp75v23tiq8d" path="res://mats/imgs/warrior/Down/WarriorDownAttack01.png" id="2_6i8rh"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="10_yv63u"]
 [ext_resource type="Texture2D" uid="uid://ekkupdmfrg3r" path="res://mats/imgs/warrior/Up/WarriorUpIdle.png" id="13_xajkt"]
 [ext_resource type="PackedScene" path="res://mats/boxes/hitbox.tscn" id="19_gs7k8"]
+[ext_resource type="PackedScene" uid="uid://8g3kh3eyv2e4" path="res://mats/items/sur/sur_spawner.tscn" id="20_r10k4"]
+[ext_resource type="PackedScene" uid="uid://bvhfgl21g3stk" path="res://mats/items/aura/aura_spawn.tscn" id="21_p8se4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sbg"]
 atlas = ExtResource("2_6i8rh")
@@ -2485,8 +2487,8 @@ show_percentage = false
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53mpi")
-animation = &"walk_left"
-frame = 7
+animation = &"attack_down"
+frame = 5
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="."]
@@ -2515,8 +2517,6 @@ shape = SubResource("CircleShape2D_dss2x")
 [node name="hirtbox" parent="." instance=ExtResource("19_gs7k8")]
 collision_layer = 4
 collision_mask = 0
-monitoring = false
-monitorable = false
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
@@ -2542,6 +2542,12 @@ collision_mask = 32
 
 [node name="c" type="CollisionShape2D" parent="get_money_area"]
 shape = SubResource("CircleShape2D_mlw8w")
+
+[node name="inv" type="Node2D" parent="."]
+
+[node name="sur_spawner" parent="inv" instance=ExtResource("20_r10k4")]
+
+[node name="Node2D" parent="inv" instance=ExtResource("21_p8se4")]
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
