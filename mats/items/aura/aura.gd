@@ -4,7 +4,8 @@ var he=m_he: set = set_he
 @export var tspeed:float=1.0
 @export_range(0,99999) var life_time_period:float=2
 @onready var t=$t
-
+@export var owner_node_path:NodePath
+@onready var owner_node=get_node_or_null(owner_node_path)
 signal no_he
 signal h_ch(v)
 signal m_h_ch(v)
@@ -40,6 +41,7 @@ func _process(delta):
 	$hp.max_value=m_he
 func delete():
 	get_parent().stoped=false
-	get_parent().get_parent().get_parent().get_node("hurt_box").set_deferred("monitoring",true)
-	get_parent().get_parent().get_parent().get_node("hurt_box").set_deferred("monitorable",true)
+	if owner_node!=null:
+		owner_node.get_node("hurt_box").set_deferred("monitoring",true)
+		owner_node.get_node("hurt_box").set_deferred("monitorable",true)
 	queue_free()

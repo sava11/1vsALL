@@ -1,8 +1,9 @@
-[gd_scene load_steps=274 format=3 uid="uid://ib37bearbmaa"]
+[gd_scene load_steps=276 format=3 uid="uid://ib37bearbmaa"]
 
 [ext_resource type="Script" path="res://mats/enemys/e3/enemy.gd" id="1_pm057"]
 [ext_resource type="Texture2D" uid="uid://bkl61v04r8j7q" path="res://mats/imgs/icons/Character underlay Enemy.png" id="2_06nnd"]
 [ext_resource type="Texture2D" uid="uid://p5niidc31kw0" path="res://mats/imgs/goblin_berserk/Down/GoblinDownAttack01.png" id="2_um1fb"]
+[ext_resource type="Shader" path="res://mats/enemys/e2/outline.gdshader" id="3_6ynmh"]
 [ext_resource type="Texture2D" uid="uid://qiyspqm40eb0" path="res://mats/imgs/goblin_berserk/Left/GoblinLeftAttack01.png" id="3_jktyp"]
 [ext_resource type="Texture2D" uid="uid://b20m6neabxoae" path="res://mats/imgs/goblin_berserk/Right/GoblinRightAttack01.png" id="4_v4tel"]
 [ext_resource type="Texture2D" uid="uid://dl4dvcctywemb" path="res://mats/imgs/goblin_berserk/Up/GoblinUpAttack01.png" id="5_rtios"]
@@ -28,6 +29,11 @@
 [ext_resource type="Texture2D" uid="uid://c8k4qvg874fnv" path="res://mats/imgs/goblin_berserk/Right/GoblinRightLand.png" id="20_spks4"]
 [ext_resource type="Texture2D" uid="uid://b40dnu1vg4w51" path="res://mats/imgs/goblin_berserk/Up/GoblinUpLand.png" id="21_tnrdc"]
 [ext_resource type="PackedScene" path="res://mats/boxes/hitbox.tscn" id="27_y0nhn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ck7jh"]
+shader = ExtResource("3_6ynmh")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwe7l"]
 atlas = ExtResource("2_um1fb")
@@ -3675,6 +3681,7 @@ position = Vector2(0, 2)
 texture = ExtResource("2_06nnd")
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ck7jh")
 sprite_frames = SubResource("SpriteFrames_a66wy")
 animation = &"attack_down"
 offset = Vector2(0, -15)

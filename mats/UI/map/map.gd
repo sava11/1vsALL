@@ -15,7 +15,6 @@ var b_boss={}
 var shop_items={}#shop_id:[iem_id, ...]
 var item_rare:float=0
 var max_column=0
-
 @onready var map_execptions=PackedInt32Array([start_posid])
 @onready var shop=$shop_cont/shop
 @onready var arenas=$arenas/gc
@@ -76,7 +75,6 @@ func _ready():
 		e.queue_free()
 	for e in range(colums*rows):
 		var b1=preload("res://mats/UI/map/button.tscn").instantiate()
-		b1.cd=cd
 		if max_size.x<w:
 			b1.custom_minimum_size.x=max_size.x
 		else:
@@ -85,21 +83,8 @@ func _ready():
 			b1.custom_minimum_size.y=max_size.y
 		else:
 			b1.custom_minimum_size.y=h-2
-		var rmax=clamp(gm.rnd.randi_range(0,5),0,99)
-		if rmax>0:
-			b1.min_range=1
-			b1.max_range=rmax
-		b1.ivents_imgs.clear()
-		if fnc.i_search(shop_items.keys(),e)!=-1:
-			b1.ivents_imgs.append("res://mats/imgs/icons/maney.png")
-			b1.shop=true
-		if e == bossid:
-			var list=gm.bosses[clamp(get_tree().current_scene.lvl,0,len(gm.bosses.keys())-1)]
-			var boss_d=list[gm.rnd.randi_range(0,len(list)-1)]
-			b1.boss=PackedStringArray([boss_d.b])
-			b1.ivents_imgs.append(boss_d.i)
 		arenas.add_child(b1)
-	upd(point)
+	#upd(point)
 func upd(point:int):
 	var pointy=(point-point%rows)/rows
 	var w=int(arenas.size.x/colums)
@@ -118,17 +103,36 @@ func upd(point:int):
 			b1.text="X"
 		else:
 			b1.text=""
+		
 	for e in range(clamp(bid%rows-1,0,rows)+clamp(pointy-1,0,colums-1)*rows, 
 	clamp(bid%rows+2,0,rows)+clamp(pointy-1,0,colums-1)*rows):
-		if e != bid:arenas.get_child(e).disabled=false
+		if e != bid:
+			upd_stats_(arenas.get_child(e))
+			arenas.get_child(e).disabled=false
 	for e in range(clamp(bid%rows-1,0,rows)+clamp(pointy,0,colums-1)*rows, 
 	clamp(bid%rows+2,0,rows)+clamp(pointy,0,colums-1)*rows):
-		if e != bid or arenas.get_child(e).shop!=0:arenas.get_child(e).disabled=false
+		if e != bid or arenas.get_child(e).shop!=0:
+			upd_stats_(arenas.get_child(e))
+			arenas.get_child(e).disabled=false
 	for e in range(clamp(bid%rows-1,0,rows)+clamp(pointy+1,0,colums-1)*rows, 
 	clamp(bid%rows+2,0,rows)+clamp(pointy+1,0,colums-1)*rows):
-		if e != bid:arenas.get_child(e).disabled=false
+		if e != bid:
+			upd_stats_(arenas.get_child(e))
+			arenas.get_child(e).disabled=false
 	item_rare=float(get_tree().current_scene.lvl*colums+(max_column))/float((gm.maps.keys().max()+1)*colums)
+func upd_stats_(b1:Button):
+	var rmax=clamp(gm.rnd.randi_range(2,5),0,99)*int(!bool(b1.shop) and b1.shop!=2) 
+	if rmax>0:
+		b1.min_range=1
+		b1.max_range=rmax
+	else:
+		b1.min_range=0
+		b1.max_range=0
+	b1.upd_stats()
 func upd_stats():
+	$stats/cont/vs.value=0
+	stats_cont.position.y=0
+	stats_cont.size.y=240
 	var cd=cr_stats()
 	var tt:Array=cd.keys()
 	for e in range(stats_cont.get_child_count()):
@@ -147,7 +151,6 @@ func _physics_process(delta):
 		if get_tree().paused==true:
 			get_tree().set_deferred("paused",false)
 func upd_b_stats():
-	$stats/cont/vs.value=0
 	var cd=cr_stats()
 	shop_items.clear()
 	posid=start_posid
@@ -160,12 +163,23 @@ func upd_b_stats():
 		e.queue_free()
 	for e in range(colums*rows):
 		var b1=arenas.get_child(e)
-		b1.shop=0
-		b1.icon=null
+		b1.clear()
 		b1.cd=cd
-		b1.ivents_imgs.clear()
+		if e == bossid:
+			b1.exit=true
+			b1.ivents_imgs.append(gm.images.icons.other.lvl_exit)
+			if !gm.maps[get_tree().current_scene.lvl].bosses.is_empty():
+				var list=PackedStringArray(gm.maps[get_tree().current_scene.lvl].bosses)
+				var boss_d=list[gm.rnd.randi_range(0,len(list)-1)]
+				var b_list=[]
+				for b in gm.bosses.keys():
+					if fnc.i_search(list,b)!=-1:
+						b_list.append(gm.bosses[b])
+				b1.boss=list
+				for ei in b_list:
+					b1.ivents_imgs.append(ei.i)
 		if fnc.i_search(shop_items.keys(),e)!=-1:
-			b1.ivents_imgs.append("res://mats/imgs/icons/maney.png")
+			b1.ivents_imgs.append(gm.images.icons.other.money)
 			b1.shop=fnc._with_chance_custom_values(0.3,2,1)
 			if b1.shop==2:
 				for ei in gm.maps[get_tree().current_scene.lvl].enemys:
@@ -183,33 +197,18 @@ func upd_b_stats():
 				#	var res=gm.enemys[ei].i
 				#	b1.ivents_imgs.append(res)
 				#b1.enemys=cur_ens
-				
-		b1.boss.clear()
-		var rmax=clamp(gm.rnd.randi_range(0,4),0,99)*int(!bool(b1.shop) and b1.shop!=2) 
-		if rmax>0:
-			b1.min_range=1
-			b1.max_range=rmax
-		else:
-			b1.min_range=0
-			b1.max_range=0
-		if e == bossid:
-			var list=gm.bosses[clamp(get_tree().current_scene.lvl,0,len(gm.bosses.keys())-1)]
-			var boss_d=list[gm.rnd.randi_range(0,len(list)-1)]
-			b1.boss=PackedStringArray([boss_d.b])
-			b1.ivents_imgs.append(boss_d.i)
+		
+		b1.show_icons()
 		var area=Polygon2D.new()
 		area.polygon=PackedVector2Array([
 			Vector2(-2,-2),
 			Vector2(b1.custom_minimum_size.x+2,-2),
 			Vector2(b1.custom_minimum_size.x+2,b1.custom_minimum_size.y+2),
 			Vector2(-2,b1.custom_minimum_size.y+2),
-			
-			
 			])
 		area.position=(b1.custom_minimum_size+Vector2(4,4))*Vector2(b1.get_index()%colums,(b1.get_index()-b1.get_index()%colums)/rows)-Vector2(2,2)#b1.position-Vector2(2,2)#-b1.custom_minimum_size/2
 		area.color=Color()
 		$arenas/areas.add_child(area)
-		b1.upd_stats()
 	
 	upd(posid)
 	upd_stats()
@@ -258,5 +257,4 @@ func _on_stat_vs_value_changed(value):
 	var t=(stats_cont.size.y*stats_cont.scale.y)/($stats/cont.size.y*$stats/cont.scale.y)
 	if t>1.0:
 		stats_cont.position.y=($stats/cont.size.y*$stats/cont.scale.y-stats_cont.size.y*stats_cont.scale.y)*(value)
-	else:
-		stats_cont.position.y=0
+	else:stats_cont.position.y=0

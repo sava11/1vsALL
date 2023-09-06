@@ -5,10 +5,10 @@ extends Control
 func validate_img(img:String):
 	var imgage=load(img)
 	if imgage==null:
-		imgage=preload("res://mats/imgs/icons/X.png")
+		imgage=load(gm.images.undef)
 	return imgage
 func _upd_():
-	for e in get_children():e.queue_free()
+	for e in get_children():e.free()
 	var w=size.x/(img_size.x*imgs_paths.size())
 	for e in range(imgs_paths.size()):
 		var tr=TextureRect.new()

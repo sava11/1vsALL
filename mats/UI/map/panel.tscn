@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_wj4hv"]
 [ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="2_l3i6n"]
-[ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/maney.png" id="3_gd5rs"]
+[ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/money.png" id="3_56yoc"]
 
 [node name="map" type="Control"]
 layout_mode = 3
@@ -13,9 +13,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_wj4hv")
+choices_colums = null
 colums = 5
 rows = 5
+max_size = null
+boss_spawn_ids = null
 shop_count = 2
+start_posid = null
 
 [node name="arenas" type="Panel" parent="."]
 layout_mode = 1
@@ -70,7 +74,7 @@ grow_vertical = 2
 
 [node name="money" parent="hero_values/cont" instance=ExtResource("2_l3i6n")]
 layout_mode = 2
-img = ExtResource("3_gd5rs")
+img = ExtResource("3_56yoc")
 popup_text = "MONEY"
 
 [node name="xp" type="Control" parent="hero_values/cont"]
@@ -185,6 +189,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 
 [connection signal="in_shop" from="." to="." method="_on_in_shop"]
 [connection signal="button_down" from="shop_cont/Button" to="." method="_on_shop_exit_down"]

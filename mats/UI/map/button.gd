@@ -8,32 +8,53 @@ var ivents_imgs:PackedStringArray=[]
 var boss:PackedStringArray
 var enemys:PackedStringArray
 var shop:int=0
+var exit:bool=false
+func show_icons():
+	$tcont/img_layer_cont.imgs_paths=ivents_imgs
+	$tcont/img_layer_cont._upd_()
+func clear():
+	sd.clear()
+	for e in $tcont/vb.get_children():
+		e.queue_free()
+	ivents_imgs=PackedStringArray([])
+	show_icons()
+	shop=0
+	exit=false
+	enemys.clear()
+	boss.clear()
+	
 func upd_stats():
 	$tcont/vb.position.y=0
-	sd.clear()
 	#$tcont/vs.value=0
+	for e in $tcont/vb.get_children():
+		e.queue_free()
 	$tcont/img_layer_cont.imgs_paths=ivents_imgs
 	$tcont/img_layer_cont._upd_()
 	if !ivents_imgs.is_empty():
 		alignment=HORIZONTAL_ALIGNMENT_LEFT
 	else:
 		alignment=HORIZONTAL_ALIGNMENT_CENTER
-		
-	for e in $tcont/vb.get_children():
-		e.queue_free()
-	var tt:Array=cd.keys()
+	var tt:Array=cd.keys().duplicate()
 	if map.bst.get(get_index())==null:
 		var val=gm.rnd.randi_range(min_range,max_range)
-		for e in val:
+		while sd.size()<val:
 			var n=tt[gm.rnd.randi_range(0,len(tt)-1)]
-			var d =cd[n].v
-			tt.erase(n)
+			var d =cd[n].get(fnc._with_chance_custom_values(0.7,"v","-v"),"v")
 			var v=0
 			if d.x!=float(int(d.x)):
 				v=snapped(gm.rnd.randf_range(d.x,d.y),0.01)
 			elif d.x==float(int(d.x)):
 				v=gm.rnd.randi_range(d.x,d.y)
+			
+			if cd[n].min_v>fnc.get_hero().cd.stats[n]+v:
+				d=cd[n].get("v")
+				v=0
+				if d.x!=float(int(d.x)):
+					v=snapped(gm.rnd.randf_range(d.x,d.y),0.01)
+				elif d.x==float(int(d.x)):
+					v=gm.rnd.randi_range(d.x,d.y)
 			sd.merge({n:v},true)
+			tt.erase(n)
 			var e1=preload("res://mats/UI/map/elems.tscn").instantiate()
 			e1.img=load(cd[n].i)
 			if v>0:
@@ -56,6 +77,7 @@ func upd_stats():
 			$tcont/vb.add_child(e1)
 func _ready():
 	$tcont/vb.position.y=0
+	$tcont/img_layer_cont.show()
 	pass#upd_stats()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -76,12 +98,17 @@ func _on_button_down():
 	if fnc.i_search(map.map_execptions,bid)==-1 and shop==0:
 		fnc.get_hero().add_stats=sd
 		map.map_execptions.append(bid)
-		get_tree().current_scene.cur_boss=boss
-		#get_tree().current_scene.ivent_queue.append(gm.ivents.arena)
-		#get_tree().current_scene.ivent_queue.append(gm.ivents.stats_map)
+		##
+		var dic={}
+		for b in boss:
+			dic.merge({b:{"die":true}})
+		##
+		get_tree().current_scene.cur_boss=dic
+		get_tree().current_scene.exit=exit
 		get_tree().current_scene.show_lvls(false)
 		get_tree().current_scene.cur_enemys=gm.maps[get_tree().current_scene.lvl].enemys.duplicate()
 		get_tree().current_scene.start_game()
+		
 	if shop==1 and map.posid==bid:
 		#get_tree().current_scene.ivent_queue.append(gm.ivents.shop)
 		

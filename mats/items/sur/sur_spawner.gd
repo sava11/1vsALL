@@ -4,7 +4,7 @@ extends Node2D
 @export_range(0,99999) var damage:float=1
 @export var crit_damage:float=2.0
 @export var crit_chance:float=0.0
-@export_range(0,99999) var counts:float=5
+@export_range(0,99999) var counts:float=6
 func set_stats(stats):
 	spawn_time_period=stats["item_spawn_time"]
 	damage=stats["dmg"]

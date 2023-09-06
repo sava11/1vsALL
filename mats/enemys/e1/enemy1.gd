@@ -1,6 +1,7 @@
 extends RigidBody2D
 @export_group("parametrs")
-@export_range(0,100) var dif:float=0
+@export var elite:bool=false
+@export_range(0,99999999) var dif:float=0
 @export var run_speed:float=30.0
 @export_range(1,999999999) var life_points_from:float=1.0
 @export_range(1,999999999) var life_points_to:float=3.0
@@ -27,12 +28,21 @@ extends RigidBody2D
 func _ready():
 	hb.monitorable=true
 	hb.monitoring=true
-	var life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)
+	$sp.material.set_deferred("shader_parameter/line_thickness",1.2*int(elite))
+	var life_points=0
+	var damage=0
+	var def=0
+	if !elite:
+		life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)
+		damage=fnc._with_dific(randf_range(damage_from,damage_to),dif)
+		def=fnc._with_dific(randf_range(defence_from,defence_to),dif)
+	else:
+		life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)*1.5
+		damage=fnc._with_dific(randf_range(damage_from,damage_to),dif)*1.5
+		def=fnc._with_dific(randf_range(defence_from,defence_to),dif)*1.25
 	hb.s_m_h(life_points)
 	hb.set_he(life_points)
-	var damage=fnc._with_dific(randf_range(damage_from,damage_to),dif)
 	$hirtbox.damage=damage
-	var def=fnc._with_dific(randf_range(defence_from,defence_to),dif)
 	hb.s_m_d(def)
 	hb.set_def(def)
 	at.active=true

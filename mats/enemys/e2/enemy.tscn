@@ -1,7 +1,8 @@
-[gd_scene load_steps=202 format=3 uid="uid://cj3gsy8dj6dgk"]
+[gd_scene load_steps=204 format=3 uid="uid://cj3gsy8dj6dgk"]
 
 [ext_resource type="Script" path="res://mats/enemys/e2/enemy.gd" id="1_2bwba"]
 [ext_resource type="Texture2D" uid="uid://c0l5vikarh04i" path="res://mats/imgs/skelet_bow/Down/SkeletonWithBowDownAttack01.png" id="2_0y554"]
+[ext_resource type="Shader" path="res://mats/enemys/e2/outline.gdshader" id="2_k71i5"]
 [ext_resource type="Texture2D" uid="uid://ddsn1t04amfln" path="res://mats/imgs/skelet_bow/Left/SkeletonWithBowLeftAttack01.png" id="3_7bcdb"]
 [ext_resource type="Texture2D" uid="uid://brkau8c7x6r1w" path="res://mats/imgs/skelet_bow/Right/SkeletonWithBowRightAttack01.png" id="4_mjrr0"]
 [ext_resource type="Texture2D" uid="uid://uvxklj00b0nv" path="res://mats/imgs/skelet_bow/Up/SkeletonWithBowUpAttack01.png" id="5_ivuvn"]
@@ -18,6 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://ctgjljuej4c7b" path="res://mats/imgs/skelet_bow/Right/SkeletonWithBowRightRun.png" id="16_rc2oc"]
 [ext_resource type="Texture2D" uid="uid://d1evvdi4r5fo2" path="res://mats/imgs/skelet_bow/Up/SkeletonWithSBowUpWalk.png" id="17_xfp0h"]
 [ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="18_a64mv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ityk8"]
+shader = ExtResource("2_k71i5")
+shader_parameter/line_color = Color(1, 0.301961, 0, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8ef6"]
 atlas = ExtResource("2_0y554")
@@ -2292,6 +2298,7 @@ damage_to = 3.0
 crit_damage_from = 2.0
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ityk8")
 sprite_frames = SubResource("SpriteFrames_a66wy")
 animation = &"attack_down"
 offset = Vector2(0, -15)

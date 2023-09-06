@@ -3,22 +3,77 @@ enum player_types{war,nec,soc}
 var player_type:gm.player_types=0
 
 enum ivents{none,arena,upg_arena,boss_arena,stats_map,shop}
+const images={
+	"undef":"res://mats/imgs/icons/X.png",
+	"icons":{
+		"charters":{
+			"sk_sw":"res://mats/imgs/icons/skelV1.png",
+			"sk_sw_u":"res://mats/imgs/icons/skelV1_up.png",
+			"sk_bo":"res://mats/imgs/icons/skel_bow.png",
+			"sk_bo_u":"res://mats/imgs/icons/skel_bow_up.png",
+			"skelvas":"res://mats/imgs/icons/skel_boss.png",
+			"skelgener":"res://mats/imgs/icons/skel_boss.png",
+			},
+		"stats":{
+			"hp":"res://mats/imgs/icons/skills/hp.png",
+			"hp_regen":"res://mats/imgs/icons/skills/hp_regeneration.png",
+			"dmg":"res://mats/imgs/icons/skills/att.png",
+			"crit_dmg":"res://mats/imgs/icons/skills/crit_dmg.png",
+			"%crit_dmg":"res://mats/imgs/icons/skills/%crit.png",
+			"+%att_speed":"res://mats/imgs/icons/skills/+%sp_att.png",
+			"def":"res://mats/imgs/icons/skills/def.png",
+			"max_stamina":"res://mats/imgs/icons/skills/max_stamina.png",
+			"regen_stamina_point":"res://mats/imgs/icons/skills/stamina_regen.png",
+			"%sp":"res://mats/imgs/icons/skills/speed.png",
+			"take_area":"res://mats/imgs/icons/skills/take.png",
+		},
+		"other":{
+			"money":"res://mats/imgs/icons/money.png",
+			"aim":"res://mats/imgs/icons/aimed.png",
+			"lvl_exit":"res://mats/imgs/icons/icon green arrow.png"
+		}
+	}
+}
 var enemys={
 	"sk_sw":{
 		"s":"res://mats/enemys/e1/enemy1.tscn",
-		"i":"res://mats/imgs/icons/skelV1.png",
-		"ui":"res://mats/imgs/icons/skelV1_up.png",
+		"i":images.icons.charters.sk_sw,
+		"ui":images.icons.charters.sk_sw_u,
 		},
 	"sk_bo":{
 		"s":"res://mats/enemys/e2/enemy.tscn",
-		"i":"res://mats/imgs/icons/skel_bow.png",
-		"ui":"res://mats/imgs/icons/skel_bow_up.png",
+		"i":images.icons.charters.sk_bo,
+		"ui":images.icons.charters.sk_bo_u,
 		},
 	"gob_be":{
 		"s":"res://mats/enemys/e3/enemy.tscn",
-		"i":"res://mats/imgs/icons/X.png",
-		"ui":"res://mats/imgs/icons/X.png",
+		"i":images.undef,
+		"ui":images.undef,
 		},
+	"gob_range":{
+		"s":"res://mats/enemys/e4/enemy.tscn",
+		"i":images.undef,
+		"ui":images.undef,
+		},
+	"cultist":{
+		"s":"res://mats/enemys/e5/enemy.tscn",
+		"i":images.undef,
+		"ui":images.undef,
+		},
+}
+var bosses={
+	"skelvas":{
+		"s":"res://mats/bosses/skel/skelboss.tscn",
+		"i":images.icons.charters.skelvas
+	},
+	"skelgener":{
+		"s":"res://mats/bosses/ancient_one/boss.tscn",
+		"i":images.icons.charters.skelgener
+	},
+	"gobbst":{
+		"s":"res://mats/bosses/gob_beast/boss.tscn",
+		"i":images.undef
+	},
 }
 var maps={
 		0:{
@@ -29,14 +84,11 @@ var maps={
 				}
 			},
 			"ecount":Vector2(8,12),
-			"enemys":[
-				"sk_sw",
-				"sk_sw",
-				"sk_sw",
-				"sk_sw",
-				"sk_sw",
-				"sk_bo",
-			]
+			"bosses":PackedStringArray(["skelvas"]),
+			"enemys":{
+				"sk_sw":0.9,
+				"sk_bo":0.1,
+			}
 		},
 		1:{
 			"locs":{
@@ -46,13 +98,11 @@ var maps={
 				}
 				},
 			"ecount":Vector2(14,20),
-			"enemys":[
-				"sk_sw",
-				"sk_sw",
-				"sk_sw",
-				"sk_bo",
-				"sk_bo",
-			]
+			"bosses":PackedStringArray([]),
+			"enemys":{
+				"sk_sw":0.6,
+				"sk_bo":0.4,
+			}
 		},
 		2:{
 			"locs":{
@@ -62,36 +112,55 @@ var maps={
 				}
 				},
 			"ecount":Vector2(8,15),
-			"enemys":[
-				"sk_sw",
-				"sk_sw",
-				"gob_be",
-				"gob_be",
-			]
+			"bosses":PackedStringArray([]),
+			"enemys":{
+				"sk_sw":0.75,
+				"gob_be":0.25,
+			}
+		},
+		3:{
+			"locs":{
+				0:{
+					"l":"res://mats/lvls/lvl3.tscn",
+					"color":Color(50,200,50)
+				}
+				},
+			"ecount":Vector2(8,15),
+			"bosses":PackedStringArray([]),
+			"enemys":{
+				"sk_sw":0.5,
+				"gob_be":0.2,
+				"gob_range":0.3
+			}
+		},
+		4:{
+			"locs":{
+				0:{
+					"l":"res://mats/lvls/lvl3.tscn",
+					"color":Color(50,200,50)
+				}
+				},
+			"ecount":Vector2(8,15),
+			"bosses":PackedStringArray([]),
+			"enemys":{
+				"sk_sw":0.1,
+				"sk_bo":0.1,
+				"gob_be":0.2,
+				"gob_range":0.4,
+				"cultist":0.2
+			}
 		},
 	}
 
-var bosses={
-	0:[
-		{
-			"b":"res://mats/bosses/skel/skelboss.tscn",
-			"i":"res://mats/imgs/icons/skel_boss.png"
-		},
-	],
-	1:[
-		{
-			"b":"res://mats/bosses/ancient_one/boss.tscn",
-			"i":"res://mats/imgs/icons/skel_boss.png"
-		},
-	],
-	2:[
-		{
-			"b":"res://mats/bosses/skel/skelboss.tscn",
-			"i":"res://mats/imgs/icons/skel_boss.png"
-		},
-	],
-}
 
+var game_stats={
+	"%spawn_elite":{
+			"v":Vector2(0.01,0.1),
+			"min_v":0.01,
+			"i":images.icons.charters.sk_sw,
+			"t":tr("%SPAWN_ELITE")
+			},
+}
 var rnd=RandomNumberGenerator.new()
 var objs={}
 func upd_objs():
@@ -130,42 +199,58 @@ func upd_objs():
 	"stats":{
 		"hp":{
 			"v":Vector2(1,4),
-			"i":"res://mats/imgs/icons/skills/hp.png",
+			"-v":Vector2(-2,-3),
+			"min_v":1,
+			"i":images.icons.stats.hp,
 			"t":tr("HP")
 			},
 		"hp_rgen":{
 			"v":Vector2(0.05,0.2),
-			"i":"res://mats/imgs/icons/skills/hp_regeneration.png",
+			"-v":Vector2(-0.05,-0.2),
+			"min_v":0,
+			"i":images.icons.stats.hp_regen,
 			"t":tr("HP_REGEN")
 			},
 		"dmg":{
 			"v":Vector2(1,3),
-			"i":"res://mats/imgs/icons/skills/att.png",
+			"-v":Vector2(-1,-4),
+			"min_v":0,
+			"i":images.icons.stats.dmg,
 			"t":tr("DMG")
 			},
 		"crit_dmg":{
 			"v":Vector2(1,5),
-			"i":"res://mats/imgs/icons/skills/crit_dmg.png",
+			"-v":Vector2(-1,-6),
+			"min_v":0,
+			"i":images.icons.stats["crit_dmg"],
 			"t":tr("CRIT_DMG")
 			},
 		"%crit_dmg":{
 			"v":Vector2(0.05,0.1),
-			"i":"res://mats/imgs/icons/skills/%crit.png",
+			"-v":Vector2(-0.05,-0.1),
+			"min_v":0,
+			"i":images.icons.stats["%crit_dmg"],
 			"t":tr("%CRIT_DMG")
 			},
 		"+%att_speed":{
 			"v":Vector2(0.005,0.01),
-			"i":"res://mats/imgs/icons/skills/+%sp_att.png",
+			"-v":Vector2(-0.005,-0.01),
+			"min_v":0.2,
+			"i":images.icons.stats["+%att_speed"],
 			"t":tr("%ATT_SPEED")
 			},
 		"def":{
-			"v":Vector2(1,2),
-			"i":"res://mats/imgs/icons/skills/def.png",
+			"v":Vector2(1,3),
+			"-v":Vector2(-1,-2),
+			"min_v":1,
+			"i":images.icons.stats.def,
 			"t":tr("DEF")
 			},
 		"max_stamina":{
 			"v":Vector2(0.2,0.5),
-			"i":"res://mats/imgs/icons/skills/max_stamina.png",
+			"-v":Vector2(-0.1,-0.4),
+			"min_v":0.5,
+			"i":images.icons.stats.max_stamina,
 			"t":tr("MAX_STAMINA_VALUE")
 			},
 		#"do_roll_cost":{
@@ -175,23 +260,29 @@ func upd_objs():
 		#	},
 		"regen_stamina_point":{
 			"v":Vector2(0.1,0.2),
-			"i":"res://mats/imgs/icons/skills/stamina_regen.png",
+			"-v":Vector2(-0.05,-0.3),
+			"min_v":0.1,
+			"i":images.icons.stats.regen_stamina_point,
 			"t":tr("STAMINA_REGEN_VALUE")
 			},
 		"%sp":{
 			"v":Vector2(0.02,0.1),
-			"i":"res://mats/imgs/icons/skills/speed.png",
+			"-v":Vector2(-0.05,-0.2),
+			"min_v":-0.5,
+			"i":images.icons.stats["%sp"],
 			"t":tr("%SPEED")
 			},
 		"take_area":{
 			"v":Vector2(2,10),
-			"i":"res://mats/imgs/icons/skills/take.png",
+			"-v":Vector2(-1,-8),
+			"min_v":10,
+			"i":images.icons.stats.take_area,
 			"t":tr("COLLECTING")
 			}
 		},
 	"updates":{
 		"the sword":{
-			"i":"res://mats/imgs/icons/X.png",
+			"i":images.undef,
 			"unlocked":false,
 			"t":tr("THE_SWORD_TEXT"),
 			"lvls":{
@@ -202,7 +293,7 @@ func upd_objs():
 				}
 			},
 		"armor":{
-			"i":"res://mats/imgs/icons/X.png",
+			"i":images.undef,
 			"unlocked":false,
 			"t":tr("ARMOR_TEXT"),
 			"lvls":{
@@ -213,7 +304,7 @@ func upd_objs():
 				}
 			},
 		"boots":{
-			"i":"res://mats/imgs/icons/X.png",
+			"i":images.undef,
 			"unlocked":false,
 			"t":tr("BOOTS_TEXT"),
 			"lvls":{
@@ -222,7 +313,7 @@ func upd_objs():
 				}
 			},
 		"item1":{
-			"i":"res://mats/imgs/icons/X.png",
+			"i":images.undef,
 			"unlocked":false,
 			"t":tr("item1_TEXT"),
 			"lvls":{
@@ -233,7 +324,7 @@ func upd_objs():
 	},
 	"items":{
 		"surikens":{
-			"i":"res://mats/imgs/icons/X.png",
+			"i":images.undef,
 			"unlocked":false,
 			"t":tr("SURIKEN_TEXT"),
 			"scn":"res://mats/items/sur/sur/sur.tscn",

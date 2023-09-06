@@ -34,7 +34,7 @@ var lvl:int=0
 func merge_stats():
 	for e in cd.stats.keys():
 		if add_stats.get(e)!=null:
-			cd.stats[e]+=add_stats[e]
+			cd.stats[e]=clamp(cd.stats[e]+add_stats[e],0,999999999)
 func test_chamber(anim_name:String,value:float):
 	var timer=value
 	for e in [anim_name+"_up",anim_name+"_down",anim_name+"_left",anim_name+"_right"]:

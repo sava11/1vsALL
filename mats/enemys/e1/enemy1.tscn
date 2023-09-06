@@ -1,8 +1,9 @@
-[gd_scene load_steps=183 format=3 uid="uid://bd24ia8p2suh3"]
+[gd_scene load_steps=185 format=3 uid="uid://bd24ia8p2suh3"]
 
 [ext_resource type="Texture2D" uid="uid://dtnkmw6sq5mbd" path="res://mats/imgs/skeletonV1/Down/SkeletonWithSwordDownAttack01.png" id="1_q5j2b"]
 [ext_resource type="Script" path="res://mats/enemys/e1/enemy1.gd" id="1_slc2g"]
 [ext_resource type="Texture2D" uid="uid://fk4k43b72kwy" path="res://mats/imgs/skeletonV1/Left/SkeletonWithSwordLeftAttack01.png" id="2_d3f56"]
+[ext_resource type="Shader" path="res://mats/enemys/e2/outline.gdshader" id="2_y7342"]
 [ext_resource type="Texture2D" uid="uid://tn61kp62nb7s" path="res://mats/imgs/skeletonV1/Right/SkeletonWithSwordRightAttack01.png" id="3_ppdef"]
 [ext_resource type="Texture2D" uid="uid://cwnsnmsbdlcew" path="res://mats/imgs/skeletonV1/Up/SkeletonWithSwordUpAttack01.png" id="4_0l2bh"]
 [ext_resource type="Texture2D" uid="uid://du7f1b2dg3and" path="res://mats/imgs/skeletonV1/Down/SkeletonWithSwordDownDeath.png" id="5_ajyuw"]
@@ -19,6 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://bi340us3pt6av" path="res://mats/imgs/skeletonV1/Up/SkeletonWithSwordUpWalk.png" id="16_c5c6w"]
 [ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="17_vjpkm"]
 [ext_resource type="Script" path="res://mats/boxes/hitbox.gd" id="18_8jsrh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uj57k"]
+shader = ExtResource("2_y7342")
+shader_parameter/line_color = Color(1, 0.301961, 0, 1)
+shader_parameter/line_thickness = 1.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wt7h4"]
 atlas = ExtResource("1_q5j2b")
@@ -2265,8 +2271,9 @@ pos_from = 0.0
 pos_to = 0.0
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_uj57k")
 sprite_frames = SubResource("SpriteFrames_a66wy")
-animation = &"death_up"
+animation = &"attack_down"
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="."]
@@ -2288,7 +2295,6 @@ parameters/run/blend_position = Vector2(-0.0017007, 0.977901)
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pb7nn")
-disabled = true
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
@@ -2321,6 +2327,8 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="c" type="CollisionPolygon2D" parent="get_hero_body"]
+
+[node name="NavigationLink2D" type="NavigationLink2D" parent="."]
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]

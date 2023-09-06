@@ -32,9 +32,11 @@ var streight_regen:float=0.5
 @onready var hb=$hurt_box
 # Called when the node enters the scene tree for the first time.
 
-signal dead
+var bname=""
+signal dead(bn)
 func _ready():
-	#get_tree().current_scene.summon(15)
+	for e in gm.bosses.keys():
+		if gm.bosses[e].s==scene_file_path:bname=e
 	connect("dead",Callable(get_tree().current_scene,"boss_die"))
 	hb.monitorable=true
 	hb.monitoring=true
@@ -215,7 +217,7 @@ func delete():
 			v.value=randi_range(exp_from,exp_to)
 		get_parent().add_child.call_deferred(v)
 		v.global_position=global_position
-	emit_signal("dead")
+	emit_signal("dead",bname)
 	queue_free()
 
 func _freeze():

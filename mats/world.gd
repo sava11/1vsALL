@@ -13,16 +13,38 @@ extends Node2D
 @onready var at=$arena_timer
 @onready var ememys_path=$world/ent/enemys
 @onready var lvl_path=$world/lvl
+
+var rsize=Vector2(576,256)
+var rpos=Vector2(-288,-128)
+func get_rand_pos():
+	var x=0
+	var y=0
+	var x1=0
+	var y1=0
+	var win=fnc.get_prkt_win()
+	x=rpos.x
+	x1=rpos.x+rsize.x
+	y=rpos.y
+	y1=rpos.y+rsize.y
+	return Vector2(randf_range(x,x1),randf_range(y,y1))
+
 var wave_count=1
 var cur_map_id=0
-var cur_boss:PackedStringArray
-var cur_enemys:PackedStringArray=[]
-var boss_killed=false
+var summoning:bool=true
+var cur_boss:Dictionary={}
+var cur_enemys:Dictionary={}
+var exit:bool=false
 @onready var ivent_queue=PackedInt32Array([gm.ivents.stats_map])
 signal end_arena()
-
-
+signal boss_fight_end()
+func all_bosses_died():
+	var res:int=0
+	for b in cur_boss.keys():
+		if cur_boss[b].die==true:
+			res+=1
+	return bool(int(res/cur_boss.size()))
 func _ready():
+	
 	$cam.limit_left=$Panel.position.x
 	$cam.limit_top=$Panel.position.y
 	$cam.limit_bottom=$Panel.position.y+$Panel.size.y
@@ -57,7 +79,7 @@ func _physics_process(_delta):
 		$cl/Control/time.text="time: "+str(int(at.time_left)+1)
 	else:
 		$cl/Control/time.hide()
-	if cur_boss.is_empty() and at.is_stopped() and at.autostart:
+	if (cur_boss.is_empty() or all_bosses_died()) and at.is_stopped() and at.autostart:
 		var time=randf_range(time_periond_from,time_periond_to)
 		at.start(time)
 		time=randf_range(spwn_time_periond_from,spwn_time_periond_to)
@@ -75,38 +97,9 @@ func _physics_process(_delta):
 func boss_summon():
 	var rsize=Vector2(576,256)
 	var rpos=Vector2(-288,-128)
-	var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
-	e.load_scene=load(cur_boss[0])
-	var x=0
-	var y=0
-	var x1=0
-	var y1=0
-	var win=fnc.get_prkt_win()
-	x=rpos.x
-	x1=rpos.x+rsize.x
-	y=rpos.y
-	y1=rpos.y+rsize.y
-	var pos=Vector2(randf_range(x,x1),randf_range(y,y1))
-	e.scene_params={
-		"global_position":pos,
-		"dif":dif,
-		}
-	e.global_position=pos
-	#e.target_path=fnc.get_hero().get_path()
-	ememys_path.add_child(e)
-var hlvls_queue=PackedInt32Array([])
-func add_to_lvl_queue(hlvl:int):
-	hlvls_queue.append(hlvl)
-
-
-func summon(enemys_count=0):
-	if enemys_count==0:enemys_count=randi_range(enemys_count_from,enemys_count_to)
-	var rsize=Vector2(576,256)
-	var rpos=Vector2(-288,-128)
-	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
-		var ens=cur_enemys.duplicate()
-		e.load_scene=load(gm.enemys[ens[gm.rnd.randi_range(0,ens.size()-1)]].s)
+	for e in cur_boss:
+		var en=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+		en.load_scene=load(gm.bosses[e].s)
 		var x=0
 		var y=0
 		var x1=0
@@ -117,20 +110,39 @@ func summon(enemys_count=0):
 		y=rpos.y
 		y1=rpos.y+rsize.y
 		var pos=Vector2(randf_range(x,x1),randf_range(y,y1))
+		en.scene_params={
+			"global_position":pos,
+			"dif":dif,
+			}
+		en.global_position=pos
+		#e.target_path=fnc.get_hero().get_path()
+		ememys_path.add_child(en)
+var hlvls_queue=PackedInt32Array([])
+func add_to_lvl_queue(hlvl:int):
+	hlvls_queue.append(hlvl)
+
+
+func summon(enemys_count=0):
+	if enemys_count==0:enemys_count=randi_range(enemys_count_from,enemys_count_to)
+	
+	for ec in range(enemys_count):
+		var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+		var ens=cur_enemys.duplicate()
+		var enemy_chance=fnc._with_chance(ens[gm.rnd.randi_range(0,ens.size()-1)])
+		for i in ens.keys():
+			if enemy_chance:
+				e.load_scene=load(gm.enemys[i].s)
+		var pos=get_rand_pos()
 		e.scene_params={
 			"global_position":pos,
 			"dif":dif,
+			"elite":fnc._with_chance(0.09)
 			}
 		e.global_position=pos
 		#e.target_path=fnc.get_hero().get_path()
 		ememys_path.add_child(e)
 func _on_enemy_summon_timer_timeout():
-	if !cur_boss.is_empty():
-		est.stop()
-		at.stop()
-		boss_summon()
-		at.time_left=0
-	else:
+	if summoning:
 		summon()
 		var time=randf_range(spwn_time_periond_from,spwn_time_periond_to)
 		est.start(time)
@@ -139,10 +151,11 @@ func _on_enemy_summon_timer_timeout():
 func menu_exit():
 	get_tree().change_scene_to_file("res://menu.tscn")
 
-func boss_die():
-	at.start(10)
-	cur_boss.clear()
-	boss_killed=true
+func boss_die(bname):
+	cur_boss[bname].die=true
+	if all_bosses_died():
+		at.start(10)
+		emit_signal("boss_fight_end")
 func _on_arena_timer_timeout():
 	stop()
 	for e in ememys_path.get_children():
@@ -152,14 +165,14 @@ func _on_arena_timer_timeout():
 	emit_signal("end_arena")
 	#else:
 	#	pass
-	if boss_killed:
-		lvl=clamp(lvl+1,0,gm.maps.keys().max())
-		upd_lvl(lvl)
-		boss_killed=false
-	else:
-		$cl/map.upd_stats()
+	if exit:
+		new_lvl()
+		exit=false
+	$cl/map.upd_stats()
 	#get_tree().change_scene_to_file("res://mats/UI/map/panel.tscn")
-	
+func new_lvl():
+	lvl=clamp(lvl+1,0,gm.maps.keys().max())
+	upd_lvl(lvl)
 func stop():
 	est.stop()
 	at.stop()
@@ -168,7 +181,7 @@ func start_game():
 		est.stop()
 		at.stop()
 		boss_summon()
-	else:
+	if summoning and cur_boss.is_empty():
 		summon()
 		var time=randf_range(spwn_time_periond_from,spwn_time_periond_to)
 		est.start(time)
@@ -198,3 +211,7 @@ func upd_lvl(lvl_id):
 	fnc.get_world_node().move_child.call_deferred(lvl,0)
 	$cl/map.upd_b_stats()
 	#print(fnc.get_world_node().find_child(lvl.name))
+
+
+func _on_boss_fight_end():
+	pass # Replace with function body.

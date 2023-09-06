@@ -1,5 +1,6 @@
 extends RigidBody2D
 @export_group("parametrs")
+@export var elite:bool=false
 @export_range(0,100) var dif:float=0
 @export var run_speed:float=30.0
 @export_range(1,999999999) var life_points_from:float=1.0
@@ -27,13 +28,24 @@ extends RigidBody2D
 @onready var hb=$hurt_box
 # Called when the node enters the scene tree for the first time.
 
+
 func _ready():
 	hb.monitorable=true
 	hb.monitoring=true
-	var life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)
+	$sp.material.set_deferred("shader_parameter/line_thickness",1.2*int(elite))
+	var life_points=0
+	var damage=0
+	var def=0
+	if !elite:
+		life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)
+		damage=fnc._with_dific(randf_range(damage_from,damage_to),dif)
+		def=fnc._with_dific(randf_range(defence_from,defence_to),dif)
+	else:
+		life_points=fnc._with_dific(randf_range(life_points_from,life_points_to),dif)*1.2
+		damage=fnc._with_dific(randf_range(damage_from,damage_to),dif)*1.3
+		def=fnc._with_dific(randf_range(defence_from,defence_to),dif)*1.4
 	hb.s_m_h(life_points)
 	hb.set_he(life_points)
-	var def=fnc._with_dific(randf_range(defence_from,defence_to),dif)
 	hb.s_m_d(def)
 	hb.set_def(def)
 	at.active=true
@@ -80,9 +92,9 @@ func _physics_process(_delta):
 			attack_wait_timer+=_delta
 			vec=mvd*run_speed
 			$get_hero_body.rotation_degrees=fnc.angle(get_input(hero.global_position))
-		if fnc._sqrt(hero.global_position-global_position)<=attack_range/2 and !attacking:
-			attak=false
-			vec=fnc.move(fnc.angle(get_input(hero.global_position))-180)*run_speed
+		#if fnc._sqrt(hero.global_position-global_position)<=attack_range/2 and !attacking:
+		#	attak=false
+		#	vec=fnc.move(fnc.angle(get_input(hero.global_position))-180)*run_speed
 		if attak==true:
 			attacking=true
 			attack_wait_timer=0
@@ -130,7 +142,7 @@ func delete():
 func aiming():
 	var e=preload("res://mats/font/crit.tscn").instantiate()
 	e.hide()
-	e.texture=preload("res://mats/imgs/icons/aimed.png")
+	e.texture=load(gm.images.icons.other.aim)
 	e.global_position=global_position+Vector2(-e.size.x/2,-36)
 	get_tree().current_scene.ememys_path.add_child(e)
 	

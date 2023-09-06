@@ -9,6 +9,7 @@ var sqrt=0
 
 func _ready():
 	global_position=start_pos
+	mvd=fnc.move(global_rotation_degrees)
 func delete():
 	queue_free()
 

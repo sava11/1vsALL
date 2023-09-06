@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://mats/world.gd" id="1_h267k"]
 [ext_resource type="PackedScene" uid="uid://bxgd1ewukcs5t" path="res://mats/lvls/lvl1.tscn" id="2_aratr"]
-[ext_resource type="PackedScene" uid="uid://cj3gsy8dj6dgk" path="res://mats/enemys/e2/enemy.tscn" id="3_2vi20"]
+[ext_resource type="PackedScene" uid="uid://c2umj1rpcr0l7" path="res://mats/enemys/e6/nec.tscn" id="3_ugxhi"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_0jca1"]
 [ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="5_cuq37"]
-[ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/maney.png" id="6_oo4gd"]
+[ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/money.png" id="5_q3sjt"]
 [ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="8_s3cml"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w576y"]
@@ -141,7 +141,8 @@ anti_aliasing_size = 0.25
 process_mode = 3
 editor_description = "проблеммы с анимациями"
 script = ExtResource("1_h267k")
-time_periond_from = 50.0
+debug = true
+time_periond_from = 45.0
 time_periond_to = 60.0
 enemys_count_from = 15
 enemys_count_to = 20
@@ -177,7 +178,7 @@ y_sort_enabled = true
 [node name="enemys" type="Node2D" parent="world/ent"]
 y_sort_enabled = true
 
-[node name="skel_bower" parent="world/ent/enemys" instance=ExtResource("3_2vi20")]
+[node name="nec" parent="world/ent/enemys" instance=ExtResource("3_ugxhi")]
 
 [node name="player" parent="world/ent" instance=ExtResource("5_0jca1")]
 position = Vector2(-176, -24)
@@ -228,7 +229,7 @@ layout_mode = 1
 offset_bottom = 21.0
 scale = Vector2(1.525, 1.525)
 theme_override_constants/separation = 4
-img = ExtResource("6_oo4gd")
+img = ExtResource("5_q3sjt")
 
 [node name="hp" type="RichTextLabel" parent="cl/Control/stats/vc"]
 process_mode = 3
@@ -380,6 +381,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[connection signal="boss_fight_end" from="." to="." method="_on_boss_fight_end"]
 [connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout" flags=18]
 [connection signal="timeout" from="arena_timer" to="." method="_on_arena_timer_timeout" flags=18]
 [connection signal="button_down" from="cl/Control/die/Button" to="." method="menu_exit"]

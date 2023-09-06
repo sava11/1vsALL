@@ -79,6 +79,13 @@ func _with_chance_custom_values(chance:float,Tvalue,Fvalue):
 	if gm.rnd.randf_range(0,1)>1-chance:
 		return Tvalue
 	return Fvalue
+func _with_chance_ulti(chances=[0.5,0.5]):
+	var cur_value=gm.rnd.randf_range(0,sum(chances))
+	var prefix:float=0
+	for e in range(chances.size()):
+		if cur_value>=prefix and cur_value<prefix+chances[e]:
+			return e
+		prefix+=chances[e]
 func find_betwen_lines(point,lines:PackedVector2Array):
 	var curent=[]
 	for e in range(lines.size()):

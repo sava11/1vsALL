@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxgd1ewukcs5t"]
+[gd_scene load_steps=11 format=3 uid="uid://bxgd1ewukcs5t"]
 
 [ext_resource type="Texture2D" uid="uid://c7tfvhbmccb17" path="res://mats/DirtTileset.png" id="1_kvv6l"]
 [ext_resource type="Texture2D" uid="uid://b5cnjupnwx1lj" path="res://mats/Tileset.png" id="2_kf4xr"]
@@ -653,6 +653,11 @@ size = Vector2(608, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ysjg"]
 size = Vector2(20, 324)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2ehv8"]
+vertices = PackedVector2Array(64, 64, 296, 152, -296, 152, 0, 64, 296, -120, 64, 0, -128, 0, -128, -80, 0, 0, -208, 0, -296, -120, -208, -80)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 7, 8, 3), PackedInt32Array(6, 3, 2, 9), PackedInt32Array(9, 2, 10, 11), PackedInt32Array(11, 10, 4, 7), PackedInt32Array(7, 4, 5, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-296, -120, -296, 152, 296, 152, 296, -120), PackedVector2Array(-208, -80, -208, 0, -128, 0, -128, -80), PackedVector2Array(0, 0, 0, 64, 64, 64, 64, 0)])
+
 [node name="lvl" type="Node2D"]
 
 [node name="TileMap2" type="TileMap" parent="."]
@@ -678,9 +683,12 @@ position = Vector2(0, 168)
 shape = SubResource("RectangleShape2D_niaqs")
 
 [node name="c3" type="CollisionShape2D" parent="border"]
-position = Vector2(304, 0)
+position = Vector2(306, 0)
 shape = SubResource("RectangleShape2D_6ysjg")
 
 [node name="c4" type="CollisionShape2D" parent="border"]
-position = Vector2(-304, 0)
+position = Vector2(-306, 0)
 shape = SubResource("RectangleShape2D_6ysjg")
+
+[node name="nav" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_2ehv8")
