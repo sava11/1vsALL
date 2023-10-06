@@ -1,8 +1,8 @@
-[gd_scene load_steps=194 format=3 uid="uid://bqsahkpcswq5h"]
+[gd_scene load_steps=195 format=3 uid="uid://bqsahkpcswq5h"]
 
 [ext_resource type="Script" path="res://mats/enemys/e4/enemy.gd" id="1_xoq2x"]
 [ext_resource type="PackedScene" uid="uid://bunfuxxnrunme" path="res://mats/enemys/e4/ap.tscn" id="4_f0aeb"]
-[ext_resource type="PackedScene" uid="uid://b5cj0qfnefrl3" path="res://mats/enemys/e4/sp.tscn" id="5_heeut"]
+[ext_resource type="Shader" path="res://mats/enemys/temp_enemys1/e2/outline.gdshader" id="5_kwc1w"]
 [ext_resource type="Texture2D" uid="uid://moti38jfedhr" path="res://mats/imgs/gob_range/Down/GoblinSlingerDownAttack01.png" id="6_h5wuf"]
 [ext_resource type="Texture2D" uid="uid://dsk72ae1db3q0" path="res://mats/imgs/gob_range/Left/GoblinSlingerLeftAttack01.png" id="7_4udsd"]
 [ext_resource type="Texture2D" uid="uid://ch6ptjxrox68a" path="res://mats/imgs/gob_range/Right/GoblinSlingerRightAttack01.png" id="8_ah6vm"]
@@ -30,6 +30,12 @@ radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fofif"]
 radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ityk8"]
+resource_local_to_scene = true
+shader = ExtResource("5_kwc1w")
+shader_parameter/line_color = Color(1, 0.301961, 0, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtb8k"]
 atlas = ExtResource("6_h5wuf")
@@ -703,7 +709,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("21_ud2vx")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_f3xnr"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1bfi"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1353,9 +1359,11 @@ max_speed = 100000.0
 
 [node name="ap" parent="." instance=ExtResource("4_f0aeb")]
 
-[node name="sp" parent="." instance=ExtResource("5_heeut")]
-sprite_frames = SubResource("SpriteFrames_f3xnr")
+[node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ityk8")
+sprite_frames = SubResource("SpriteFrames_e1bfi")
 animation = &"attack_down"
+offset = Vector2(0, -15)
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]

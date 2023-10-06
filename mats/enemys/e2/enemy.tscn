@@ -1,8 +1,8 @@
-[gd_scene load_steps=154 format=3 uid="uid://dm8fh1bkeiur1"]
+[gd_scene load_steps=155 format=3 uid="uid://dm8fh1bkeiur1"]
 
 [ext_resource type="Script" path="res://mats/enemys/e2/enemy.gd" id="1_thpiq"]
+[ext_resource type="Shader" path="res://mats/enemys/temp_enemys1/e2/outline.gdshader" id="4_n6ux5"]
 [ext_resource type="PackedScene" uid="uid://xslfeevkbt3v" path="res://mats/enemys/e2/bow_anims.tscn" id="4_p35am"]
-[ext_resource type="PackedScene" uid="uid://cxoysk2oeh2y2" path="res://mats/enemys/e2/bow_sp.tscn" id="5_3vuyd"]
 [ext_resource type="Texture2D" uid="uid://c0l5vikarh04i" path="res://mats/imgs/skelet_bow/Down/SkeletonWithBowDownAttack01.png" id="6_xg4xh"]
 [ext_resource type="Texture2D" uid="uid://ddsn1t04amfln" path="res://mats/imgs/skelet_bow/Left/SkeletonWithBowLeftAttack01.png" id="7_cbuiy"]
 [ext_resource type="Texture2D" uid="uid://brkau8c7x6r1w" path="res://mats/imgs/skelet_bow/Right/SkeletonWithBowRightAttack01.png" id="8_idwtg"]
@@ -30,6 +30,12 @@ radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fofif"]
 radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ityk8"]
+resource_local_to_scene = true
+shader = ExtResource("4_n6ux5")
+shader_parameter/line_color = Color(1, 0.301961, 0, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8ef6"]
 atlas = ExtResource("6_xg4xh")
@@ -543,7 +549,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("21_conqx")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_txnaq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pwkc7"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1073,8 +1079,11 @@ avoidance_enabled = true
 radius = 5.0
 max_speed = 100000.0
 
-[node name="sp" parent="." instance=ExtResource("5_3vuyd")]
-sprite_frames = SubResource("SpriteFrames_txnaq")
+[node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ityk8")
+sprite_frames = SubResource("SpriteFrames_pwkc7")
+animation = &"run_up"
+offset = Vector2(0, -15)
 
 [node name="ap" parent="." instance=ExtResource("4_p35am")]
 

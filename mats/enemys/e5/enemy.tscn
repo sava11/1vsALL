@@ -1,11 +1,11 @@
-[gd_scene load_steps=150 format=3 uid="uid://q2lq4q0lspnp"]
+[gd_scene load_steps=151 format=3 uid="uid://q2lq4q0lspnp"]
 
 [ext_resource type="Script" path="res://mats/enemys/e5/enemy.gd" id="1_vmgb2"]
 [ext_resource type="Texture2D" uid="uid://chwk63e2u38fb" path="res://mats/imgs/cultist/Down/CultistDownAttack01.png" id="3_j72yi"]
 [ext_resource type="PackedScene" uid="uid://dfg5jderkfus7" path="res://mats/enemys/e5/ap.tscn" id="4_5kvsa"]
 [ext_resource type="Texture2D" uid="uid://bltqno3s6jwfx" path="res://mats/imgs/cultist/Left/CultistLeftAttack01.png" id="4_l5c0j"]
 [ext_resource type="Texture2D" uid="uid://bvks6nh4qofec" path="res://mats/imgs/cultist/Right/CultistRightAttack01.png" id="5_4ihbc"]
-[ext_resource type="PackedScene" uid="uid://bsvsyb1507433" path="res://mats/enemys/e5/sp.tscn" id="5_f02hu"]
+[ext_resource type="Shader" path="res://mats/enemys/temp_enemys1/e2/outline.gdshader" id="5_8eww1"]
 [ext_resource type="Texture2D" uid="uid://dtg5otcybpayh" path="res://mats/imgs/cultist/Up/CultistUpAttack01.png" id="6_t7hqa"]
 [ext_resource type="Texture2D" uid="uid://k22o032ov2wl" path="res://mats/imgs/cultist/Down/CultistDownDeath.png" id="7_xqd80"]
 [ext_resource type="Texture2D" uid="uid://c7nvs7b1gqkdh" path="res://mats/imgs/cultist/Left/CultistLeftDeath.png" id="8_edx1d"]
@@ -30,6 +30,12 @@ radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fofif"]
 radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ityk8"]
+resource_local_to_scene = true
+shader = ExtResource("5_8eww1")
+shader_parameter/line_color = Color(1, 0.301961, 0, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah7fp"]
 atlas = ExtResource("3_j72yi")
@@ -527,7 +533,7 @@ region = Rect2(288, 0, 48, 48)
 atlas = ExtResource("18_vsi32")
 region = Rect2(336, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fcetl"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xdgp"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1052,9 +1058,12 @@ max_speed = 100000.0
 
 [node name="ap" parent="." instance=ExtResource("4_5kvsa")]
 
-[node name="sp" parent="." instance=ExtResource("5_f02hu")]
-sprite_frames = SubResource("SpriteFrames_fcetl")
+[node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ityk8")
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_1xdgp")
 animation = &"attack_down"
+offset = Vector2(0, -15)
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]

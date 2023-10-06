@@ -1,10 +1,10 @@
-[gd_scene load_steps=190 format=3 uid="uid://bl01fjw3wobi1"]
+[gd_scene load_steps=191 format=3 uid="uid://bl01fjw3wobi1"]
 
 [ext_resource type="Script" path="res://mats/enemys/e3/enemy.gd" id="1_ludh7"]
 [ext_resource type="PackedScene" uid="uid://juq5p5p58f46" path="res://mats/enemys/e3/ap.tscn" id="3_33oqd"]
 [ext_resource type="Texture2D" uid="uid://p5niidc31kw0" path="res://mats/imgs/goblin_berserk/Down/GoblinDownAttack01.png" id="4_878d7"]
-[ext_resource type="PackedScene" uid="uid://by8ee0bj1t604" path="res://mats/enemys/e3/sp.tscn" id="4_jd2pl"]
 [ext_resource type="Texture2D" uid="uid://qiyspqm40eb0" path="res://mats/imgs/goblin_berserk/Left/GoblinLeftAttack01.png" id="5_75cq0"]
+[ext_resource type="Shader" path="res://mats/enemys/temp_enemys1/e2/outline.gdshader" id="5_nspxd"]
 [ext_resource type="Texture2D" uid="uid://b20m6neabxoae" path="res://mats/imgs/goblin_berserk/Right/GoblinRightAttack01.png" id="6_mq346"]
 [ext_resource type="Texture2D" uid="uid://dl4dvcctywemb" path="res://mats/imgs/goblin_berserk/Up/GoblinUpAttack01.png" id="7_18mbp"]
 [ext_resource type="Texture2D" uid="uid://bla0cffheicgd" path="res://mats/imgs/goblin_berserk/Down/GoblinDownDeath.png" id="8_h4l7w"]
@@ -38,6 +38,12 @@ radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fofif"]
 radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ck7jh"]
+resource_local_to_scene = true
+shader = ExtResource("5_nspxd")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwe7l"]
 atlas = ExtResource("4_878d7")
@@ -663,7 +669,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("27_k5h0u")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rj8pv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_0b8rx"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1315,8 +1321,11 @@ max_speed = 100000.0
 
 [node name="ap" parent="." instance=ExtResource("3_33oqd")]
 
-[node name="sp" parent="." instance=ExtResource("4_jd2pl")]
-sprite_frames = SubResource("SpriteFrames_rj8pv")
+[node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ck7jh")
+sprite_frames = SubResource("SpriteFrames_0b8rx")
+animation = &"attack_down"
+offset = Vector2(0, -15)
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]

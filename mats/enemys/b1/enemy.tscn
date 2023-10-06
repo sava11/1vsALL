@@ -1,7 +1,7 @@
-[gd_scene load_steps=215 format=3 uid="uid://cqj4vrkgp02ao"]
+[gd_scene load_steps=216 format=3 uid="uid://cqj4vrkgp02ao"]
 
 [ext_resource type="Script" path="res://mats/enemys/b1/enemy.gd" id="1_lm01q"]
-[ext_resource type="PackedScene" uid="uid://ci1cb1nmluk6n" path="res://mats/enemys/b1/sp.tscn" id="2_y6bwt"]
+[ext_resource type="Shader" path="res://mats/enemys/temp_enemys1/e2/outline.gdshader" id="2_ai31i"]
 [ext_resource type="Texture2D" uid="uid://buiutkjqamrfp" path="res://mats/imgs/sorceress/Down/SorceressDownAttack01.png" id="3_n743i"]
 [ext_resource type="Texture2D" uid="uid://012dhue6knw5" path="res://mats/imgs/sorceress/Left/SorceressLeftAttack01.png" id="4_a2cla"]
 [ext_resource type="Texture2D" uid="uid://blfolqc1kq5s8" path="res://mats/imgs/sorceress/Right/SorceressRighAttack01.png" id="5_lqpw2"]
@@ -419,6 +419,12 @@ _data = {
 "run": SubResource("Animation_514ua"),
 "teleporting": SubResource("Animation_h7y74")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ityk8"]
+resource_local_to_scene = true
+shader = ExtResource("2_ai31i")
+shader_parameter/line_color = Color(1, 0.301961, 0, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqadf"]
 atlas = ExtResource("3_n743i")
@@ -1104,7 +1110,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("26_aigxi")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4tuj3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4xcgg"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1811,9 +1817,12 @@ libraries = {
 "": SubResource("AnimationLibrary_qjeva")
 }
 
-[node name="sp" parent="." instance=ExtResource("2_y6bwt")]
-sprite_frames = SubResource("SpriteFrames_4tuj3")
+[node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ityk8")
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_4xcgg")
 animation = &"attack3_down"
+offset = Vector2(0, -15)
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pb7nn")

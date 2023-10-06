@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c54d08vj25anr"]
+[gd_scene load_steps=3 format=3 uid="uid://c54d08vj25anr"]
 
 [ext_resource type="Script" path="res://mats/menu.gd" id="1_503lg"]
 [ext_resource type="TileSet" uid="uid://csc8a81gx41m8" path="res://mats/lvls/sand&rock.tres" id="2_s4n4m"]
-[ext_resource type="Texture2D" uid="uid://d0kfxl270qt4c" path="res://mats/imgs/sorceress/Down/SorceressDownIdle.png" id="2_swj1p"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -108,54 +107,6 @@ focus_neighbor_right = NodePath("../../../langs/en")
 focus_neighbor_bottom = NodePath("../../../langs/en")
 text = "EXIT"
 
-[node name="wis" type="Panel" parent="main_menu"]
-visible = false
-layout_mode = 0
-offset_left = 384.0
-offset_top = 64.0
-offset_right = 512.0
-offset_bottom = 256.0
-
-[node name="img" type="Sprite2D" parent="main_menu/wis"]
-position = Vector2(64, 64)
-scale = Vector2(3, 3)
-texture = ExtResource("2_swj1p")
-hframes = 6
-
-[node name="left" type="Button" parent="main_menu/wis"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -40.0
-offset_right = 56.0
-offset_bottom = -8.0
-grow_vertical = 0
-text = "<"
-
-[node name="right" type="Button" parent="main_menu/wis"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -56.0
-offset_top = -40.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-text = ">"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="main_menu/wis"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 120.0
-offset_right = 112.0
-offset_bottom = 144.0
-
 [node name="langs" type="HBoxContainer" parent="main_menu"]
 layout_mode = 1
 anchors_preset = 7
@@ -191,7 +142,5 @@ text = "ru"
 [connection signal="button_down" from="main_menu/cont/buttons/play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="main_menu/cont/buttons/credits" to="." method="_on_credits_button_down"]
 [connection signal="button_down" from="main_menu/cont/buttons/exit" to="." method="_on_exit_button_down"]
-[connection signal="button_down" from="main_menu/wis/left" to="." method="_on_left_button_down"]
-[connection signal="button_down" from="main_menu/wis/right" to="." method="_on_right_button_down"]
 [connection signal="button_down" from="main_menu/langs/en" to="." method="_on_en_button_down"]
 [connection signal="button_down" from="main_menu/langs/ru" to="." method="_on_ru_button_down"]
