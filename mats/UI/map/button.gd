@@ -22,8 +22,17 @@ func clear():
 	exit=false
 	enemys.clear()
 	boss.clear()
-	
+func set_color(state:String,color1:Color,color2:Color):
+	get("theme").get("Button/styles/"+state).set("bg_color",color1)
+	get("theme").get("Button/styles/"+state).set("border_color",color2)
 func upd_stats():
+	var l=gm.maps[get_tree().current_scene.get("lvl")].get("lvl_color",
+		{"normal":{"bg":Color("252525"),"brd":Color("959595")},
+		"pressed":{"bg":Color("515151"),"brd":Color("959595")},
+		"hover":{"bg":Color("323232"),"brd":Color("959595")},
+		"disabled":{"bg":Color("474747"),"brd":Color("959595")},},)
+	for e in l.keys():
+		set_color(e,l[e].bg,l[e].brd)
 	$tcont/vb.position.y=0
 	#$tcont/vs.value=0
 	for e in $tcont/vb.get_children():
@@ -39,7 +48,7 @@ func upd_stats():
 		var val=gm.rnd.randi_range(min_range,max_range)
 		while sd.size()<val:
 			var n=tt[gm.rnd.randi_range(0,len(tt)-1)]
-			var d =cd[n].get(fnc._with_chance_custom_values(0.7,"v","-v"),"v")
+			var d =cd[n].get(fnc._with_chance_custom_values(0.45,"v","-v"),"v")
 			var v=0
 			if d.x!=float(int(d.x)):
 				v=snapped(gm.rnd.randf_range(d.x,d.y),0.01)
@@ -75,7 +84,10 @@ func upd_stats():
 			else:
 				e1.txt=str(v)
 			$tcont/vb.add_child(e1)
+	$tcont/vs.value=0
+	$tcont/vb.position.y=0
 func _ready():
+	$tcont/vs.value=0
 	$tcont/vb.position.y=0
 	$tcont/img_layer_cont.show()
 	pass#upd_stats()
@@ -100,8 +112,10 @@ func _on_button_down():
 		map.map_execptions.append(bid)
 		##
 		var dic={}
+		var ids=0
 		for b in boss:
-			dic.merge({b:{"die":true}})
+			dic.merge({ids:{"name":b,"die":true}})
+			ids+=1
 		##
 		get_tree().current_scene.cur_boss=dic
 		get_tree().current_scene.exit=exit
@@ -121,7 +135,7 @@ func _on_button_down():
 		get_tree().current_scene.start_game()
 		shop=1
 		$tcont/img_layer_cont.imgs_paths.clear()
-		$tcont/img_layer_cont.imgs_paths.append("res://mats/imgs/icons/maney.png")
+		$tcont/img_layer_cont.imgs_paths.append(gm.images.icons.other.money)
 		$tcont/img_layer_cont._upd_()
 	if map.max_column<bid%map.colums:
 		map.max_column=bid%map.colums

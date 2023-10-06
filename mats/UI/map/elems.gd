@@ -1,5 +1,6 @@
 extends HBoxContainer
 @export var img:Texture
+@export var img_size:Vector2=Vector2(0,0)
 @export var txt:String
 @export var show_popup_text:bool=true
 var text=null
@@ -10,6 +11,10 @@ var showing_time:float=0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$tr.texture=img
+	if img_size<=Vector2.ZERO:
+		img_size=img.get_size()*1.4
+	$tr.custom_minimum_size=img_size
+	$tr.size=img_size
 	$rt.text=txt
 	$rt.custom_minimum_size.x=$rt.get_theme_default_font().get_string_size(txt).x
 	custom_minimum_size.x=$rt.custom_minimum_size.x+$rt.position.x
@@ -19,7 +24,7 @@ func _physics_process(delta):
 			showing_time+=delta
 		if showing_time>=show_time:
 			showing_time=0.0
-			text.global_position=get_global_mouse_position().clamp(Vector2(50,10),fnc.get_prkt_win()-Vector2(50,10))
+			text.global_position=get_global_mouse_position().clamp(Vector2(50,10),fnc.get_prkt_win()-Vector2(50,28))
 			text.show()
 		if !(Geometry2D.is_point_in_polygon(get_global_mouse_position(),PackedVector2Array([
 			global_position,

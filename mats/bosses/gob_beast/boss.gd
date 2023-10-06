@@ -101,7 +101,7 @@ func _process(_delta):
 	queue_redraw()
 	_upd_anim_params()
 	if die==false and moving:
-		if hero.die!=true :
+		if hero.cur_anim=="d":
 			mvd=get_input(hero.global_position)
 		else:
 			mvd=Vector2.ZERO
@@ -111,10 +111,10 @@ func _process(_delta):
 			chance_timer+=_delta
 			if chance_timer>=chance_time:
 				if fnc._with_chance(chance_to_attack2):
-					attak2=!attacking2 and !hero.die and cur_streight-_streight_fb>0 
+					attak2=!attacking2 and hero.cur_anim!="d" and cur_streight-_streight_fb>0 
 				chance_timer=0
 		
-		attak=bs!=[] and !attacking and !hero.die and !attak2 and !attacking2
+		attak=bs!=[] and !attacking and hero.cur_anim!="d" and !attak2 and !attacking2
 		#print(summon_stages[len(summon_stages)-1]," ",hb.he)
 		if attak and !attacking:
 			attacking=true

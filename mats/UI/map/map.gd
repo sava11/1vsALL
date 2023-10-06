@@ -5,7 +5,7 @@ extends Control
 var start_position:Vector2=Vector2(-1,-1)
 @export var max_size:Vector2=Vector2(200,150)
 
-@export var boss_spawn_ids:PackedInt32Array=[14,19,9]
+@export var boss_spawn_ids:PackedInt64Array=PackedInt64Array([14,19,9])
 @export_range(0,999) var shop_count:int=3
 @export_range(0,999) var start_posid:int=10
 signal in_shop
@@ -20,6 +20,10 @@ var max_column=0
 @onready var arenas=$arenas/gc
 @onready var stats_cont=$stats/cont/gc
 var bossid=0
+func set_color(color1:Color,color2:Color):
+	$arenas.get("theme_override_styles/panel/").set("bg_color",color1)
+	$arenas.get("theme_override_styles/panel/").set("border_color",color2)
+
 func get_id_in_cont(bid:int,offset:Vector2=Vector2.ZERO,clamps:Vector2=Vector2(1,1)):
 	var x=bid%int(clamps.x)
 	var y=clamp(int(clamps.y+offset.y),1,9999999)
@@ -54,6 +58,7 @@ func cr_stats():
 			d0.merge({e:d[e]})
 	return d0
 func _ready():
+	set_color(gm.maps[get_tree().current_scene.lvl].panel.bg,gm.maps[get_tree().current_scene.lvl].panel.brd)
 	posid=start_posid
 	bossid=boss_spawn_ids[gm.rnd.randi_range(0,len(boss_spawn_ids)-1)]
 	var cd=cr_stats()

@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3nmehkr0kwlj"]
+[gd_scene load_steps=5 format=3 uid="uid://d3nmehkr0kwlj"]
 
 [ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_wj4hv"]
 [ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="2_l3i6n"]
 [ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/money.png" id="3_56yoc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2iv0"]
+corner_detail = 1
+anti_aliasing = false
 
 [node name="map" type="Control"]
 layout_mode = 3
@@ -13,13 +17,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_wj4hv")
-choices_colums = null
 colums = 5
 rows = 5
-max_size = null
-boss_spawn_ids = null
 shop_count = 2
-start_posid = null
 
 [node name="arenas" type="Panel" parent="."]
 layout_mode = 1
@@ -29,9 +29,10 @@ anchor_bottom = 1.0
 offset_left = 94.0
 offset_top = 4.0
 offset_right = -4.0
-offset_bottom = -40.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2iv0")
 metadata/_edit_group_ = true
 
 [node name="gc" type="GridContainer" parent="arenas"]
@@ -56,7 +57,7 @@ anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 90.0
-offset_bottom = -252.0
+offset_bottom = -274.0
 metadata/_edit_group_ = true
 
 [node name="cont" type="VBoxContainer" parent="hero_values"]
@@ -75,6 +76,7 @@ grow_vertical = 2
 [node name="money" parent="hero_values/cont" instance=ExtResource("2_l3i6n")]
 layout_mode = 2
 img = ExtResource("3_56yoc")
+img_size = Vector2(16, 16)
 popup_text = "MONEY"
 
 [node name="xp" type="Control" parent="hero_values/cont"]
@@ -115,7 +117,7 @@ anchor_bottom = 1.0
 offset_left = 96.0
 offset_top = 4.0
 offset_right = -4.0
-offset_bottom = -40.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

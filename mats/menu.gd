@@ -2,13 +2,15 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	grab_focus()
+	$main_menu/cont/buttons/play.call_deferred("grab_focus")
 	#var ii:float=0.3
 	#var p:float=0.01
 	#for e in range(20):
 	#	ii=ii-ii*p
 	#	print(ii)
-	$wis/img.texture=load(gm.objs.player[gm.player_type].img)
-	$wis/img.hframes=gm.objs.player[gm.player_type].hframes
+	$main_menu/wis/img.texture=load(gm.objs.player[gm.player_type].img)
+	$main_menu/wis/img.hframes=gm.objs.player[gm.player_type].hframes
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

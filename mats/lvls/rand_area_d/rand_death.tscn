@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7tx2lvkodnen"]
+
+[ext_resource type="Script" path="res://mats/lvls/rand_area_d/rand_death.gd" id="1_g77ee"]
+
+[node name="rand_death" type="Area2D"]
+script = ExtResource("1_g77ee")
+shadow = Color(0, 0, 0, 0.32549)
+
+[node name="c" type="CollisionPolygon2D" parent="."]

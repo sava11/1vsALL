@@ -15,7 +15,7 @@ func _process(delta):
 		self_modulate.a=time_curve.sample_baked(st/time)
 	else:
 		var itm=load_scene.instantiate()
-		itm.global_position=global_position
+		itm.set_deferred("global_position",global_position)
 		for e in scene_params.keys():
 			if itm.get(e)!=null:
 				itm.set(e,scene_params[e])

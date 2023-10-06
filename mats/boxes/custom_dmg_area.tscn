@@ -3,6 +3,13 @@
 [ext_resource type="Script" path="res://mats/boxes/custom_dmg_area.gd" id="1_xbmu5"]
 
 [node name="custom_dmg_area" type="Area2D"]
-collision_layer = 0
-collision_mask = 6
+collision_layer = 6
+collision_mask = 0
 script = ExtResource("1_xbmu5")
+
+[node name="r" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+
+[node name="t" type="Timer" parent="."]
+
+[connection signal="timeout" from="t" to="." method="_on_t_timeout"]

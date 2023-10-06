@@ -5,55 +5,45 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwy4c"]
 bg_color = Color(0.145098, 0.145098, 0.145098, 1)
-border_width_left = 1
+border_width_left = 2
 border_width_top = 5
-border_width_right = 1
+border_width_right = 2
 border_width_bottom = 5
 border_color = Color(0.278431, 0.278431, 0.278431, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+anti_aliasing = false
 anti_aliasing_size = 0.25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaqf2"]
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
-border_width_left = 1
+border_width_left = 2
 border_width_top = 3
-border_width_right = 1
+border_width_right = 2
 border_width_bottom = 3
 border_color = Color(0.584314, 0.584314, 0.584314, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+anti_aliasing = false
 anti_aliasing_size = 0.25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jauy"]
-bg_color = Color(0.196078, 0.196078, 0.196078, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0.584314, 0.584314, 0.584314, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0)
+anti_aliasing = false
 anti_aliasing_size = 0.25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxo21"]
 bg_color = Color(0.317647, 0.317647, 0.317647, 1)
-border_width_left = 1
+border_width_left = 2
 border_width_top = 3
-border_width_right = 1
+border_width_right = 2
 border_width_bottom = 3
 border_color = Color(0.584314, 0.584314, 0.584314, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing_size = 0.25
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [sub_resource type="Theme" id="Theme_aq1dw"]
 Button/styles/disabled = SubResource("StyleBoxFlat_bwy4c")

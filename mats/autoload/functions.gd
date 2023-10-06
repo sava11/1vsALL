@@ -95,3 +95,4 @@ func find_betwen_lines(point,lines:PackedVector2Array):
 		return -1
 	else:
 		return curent[gm.rnd.randi_range(0,curent.size()-1)]
+

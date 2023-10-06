@@ -12,7 +12,7 @@ func _ready():
 	mvd=fnc.move(global_rotation_degrees)
 	rotation_degrees-=90
 	$c.emitting=true
-	$c2.gravity=mvd.normalized()*98
+	$c.gravity=mvd.normalized()*98
 func delete():
 	queue_free()
 
@@ -21,3 +21,6 @@ func _physics_process(_delta):
 	position+=mvd*speed*_delta
 	if fnc._sqrt(position-start_pos)>sqrt:
 		delete()
+func _on_body_entered(body):
+		delete()
+

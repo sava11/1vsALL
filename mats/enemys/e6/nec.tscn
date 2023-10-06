@@ -1900,7 +1900,6 @@ attack_range = 150.0
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y8n8u")
 animation = &"attack1_down"
-frame = 6
 offset = Vector2(0, -15)
 
 [node name="c" type="CollisionShape2D" parent="."]
@@ -1931,9 +1930,17 @@ parameters/conditions/death = false
 parameters/conditions/idle = false
 parameters/conditions/run = false
 
+[node name="na" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+avoidance_enabled = true
+radius = 5.0
+debug_enabled = true
+
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]
 [connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started" flags=18]
 [connection signal="no_he" from="hurt_box" to="." method="_on_hurt_box_no_he"]
 [connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout" flags=18]
 [connection signal="animation_finished" from="ap" to="." method="_on_ap_animation_finished"]
+[connection signal="velocity_computed" from="na" to="." method="move"]

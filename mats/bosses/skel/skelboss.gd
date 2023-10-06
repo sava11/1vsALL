@@ -32,7 +32,6 @@ extends RigidBody2D
 @export_range(-180,180) var r_angle_from:float=-45
 @export_range(-180,180) var r_angle_to:float=45
 @export_group("summon")
-@export_group("summon")
 @export_enum("skel_wall","skel_circle")var summon_type:int=0
 @export_range(1,99999) var spwn_range_from:int=25
 @export_range(1,99999) var spwn_range_to:int=50
@@ -121,12 +120,12 @@ func _process(_delta):
 	queue_redraw()
 	_upd_anim_params()
 	if die==false:
-		if hero.die!=true and summoning==false:
+		if hero.cur_anim!="d" and summoning==false:
 			mvd=get_input(hero.global_position)
 		else:
 			mvd=Vector2.ZERO
-		attak=bs!=[] and attacking==false and hero.die==false
-		summon=len(summon_stages)!=0 and summon_stages[len(summon_stages)-1]>hb.he and hero.die==false
+		attak=bs!=[] and attacking==false and hero.cur_anim!="d"
+		summon=len(summon_stages)!=0 and summon_stages[len(summon_stages)-1]>hb.he and hero.cur_anim!="d"
 		#print(summon_stages[len(summon_stages)-1]," ",hb.he)
 		if summon and summoning==false:
 			summoning=true
@@ -229,8 +228,8 @@ func _summon(type:int=1,difficulty:float=spwn_skel_lvl):
 			var ang=fnc.angle(mvd)-spwn_ang/2
 			var rast=randi_range(spwn_range_from,spwn_range_to)
 			var pos=fnc.move(ang+e*ang1)*rast+global_position
-			var en=preload("res://mats/enemys/e1/enemy1.tscn").instantiate()
-			en.load_scene=preload("res://mats/enemys/e1/enemy1.tscn")
+			var en=preload("res://mats/enemys/e1/enemy.tscn").instantiate()
+			en.load_scene=preload("res://mats/enemys/e1/enemy.tscn")
 			en.scene_params={
 				"global_position":pos,
 				"dif":dif+0.5
@@ -247,7 +246,7 @@ func _summon(type:int=1,difficulty:float=spwn_skel_lvl):
 			var pos=fnc.move(ang+e*ang1)*rast+global_position
 			var en=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
 			var ens=[
-					"res://mats/enemys/e1/enemy1.tscn",
+					"res://mats/enemys/e1/enemy.tscn",
 					"res://mats/enemys/e2/enemy.tscn"
 					]
 			ens.shuffle()

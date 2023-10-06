@@ -6,6 +6,7 @@ var he=m_he: set = set_he
 @export var tspeed:float=1.0
 @onready var t=$Timer
 var invi=false: set = set_invi
+var step=0
 signal invi_started
 signal invi_ended
 
@@ -31,12 +32,15 @@ func set_def(value):
 		emit_signal("no_def")
 		def=1
 func set_he(value):
+	
 	he=value
 	emit_signal("h_ch",he)
 	if he<=0:
 		emit_signal("no_he")
 		he=0
 func _ready():
+	if !is_connected("area_exited",Callable(self,"_on_area_exited")):
+		connect("area_exited",Callable(self,"_on_area_exited"))
 	self.he=m_he
 	self.def=m_def
 	$Timer.wait_time=tspeed
@@ -59,13 +63,31 @@ func _on_hurt_box_invi_ended():
 func _on_hurt_box_invi_started():
 	set_deferred("monitorable",false)
 	set_deferred("monitoring",false)
-
-
+func _process(delta):
+	step=delta
+	for area in temp:
+		var dmg=area.damage
+		if fnc._with_chance(area.crit_chance):
+			dmg+=area.crit_damage
+			var crit=preload("res://mats/font/crit.tscn").instantiate()
+			get_tree().current_scene.ememys_path.add_child.call_deferred(crit)
+			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
+		set_he(he-dmg/float(def)*delta)
+		
+var temp=[]
 func _on_area_entered(area):
-	var dmg=area.damage
-	if fnc._with_chance(area.crit_chance):
-		dmg+=area.crit_damage
-		var crit=preload("res://mats/font/crit.tscn").instantiate()
-		get_tree().current_scene.ememys_path.add_child(crit)
-		crit.position=global_position+Vector2(-crit.size.x/2,-40)
-	set_he(he-float(dmg)/float(def))
+	if area.by_time==true:
+		temp.append(area)
+	else:
+		var dmg=area.damage
+		if fnc._with_chance(area.crit_chance):
+			dmg+=area.crit_damage
+			var crit=preload("res://mats/font/crit.tscn").instantiate()
+			get_tree().current_scene.ememys_path.add_child.call_deferred(crit)
+			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
+		set_he(he-float(dmg)/float(def))
+
+
+func _on_area_exited(area):
+	if area.by_time==true:
+		temp.remove_at(fnc.i_search(temp,area))

@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://bla46yhexjifu"]
+[gd_scene load_steps=23 format=3 uid="uid://bla46yhexjifu"]
 
 [ext_resource type="Script" path="res://mats/world.gd" id="1_h267k"]
-[ext_resource type="PackedScene" uid="uid://bxgd1ewukcs5t" path="res://mats/lvls/lvl1.tscn" id="2_aratr"]
-[ext_resource type="PackedScene" uid="uid://c2umj1rpcr0l7" path="res://mats/enemys/e6/nec.tscn" id="3_ugxhi"]
+[ext_resource type="PackedScene" uid="uid://c5xjfbppnuqox" path="res://mats/enemys/b3/enemy.tscn" id="3_pkrjb"]
+[ext_resource type="PackedScene" uid="uid://bxgd1ewukcs5t" path="res://mats/lvls/lvl1/lvl1.tscn" id="4_dadh4"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_0jca1"]
+[ext_resource type="FontFile" uid="uid://brnwdxh7i4uhv" path="res://mats/font/impact.ttf" id="5_14lbc"]
 [ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="5_cuq37"]
 [ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/money.png" id="5_q3sjt"]
 [ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="8_s3cml"]
@@ -105,6 +106,8 @@ corner_radius_bottom_left = 5
 anti_aliasing_size = 0.25
 
 [sub_resource type="Theme" id="Theme_vxiwi"]
+resource_local_to_scene = true
+default_font = ExtResource("5_14lbc")
 default_font_size = 16
 Button/styles/disabled = SubResource("StyleBoxFlat_w576y")
 Button/styles/focus = SubResource("StyleBoxFlat_a0r5i")
@@ -115,6 +118,27 @@ LineEdit/styles/focus = SubResource("StyleBoxFlat_v43d8")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_e3njk")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_l1rhv")
 Panel/styles/panel = SubResource("StyleBoxFlat_33j16")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgfes"]
+bg_color = Color(0.52549, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vmo8e"]
+bg_color = Color(0.686275, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0313l"]
 bg_color = Color(0, 0.294118, 0, 1)
@@ -141,12 +165,10 @@ anti_aliasing_size = 0.25
 process_mode = 3
 editor_description = "проблеммы с анимациями"
 script = ExtResource("1_h267k")
-debug = true
 time_periond_from = 45.0
 time_periond_to = 60.0
 enemys_count_from = 15
 enemys_count_to = 20
-waves = 1
 dif = 0.0
 
 [node name="enemy_summon_timer" type="Timer" parent="."]
@@ -157,19 +179,28 @@ wait_time = 3.0
 process_mode = 1
 wait_time = 3.0
 
-[node name="Panel" type="Panel" parent="."]
+[node name="cam_bord" type="Panel" parent="."]
+visible = false
 offset_left = -304.0
 offset_top = -160.0
 offset_right = 304.0
 offset_bottom = 160.0
 
+[node name="area" type="Panel" parent="."]
+visible = false
+offset_left = -288.0
+offset_top = -128.0
+offset_right = 288.0
+offset_bottom = 128.0
+
 [node name="cam" type="Camera2D" parent="."]
-position = Vector2(-176, -24)
+position = Vector2(-128, 0)
 zoom = Vector2(1.05, 1.05)
 
 [node name="world" type="Node2D" parent="."]
+process_mode = 1
 
-[node name="lvl" parent="world" instance=ExtResource("2_aratr")]
+[node name="lvl" parent="world" instance=ExtResource("4_dadh4")]
 
 [node name="ent" type="Node2D" parent="world"]
 process_mode = 1
@@ -177,11 +208,13 @@ y_sort_enabled = true
 
 [node name="enemys" type="Node2D" parent="world/ent"]
 y_sort_enabled = true
+position = Vector2(-40, 24)
 
-[node name="nec" parent="world/ent/enemys" instance=ExtResource("3_ugxhi")]
+[node name="enemy" parent="world/ent/enemys" instance=ExtResource("3_pkrjb")]
+position = Vector2(104, -48)
 
 [node name="player" parent="world/ent" instance=ExtResource("5_0jca1")]
-position = Vector2(-176, -24)
+position = Vector2(-128, 0)
 max_contacts_reported = 3
 contact_monitor = true
 
@@ -230,14 +263,73 @@ offset_bottom = 21.0
 scale = Vector2(1.525, 1.525)
 theme_override_constants/separation = 4
 img = ExtResource("5_q3sjt")
+img_size = Vector2(16, 16)
 
-[node name="hp" type="RichTextLabel" parent="cl/Control/stats/vc"]
+[node name="hp" type="Control" parent="cl/Control/stats/vc"]
 process_mode = 3
-custom_minimum_size = Vector2(112, 20)
+modulate = Color(1, 1, 1, 0.627451)
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-mouse_filter = 2
-text = "asd"
-scroll_active = false
+
+[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/hp"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.8
+offset_right = 28.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme_override_styles/background = SubResource("StyleBoxFlat_wgfes")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vmo8e")
+value = 50.0
+show_percentage = false
+
+[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/hp/pg"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "	1"
+
+[node name="stamina" type="Control" parent="cl/Control/stats/vc"]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.627451)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/stamina"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.8
+offset_right = 28.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme_override_styles/background = SubResource("StyleBoxFlat_0313l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1n5d6")
+value = 50.0
+show_percentage = false
+
+[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/stamina/pg"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "	1"
 
 [node name="xp" type="Control" parent="cl/Control/stats/vc"]
 process_mode = 3
@@ -270,61 +362,15 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "	lvl - 0"
 
-[node name="stamina" type="Control" parent="cl/Control/stats/vc"]
-process_mode = 3
-modulate = Color(1, 1, 1, 0.501961)
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/stamina"]
-process_mode = 3
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.8
-offset_right = 28.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-theme_override_styles/background = SubResource("StyleBoxFlat_0313l")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1n5d6")
-value = 50.0
-show_percentage = false
-
-[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/stamina/pg"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "	1"
-
-[node name="waves" type="RichTextLabel" parent="cl/Control"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -92.0
-offset_right = 60.0
-offset_bottom = 24.0
-grow_horizontal = 2
-mouse_filter = 2
-
 [node name="time" type="RichTextLabel" parent="cl/Control"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 140.0
-offset_top = 48.0
-offset_right = 292.0
-offset_bottom = 72.0
+offset_left = 192.0
+offset_right = 267.0
+offset_bottom = 24.0
 grow_horizontal = 2
 mouse_filter = 2
 
@@ -353,6 +399,14 @@ grow_vertical = 2
 text = "MEMENTO_MORI"
 scroll_active = false
 
+[node name="killed_by" type="RichTextLabel" parent="cl/Control/die"]
+layout_mode = 0
+offset_top = 248.0
+offset_right = 640.0
+offset_bottom = 320.0
+mouse_filter = 2
+text = "KILLED_BY"
+
 [node name="Button" type="Button" parent="cl/Control/die"]
 custom_minimum_size = Vector2(130, 30)
 layout_mode = 1
@@ -369,8 +423,23 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "BACK_TO_TILTE"
 
+[node name="bpg" type="HFlowContainer" parent="cl/Control"]
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.0
+offset_right = 108.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 0
+
 [node name="map" parent="cl" instance=ExtResource("8_s3cml")]
 visible = false
+boss_spawn_ids = PackedInt64Array(14, 9, 19)
 
 [node name="massanges" type="Control" parent="cl"]
 layout_mode = 3

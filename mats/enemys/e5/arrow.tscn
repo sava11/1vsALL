@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsbnsc8s60a1k"]
+[gd_scene load_steps=4 format=3 uid="uid://c5wfsdk4wq6v8"]
 
-[ext_resource type="Script" path="res://mats/enemys/e5/arrow.gd" id="2_yr2ei"]
+[ext_resource type="Script" path="res://mats/enemys/temp_enemys1/e5/arrow.gd" id="1_dkueh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2gld8"]
 radius = 2.5
@@ -11,15 +11,15 @@ colors = PackedColorArray(1, 1, 1, 1, 0.940036, 0.910714, 0.842739, 1, 0.664202,
 
 [node name="arrow" type="Area2D"]
 z_index = 1
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("2_yr2ei")
+collision_layer = 74
+collision_mask = 72
+script = ExtResource("1_dkueh")
 
-[node name="c" type="CollisionShape2D" parent="."]
+[node name="col" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.265755)
 shape = SubResource("CircleShape2D_2gld8")
 
-[node name="c2" type="CPUParticles2D" parent="."]
+[node name="c" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 768
 lifetime = 0.35
@@ -30,4 +30,4 @@ emission_sphere_radius = 2.0
 gravity = Vector2(0, -98)
 color_ramp = SubResource("Gradient_yhf02")
 
-[connection signal="area_entered" from="." to="." method="delete"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

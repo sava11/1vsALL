@@ -51,12 +51,14 @@ extends RigidBody2D
 @onready var hero=fnc.get_hero()
 @onready var hb=$hurt_box
 @onready var at=$at
-
+@onready var na=$na
 var do_stages=[]
 var max_do_points=2
 var current_do_points=max_do_points
 #timers
 var attacks_timer:float=0
+var think_timer:float=0
+var think_time:float=1
 
 var vec:Vector2=Vector2.ZERO
 var last_mvd:Vector2=Vector2.ZERO
@@ -119,29 +121,32 @@ func _ready():
 	#at["parameters/conditions/death"]=false
 	pass
 
-var think_timer:float=0
-var think_time:float=1
 var current_action:int=0
 func thinker():
 	if think_timer>=think_time and current_action==0:
 		think_timer=0
 		current_action=fnc._with_chance_ulti([0.3,0.7])+1
 func _integrate_forces(st):
+	
+	
+	
 	vec=st.get_linear_velocity()
+	
 	mvd=get_input(hero.global_position)
 	if mvd!=Vector2.ZERO and mvd!=last_mvd:
 		last_mvd=mvd
 	pre_status()
 	match_status(st.get_step())
 	post_status()
+	if na.is_navigation_finished():return
 	#set_anim()
-	st.set_linear_velocity(vec)
 func pre_status():
 	pass
 func timers(_delta):
 	attacks_timer+=_delta
 	think_timer+=_delta
 func match_status(_delta:float):
+	
 	match state:
 		status.wait_anim:
 			if anim_finish:
@@ -165,10 +170,12 @@ func match_status(_delta:float):
 			var moveing=get_sqrt(hero)>=attack_range
 			if moveing:
 				set_anim("run")
-				vec=mvd*run_speed
 				timers(_delta)
 				thinker()
 				from_idle_or_run_ta_attacks()
+				na.target_position=hero.global_position
+				var cvec=global_position.direction_to(na.get_next_path_position())*run_speed
+				na.set_velocity(cvec)
 			else:
 				state=status.i
 				
@@ -185,6 +192,14 @@ func match_status(_delta:float):
 			vec=Vector2.ZERO
 func post_status():
 	pass
+
+
+func move(safe_velocity):
+	if state==status.r:
+		set_linear_velocity(safe_velocity)
+	else:
+		set_linear_velocity(Vector2(0,0))
+
 func from_idle_or_run_ta_attacks():
 	if len(do_stages)!=0 and do_stages[len(do_stages)-1]>hb.he:
 		do_stages.remove_at(len(do_stages)-1)
@@ -247,3 +262,5 @@ func _on_hurt_box_no_he():
 	delete()
 func delete():
 	state=status.d
+
+

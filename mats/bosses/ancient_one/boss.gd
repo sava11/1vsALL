@@ -91,12 +91,12 @@ func _process(_delta):
 	queue_redraw()
 	_upd_anim_params()
 	if die==false:
-		if hero.die!=true and healing==false:
+		if hero.cur_anim=="d" and healing==false:
 			mvd=get_input(hero.global_position)
 		else:
 			mvd=Vector2.ZERO
-		heal=len(heal_stages)!=0 and heal_stages[len(heal_stages)-1]>hb.he and hero.die==false
-		attak=bs!=[] and attacking==false and heal==false and healing==false and heal==false and hero.die==false
+		heal=len(heal_stages)!=0 and heal_stages[len(heal_stages)-1]>hb.he and hero.cur_anim!="d"
+		attak=bs!=[] and attacking==false and heal==false and healing==false and heal==false and hero.cur_anim!="d"
 		#print(summon_stages[len(summon_stages)-1]," ",hb.he)
 		if heal and healing==false:
 			heal_time=0

@@ -1,6 +1,6 @@
-[gd_scene load_steps=309 format=3 uid="uid://l57bvpcoqg8i"]
+[gd_scene load_steps=308 format=3 uid="uid://l57bvpcoqg8i"]
 
-[ext_resource type="Script" path="res://mats/bosses/skel/skelboss.gd" id="1_64xmp"]
+[ext_resource type="Script" path="res://mats/bosses/skel/skelboss.gd" id="1_m2vvn"]
 [ext_resource type="Texture2D" uid="uid://ctnp7i56ob03k" path="res://mats/imgs/SkeletonBoss/Down/SkeletonKingDownAttack01.png" id="2_x15d0"]
 [ext_resource type="Texture2D" uid="uid://cgldcodycrmnf" path="res://mats/imgs/SkeletonBoss/Left/SkeletonKingLeftAttack01.png" id="3_upbcj"]
 [ext_resource type="Texture2D" uid="uid://c2hau6gft7atd" path="res://mats/imgs/SkeletonBoss/Right/SkeletonKingRightAttack01.png" id="4_ftpko"]
@@ -829,7 +829,7 @@ region = Rect2(384, 0, 48, 48)
 atlas = ExtResource("25_4mp1t")
 region = Rect2(432, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1yhjr"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ynlok"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1552,33 +1552,6 @@ animations = [{
 "name": &"walk_up",
 "speed": 5.0
 }]
-
-[sub_resource type="Animation" id="Animation_usmlp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:collision_mask")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:collision_layer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
 
 [sub_resource type="Animation" id="Animation_x43ur"]
 resource_name = "attack1_down"
@@ -3743,7 +3716,6 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjeva"]
 resource_local_to_scene = true
 _data = {
-"RESET": SubResource("Animation_usmlp"),
 "attack1_down": SubResource("Animation_x43ur"),
 "attack1_left": SubResource("Animation_dpjdo"),
 "attack1_right": SubResource("Animation_as5k4"),
@@ -4029,29 +4001,11 @@ collision_mask = 16
 can_sleep = false
 lock_rotation = true
 freeze_mode = 1
-script = ExtResource("1_64xmp")
-run_speed = 35.0
-life_points_from = 3.0
-life_points_to = 4.0
-exp_from = 10
-exp_to = 20
-mny_from = 12
-mny_to = 18
-attack_range = 40.0
-damage_from = 2.0
-damage_to = 3.5
-rollat_range = 35.0
-r_damage_from = 4.0
-r_damage_to = 6.0
-r_angle_from = -60.0
-r_angle_to = 60.0
-wskel_amout_from = 4
-cskel_amout_from = 6
-cskel_amout_to = 10
+script = ExtResource("1_m2vvn")
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_1yhjr")
-animation = &"deshatt_up"
+sprite_frames = SubResource("SpriteFrames_ynlok")
+animation = &"attack_down"
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="."]
@@ -4108,6 +4062,12 @@ collision_mask = 0
 monitoring = false
 monitorable = false
 
+[node name="get_hero_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="c" type="CollisionPolygon2D" parent="get_hero_area"]
+
 [node name="pb" type="ProgressBar" parent="."]
 modulate = Color(0.717647, 0, 0, 1)
 z_index = 1
@@ -4117,12 +4077,6 @@ offset_bottom = 50.0
 scale = Vector2(0.1, 0.1)
 value = 50.0
 show_percentage = false
-
-[node name="get_hero_area" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-
-[node name="c" type="CollisionPolygon2D" parent="get_hero_area"]
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]
