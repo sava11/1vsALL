@@ -12,6 +12,8 @@ BACK,back,назад
 
 MEMENTO_MORI,end of the story,конец истории
 BACK_TO_TILTE,to main menu,вернуться в главное меню
+RUN_END_TIME,run time,время забега
+RUN_END_LVL,level in run,уровень в забеге
 
 HP,health points (HP),жизненная сила (ЖЗ)
 HP_REGEN,heals HP per second,лечение ЖЗ за секунду
@@ -30,4 +32,8 @@ ARMOR_TEXT,armor upgrade,улучшение брони
 BOOTS_TEXT,boots upgrade,улучшение обуви
 item1_TEXT,test upgrade. Don't buy it.,тестовое улучшение. Не покупай его.
 
+
 SURIKEN_TEXT,stealth assassin throwing weapon,метательное оружие скрытных убийц
+
+ZALLE_VOID_TEXT,you realy want to take it?,те реально хочешь купить это?
+FALLE_VOID_TEXT,sum of words 2,сумма слов 2

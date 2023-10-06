@@ -17,7 +17,7 @@ func load_item(item_name:String):
 	#sd.merge({n:v},true)
 	$img.texture=load(sd.i)
 	$txt.text=tr(sd.t)
-	$buy.text=tr("BUY_ITEM")+" "+str(value)
+	$buy.text=str(value)
 	for e in sd["lvls"][lvl].stats:
 		var e1=preload("res://mats/UI/map/elems.tscn").instantiate()
 		var n=gm.objs.stats[e]

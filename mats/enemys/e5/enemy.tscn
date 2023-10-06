@@ -527,7 +527,7 @@ region = Rect2(288, 0, 48, 48)
 atlas = ExtResource("18_vsi32")
 region = Rect2(336, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_y7fo6"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcetl"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1002,7 +1002,6 @@ statuses = {
 "tp": "teleporting",
 "wait_anim": ""
 }
-mny_from = 0
 mny_to = 4
 attack_range = 200.0
 
@@ -1054,7 +1053,7 @@ max_speed = 100000.0
 [node name="ap" parent="." instance=ExtResource("4_5kvsa")]
 
 [node name="sp" parent="." instance=ExtResource("5_f02hu")]
-sprite_frames = SubResource("SpriteFrames_y7fo6")
+sprite_frames = SubResource("SpriteFrames_fcetl")
 animation = &"attack_down"
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]

@@ -47,6 +47,7 @@ var summoning:bool=true
 var cur_boss:Dictionary={}
 var cur_enemys:Dictionary={"sk_sw":1}
 var exit:bool=false
+var time_run=0
 @onready var ivent_queue=PackedInt32Array([gm.ivents.stats_map])
 signal end_arena()
 signal boss_fight_end()
@@ -101,10 +102,14 @@ func _physics_process(_delta):
 		est.start(time)
 	if fnc.get_hero().state=="d":
 		$cl/Control/die.show()
+		mouse_massage()
+		$cl/Control/stats.hide()
 		est.stop()
 		at.stop()
 		for e in ememys_path.get_children():
 			e.queue_free()
+	else:
+		time_run+=_delta
 	if $cl/map.visible==true and ememys_path.get_child_count()>0:
 		for e in $cl/Control/bpg.get_children():
 			e.queue_free()
@@ -250,9 +255,9 @@ func upd_lvl(lvl_id):
 func _on_boss_fight_end():
 	#print("GJJHHK")
 	pass # Replace with function body.
-func mouse_massage(msg:String):
-	var m=$cl/Control/die/killed_by
-	m.text=tr("KILLED_BY") + msg
-	add_child(m)
-	var f=m.get_font("normal_font").get_string_size(m.text)
-	m.rect_global_position=get_global_mouse_position()-Vector2(f.x/2,f.y/2)
+func mouse_massage():
+	var m=$cl/Control/die/mm
+	var f=m.get_theme_font("normal_font").get_string_size(m.text).x
+	m.global_position.x=-f/2+$cl/Control.size.x/2
+	$cl/Control/die/results/time.text=tr("RUN_END_TIME")+": "+str( snapped(time_run,0.1))
+	$cl/Control/die/results/lvl.text=tr("RUN_END_LVL")+": "+str(snapped(lvl,1))

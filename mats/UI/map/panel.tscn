@@ -121,7 +121,6 @@ offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_group_ = true
 
 [node name="shop" type="GridContainer" parent="shop_cont"]
 layout_mode = 1
@@ -144,7 +143,7 @@ offset_right = 101.0
 offset_bottom = 5.0
 grow_vertical = 0
 scale = Vector2(0.7, 0.7)
-text = "SHOP_EXIT"
+text = "EXIT"
 
 [node name="stats" type="Panel" parent="."]
 layout_mode = 1

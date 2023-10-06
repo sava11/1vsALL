@@ -399,14 +399,6 @@ grow_vertical = 2
 text = "MEMENTO_MORI"
 scroll_active = false
 
-[node name="killed_by" type="RichTextLabel" parent="cl/Control/die"]
-layout_mode = 0
-offset_top = 248.0
-offset_right = 640.0
-offset_bottom = 320.0
-mouse_filter = 2
-text = "KILLED_BY"
-
 [node name="Button" type="Button" parent="cl/Control/die"]
 custom_minimum_size = Vector2(130, 30)
 layout_mode = 1
@@ -422,6 +414,31 @@ offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "BACK_TO_TILTE"
+
+[node name="results" type="VBoxContainer" parent="cl/Control/die"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -72.0
+offset_bottom = 65.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="time" type="RichTextLabel" parent="cl/Control/die/results"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 0
+text = "RUN_END_TIME"
+
+[node name="lvl" type="RichTextLabel" parent="cl/Control/die/results"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 0
+text = "END_RUN_LVL"
 
 [node name="bpg" type="HFlowContainer" parent="cl/Control"]
 custom_minimum_size = Vector2(320, 48)
