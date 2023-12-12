@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4bnt6s48h516"]
+
+[ext_resource type="Script" path="res://mats/contents/summon/summon.gd" id="1_6erqw"]
+
+[node name="summon" type="Node2D"]
+script = ExtResource("1_6erqw")

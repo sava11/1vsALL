@@ -1,6 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://kckdcywpbss6"]
+[gd_scene load_steps=6 format=3 uid="uid://ejhsq4mdl2tu"]
 
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_mt30o"]
 [ext_resource type="Script" path="res://mats/UI/text_panel.gd" id="1_xv5s0"]
+
+[sub_resource type="FontVariation" id="FontVariation_li2yg"]
+base_font = ExtResource("1_mt30o")
+spacing_top = 8
+
+[sub_resource type="Theme" id="Theme_clqld"]
+default_font = SubResource("FontVariation_li2yg")
+default_font_size = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfh7j"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
@@ -20,6 +29,7 @@ offset_right = 160.0
 offset_bottom = 48.0
 scale = Vector2(0.5, 0.5)
 mouse_default_cursor_shape = 16
+theme = SubResource("Theme_clqld")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hfh7j")
 script = ExtResource("1_xv5s0")
 
@@ -30,9 +40,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = -54.667
+offset_bottom = -17.333
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+autowrap_mode = 2
+shortcut_keys_enabled = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

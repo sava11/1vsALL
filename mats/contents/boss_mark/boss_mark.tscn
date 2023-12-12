@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uxwpjiuinj83"]
+
+[ext_resource type="Script" path="res://mats/contents/boss_mark/boss_mark.gd" id="1_omf1r"]
+
+[node name="boss_mark" type="Node"]
+script = ExtResource("1_omf1r")

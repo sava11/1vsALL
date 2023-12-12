@@ -4,27 +4,37 @@
 [ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="1_5lett"]
 
 [node name="hb" type="HBoxContainer"]
-offset_right = 21.0
-offset_bottom = 20.0
+z_index = 1
+offset_right = 156.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+mouse_filter = 0
 mouse_default_cursor_shape = 16
 theme_override_constants/separation = 0
 script = ExtResource("1_3gaee")
 img = ExtResource("1_5lett")
+img_size = Vector2(16, 16)
 txt = "564"
 
 [node name="tr" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_filter = 2
 texture = ExtResource("1_5lett")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="ext" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+text = "сокр"
+scroll_active = false
+
 [node name="rt" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-fit_content = true
 scroll_active = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

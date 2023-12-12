@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc2ls352gjfnt"]
+
+[ext_resource type="Script" path="res://mats/contents/damage/circle_wave/damage.gd" id="1_jwmys"]
+
+[node name="damage" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_jwmys")
+count = 2
+zone_angle = 3.0
+drawing = true
+autoset = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

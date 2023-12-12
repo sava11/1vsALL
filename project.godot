@@ -12,10 +12,10 @@ config_version=5
 
 config/name="1vsALL"
 run/main_scene="res://menu.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="res://mats/Снимок экрана (3).png"
+boot_splash/image="res://mats/imgs/Снимок экрана (3).png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
 
@@ -23,6 +23,7 @@ boot_splash/minimum_display_time=1000
 
 fnc="*res://mats/autoload/functions.gd"
 gm="*res://mats/autoload/game.gd"
+sls="*res://mats/autoload/sls.gd"
 
 [display]
 
@@ -33,6 +34,10 @@ window/size/window_height_override=648
 window/stretch/mode="canvas_items"
 window/dpi/allow_hidpi=false
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gift/plugin.cfg")
 
 [input]
 
@@ -93,7 +98,7 @@ esc={
 [internationalization]
 
 locale/translations=PackedStringArray("res://mats/trs/tr.ru.translation", "res://mats/trs/tr.en.translation")
-locale/locale_filter_mode=0
+locale/locale_filter_mode=-1
 
 [layer_names]
 
@@ -106,16 +111,12 @@ locale/locale_filter_mode=0
 2d_physics/layer_7="borders"
 2d_physics/layer_8="arrows"
 
-[memory]
-
-limits/multithreaded_server/rid_pool_prealloc=128
-
 [physics]
 
 2d/default_gravity=0.0
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=3
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

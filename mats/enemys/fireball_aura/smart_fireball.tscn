@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2dyhjwt7ramc"]
+
+[ext_resource type="Script" path="res://mats/enemys/smart_fireball/smart_fireball.gd" id="1_6r1ov"]
+[ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="2_2dbo1"]
+[ext_resource type="Script" path="res://mats/boxes/hitbox.gd" id="3_v3y8r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7w2g2"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6gnq"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do4rl"]
+radius = 2.0
+
+[sub_resource type="Curve" id="Curve_hkvuy"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qa3ov"]
+offsets = PackedFloat32Array(0, 0.218543, 0.81457, 1)
+colors = PackedColorArray(0.6, 0.188235, 0, 1, 1, 0.188235, 0, 1, 1, 0.780392, 0, 1, 0.576471, 0.27451, 0, 0.611765)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hllfb"]
+radius = 4.0
+
+[node name="smart_fireball" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 16
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_6r1ov")
+
+[node name="hurt_box" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_2dbo1")
+
+[node name="col" type="CollisionShape2D" parent="hurt_box"]
+shape = SubResource("CircleShape2D_7w2g2")
+
+[node name="Timer" type="Timer" parent="hurt_box"]
+
+[node name="hirtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_v3y8r")
+
+[node name="col" type="CollisionShape2D" parent="hirtbox"]
+shape = SubResource("CircleShape2D_x6gnq")
+
+[node name="Timer" type="Timer" parent="hirtbox"]
+wait_time = 0.05
+
+[node name="col" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_do4rl")
+
+[node name="c" type="CPUParticles2D" parent="."]
+amount = 1280
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 2
+emission_sphere_radius = 3.0
+gravity = Vector2(-98, 0)
+radial_accel_min = -15.0
+radial_accel_max = -10.0
+scale_amount_curve = SubResource("Curve_hkvuy")
+color_ramp = SubResource("Gradient_qa3ov")
+
+[node name="del_area" type="Area2D" parent="."]
+
+[node name="c" type="CollisionShape2D" parent="del_area"]
+shape = SubResource("CircleShape2D_hllfb")
+
+[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]
+[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started" flags=18]
+[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout" flags=18]
+[connection signal="timeout" from="hirtbox/Timer" to="hirtbox" method="_on_Timer_timeout" flags=18]
+[connection signal="body_entered" from="del_area" to="." method="_on_del_area_body_entered"]

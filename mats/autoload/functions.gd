@@ -1,4 +1,6 @@
 extends Node
+
+var rnd=RandomNumberGenerator.new()
 func get_hero():
 	return get_tree().current_scene.get_node("world/ent/player")
 func get_world_node():
@@ -60,6 +62,12 @@ func change_parent(where,what):
 	where.call_deferred("add_child",what)
 	await get_tree().process_frame
 
+func to_glb_PV(pv:PackedVector2Array,pos:Vector2=Vector2.ZERO,_scale=1,loc_pos=0):
+	var poolvec2=PackedVector2Array([])
+	for e in pv:
+		var t=move(angle(e))*(_sqrt(e*_scale))
+		poolvec2.append((t+pos))
+	return poolvec2
 
 func get_ang_move(angle:float,ex:float):
 	var ang1=abs(ex)
@@ -72,27 +80,79 @@ func get_ang_move(angle:float,ex:float):
 func _with_dific(v:float,dific:float):
 	return v+v*dific
 func _with_chance(chance:float):
-	if gm.rnd.randf_range(0,1)>1-chance:
+	if rnd.randf_range(0,1)>1-chance:
 		return true
 	return false
 func _with_chance_custom_values(chance:float,Tvalue,Fvalue):
-	if gm.rnd.randf_range(0,1)>1-chance:
+	if rnd.randf_range(0,1)>1-chance:
 		return Tvalue
 	return Fvalue
 func _with_chance_ulti(chances=[0.5,0.5]):
-	var cur_value=gm.rnd.randf_range(0,sum(chances))
+	var sum=sum(chances)
+	var cur_value=rnd.randf_range(0,sum)
 	var prefix:float=0
-	for e in range(chances.size()):
-		if cur_value>=prefix and cur_value<prefix+chances[e]:
-			return e
-		prefix+=chances[e]
+	if sum>0:
+		for e in range(chances.size()):
+			if cur_value>=prefix and cur_value<prefix+chances[e]:
+				return e
+			prefix+=chances[e]
+	return -1
 func find_betwen_lines(point,lines:PackedVector2Array):
 	var curent=[]
 	for e in range(lines.size()):
 		if lines[e].x<=point and lines[e].y>point:
 			curent.append(e)
+	
 	if curent==[]:
 		return -1
 	else:
-		return curent[gm.rnd.randi_range(0,curent.size()-1)]
+		return curent[rnd.randi_range(0,curent.size()-1)]
 
+func rec_duplic(d:Dictionary):
+	var out_d={}
+	for e in d.keys():
+		if typeof(d[e])==TYPE_DICTIONARY:
+			out_d.merge({e:rec_duplic(d[e].duplicate())})
+		else:
+			out_d.merge({e:d[e]})
+	return out_d
+
+func setter(itm,data:Dictionary):
+	for e in data.keys():
+		if e.contains("/"):
+			var me=e
+			if e.begins_with("/"):me=e.erase(0)
+			var str=me.split(".")
+			var n=itm.get_node(str[0])
+			if is_instance_valid(n):
+				if !str[1].contains("()"):n.set(str[1],data[e])
+				else:
+					var var_type=typeof(data[e])
+					var callable=Callable(n,str[1].split("()")[0])
+					if var_type!=TYPE_NIL:
+						if var_type!=TYPE_ARRAY:
+							callable=callable.bindv([data[e]])
+						else:
+							callable=callable.bindv(data[e])
+					callable.call()
+			else:
+				printerr("can't set/call parametr ",e," with ",data[e])
+		else:
+			var str=e.split(".")[len(e.split("."))-1]
+			if is_instance_valid(itm):
+				if !str.contains("()"):itm.set(str,data[e])
+				else:
+					var var_type=typeof(data[e])
+					var callable=Callable(itm,str.split("()")[0])
+					if var_type!=TYPE_NIL:
+						if var_type!=TYPE_ARRAY:
+							callable=callable.bindv([data[e]])
+						else:
+							callable=callable.bindv(data[e])
+					callable.call()
+			else:
+				printerr("can't set/call parametr ",e," with ",data[e])
+
+
+func _ready():
+	rnd.randomize()

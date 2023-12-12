@@ -55,12 +55,10 @@ var timer=0
 var roll_timer=0
 var current_stamina=0
 var cd={}
-var inv={}
 var add_stats={}
 var money:int=0
 var exp:int=0
 var lvl:int=0
-#var inventORI={}#"name":{"stat":value}
 # Called when the node enters the scene tree for the first time.
 func merge_stats():
 	for e in cd.stats.keys():
@@ -117,9 +115,9 @@ func get_ang_move(angle:float,ex:float):
 var anim_finish:bool=false
 func _ready():
 	connect("lvl_up",Callable(get_tree().current_scene,"add_to_lvl_queue"))
-	cd=gm.objs["player"][gm.player_type].duplicate()
-	cd.stats=gm.objs["player"][gm.player_type].stats.duplicate()
-	cd.prefs=gm.objs["player"][gm.player_type].prefs.duplicate()
+	cd=gm.objs["player"].duplicate()
+	cd.stats=gm.objs["player"].stats.duplicate()
+	cd.prefs=gm.objs["player"].prefs.duplicate()
 	current_stamina=cd.stats["max_stamina"]
 	roll_timer=cd.prefs["roll_timer"]
 	#var roll_t=$ap.get_animation("roll_up").length/roll_timer
@@ -164,14 +162,16 @@ func _draw():
 func _process(_delta):
 	queue_redraw()
 func _integrate_forces(st):
-	vec=st.get_linear_velocity()
+	#vec=st.get_linear_velocity()
 	var step=st.get_step()
 	pre_status(step)
 	find_status(step)
 	post_status()
+	set_linear_velocity(vec)
 	
 	#set_anim()
 func pre_status(_delta):
+	$inv.rotation_degrees=fnc.angle(mvd)
 	$pg.value=hb.he
 	$pg.max_value=hb.m_he
 	$get_enemy_area.rotation_degrees=fnc.angle(last_mvd)
@@ -224,14 +224,14 @@ func find_status(_delta:float):
 		#print(state)
 		if state=="a":
 			current_stamina=clamp(current_stamina+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
-			vec=vec.move_toward(mvd*(cd.prefs["run_speed"]*cd.prefs["run_scale"]+cd.prefs["run_speed"]*cd.stats["%sp"]),_delta*cd.prefs["run_speed"]*1000)
+			vec=vec.move_toward(mvd*(cd.stats["run_speed"]*cd.prefs["run_scale"]),_delta*cd.stats["run_speed"]*1000)
 			set_anim(statuses[state])
 		if state=="r":
 			current_stamina=clamp(current_stamina+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
-			vec=vec.move_toward(mvd*(cd.prefs["run_speed"]*cd.prefs["run_scale"]+cd.prefs["run_speed"]*cd.stats["%sp"]),_delta*cd.prefs["run_speed"]*1000)
+			vec=vec.move_toward(mvd*(cd.stats["run_speed"]*cd.prefs["run_scale"]),_delta*cd.stats["run_speed"]*1000)
 			set_anim(statuses[state])
 		if state=="ro":
-			vec=freezed_mvd*cd.prefs["roll_speed"]*cd.prefs["roll_scale"]
+			vec=freezed_mvd*cd.stats["roll_speed"]*cd.prefs["roll_scale"]
 			timer+=_delta
 			if timer>=roll_timer:
 				timer=0
@@ -240,7 +240,7 @@ func find_status(_delta:float):
 			set_anim(statuses[state])
 		if state=="i":
 			current_stamina=clamp(current_stamina+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
-			vec=vec.move_toward(mvd*(cd.prefs["run_speed"]*cd.prefs["run_scale"]+cd.prefs["run_speed"]*cd.stats["%sp"]),_delta*cd.prefs["run_speed"]*1000)
+			vec=vec.move_toward(mvd*(cd.stats["run_speed"]*cd.prefs["run_scale"]),_delta*cd.stats["run_speed"]*1000)
 			set_anim(statuses[state])
 			vec=Vector2.ZERO
 		new_dos(_delta)
@@ -248,7 +248,6 @@ func find_status(_delta:float):
 		if anim_finish==false:
 			set_anim(statuses[state])
 			vec=Vector2.ZERO
-	set_linear_velocity(vec)
 func new_dos(_delta:float):
 	pass
 
@@ -272,8 +271,6 @@ func delete():
 
 func _on_hurt_box_h_ch(v):
 	if v>0:
-		for e in $inv.get_children():
-			e.queue_free()
 		pass
 		#state=idle
 

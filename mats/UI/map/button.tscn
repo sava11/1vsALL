@@ -46,6 +46,7 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="Theme" id="Theme_aq1dw"]
+default_font_size = 16
 Button/styles/disabled = SubResource("StyleBoxFlat_bwy4c")
 Button/styles/hover = SubResource("StyleBoxFlat_yaqf2")
 Button/styles/normal = SubResource("StyleBoxFlat_1jauy")
@@ -62,6 +63,8 @@ icon_alignment = 2
 expand_icon = true
 language = "ru_RU"
 script = ExtResource("1_nbxky")
+min_range = 1
+max_range = 4
 
 [node name="tcont" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -76,18 +79,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="vb" type="HFlowContainer" parent="tcont"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -29.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.75, 0.75)
-mouse_filter = 2
-
 [node name="img_layer_cont" parent="tcont" instance=ExtResource("2_ks20h")]
 layout_mode = 1
 offset_left = -44.0
@@ -96,21 +87,15 @@ offset_bottom = -25.0
 mouse_filter = 2
 img_size = Vector2(32, 32)
 
-[node name="vs" type="VSlider" parent="tcont"]
-modulate = Color(1, 1, 1, 0)
+[node name="vb" type="HFlowContainer" parent="tcont"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 71.0
-offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.6, 0.6)
-focus_mode = 0
-mouse_filter = 1
-max_value = 1.0
-step = 0.05
+mouse_filter = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
-[connection signal="value_changed" from="tcont/vs" to="." method="_on_vs_value_changed"]

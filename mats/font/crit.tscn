@@ -6,7 +6,6 @@
 [node name="crit" type="TextureRect"]
 modulate = Color(1, 1, 1, 0.752941)
 z_index = 1
-anchors_preset = -1
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0

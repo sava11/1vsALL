@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjq6lohvs8mw1"]
+
+[ext_resource type="Script" path="res://mats/contents/drop/drop.gd" id="1_myct5"]
+
+[node name="drop" type="Node"]
+script = ExtResource("1_myct5")

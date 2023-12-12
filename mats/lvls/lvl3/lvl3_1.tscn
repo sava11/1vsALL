@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dq2daurhmgttd"]
 
-[ext_resource type="Texture2D" uid="uid://c7tfvhbmccb17" path="res://mats/DirtTileset.png" id="1_ywrhk"]
-[ext_resource type="Texture2D" uid="uid://pbrjm2qwyfy3" path="res://mats/test_tileset.png" id="2_ywca4"]
-[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/lvls/fier_plate/a.tscn" id="4_4nkyt"]
+[ext_resource type="Texture2D" uid="uid://c7tfvhbmccb17" path="res://mats/imgs/DirtTileset.png" id="1_ywrhk"]
+[ext_resource type="Texture2D" uid="uid://pbrjm2qwyfy3" path="res://mats/imgs/test_tileset.png" id="2_ywca4"]
+[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/contents/fier_plate/a.tscn" id="4_4nkyt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rox4s"]
 texture = ExtResource("1_ywrhk")
@@ -763,3 +763,5 @@ position = Vector2(88, 88)
 
 [node name="a13" parent="traps" instance=ExtResource("4_4nkyt")]
 position = Vector2(-8, -32)
+
+[node name="pos" type="Marker2D" parent="."]

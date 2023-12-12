@@ -1,6 +1,6 @@
 extends Area2D
-@export var m_he=1: set = s_m_h
-@export var m_def=1: set = s_m_d
+@export var m_he:float=1: set = s_m_h
+@export var m_def:float=1: set = s_m_d
 var def=m_def: set = set_def
 var he=m_he: set = set_he
 @export var tspeed:float=1.0
@@ -10,13 +10,13 @@ var step=0
 signal invi_started
 signal invi_ended
 
-
 signal no_he
 signal no_def
 signal h_ch(v)
 signal d_ch(v)
 signal m_h_ch(v)
 signal m_d_ch(v)
+
 func s_m_h(v):
 	m_he=v
 	self.he=min(he,m_he)
@@ -76,12 +76,14 @@ func _process(delta):
 		
 var temp=[]
 func _on_area_entered(area):
-	if area.by_time==true:
+	if area.by_time:
 		temp.append(area)
 	else:
 		var dmg=area.damage
 		if fnc._with_chance(area.crit_chance):
 			dmg+=area.crit_damage
+			if area.crit_chance>1:
+				dmg*=area.crit_chance
 			var crit=preload("res://mats/font/crit.tscn").instantiate()
 			get_tree().current_scene.ememys_path.add_child.call_deferred(crit)
 			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
@@ -89,5 +91,5 @@ func _on_area_entered(area):
 
 
 func _on_area_exited(area):
-	if area.by_time==true:
+	if area.by_time and temp.has(area):
 		temp.remove_at(fnc.i_search(temp,area))

@@ -1,8 +1,11 @@
-[gd_scene load_steps=155 format=3 uid="uid://dm8fh1bkeiur1"]
+[gd_scene load_steps=157 format=3 uid="uid://bxscbgmn6rof4"]
 
 [ext_resource type="Script" path="res://mats/enemys/e2/enemy.gd" id="1_thpiq"]
-[ext_resource type="Shader" path="res://mats/enemys/temp_enemys1/e2/outline.gdshader" id="4_n6ux5"]
-[ext_resource type="PackedScene" uid="uid://xslfeevkbt3v" path="res://mats/enemys/e2/bow_anims.tscn" id="4_p35am"]
+[ext_resource type="PackedScene" uid="uid://cnpiy06dqixao" path="res://mats/contents/damage/range/damage.tscn" id="3_kcsf4"]
+[ext_resource type="PackedScene" uid="uid://btyifdisya4aa" path="res://mats/enemys/e2/visual.tscn" id="4_6kixi"]
+[ext_resource type="PackedScene" uid="uid://bgshayat5m2pr" path="res://mats/contents/arrow/arrow.tscn" id="4_6vp1t"]
+[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="4_n6ux5"]
+[ext_resource type="PackedScene" uid="uid://bjq6lohvs8mw1" path="res://mats/contents/drop/drop.tscn" id="5_kk0o2"]
 [ext_resource type="Texture2D" uid="uid://c0l5vikarh04i" path="res://mats/imgs/skelet_bow/Down/SkeletonWithBowDownAttack01.png" id="6_xg4xh"]
 [ext_resource type="Texture2D" uid="uid://ddsn1t04amfln" path="res://mats/imgs/skelet_bow/Left/SkeletonWithBowLeftAttack01.png" id="7_cbuiy"]
 [ext_resource type="Texture2D" uid="uid://brkau8c7x6r1w" path="res://mats/imgs/skelet_bow/Right/SkeletonWithBowRightAttack01.png" id="8_idwtg"]
@@ -18,20 +21,19 @@
 [ext_resource type="Texture2D" uid="uid://cf2nfym2hdmqr" path="res://mats/imgs/skelet_bow/Down/SkeletonWithBowDownWalk.png" id="18_bgg22"]
 [ext_resource type="Texture2D" uid="uid://b6hvo802exrq4" path="res://mats/imgs/skelet_bow/Left/SkeletonWithBowLefttRun.png" id="19_gwds8"]
 [ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="19_vlur7"]
-[ext_resource type="Script" path="res://mats/boxes/hitbox.gd" id="20_rcnd6"]
 [ext_resource type="Texture2D" uid="uid://ctgjljuej4c7b" path="res://mats/imgs/skelet_bow/Right/SkeletonWithBowRightRun.png" id="20_tp4u3"]
 [ext_resource type="Texture2D" uid="uid://d1evvdi4r5fo2" path="res://mats/imgs/skelet_bow/Up/SkeletonWithSBowUpWalk.png" id="21_conqx"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m8cqe"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iu3cc"]
 friction = 0.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pb7nn"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_stnea"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1cby"]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fofif"]
-radius = 8.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ityk8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwq0p"]
 resource_local_to_scene = true
 shader = ExtResource("4_n6ux5")
 shader_parameter/line_color = Color(1, 0.301961, 0, 1)
@@ -549,7 +551,7 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("21_conqx")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pwkc7"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_t5qi7"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -1018,81 +1020,60 @@ animations = [{
 }]
 
 [node name="enemy" type="RigidBody2D"]
-collision_layer = 49
-collision_mask = 49
-physics_material_override = SubResource("PhysicsMaterial_m8cqe")
+collision_layer = 17
+collision_mask = 17
+physics_material_override = SubResource("PhysicsMaterial_iu3cc")
 can_sleep = false
 lock_rotation = true
-freeze_mode = 1
+custom_integrator = true
+contact_monitor = true
 script = ExtResource("1_thpiq")
-life_points_to = 1.0
-defence_from = 1.1
-defence_to = 1.2
-mny_from = -3
-mny_to = 3
-attack1_time_period = 1.0
-attack_range = 150.0
+stop_range_to = 200.0
 
-[node name="c" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_pb7nn")
+[node name="see" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 9
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
-monitoring = false
-monitorable = false
 script = ExtResource("19_vlur7")
-m_he = 2
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]
-rotation = 1.5708
-shape = SubResource("CircleShape2D_fofif")
+shape = SubResource("CircleShape2D_stnea")
 
 [node name="Timer" type="Timer" parent="hurt_box"]
 
-[node name="hirtbox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-monitoring = false
+[node name="attack" parent="." instance=ExtResource("3_kcsf4")]
 monitorable = false
-script = ExtResource("20_rcnd6")
+load_scene = ExtResource("4_6vp1t")
+attack_name = "a1"
+attack_anim_name = "attack"
+attack_range = 200.0
 
-[node name="col" type="CollisionPolygon2D" parent="hirtbox"]
-
-[node name="Timer" type="Timer" parent="hirtbox"]
-wait_time = 0.05
-
-[node name="get_hero_body" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-
-[node name="c" type="CollisionPolygon2D" parent="get_hero_body"]
-
-[node name="r" type="RayCast2D" parent="get_hero_body"]
-target_position = Vector2(0, 0)
-collision_mask = 9
+[node name="c" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q1cby")
 
 [node name="na" type="NavigationAgent2D" parent="."]
-path_desired_distance = 5.0
+path_desired_distance = 0.5
 target_desired_distance = 5.0
 avoidance_enabled = true
-radius = 5.0
-max_speed = 100000.0
 
-[node name="sp" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_ityk8")
-sprite_frames = SubResource("SpriteFrames_pwkc7")
-animation = &"run_up"
-offset = Vector2(0, -15)
+[node name="visual" parent="." instance=ExtResource("4_6kixi")]
 
-[node name="ap" parent="." instance=ExtResource("4_p35am")]
+[node name="sp" parent="visual" index="1"]
+material = SubResource("ShaderMaterial_cwq0p")
+sprite_frames = SubResource("SpriteFrames_t5qi7")
+frame = 0
 
-[connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
-[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]
-[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started" flags=18]
-[connection signal="no_he" from="hurt_box" to="." method="_on_hurt_box_no_he"]
-[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout" flags=18]
-[connection signal="timeout" from="hirtbox/Timer" to="hirtbox" method="_on_Timer_timeout" flags=18]
-[connection signal="body_entered" from="get_hero_body" to="." method="_on_get_hero_body_body_entered"]
-[connection signal="body_exited" from="get_hero_body" to="." method="_on_get_hero_body_body_exited"]
+[node name="drop" parent="." instance=ExtResource("5_kk0o2")]
+
+[connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered"]
+[connection signal="area_exited" from="hurt_box" to="hurt_box" method="_on_area_exited"]
+[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended"]
+[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started"]
+[connection signal="no_he" from="hurt_box" to="." method="delete"]
+[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout"]
 [connection signal="velocity_computed" from="na" to="." method="move"]
+
+[editable path="visual"]

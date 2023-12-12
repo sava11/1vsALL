@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3 uid="uid://17bbem04aabd"]
+
+[ext_resource type="PackedScene" uid="uid://dfe22bmixbbc5" path="res://mats/boxes/custom_dmg_area.tscn" id="1_f8h06"]
+[ext_resource type="Script" path="res://mats/contents/fire_tower/ft.gd" id="1_ovm21"]
+[ext_resource type="PackedScene" uid="uid://heog28crk5py" path="res://mats/boxes/hurt_box.tscn" id="2_pkjsl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlxi2"]
+radius = 12.0
+
+[sub_resource type="Curve" id="Curve_pgeax"]
+max_value = 1.01
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(0.5, 1.25), 0.0, 0.0, 0, 0, Vector2(1, 0.75), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_jyee8"]
+offsets = PackedFloat32Array(0, 0.224138, 0.762931, 1)
+colors = PackedColorArray(0.6, 0.188235, 0, 1, 1, 0.188235, 0, 1, 1, 0.780392, 0, 1, 0.576471, 0.27451, 0, 0.611765)
+
+[node name="r" type="RigidBody2D"]
+can_sleep = false
+lock_rotation = true
+freeze = true
+script = ExtResource("1_ovm21")
+
+[node name="c" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vlxi2")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.67451, 0.294118, 0, 1)
+polygon = PackedVector2Array(4, 12, 6, 6, 12, 4, 12, -4, 6, -6, 4, -12, -4, -12, -6, -6, -12, -4, -12, 4, -6, 6, -4, 12)
+
+[node name="dmgs" type="Node2D" parent="."]
+
+[node name="r_dmg" parent="dmgs" instance=ExtResource("1_f8h06")]
+position = Vector2(12, 0)
+by_time = true
+damage = 3.0
+crit_damage = 5.0
+crit_chance = 0.01
+
+[node name="c" type="CollisionPolygon2D" parent="dmgs/r_dmg"]
+polygon = PackedVector2Array(0, 2, 92, 6, 94, 0, 92, -6, 0, -2)
+
+[node name="cp" type="CPUParticles2D" parent="dmgs/r_dmg"]
+amount = 1024
+randomness = 1.0
+lifetime_randomness = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.5
+gravity = Vector2(200, 0)
+orbit_velocity_min = -0.03
+orbit_velocity_max = 0.03
+scale_amount_curve = SubResource("Curve_pgeax")
+color_ramp = SubResource("Gradient_jyee8")
+
+[node name="u_dmg" parent="dmgs" instance=ExtResource("1_f8h06")]
+position = Vector2(0, -12)
+rotation = -1.5708
+
+[node name="c" type="CollisionPolygon2D" parent="dmgs/u_dmg"]
+polygon = PackedVector2Array(0, 2, 92, 6, 94, 0, 92, -6, 0, -2)
+
+[node name="cp" type="CPUParticles2D" parent="dmgs/u_dmg"]
+amount = 1024
+randomness = 1.0
+lifetime_randomness = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.5
+gravity = Vector2(0, -200)
+orbit_velocity_min = -0.03
+orbit_velocity_max = 0.03
+scale_amount_curve = SubResource("Curve_pgeax")
+color_ramp = SubResource("Gradient_jyee8")
+
+[node name="l_dmg" parent="dmgs" instance=ExtResource("1_f8h06")]
+position = Vector2(-12, 0)
+rotation = 3.14159
+by_time = true
+damage = 3.0
+crit_damage = 5.0
+crit_chance = 0.01
+
+[node name="c" type="CollisionPolygon2D" parent="dmgs/l_dmg"]
+polygon = PackedVector2Array(0, 2, 92, 6, 94, 0, 92, -6, 0, -2)
+
+[node name="cp" type="CPUParticles2D" parent="dmgs/l_dmg"]
+amount = 1024
+randomness = 1.0
+lifetime_randomness = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.5
+gravity = Vector2(200, 0)
+orbit_velocity_min = -0.03
+orbit_velocity_max = 0.03
+scale_amount_curve = SubResource("Curve_pgeax")
+color_ramp = SubResource("Gradient_jyee8")
+
+[node name="d_dmg" parent="dmgs" instance=ExtResource("1_f8h06")]
+position = Vector2(0, 12)
+rotation = 1.5708
+by_time = true
+damage = 3.0
+crit_damage = 5.0
+crit_chance = 0.01
+
+[node name="c" type="CollisionPolygon2D" parent="dmgs/d_dmg"]
+polygon = PackedVector2Array(0, 2, 92, 6, 94, 0, 92, -6, 0, -2)
+
+[node name="cp" type="CPUParticles2D" parent="dmgs/d_dmg"]
+amount = 1024
+randomness = 1.0
+lifetime_randomness = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.5
+gravity = Vector2(0, -200)
+orbit_velocity_min = -0.03
+orbit_velocity_max = 0.03
+scale_amount_curve = SubResource("Curve_pgeax")
+color_ramp = SubResource("Gradient_jyee8")
+
+[node name="hurt_box" parent="." instance=ExtResource("2_pkjsl")]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvjs6lv0qdo6s"]
+
+[ext_resource type="Script" path="res://mats/contents/enemy_logick/enemy_logic.gd" id="1_kftc3"]
+
+[node name="enemy_logic" type="Node"]
+script = ExtResource("1_kftc3")

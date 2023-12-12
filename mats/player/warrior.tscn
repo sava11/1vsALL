@@ -1408,8 +1408,8 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_mlw8w"]
 
 [node name="player" type="RigidBody2D"]
-collision_layer = 73
-collision_mask = 73
+collision_layer = 25
+collision_mask = 25
 physics_material_override = SubResource("PhysicsMaterial_dyk5m")
 custom_integrator = true
 can_sleep = false
@@ -1431,8 +1431,7 @@ show_percentage = false
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53mpi")
-animation = &"roll_up"
-frame = 7
+animation = &"idle_right"
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="."]
@@ -1476,10 +1475,6 @@ collision_mask = 32
 shape = SubResource("CircleShape2D_mlw8w")
 
 [node name="inv" type="Node2D" parent="."]
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 50.0
-avoidance_layers = 2
 
 [connection signal="animation_finished" from="ap" to="." method="_on_ap_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

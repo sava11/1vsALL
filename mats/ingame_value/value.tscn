@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxaofsmi8406d"]
 
 [ext_resource type="Script" path="res://mats/ingame_value/value.gd" id="1_5gfn0"]
-[ext_resource type="Texture2D" uid="uid://ql03bevivc73" path="res://mats/Full Coinss.png" id="2_jn0b8"]
+[ext_resource type="Texture2D" uid="uid://ql03bevivc73" path="res://mats/imgs/Full Coinss.png" id="2_jn0b8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_517dh"]
 radius = 5.0

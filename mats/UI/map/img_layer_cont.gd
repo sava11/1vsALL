@@ -17,7 +17,7 @@ func _upd_():
 		var hided=fnc.i_search(hided_imgs,e)!=-1
 		tr.position.x=size_x*int(!hided)
 		tr.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
-		tr.custom_minimum_size=img_size
+		tr.custom_minimum_size=tr.texture.get_size()#img_size
 		if hided:tr.hide()
 		add_child(tr)
 		tr.name=str(tr.get_index())
@@ -27,8 +27,3 @@ func _upd_():
 		anchors_preset=6
 func _ready():
 	_upd_()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

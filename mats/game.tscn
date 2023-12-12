@@ -1,15 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://bla46yhexjifu"]
+[gd_scene load_steps=29 format=3 uid="uid://bla46yhexjifu"]
 
 [ext_resource type="Script" path="res://mats/world.gd" id="1_h267k"]
-[ext_resource type="PackedScene" uid="uid://c5xjfbppnuqox" path="res://mats/enemys/b3/enemy.tscn" id="3_pkrjb"]
-[ext_resource type="PackedScene" uid="uid://bxgd1ewukcs5t" path="res://mats/lvls/lvl1/lvl1.tscn" id="4_dadh4"]
+[ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="4_8fyee"]
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="4_ikpob"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_0jca1"]
-[ext_resource type="FontFile" uid="uid://brnwdxh7i4uhv" path="res://mats/font/impact.ttf" id="5_14lbc"]
-[ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="5_cuq37"]
-[ext_resource type="Texture2D" uid="uid://drqymta42j65b" path="res://mats/imgs/icons/money.png" id="5_q3sjt"]
+[ext_resource type="Texture2D" uid="uid://cvognw0q4medm" path="res://mats/imgs/warrior/hpbar_ico.png" id="5_em3dd"]
+[ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="6_tfxx6"]
+[ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="7_k1w0t"]
+[ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="8_3u3vu"]
 [ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="8_s3cml"]
+[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="9_7ucnp"]
+[ext_resource type="PackedScene" uid="uid://0553mxpjh6lr" path="res://mats/humans.tscn" id="12_qgy1a"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w576y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7kw2"]
 bg_color = Color(0.258824, 0, 0.454902, 1)
 border_width_left = 2
 border_width_top = 2
@@ -20,10 +23,10 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0r5i"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q1we"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3la0"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ro27r"]
 bg_color = Color(0.168627, 0.188235, 1, 1)
 border_width_left = 2
 border_width_top = 2
@@ -34,7 +37,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmsdp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajfmk"]
 bg_color = Color(0.129412, 0, 0.866667, 1)
 border_width_left = 2
 border_width_top = 2
@@ -45,7 +48,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_leho8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw0re"]
 bg_color = Color(0.0627451, 0, 0.533333, 1)
 border_width_left = 2
 border_width_top = 2
@@ -56,10 +59,10 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v43d8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwnwu"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3njk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hugml"]
 content_margin_left = 5.0
 content_margin_top = 0.0
 content_margin_right = 5.0
@@ -74,7 +77,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1rhv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2yig"]
 content_margin_left = 5.0
 content_margin_top = 0.0
 content_margin_right = 5.0
@@ -89,7 +92,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33j16"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahtkx"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
@@ -105,71 +108,132 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing_size = 0.25
 
-[sub_resource type="Theme" id="Theme_vxiwi"]
-resource_local_to_scene = true
-default_font = ExtResource("5_14lbc")
-default_font_size = 16
-Button/styles/disabled = SubResource("StyleBoxFlat_w576y")
-Button/styles/focus = SubResource("StyleBoxFlat_a0r5i")
-Button/styles/hover = SubResource("StyleBoxFlat_e3la0")
-Button/styles/normal = SubResource("StyleBoxFlat_kmsdp")
-Button/styles/pressed = SubResource("StyleBoxFlat_leho8")
-LineEdit/styles/focus = SubResource("StyleBoxFlat_v43d8")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_e3njk")
-LineEdit/styles/read_only = SubResource("StyleBoxFlat_l1rhv")
-Panel/styles/panel = SubResource("StyleBoxFlat_33j16")
+[sub_resource type="FontVariation" id="FontVariation_5yrwh"]
+base_font = ExtResource("4_ikpob")
+spacing_top = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgfes"]
-bg_color = Color(0.52549, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing_size = 0.25
+[sub_resource type="Theme" id="Theme_8rgl8"]
+default_font = SubResource("FontVariation_5yrwh")
+Button/styles/disabled = SubResource("StyleBoxFlat_k7kw2")
+Button/styles/focus = SubResource("StyleBoxFlat_6q1we")
+Button/styles/hover = SubResource("StyleBoxFlat_ro27r")
+Button/styles/normal = SubResource("StyleBoxFlat_ajfmk")
+Button/styles/pressed = SubResource("StyleBoxFlat_tw0re")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_gwnwu")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_hugml")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_t2yig")
+Panel/styles/panel = SubResource("StyleBoxFlat_ahtkx")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vmo8e"]
-bg_color = Color(0.686275, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.8, 0.8, 0)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing_size = 0.25
+[sub_resource type="Shader" id="Shader_dpahl"]
+code = "shader_type canvas_item;
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0313l"]
-bg_color = Color(0, 0.294118, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing_size = 0.25
+uniform vec4 line_color : source_color = vec4(1);
+uniform float line_thickness : hint_range(0, 10) = 1.0;
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1n5d6"]
-bg_color = Color(0, 0.372549, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.8, 0.8, 0)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing_size = 0.25
+void fragment() {
+	vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
+	
+	float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+	outline = min(outline, 1.0);
+	
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, line_color, outline - color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drogy"]
+shader = SubResource("Shader_dpahl")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 1.0
+
+[sub_resource type="FontVariation" id="FontVariation_ds5t5"]
+base_font = ExtResource("4_ikpob")
+spacing_glyph = 1
+spacing_top = 2
+
+[sub_resource type="Animation" id="Animation_xffy4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("exit:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_366j8"]
+resource_name = "end"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("vc:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(240, 0), Vector2(240, -760)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("exit:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("exit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fmv7k"]
+_data = {
+"RESET": SubResource("Animation_xffy4"),
+"end": SubResource("Animation_366j8")
+}
 
 [node name="game" type="Node2D"]
 process_mode = 3
-editor_description = "проблеммы с анимациями"
+editor_description = "подразделить волны
+"
 script = ExtResource("1_h267k")
-time_periond_from = 45.0
+time_periond_from = 40.0
 time_periond_to = 60.0
+spwn_time_periond_to = 10.0
 enemys_count_from = 15
 enemys_count_to = 20
-dif = 0.0
+lvl = 1
 
 [node name="enemy_summon_timer" type="Timer" parent="."]
 process_mode = 1
@@ -179,44 +243,27 @@ wait_time = 3.0
 process_mode = 1
 wait_time = 3.0
 
-[node name="cam_bord" type="Panel" parent="."]
-visible = false
-offset_left = -304.0
-offset_top = -160.0
-offset_right = 304.0
-offset_bottom = 160.0
-
-[node name="area" type="Panel" parent="."]
-visible = false
-offset_left = -288.0
-offset_top = -128.0
-offset_right = 288.0
-offset_bottom = 128.0
-
 [node name="cam" type="Camera2D" parent="."]
-position = Vector2(-128, 0)
-zoom = Vector2(1.05, 1.05)
+position = Vector2(-16, 0)
+zoom = Vector2(1.1, 1.1)
 
 [node name="world" type="Node2D" parent="."]
 process_mode = 1
 
-[node name="lvl" parent="world" instance=ExtResource("4_dadh4")]
-
 [node name="ent" type="Node2D" parent="world"]
-process_mode = 1
 y_sort_enabled = true
 
 [node name="enemys" type="Node2D" parent="world/ent"]
 y_sort_enabled = true
-position = Vector2(-40, 24)
-
-[node name="enemy" parent="world/ent/enemys" instance=ExtResource("3_pkrjb")]
-position = Vector2(104, -48)
 
 [node name="player" parent="world/ent" instance=ExtResource("5_0jca1")]
-position = Vector2(-128, 0)
+process_mode = 1
+position = Vector2(-16, 0)
 max_contacts_reported = 3
 contact_monitor = true
+
+[node name="inv" parent="world/ent/player" index="8"]
+process_mode = 1
 
 [node name="rt" type="RemoteTransform2D" parent="world/ent/player"]
 remote_path = NodePath("../../../../cam")
@@ -232,135 +279,71 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_vxiwi")
+theme = SubResource("Theme_8rgl8")
 
-[node name="stats" type="Panel" parent="cl/Control"]
-process_mode = 3
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 112.0
-mouse_filter = 2
+[node name="status" type="Control" parent="cl/Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 106.0
+offset_bottom = 50.0
 
-[node name="vc" type="VBoxContainer" parent="cl/Control/stats"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_right = -8.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BarIco" type="Sprite2D" parent="cl/Control/status"]
+texture = ExtResource("4_8fyee")
+centered = false
 
-[node name="mny_cont" type="Control" parent="cl/Control/stats/vc"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
+[node name="hp" type="TextureProgressBar" parent="cl/Control/status"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 5.0
+offset_right = 104.0
+offset_bottom = 19.0
+step = 0.001
+value = 100.0
+texture_under = ExtResource("5_em3dd")
+texture_progress = ExtResource("6_tfxx6")
+texture_progress_offset = Vector2(4, 3)
 
-[node name="mny" parent="cl/Control/stats/vc/mny_cont" instance=ExtResource("5_cuq37")]
-layout_mode = 1
-offset_bottom = 21.0
-scale = Vector2(1.525, 1.525)
-theme_override_constants/separation = 4
-img = ExtResource("5_q3sjt")
-img_size = Vector2(16, 16)
-
-[node name="hp" type="Control" parent="cl/Control/stats/vc"]
-process_mode = 3
-modulate = Color(1, 1, 1, 0.627451)
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/hp"]
-process_mode = 3
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.8
-offset_right = 28.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-theme_override_styles/background = SubResource("StyleBoxFlat_wgfes")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vmo8e")
-value = 50.0
-show_percentage = false
-
-[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/hp/pg"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "	1"
-
-[node name="stamina" type="Control" parent="cl/Control/stats/vc"]
-process_mode = 3
-modulate = Color(1, 1, 1, 0.627451)
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/stamina"]
-process_mode = 3
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.8
-offset_right = 28.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-theme_override_styles/background = SubResource("StyleBoxFlat_0313l")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1n5d6")
-value = 50.0
-show_percentage = false
-
-[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/stamina/pg"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "	1"
-
-[node name="xp" type="Control" parent="cl/Control/stats/vc"]
-process_mode = 3
+[node name="RichTextLabel" type="RichTextLabel" parent="cl/Control/status/hp"]
 visible = false
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="pg" type="ProgressBar" parent="cl/Control/stats/vc/xp"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.0
-offset_right = 28.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-show_percentage = false
-
-[node name="t" type="RichTextLabel" parent="cl/Control/stats/vc/xp/pg"]
-process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "	lvl - 0"
+text = "    48/88"
+
+[node name="stamina" type="TextureProgressBar" parent="cl/Control/status"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 19.0
+offset_right = 88.0
+offset_bottom = 29.0
+step = 0.001
+value = 100.0
+texture_under = ExtResource("7_k1w0t")
+texture_progress = ExtResource("8_3u3vu")
+texture_progress_offset = Vector2(3, 2)
+
+[node name="money" type="RichTextLabel" parent="cl/Control/status"]
+material = SubResource("ShaderMaterial_drogy")
+clip_contents = false
+layout_mode = 0
+offset_left = 46.0
+offset_top = 30.0
+offset_right = 103.0
+offset_bottom = 45.0
+theme_override_fonts/normal_font = SubResource("FontVariation_ds5t5")
+text = "99"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="money_img" type="Sprite2D" parent="cl/Control/status"]
+position = Vector2(28, 31)
+texture = ExtResource("9_7ucnp")
+centered = false
 
 [node name="time" type="RichTextLabel" parent="cl/Control"]
 process_mode = 3
@@ -376,6 +359,7 @@ mouse_filter = 2
 
 [node name="die" type="Control" parent="cl/Control"]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -391,54 +375,75 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -128.0
-offset_top = -12.0
+offset_top = -94.0
 offset_right = 128.0
-offset_bottom = 12.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "MEMENTO_MORI"
 scroll_active = false
 
-[node name="Button" type="Button" parent="cl/Control/die"]
-custom_minimum_size = Vector2(130, 30)
+[node name="Panel" type="Panel" parent="cl/Control/die"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -110.0
-offset_right = 65.0
-offset_bottom = -80.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "BACK_TO_TILTE"
-
-[node name="results" type="VBoxContainer" parent="cl/Control/die"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -72.0
-offset_bottom = 65.0
-grow_horizontal = 0
+offset_left = -80.0
+offset_top = -69.0
+offset_right = 80.0
+offset_bottom = 21.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="time" type="RichTextLabel" parent="cl/Control/die/results"]
-custom_minimum_size = Vector2(0, 50)
+[node name="results" type="VBoxContainer" parent="cl/Control/die/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="time" type="RichTextLabel" parent="cl/Control/die/Panel/results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 0
 text = "RUN_END_TIME"
 
-[node name="lvl" type="RichTextLabel" parent="cl/Control/die/results"]
-custom_minimum_size = Vector2(0, 50)
+[node name="lvl" type="RichTextLabel" parent="cl/Control/die/Panel/results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 0
-text = "END_RUN_LVL"
+text = "RUN_END_LVL"
+
+[node name="arenas" type="RichTextLabel" parent="cl/Control/die/Panel/results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "END_RUN_ARENAS"
+
+[node name="b" type="Button" parent="cl/Control/die"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = 26.5
+offset_right = 42.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK_TO_TILTE"
 
 [node name="bpg" type="HFlowContainer" parent="cl/Control"]
 custom_minimum_size = Vector2(320, 48)
@@ -454,11 +459,124 @@ mouse_filter = 2
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
 
+[node name="game_end" type="Control" parent="cl/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vc" type="VBoxContainer" parent="cl/Control/game_end"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2160.0
+offset_top = -164.667
+offset_right = 2320.0
+offset_bottom = 595.333
+grow_horizontal = 2
+alignment = 1
+
+[node name="c" type="Control" parent="cl/Control/game_end/vc"]
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="cl/Control/game_end/vc/c"]
+custom_minimum_size = Vector2(160, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -157.0
+offset_right = 80.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="results" type="VBoxContainer" parent="cl/Control/game_end/vc/c/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="time" type="RichTextLabel" parent="cl/Control/game_end/vc/c/Panel/results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "RUN_END_TIME"
+
+[node name="lvl" type="RichTextLabel" parent="cl/Control/game_end/vc/c/Panel/results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "RUN_END_LVL"
+
+[node name="arenas" type="RichTextLabel" parent="cl/Control/game_end/vc/c/Panel/results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "END_RUN_ARENAS"
+
+[node name="b" type="Button" parent="cl/Control/game_end/vc/c/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = 49.5
+offset_right = 42.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK_TO_TILTE"
+
+[node name="auth" parent="cl/Control/game_end/vc" instance=ExtResource("12_qgy1a")]
+layout_mode = 2
+
+[node name="ap" type="AnimationPlayer" parent="cl/Control/game_end"]
+libraries = {
+"": SubResource("AnimationLibrary_fmv7k")
+}
+
+[node name="exit" type="Button" parent="cl/Control/game_end"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -49.0
+offset_right = 118.0
+offset_bottom = -26.0
+grow_vertical = 0
+text = "BACK_TO_TILTE"
+
 [node name="map" parent="cl" instance=ExtResource("8_s3cml")]
+process_mode = 3
 visible = false
 boss_spawn_ids = PackedInt64Array(14, 9, 19)
+start_posid = 13
 
 [node name="massanges" type="Control" parent="cl"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -468,6 +586,11 @@ grow_vertical = 2
 mouse_filter = 2
 
 [connection signal="boss_fight_end" from="." to="." method="_on_boss_fight_end"]
-[connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout" flags=18]
-[connection signal="timeout" from="arena_timer" to="." method="_on_arena_timer_timeout" flags=18]
-[connection signal="button_down" from="cl/Control/die/Button" to="." method="menu_exit"]
+[connection signal="end_arena" from="." to="." method="_on_end_arena"]
+[connection signal="game_end" from="." to="." method="_on_game_end"]
+[connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout"]
+[connection signal="timeout" from="arena_timer" to="." method="_on_arena_timer_timeout"]
+[connection signal="button_down" from="cl/Control/die/b" to="." method="menu_exit"]
+[connection signal="button_down" from="cl/Control/game_end/vc/c/Panel/b" to="." method="_on_b_button_down"]
+
+[editable path="world/ent/player"]

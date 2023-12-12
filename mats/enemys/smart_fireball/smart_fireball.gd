@@ -1,13 +1,16 @@
 extends RigidBody2D
+signal deled;
 @export_range(1,99999) var speed:float=100
 @export_range(1,99999) var acc_speed:float=100
 @export var damage:float=1.0
 @export var crit_damage:float=2.0
 @export var crit_chance:float=0.0
 var vec:Vector2=Vector2.ZERO
-@onready var target=fnc.get_hero()
+var target=null
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if target==null:
+		target=fnc.get_hero()
 	$c.emitting=true
 	$hirtbox.damage=damage
 	$hirtbox.crit_damage=crit_damage
@@ -21,11 +24,18 @@ func _process(_delta):
 	last_vec=vec
 	var cur_sqrt=(vec-last_vec).normalized()
 	vec=get_linear_velocity()
-	vec=vec.move_toward((target.global_position-global_position).normalized()*speed,acc_speed*_delta)
+	if target==fnc.get_hero():
+		vec=vec.move_toward((target.global_position-global_position).normalized()*speed,acc_speed*_delta)
+	else:
+		vec=vec.move_toward((target.global_position-global_position).normalized()*speed*(fnc._sqrt(target.global_position-global_position)/50),acc_speed*_delta)
 	$c.gravity=cur_sqrt*98
 	set_linear_velocity(vec)
 
 func delete():
+	emit_signal("deled")
+	var b=preload("res://mats/enemys/bulb/bulb.tscn").instantiate()
+	b.global_position=global_position
+	get_parent().add_child.call_deferred(b)
 	queue_free()
 
 func _on_del_area_body_entered(body):

@@ -3,6 +3,7 @@ extends Panel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	gm.set_font(gm.cur_font,theme)
 	pass # Replace with function body.
 
 var been_in:bool=false

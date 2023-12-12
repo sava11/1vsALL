@@ -14,6 +14,7 @@ MEMENTO_MORI,end of the story,конец истории
 BACK_TO_TILTE,to main menu,вернуться в главное меню
 RUN_END_TIME,run time,время забега
 RUN_END_LVL,level in run,уровень в забеге
+END_RUN_ARENAS,complited arenas,пройдено арен
 
 HP,health points (HP),жизненная сила (ЖЗ)
 HP_REGEN,heals HP per second,лечение ЖЗ за секунду
@@ -31,6 +32,14 @@ THE_SWORD_TEXT,sword upgrade,улучшение меча
 ARMOR_TEXT,armor upgrade,улучшение брони
 BOOTS_TEXT,boots upgrade,улучшение обуви
 item1_TEXT,test upgrade. Don't buy it.,тестовое улучшение. Не покупай его.
+PLAYER_ARENA_POS,You,Ты
+
+DEF-HP_TEXT,update kit mixed with defance kit and hp kit,набор улучшений совмещённый с набором защиты и набором здоровья
+DEF_TEXT,defance update kit,набор улучшения защиты
+HP_TEXT,hp uptade kit,набор улучшения здоровья
+AGILITY-DEF_TEXT,update kit mixed with defance kit and agility kit,набор улучшений совмещённый с набором защиты и набором ловкости
+AGILITY-HP_TEXT,update kit mixed with agility kit and hp kit,набор улучшений совмещённый с набором ловкости и набором здоровья
+AGILITY_TEXT,agility uptade kit,набор улучшения ловкости
 
 
 SURIKEN_TEXT,stealth assassin throwing weapon,метательное оружие скрытных убийц
