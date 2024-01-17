@@ -14,4 +14,12 @@ func _on_button_3_button_down():
 
 
 func _on_back_button_down():
-	get_tree().change_scene_to_file("res://menu.tscn")
+	queue_free()
+	get_parent().get_node("bg").show()
+	get_parent().get_node("main_menu").show()
+
+
+func _on_training_button_down():
+	gm.cur_gameplay_type=gm.gameplay_type.train
+	get_tree().change_scene_to_packed(preload("res://mats/game.tscn"))
+	

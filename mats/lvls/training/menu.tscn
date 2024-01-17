@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://b1nc6a3d2w03g"]
+
+[node name="die" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -77.0
+offset_right = 80.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="results" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="time" type="RichTextLabel" parent="results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "RUN_END_TIME"
+
+[node name="lvl" type="RichTextLabel" parent="results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "RUN_END_LVL"
+
+[node name="arenas" type="RichTextLabel" parent="results"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+text = "END_RUN_ARENAS"
+
+[node name="b" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = 46.5
+offset_right = 63.0
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK_TO_TILTE"

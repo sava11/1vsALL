@@ -55,7 +55,6 @@ func summon():
 				for enemy in gm.maps[gm.get_cur_lvl()].enemys.keys():
 					perc.append(gm.maps[gm.get_cur_lvl()].enemys[enemy])
 				var enemy=gm.maps[gm.get_cur_lvl()].enemys.keys()[fnc._with_chance_ulti(perc)]
-				print(gm.enemys[enemy].s)
 				en.load_scene=load(gm.enemys[enemy].s)
 				en.scene_data={
 					"global_position":pos,

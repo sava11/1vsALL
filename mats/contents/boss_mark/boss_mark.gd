@@ -6,7 +6,6 @@ var bname:int=0
 var pb=null
 func emit():
 	emit_signal("die",bname)
-	print("sdf")
 	if is_instance_valid(pb):
 		pb.queue_free()
 func _ready():

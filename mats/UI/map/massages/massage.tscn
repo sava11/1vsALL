@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmvfg4skk1qpt"]
+
+[ext_resource type="Script" path="res://mats/UI/map/massages/massage.gd" id="1_nqlb4"]
+
+[sub_resource type="Curve" id="Curve_gsstw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.196394), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dn703"]
+bg_color = Color(0.368627, 0.368627, 0.368627, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="msg" type="Control"]
+custom_minimum_size = Vector2(120, 176)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 176.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_nqlb4")
+
+[node name="l" type="Line2D" parent="."]
+position = Vector2(16, 16)
+width_curve = SubResource("Curve_gsstw")
+
+[node name="pnl" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dn703")
+
+[node name="t" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="b" type="Button" parent="."]
+custom_minimum_size = Vector2(104, 32)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -40.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CLOSE"
+
+[connection signal="button_down" from="b" to="." method="_on_b_button_down"]

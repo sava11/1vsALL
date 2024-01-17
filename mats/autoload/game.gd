@@ -1,6 +1,6 @@
 extends Node
 enum dificulty{easy,norm,hard}
-enum gameplay_type{clasic,bossrush,inf}
+enum gameplay_type{clasic,bossrush,inf,train}
 var cur_gameplay_type=gameplay_type.clasic
 var cur_dif=dificulty.norm
 enum ivents{none,arena,upg_arena,boss_arena,stats_map,shop}
@@ -142,6 +142,9 @@ var bosses={
 	},
 }
 var arenas={
+	"train":{
+		"t1":"res://mats/lvls/lvl1/lvl1.tscn"
+	},
 	"l1":{
 		"a1":"res://mats/lvls/lvl1/lvl1.tscn",
 		"a2":"res://mats/lvls/lvl1/lvl1_1.tscn",
@@ -240,6 +243,33 @@ var bossrush={
 		},
 }
 var maps={
+		-1:{"locs":{
+				0:{
+					"l":arenas.train.t1,
+					"color":Color(50,200,50),
+					"%":1
+				},
+			},
+			"lvl_color":{
+				"normal":{"bg":Color("c29644"),"brd":Color("f0c986")},
+				"pressed":{"bg":Color("a07a33"),"brd":Color("dc7938")},
+				"hover":{"bg":Color("a07a33"),"brd":Color("c29600")},
+				"disabled":{"bg":Color("8f6e00"),"brd":Color("bf9443")},
+				},
+			"ecount":Vector2(4,8),
+			"bosses":PackedStringArray([]),
+			"panel":{"bg":Color("8f6F50"),"brd":Color("bf9443")},
+			"boss_arena":{
+					0:{
+						"l":arenas.train.t1,
+						"%":1
+					},
+					
+				},
+			"enemys":{
+				"sk_sw":1,
+			}
+		},
 		0:{
 			
 			"locs":{
@@ -403,7 +433,7 @@ func upd_objs():
 	"player":{
 			"name":"Warrior",
 			"stats":{
-				"hp":3000,
+				"hp":3,
 				"hp_rgen":0.1,
 				"max_stamina":1.5,
 				"regen_stamina_point":0.3,
@@ -474,6 +504,7 @@ func upd_objs():
 			"min_v":50,
 			"i":images.icons.stats["%sp"],
 			"t":tr("%SPEED"),
+			"ct":tr("C%SPEED"),
 			"price":2.5
 			},
 		"hp":{
@@ -492,6 +523,7 @@ func upd_objs():
 			"min_v":1,
 			"i":images.icons.stats.hp,
 			"t":tr("HP"),
+			"ct":tr("CHP"),
 			"price":3.5
 			},
 		"hp_rgen":{
@@ -510,6 +542,7 @@ func upd_objs():
 			"min_v":0,
 			"i":images.icons.stats.hp_regen,
 			"t":tr("HP_REGEN"),
+			"ct":tr("CHP_REGEN"),
 			"price":4
 			},
 		"dmg":{
@@ -528,6 +561,7 @@ func upd_objs():
 			"min_v":0,
 			"i":images.icons.stats.dmg,
 			"t":tr("DMG"),
+			"ct":tr("CDMG"),
 			"price":5
 			},
 		"crit_dmg":{
@@ -546,6 +580,7 @@ func upd_objs():
 			"min_v":0,
 			"i":images.icons.stats["crit_dmg"],
 			"t":tr("CRIT_DMG"),
+			"ct":tr("CCRIT_DMG"),
 			"price":3.5
 			},
 		"%crit_dmg":{
@@ -564,6 +599,7 @@ func upd_objs():
 			"min_v":0,
 			"i":images.icons.stats["%crit_dmg"],
 			"t":tr("%CRIT_DMG"),
+			"ct":tr("C%CRIT_DMG"),
 			"price":4
 			},
 		"def":{
@@ -582,6 +618,7 @@ func upd_objs():
 			"min_v":1,
 			"i":images.icons.stats.def,
 			"t":tr("DEF"),
+			"ct":tr("CDEF"),
 			"price":5.5
 			},
 		"max_stamina":{
@@ -600,6 +637,7 @@ func upd_objs():
 			"min_v":0.5,
 			"i":images.icons.stats.max_stamina,
 			"t":tr("MAX_STAMINA_VALUE"),
+			"ct":tr("CMAX_STAMINA_VALUE"),
 			"price":3.2
 			},
 		"regen_stamina_point":{
@@ -618,6 +656,7 @@ func upd_objs():
 			"min_v":0.1,
 			"i":images.icons.stats.regen_stamina_point,
 			"t":tr("STAMINA_REGEN_VALUE"),
+			"ct":tr("CSTAMINA_REGEN_VALUE"),
 			"price":4.2
 			},
 		"take_area":{
@@ -636,6 +675,7 @@ func upd_objs():
 			"min_v":10,
 			"i":images.icons.stats.take_area,
 			"t":tr("COLLECTING"),
+			"ct":tr("CCOLLECTING"),
 			"price":2.6
 			}
 		},

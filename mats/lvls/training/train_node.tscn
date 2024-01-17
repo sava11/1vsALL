@@ -1,20 +1,18 @@
-[gd_scene load_steps=34 format=3 uid="uid://bla46yhexjifu"]
+[gd_scene load_steps=30 format=3 uid="uid://bqq0sdewfmpap"]
 
-[ext_resource type="Script" path="res://mats/world.gd" id="1_h267k"]
-[ext_resource type="AudioStream" uid="uid://ba8igrseium1m" path="res://mats/sounds/фоновая2.mp3" id="2_cqo71"]
-[ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="3_5pvro"]
-[ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="4_8fyee"]
-[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="4_ikpob"]
-[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_0jca1"]
-[ext_resource type="Texture2D" uid="uid://cvognw0q4medm" path="res://mats/imgs/warrior/hpbar_ico.png" id="5_em3dd"]
-[ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="6_tfxx6"]
-[ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="7_k1w0t"]
-[ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="8_3u3vu"]
-[ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="8_s3cml"]
-[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="9_7ucnp"]
-[ext_resource type="Shader" path="res://mats/UI/outline.gdshader" id="11_3vjbr"]
-[ext_resource type="Script" path="res://mats/train_massanges.gd" id="12_0uav7"]
-[ext_resource type="PackedScene" uid="uid://ejyfxg6ejh5b" path="res://mats/auth/humans.tscn" id="12_24rpo"]
+[ext_resource type="Script" path="res://mats/lvls/training/train_node.gd" id="1_22wba"]
+[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="1_mern4"]
+[ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="2_htwyv"]
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="2_r73sq"]
+[ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="3_hoy1i"]
+[ext_resource type="Script" path="res://mats/lvls/training/map.gd" id="4_81dyj"]
+[ext_resource type="Texture2D" uid="uid://cvognw0q4medm" path="res://mats/imgs/warrior/hpbar_ico.png" id="4_y15r8"]
+[ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="5_be67i"]
+[ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="6_wjkha"]
+[ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="7_g65iq"]
+[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="8_4fb68"]
+[ext_resource type="PackedScene" uid="uid://csqyx268vhvmt" path="res://mats/lvls/training/gm_end.tscn" id="9_lmhu6"]
+[ext_resource type="PackedScene" uid="uid://0553mxpjh6lr" path="res://mats/auth/humans.tscn" id="10_e0iab"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7kw2"]
 bg_color = Color(0.258824, 0, 0.454902, 1)
@@ -113,7 +111,7 @@ corner_radius_bottom_left = 5
 anti_aliasing_size = 0.25
 
 [sub_resource type="FontVariation" id="FontVariation_5yrwh"]
-base_font = ExtResource("4_ikpob")
+base_font = ExtResource("2_r73sq")
 spacing_top = 2
 
 [sub_resource type="Theme" id="Theme_8rgl8"]
@@ -157,24 +155,9 @@ shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/line_thickness = 1.0
 
 [sub_resource type="FontVariation" id="FontVariation_ds5t5"]
-base_font = ExtResource("4_ikpob")
+base_font = ExtResource("2_r73sq")
 spacing_glyph = 1
 spacing_top = 2
-
-[sub_resource type="Animation" id="Animation_xffy4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("exit:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_366j8"]
 resource_name = "end"
@@ -223,73 +206,95 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fmv7k"]
 _data = {
-"RESET": SubResource("Animation_xffy4"),
 "end": SubResource("Animation_366j8")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rkm2b"]
-shader = ExtResource("11_3vjbr")
-shader_parameter/line_color = Color(0, 0, 0, 1)
-shader_parameter/line_thickness = 1.0
-
-[node name="game" type="Node2D"]
-process_mode = 3
-editor_description = "подразделить волны
-"
-script = ExtResource("1_h267k")
-gameplay = 0
-time_periond_from = 40.0
-time_periond_to = 60.0
-spwn_time_periond_to = 10.0
-enemys_count_from = 15
-enemys_count_to = 20
-
-[node name="asp_fight" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_cqo71")
-bus = &"game"
-
-[node name="asp_think" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_5pvro")
-bus = &"menu"
+[node name="main" type="Node"]
+script = ExtResource("1_22wba")
 
 [node name="enemy_summon_timer" type="Timer" parent="."]
-process_mode = 1
-wait_time = 3.0
 
 [node name="arena_timer" type="Timer" parent="."]
-process_mode = 1
-wait_time = 3.0
 
 [node name="cam" type="Camera2D" parent="."]
-position = Vector2(-16, 0)
-zoom = Vector2(1.1, 1.1)
 
 [node name="world" type="Node2D" parent="."]
-process_mode = 1
+visible = false
+position = Vector2(320, 144)
+
+[node name="lvl" parent="world" instance=ExtResource("2_htwyv")]
 
 [node name="ent" type="Node2D" parent="world"]
-y_sort_enabled = true
 
-[node name="enemys" type="Node2D" parent="world/ent"]
-y_sort_enabled = true
-
-[node name="player" parent="world/ent" instance=ExtResource("5_0jca1")]
-process_mode = 1
-position = Vector2(-16, 0)
-max_contacts_reported = 3
-contact_monitor = true
-
-[node name="inv" parent="world/ent/player" index="8"]
-process_mode = 1
-
-[node name="rt" type="RemoteTransform2D" parent="world/ent/player"]
-remote_path = NodePath("../../../../cam")
+[node name="player" parent="world" instance=ExtResource("1_mern4")]
+position = Vector2(-125, -12)
 
 [node name="cl" type="CanvasLayer" parent="."]
-process_mode = 3
 
-[node name="Control" type="Control" parent="cl"]
+[node name="massanges" type="Control" parent="cl"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="map" type="Panel" parent="cl"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_81dyj")
+max_button_size = null
+border_offset_size = null
+arenas = null
+start_pos = null
+
+[node name="hbc" type="HBoxContainer" parent="cl/map"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="Panel" type="Panel" parent="cl/map/hbc"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="vbc" type="VBoxContainer" parent="cl/map/hbc"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="map" type="Panel" parent="cl/map/hbc/vbc"]
+custom_minimum_size = Vector2(532, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="gc" type="Control" parent="cl/map/hbc/vbc/map"]
+custom_minimum_size = Vector2(532, 276)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inv" type="Panel" parent="cl/map/hbc/vbc"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="gm_ui" type="Control" parent="cl"]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -298,7 +303,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_8rgl8")
 
-[node name="status" type="Control" parent="cl/Control"]
+[node name="status" type="Control" parent="cl/gm_ui"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2.0
@@ -306,11 +311,11 @@ offset_top = 2.0
 offset_right = 106.0
 offset_bottom = 50.0
 
-[node name="BarIco" type="Sprite2D" parent="cl/Control/status"]
-texture = ExtResource("4_8fyee")
+[node name="BarIco" type="Sprite2D" parent="cl/gm_ui/status"]
+texture = ExtResource("3_hoy1i")
 centered = false
 
-[node name="hp" type="TextureProgressBar" parent="cl/Control/status"]
+[node name="hp" type="TextureProgressBar" parent="cl/gm_ui/status"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 5.0
@@ -318,11 +323,11 @@ offset_right = 104.0
 offset_bottom = 19.0
 step = 0.001
 value = 100.0
-texture_under = ExtResource("5_em3dd")
-texture_progress = ExtResource("6_tfxx6")
+texture_under = ExtResource("4_y15r8")
+texture_progress = ExtResource("5_be67i")
 texture_progress_offset = Vector2(4, 3)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="cl/Control/status/hp"]
+[node name="RichTextLabel" type="RichTextLabel" parent="cl/gm_ui/status/hp"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -332,7 +337,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "    48/88"
 
-[node name="stamina" type="TextureProgressBar" parent="cl/Control/status"]
+[node name="stamina" type="TextureProgressBar" parent="cl/gm_ui/status"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 19.0
@@ -340,11 +345,11 @@ offset_right = 88.0
 offset_bottom = 29.0
 step = 0.001
 value = 100.0
-texture_under = ExtResource("7_k1w0t")
-texture_progress = ExtResource("8_3u3vu")
+texture_under = ExtResource("6_wjkha")
+texture_progress = ExtResource("7_g65iq")
 texture_progress_offset = Vector2(3, 2)
 
-[node name="money" type="RichTextLabel" parent="cl/Control/status"]
+[node name="money" type="RichTextLabel" parent="cl/gm_ui/status"]
 material = SubResource("ShaderMaterial_drogy")
 clip_contents = false
 layout_mode = 0
@@ -357,12 +362,12 @@ text = "99"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="money_img" type="Sprite2D" parent="cl/Control/status"]
+[node name="money_img" type="Sprite2D" parent="cl/gm_ui/status"]
 position = Vector2(28, 31)
-texture = ExtResource("9_7ucnp")
+texture = ExtResource("8_4fb68")
 centered = false
 
-[node name="time" type="RichTextLabel" parent="cl/Control"]
+[node name="time" type="RichTextLabel" parent="cl/gm_ui"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 5
@@ -374,16 +379,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="die" type="Control" parent="cl/Control"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="mm" type="RichTextLabel" parent="cl/Control/die"]
+[node name="mm" type="RichTextLabel" parent="cl/gm_ui"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -397,71 +393,23 @@ offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "MEMENTO_MORI"
+fit_content = true
 scroll_active = false
 
-[node name="Panel" type="Panel" parent="cl/Control/die"]
+[node name="die" parent="cl/gm_ui" instance=ExtResource("9_lmhu6")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -69.0
-offset_right = 80.0
-offset_bottom = 21.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = -72.0
+offset_bottom = 18.0
 
-[node name="results" type="VBoxContainer" parent="cl/Control/die/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = -3.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Button" type="Button" parent="cl/gm_ui/die"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 95.0
+offset_right = 122.0
+offset_bottom = 118.0
+text = "BACK"
 
-[node name="time" type="RichTextLabel" parent="cl/Control/die/Panel/results"]
-use_parent_material = true
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 0
-text = "RUN_END_TIME"
-
-[node name="lvl" type="RichTextLabel" parent="cl/Control/die/Panel/results"]
-use_parent_material = true
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 0
-text = "RUN_END_LVL"
-
-[node name="arenas" type="RichTextLabel" parent="cl/Control/die/Panel/results"]
-use_parent_material = true
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 0
-text = "END_RUN_ARENAS"
-
-[node name="b" type="Button" parent="cl/Control/die"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = 26.5
-offset_right = 42.0
-offset_bottom = 49.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "BACK_TO_TILTE"
-
-[node name="bpg" type="HFlowContainer" parent="cl/Control"]
+[node name="bpg" type="HFlowContainer" parent="cl/gm_ui"]
 custom_minimum_size = Vector2(320, 48)
 layout_mode = 1
 anchors_preset = 5
@@ -475,7 +423,8 @@ mouse_filter = 2
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
 
-[node name="game_end" type="Control" parent="cl/Control"]
+[node name="game_end" type="Control" parent="cl/gm_ui"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -483,38 +432,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="vc" type="VBoxContainer" parent="cl/Control/game_end"]
+[node name="vc" type="VBoxContainer" parent="cl/gm_ui/game_end"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 1520.0
-offset_right = 1680.0
-offset_bottom = 760.0
-grow_horizontal = 2
-
-[node name="c" type="Control" parent="cl/Control/game_end/vc"]
-custom_minimum_size = Vector2(160, 480)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="Panel" type="Panel" parent="cl/Control/game_end/vc/c"]
-custom_minimum_size = Vector2(160, 90)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -80.0
-offset_top = -148.0
 offset_right = 80.0
-offset_bottom = -58.0
+offset_bottom = 421.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="c" type="Control" parent="cl/gm_ui/game_end/vc"]
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="cl/gm_ui/game_end/vc/c"]
+custom_minimum_size = Vector2(160, 90)
+layout_mode = 1
+offset_top = 88.0
+offset_right = 160.0
+offset_bottom = 178.0
 size_flags_horizontal = 0
 
-[node name="results" type="VBoxContainer" parent="cl/Control/game_end/vc/c/Panel"]
+[node name="results" type="VBoxContainer" parent="cl/gm_ui/game_end/vc/c/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -526,28 +469,28 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="time" type="RichTextLabel" parent="cl/Control/game_end/vc/c/Panel/results"]
+[node name="time" type="RichTextLabel" parent="cl/gm_ui/game_end/vc/c/Panel/results"]
 use_parent_material = true
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 0
 text = "RUN_END_TIME"
 
-[node name="lvl" type="RichTextLabel" parent="cl/Control/game_end/vc/c/Panel/results"]
+[node name="lvl" type="RichTextLabel" parent="cl/gm_ui/game_end/vc/c/Panel/results"]
 use_parent_material = true
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 0
 text = "RUN_END_LVL"
 
-[node name="arenas" type="RichTextLabel" parent="cl/Control/game_end/vc/c/Panel/results"]
+[node name="arenas" type="RichTextLabel" parent="cl/gm_ui/game_end/vc/c/Panel/results"]
 use_parent_material = true
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 0
 text = "END_RUN_ARENAS"
 
-[node name="b" type="Button" parent="cl/Control/game_end/vc/c/Panel"]
+[node name="b" type="Button" parent="cl/gm_ui/game_end/vc/c/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -562,15 +505,15 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "BACK_TO_TILTE"
 
-[node name="auth" parent="cl/Control/game_end/vc" instance=ExtResource("12_24rpo")]
+[node name="auth" parent="cl/gm_ui/game_end/vc" instance=ExtResource("10_e0iab")]
 layout_mode = 2
 
-[node name="ap" type="AnimationPlayer" parent="cl/Control/game_end"]
+[node name="ap" type="AnimationPlayer" parent="cl/gm_ui/game_end"]
 libraries = {
 "": SubResource("AnimationLibrary_fmv7k")
 }
 
-[node name="exit" type="Button" parent="cl/Control/game_end"]
+[node name="exit" type="Button" parent="cl/gm_ui/game_end"]
 visible = false
 layout_mode = 1
 anchors_preset = 2
@@ -583,58 +526,5 @@ offset_bottom = -26.0
 grow_vertical = 0
 text = "BACK_TO_TILTE"
 
-[node name="tip" type="VBoxContainer" parent="cl/Control"]
-visible = false
-layout_mode = 2
-offset_left = 6.0
-offset_top = 54.0
-offset_right = 208.0
-offset_bottom = 100.0
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_override_constants/separation = 0
-
-[node name="t" type="RichTextLabel" parent="cl/Control/tip"]
-material = SubResource("ShaderMaterial_rkm2b")
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-text = "RMB / SHIFT / SPACE - roll"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="t2" type="RichTextLabel" parent="cl/Control/tip"]
-material = SubResource("ShaderMaterial_rkm2b")
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-text = "W/A/S/D / arrows - move"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="map" parent="cl" instance=ExtResource("8_s3cml")]
-process_mode = 3
-visible = false
-
-[node name="massanges" type="Control" parent="cl"]
-process_mode = 3
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("12_0uav7")
-
-[connection signal="boss_fight_end" from="." to="." method="_on_boss_fight_end"]
-[connection signal="end_arena" from="." to="." method="_on_end_arena"]
-[connection signal="game_end" from="." to="." method="_on_game_end"]
-[connection signal="finished" from="asp_fight" to="." method="_on_asp_fight_finished"]
-[connection signal="finished" from="asp_think" to="." method="_on_asp_think_finished"]
 [connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout"]
 [connection signal="timeout" from="arena_timer" to="." method="_on_arena_timer_timeout"]
-[connection signal="button_down" from="cl/Control/die/b" to="." method="menu_exit"]
-[connection signal="button_down" from="cl/Control/game_end/vc/c/Panel/b" to="." method="_on_b_button_down"]
-
-[editable path="world/ent/player"]

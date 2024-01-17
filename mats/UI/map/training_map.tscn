@@ -1,22 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3nmehkr0kwlj"]
+[gd_scene load_steps=12 format=3 uid="uid://brnmcbbj1vas5"]
 
-[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_38yfu"]
-[ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_wj4hv"]
-[ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="2_l3i6n"]
-[ext_resource type="Texture2D" uid="uid://b67xymnebnqc5" path="res://mats/UI/imgs/stats.png" id="3_a5vtt"]
-[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="4_os1d0"]
-[ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="6_68j3j"]
-[ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="7_5n64a"]
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_tdd5o"]
+[ext_resource type="Script" path="res://mats/UI/map/map.gd" id="2_65g8f"]
+[ext_resource type="Texture2D" uid="uid://b67xymnebnqc5" path="res://mats/UI/imgs/stats.png" id="3_omh8n"]
+[ext_resource type="PackedScene" uid="uid://d1q3jqx7pbb7t" path="res://mats/UI/map/elems.tscn" id="4_t6e7s"]
+[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="5_mnsh2"]
+[ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="6_dgsvi"]
+[ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="7_76pyu"]
 
 [sub_resource type="FontVariation" id="FontVariation_cajka"]
-base_font = ExtResource("1_38yfu")
+base_font = ExtResource("1_tdd5o")
 spacing_top = 4
 
 [sub_resource type="Theme" id="Theme_tp2ss"]
 default_font = SubResource("FontVariation_cajka")
 
 [sub_resource type="FontVariation" id="FontVariation_npmpf"]
-base_font = ExtResource("1_38yfu")
+base_font = ExtResource("1_tdd5o")
 spacing_top = 2
 
 [sub_resource type="Theme" id="Theme_7km3u"]
@@ -31,16 +31,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = SubResource("Theme_tp2ss")
-script = ExtResource("1_wj4hv")
+script = ExtResource("2_65g8f")
 colums = 5
-rows = 5
-shop_count = 2
+boss_spawn_ids = Array[int]([4])
+shop_count = 1
+start_posid = 0
 
 [node name="stats2" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(8, 4)
 scale = Vector2(2, 2)
-texture = ExtResource("3_a5vtt")
+texture = ExtResource("3_omh8n")
 centered = false
 
 [node name="cont" type="RichTextLabel" parent="stats2"]
@@ -100,10 +101,10 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="money" parent="hero_values/cont" instance=ExtResource("2_l3i6n")]
+[node name="money" parent="hero_values/cont" instance=ExtResource("4_t6e7s")]
 layout_mode = 2
 theme = SubResource("Theme_7km3u")
-img = ExtResource("4_os1d0")
+img = ExtResource("5_mnsh2")
 show_popup_text = true
 popup_text = "MONEY"
 
@@ -189,7 +190,7 @@ offset_top = 2.0
 offset_right = 124.0
 offset_bottom = 2.0
 scale = Vector2(2, 2)
-texture = ExtResource("6_68j3j")
+texture = ExtResource("6_dgsvi")
 
 [node name="gc" type="GridContainer" parent="arenas"]
 layout_mode = 0
@@ -223,7 +224,7 @@ offset_left = 12.0
 offset_top = 135.0
 offset_right = 31.0
 offset_bottom = 151.0
-icon = ExtResource("7_5n64a")
+icon = ExtResource("7_76pyu")
 flat = true
 icon_alignment = 1
 expand_icon = true

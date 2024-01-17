@@ -94,16 +94,30 @@ func all_bosses_died():
 	return bool(int(res/cur_boss.size()))
 func _ready():
 	#gm.set_font(gm.cur_font,$cl/Control.theme)
-	if debug==false and gameplay==gm.gameplay_type.clasic:
-		show_lvls()
-		#upd_lvl(lvl)
-		$cl/map.upd_b_stats()
-		connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
-	if debug==false and gameplay==gm.gameplay_type.bossrush:
-		summoning=false
-		bossrush_update()
-		connect("end_arena",Callable(self,"bossrush_update"))
-		end_lvl=len(gm.bossrush)
+	if !debug:
+		if gameplay==gm.gameplay_type.clasic:
+			show_lvls()
+			#upd_lvl(lvl)
+			$cl/map.upd_b_stats()
+			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
+		if gameplay==gm.gameplay_type.bossrush:
+			summoning=false
+			bossrush_update()
+			connect("end_arena",Callable(self,"bossrush_update"))
+			end_lvl=len(gm.bossrush)
+		if gameplay==gm.gameplay_type.train:
+			lvl=-1
+			$cl/map.name="del_map"
+			$cl/del_map.queue_free()
+			var m=preload("res://mats/UI/map/training_map.tscn").instantiate()
+			m.name="map"
+			$cl.add_child(m)
+			$cl.move_child(m,1)
+			$cl/Control/tip.show()
+			$cl/map.upd_b_stats()
+			show_lvls()
+			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
+			
 				
 	#cur_enemys=gm.maps[lvl].enemys.duplicate()
 	$cl/Control/die.hide()
@@ -192,7 +206,6 @@ func bossrush_update():
 		boss_summon()
 		lvl+=1
 	else:
-		print("sfg")
 		emit_signal("game_end")
 func boss_summon():
 	for e in cur_boss.keys():
@@ -263,7 +276,7 @@ func _on_arena_timer_timeout():
 	for e in ememys_path.get_children():
 		e.queue_free()
 	#if hlvls_queue.is_empty():
-	if lvl<end_lvl:
+	if lvl<end_lvl and (gameplay==gm.gameplay_type.clasic or gameplay==gm.gameplay_type.train):
 		show_lvls()
 		$cl/map.upd_stats()
 		
@@ -277,7 +290,7 @@ func _on_arena_timer_timeout():
 	
 	#get_tree().change_scene_to_file("res://mats/UI/map/panel.tscn")
 func new_lvl():
-	if lvl+1<=end_lvl:#gm.maps.keys().max():
+	if lvl+1<=end_lvl and gameplay!=gm.gameplay_type.train:#gm.maps.keys().max():
 		lvl+=1
 		upd_lvl(lvl)
 		$cl/map.upd_b_stats()
@@ -304,10 +317,14 @@ func start_waves():
 	est.start(time)
 func show_lvls(b:bool=true):
 	if b==true:
+		start_sound_think()
+		stop_sound_fight()
 		$world.hide()
 		$cl/Control.hide()
 		$cl/map.show()
 	else:
+		stop_sound_think()
+		start_sound_fight()
 		$world.show()
 		$cl/Control.show()
 		$cl/map.hide()
@@ -383,3 +400,18 @@ func _on_game_end():
 func _on_b_button_down():
 	$cl/Control/game_end/vc/c/Panel/b.hide()
 	$cl/Control/game_end/ap.play("end")
+
+func start_sound_fight():
+	$asp_fight.play()
+func stop_sound_fight():
+	$asp_fight.stop()
+func start_sound_think():
+	$asp_think.play()
+func stop_sound_think():
+	$asp_think.stop()
+func _on_asp_think_finished():
+	pass # Replace with function body.
+
+
+func _on_asp_fight_finished():
+	pass # Replace with function body.

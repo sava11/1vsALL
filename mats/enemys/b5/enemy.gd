@@ -10,7 +10,6 @@ func in_status_think():
 	if s2.active==true and current_action==s2.do_name and attacks_timer>=s2.time_period:
 		state=s2.do_name
 func past_ready():
-	print(dif)
 	s.custom_data={
 		"dots":3,
 		"width":0.5,

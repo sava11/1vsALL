@@ -1458,10 +1458,10 @@ _data = {
 collision_layer = 16
 collision_mask = 16
 physics_material_override = SubResource("PhysicsMaterial_iu3cc")
-custom_integrator = true
-contact_monitor = true
 can_sleep = false
 lock_rotation = true
+custom_integrator = true
+contact_monitor = true
 script = ExtResource("1_pdlpu")
 stop_range_from = 150.0
 stop_range_to = 200.0
@@ -1513,10 +1513,10 @@ libraries = {
 "": SubResource("AnimationLibrary_qjeva")
 }
 
-[connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered" flags=18]
-[connection signal="area_exited" from="hurt_box" to="hurt_box" method="_on_area_exited" flags=18]
-[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]
-[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started" flags=18]
+[connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered"]
+[connection signal="area_exited" from="hurt_box" to="hurt_box" method="_on_area_exited"]
+[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended"]
+[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started"]
 [connection signal="no_he" from="hurt_box" to="." method="delete"]
-[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout" flags=18]
+[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout"]
 [connection signal="velocity_computed" from="na" to="." method="move"]

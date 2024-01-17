@@ -44,8 +44,8 @@ length = 10.0
 [node name="arrow" type="Area2D"]
 z_index = 1
 material = SubResource("ShaderMaterial_stwfb")
-collision_layer = 10
-collision_mask = 8
+collision_layer = 11
+collision_mask = 9
 script = ExtResource("2_e0ord")
 node_path = NodePath("")
 active = false

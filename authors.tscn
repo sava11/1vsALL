@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://authors.gd" id="1_aj2yi"]
 [ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_c8jl7"]
-[ext_resource type="PackedScene" uid="uid://0553mxpjh6lr" path="res://mats/humans.tscn" id="3_y2t3k"]
+[ext_resource type="PackedScene" uid="uid://ejyfxg6ejh5b" path="res://mats/auth/humans.tscn" id="3_y2t3k"]
 
 [sub_resource type="FontVariation" id="FontVariation_x6ent"]
 base_font = ExtResource("1_c8jl7")
@@ -21,17 +21,14 @@ grow_vertical = 2
 theme = SubResource("Theme_hbkhh")
 script = ExtResource("1_aj2yi")
 
-[node name="auth" parent="." instance=ExtResource("3_y2t3k")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 300.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="elem" parent="." instance=ExtResource("3_y2t3k")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+up_padding = 32
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

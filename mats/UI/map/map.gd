@@ -1,11 +1,9 @@
 extends Control
-@export_range(2,99) var choices_colums:int=3
 @export_range(1,999) var colums:int=1
 @export_range(1,999) var rows:int=1
 var start_position:Vector2=Vector2(-1,-1)
-@export var max_size:Vector2=Vector2(200,150)
-
-@export var boss_spawn_ids:PackedInt64Array=PackedInt64Array([14,19,9])
+@export var max_size:Vector2=Vector2(200,90)
+@export var boss_spawn_ids:Array[int]=[14,19,9]
 @export_range(0,999) var shop_count:int=3
 @export_range(0,999) var start_posid:int=10
 signal in_shop
@@ -64,35 +62,37 @@ func _ready():
 		e1.img=load(cd[tt[e]].i)
 		e1.txt=str(fnc.get_hero().cd.stats[tt[e]])
 		e1.popup_text=cd[tt[e]].t
+		e1.get_node("ext").text=cd[tt[e]].ct
 		e1.show_popup_text=true
 		e1.ext_vis=true
 		stats_cont.add_child(e1)
 		
 	var point=posid
-	cr_shops()
-	var w=int((arenas.size.x+4)/colums)
-	var h=(arenas.size.y+4)/rows
-	arenas.columns=colums
-	var bid=0
-	for e in arenas.get_children():
-		e.queue_free()
-	for e in range(colums*rows):
-		var b1=preload("res://mats/UI/map/button.tscn").instantiate()
-		if max_size.x<w:
-			b1.custom_minimum_size.x=max_size.x
-		else:
-			b1.custom_minimum_size.x=w-4
-		if max_size.y<h:
-			b1.custom_minimum_size.y=max_size.y
-		else:
-			b1.custom_minimum_size.y=h-4
-		arenas.add_child(b1)
+	if get_tree().current_scene.gameplay==gm.gameplay_type.clasic or get_tree().current_scene.gameplay==gm.gameplay_type.train:
+		cr_shops()
+		var w=int((arenas.size.x+4)/colums)
+		var h=(arenas.size.y+4)/rows
+		arenas.columns=colums
+		var bid=0
+		for e in arenas.get_children():
+			e.queue_free()
+		for e in range(colums*rows):
+			var b1=preload("res://mats/UI/map/button.tscn").instantiate()
+			if max_size.x<w:
+				b1.custom_minimum_size.x=max_size.x
+			else:
+				b1.custom_minimum_size.x=w-4
+			if max_size.y<h:
+				b1.custom_minimum_size.y=max_size.y
+			else:
+				b1.custom_minimum_size.y=h-4
+			arenas.add_child(b1)
 	#upd(point)
 func upd(point:int):
 	var pointy=(point-point%rows)/rows
 	var w=int(arenas.size.x/colums)
 	var h=arenas.size.y/rows
-	arenas.columns=colums
+	#arenas.columns=colums
 	if max_column<posid%colums:
 		max_column=posid%colums
 	var bid=0

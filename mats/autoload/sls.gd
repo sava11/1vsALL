@@ -1,22 +1,9 @@
 extends Node
-const fformat="1vA"
-var lpath="res://"
-const fname="data"
-var sd={
-	"dinamic":{
-		
-	},
-	"static":{
-		
-	}
-}
-func save_data():
-	var path=lpath+fname+"."+fformat
+func save_data(path:String,data:Dictionary):
 	var save_game := FileAccess.open(path, FileAccess.WRITE)
-	save_game.store_line(JSON.stringify(sd))
+	save_game.store_line(JSON.stringify(data))
 	save_game.close()
-func load_data():
-	var path=lpath+fname+"."+fformat
+func load_data(path:String):
 	if (FileAccess.file_exists(path)):
 		var save_game := FileAccess.open(path, FileAccess.READ)
 		save_game.open(path, FileAccess.READ)
@@ -27,5 +14,6 @@ func load_data():
 		save_game.close()
 	else:
 		print("save isn't exists")
-
+func _ready():
+	DirAccess.make_dir_absolute("saves")
 
