@@ -76,6 +76,7 @@ func _process(delta):
 		
 var temp=[]
 func _on_area_entered(area):
+	print(area)
 	if area.by_time:
 		temp.append(area)
 	else:

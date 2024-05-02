@@ -2312,6 +2312,7 @@ shape = SubResource("CircleShape2D_q1cby")
 path_desired_distance = 0.1
 target_desired_distance = 5.0
 avoidance_enabled = true
+max_speed = 3000.0
 
 [node name="see" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)

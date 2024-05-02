@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="7_g65iq"]
 [ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="8_4fb68"]
 [ext_resource type="PackedScene" uid="uid://csqyx268vhvmt" path="res://mats/lvls/training/gm_end.tscn" id="9_lmhu6"]
-[ext_resource type="PackedScene" uid="uid://0553mxpjh6lr" path="res://mats/auth/humans.tscn" id="10_e0iab"]
+[ext_resource type="PackedScene" uid="uid://ejyfxg6ejh5b" path="res://mats/auth/humans.tscn" id="10_e0iab"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7kw2"]
 bg_color = Color(0.258824, 0, 0.454902, 1)

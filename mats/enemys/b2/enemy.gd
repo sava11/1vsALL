@@ -1,6 +1,6 @@
 extends "res://mats/contents/base/charter_tamplate.gd"
 @export_category("attack2_speed")
-var attack2_speed=100
+var attack2_speed=230
 func past_ready():
 	$stages.centerize=true
 	$stages.max_value=hb.m_he

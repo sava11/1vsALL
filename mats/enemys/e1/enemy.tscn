@@ -921,7 +921,6 @@ stop_range_to = 20.0
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
-monitorable = false
 script = ExtResource("2_qh5i6")
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]
@@ -948,7 +947,8 @@ avoidance_enabled = true
 [node name="sp" parent="visual" index="0"]
 material = SubResource("ShaderMaterial_kbboe")
 sprite_frames = SubResource("SpriteFrames_0vqqq")
-frame = 4
+animation = &"attack_down"
+frame = 7
 
 [node name="drop" parent="." instance=ExtResource("22_p8e2y")]
 

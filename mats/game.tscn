@@ -1,20 +1,23 @@
-[gd_scene load_steps=34 format=3 uid="uid://bla46yhexjifu"]
+[gd_scene load_steps=37 format=3 uid="uid://bla46yhexjifu"]
 
-[ext_resource type="Script" path="res://mats/world.gd" id="1_h267k"]
-[ext_resource type="AudioStream" uid="uid://ba8igrseium1m" path="res://mats/sounds/фоновая2.mp3" id="2_cqo71"]
-[ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="3_5pvro"]
-[ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="4_8fyee"]
-[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="4_ikpob"]
-[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_0jca1"]
-[ext_resource type="Texture2D" uid="uid://cvognw0q4medm" path="res://mats/imgs/warrior/hpbar_ico.png" id="5_em3dd"]
-[ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="6_tfxx6"]
-[ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="7_k1w0t"]
-[ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="8_3u3vu"]
-[ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="8_s3cml"]
-[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="9_7ucnp"]
-[ext_resource type="Shader" path="res://mats/UI/outline.gdshader" id="11_3vjbr"]
-[ext_resource type="Script" path="res://mats/train_massanges.gd" id="12_0uav7"]
-[ext_resource type="PackedScene" uid="uid://ejyfxg6ejh5b" path="res://mats/auth/humans.tscn" id="12_24rpo"]
+[ext_resource type="Script" path="res://mats/world.gd" id="1_5vrsg"]
+[ext_resource type="AudioStream" uid="uid://ba8igrseium1m" path="res://mats/sounds/фоновая2.mp3" id="2_llw5c"]
+[ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="3_bbsw8"]
+[ext_resource type="PackedScene" uid="uid://bx5emspkwmndy" path="res://mats/enemys/e3/enemy.tscn" id="4_0ig2r"]
+[ext_resource type="PackedScene" uid="uid://bpqfjokxhc0hs" path="res://mats/lvls/lvl1/lvl1.tscn" id="4_h6kqa"]
+[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="4_i7aii"]
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="5_ws7jf"]
+[ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="6_7bi6b"]
+[ext_resource type="PackedScene" uid="uid://d0igc80flvs2u" path="res://mats/enemys/e1/enemy.tscn" id="6_gkbw3"]
+[ext_resource type="Texture2D" uid="uid://cvognw0q4medm" path="res://mats/imgs/warrior/hpbar_ico.png" id="7_c5j6u"]
+[ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="8_n6ksi"]
+[ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="9_y0w23"]
+[ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="10_vmdag"]
+[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="11_ffrlu"]
+[ext_resource type="PackedScene" uid="uid://ejyfxg6ejh5b" path="res://mats/auth/humans.tscn" id="12_ccux0"]
+[ext_resource type="Shader" path="res://mats/UI/outline.gdshader" id="13_yibgt"]
+[ext_resource type="PackedScene" uid="uid://d3nmehkr0kwlj" path="res://mats/UI/map/panel.tscn" id="14_ckd2u"]
+[ext_resource type="Script" path="res://mats/train_massanges.gd" id="15_3ciag"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7kw2"]
 bg_color = Color(0.258824, 0, 0.454902, 1)
@@ -113,7 +116,7 @@ corner_radius_bottom_left = 5
 anti_aliasing_size = 0.25
 
 [sub_resource type="FontVariation" id="FontVariation_5yrwh"]
-base_font = ExtResource("4_ikpob")
+base_font = ExtResource("5_ws7jf")
 spacing_top = 2
 
 [sub_resource type="Theme" id="Theme_8rgl8"]
@@ -157,7 +160,7 @@ shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/line_thickness = 1.0
 
 [sub_resource type="FontVariation" id="FontVariation_ds5t5"]
-base_font = ExtResource("4_ikpob")
+base_font = ExtResource("5_ws7jf")
 spacing_glyph = 1
 spacing_top = 2
 
@@ -228,7 +231,7 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rkm2b"]
-shader = ExtResource("11_3vjbr")
+shader = ExtResource("13_yibgt")
 shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/line_thickness = 1.0
 
@@ -236,20 +239,23 @@ shader_parameter/line_thickness = 1.0
 process_mode = 3
 editor_description = "подразделить волны
 "
-script = ExtResource("1_h267k")
+script = ExtResource("1_5vrsg")
+debug = true
 gameplay = 0
 time_periond_from = 40.0
 time_periond_to = 60.0
 spwn_time_periond_to = 10.0
 enemys_count_from = 15
 enemys_count_to = 20
+dif = 2.0
+lvl = 2
 
 [node name="asp_fight" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_cqo71")
+stream = ExtResource("2_llw5c")
 bus = &"game"
 
 [node name="asp_think" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_5pvro")
+stream = ExtResource("3_bbsw8")
 bus = &"menu"
 
 [node name="enemy_summon_timer" type="Timer" parent="."]
@@ -267,13 +273,21 @@ zoom = Vector2(1.1, 1.1)
 [node name="world" type="Node2D" parent="."]
 process_mode = 1
 
+[node name="lvl" parent="world" instance=ExtResource("4_h6kqa")]
+
 [node name="ent" type="Node2D" parent="world"]
 y_sort_enabled = true
 
 [node name="enemys" type="Node2D" parent="world/ent"]
 y_sort_enabled = true
 
-[node name="player" parent="world/ent" instance=ExtResource("5_0jca1")]
+[node name="gobbers" parent="world/ent/enemys" instance=ExtResource("4_0ig2r")]
+position = Vector2(164, 30)
+
+[node name="base" parent="world/ent/enemys" instance=ExtResource("6_gkbw3")]
+position = Vector2(-34, -42)
+
+[node name="player" parent="world/ent" instance=ExtResource("4_i7aii")]
 process_mode = 1
 position = Vector2(-16, 0)
 max_contacts_reported = 3
@@ -307,7 +321,7 @@ offset_right = 106.0
 offset_bottom = 50.0
 
 [node name="BarIco" type="Sprite2D" parent="cl/Control/status"]
-texture = ExtResource("4_8fyee")
+texture = ExtResource("6_7bi6b")
 centered = false
 
 [node name="hp" type="TextureProgressBar" parent="cl/Control/status"]
@@ -318,8 +332,8 @@ offset_right = 104.0
 offset_bottom = 19.0
 step = 0.001
 value = 100.0
-texture_under = ExtResource("5_em3dd")
-texture_progress = ExtResource("6_tfxx6")
+texture_under = ExtResource("7_c5j6u")
+texture_progress = ExtResource("8_n6ksi")
 texture_progress_offset = Vector2(4, 3)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="cl/Control/status/hp"]
@@ -340,8 +354,8 @@ offset_right = 88.0
 offset_bottom = 29.0
 step = 0.001
 value = 100.0
-texture_under = ExtResource("7_k1w0t")
-texture_progress = ExtResource("8_3u3vu")
+texture_under = ExtResource("9_y0w23")
+texture_progress = ExtResource("10_vmdag")
 texture_progress_offset = Vector2(3, 2)
 
 [node name="money" type="RichTextLabel" parent="cl/Control/status"]
@@ -359,7 +373,7 @@ shortcut_keys_enabled = false
 
 [node name="money_img" type="Sprite2D" parent="cl/Control/status"]
 position = Vector2(28, 31)
-texture = ExtResource("9_7ucnp")
+texture = ExtResource("11_ffrlu")
 centered = false
 
 [node name="time" type="RichTextLabel" parent="cl/Control"]
@@ -476,6 +490,7 @@ theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
 
 [node name="game_end" type="Control" parent="cl/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -488,8 +503,8 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 1520.0
-offset_right = 1680.0
+offset_left = 6320.0
+offset_right = 6480.0
 offset_bottom = 760.0
 grow_horizontal = 2
 
@@ -562,7 +577,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "BACK_TO_TILTE"
 
-[node name="auth" parent="cl/Control/game_end/vc" instance=ExtResource("12_24rpo")]
+[node name="auth" parent="cl/Control/game_end/vc" instance=ExtResource("12_ccux0")]
 layout_mode = 2
 
 [node name="ap" type="AnimationPlayer" parent="cl/Control/game_end"]
@@ -612,7 +627,7 @@ text = "W/A/S/D / arrows - move"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="map" parent="cl" instance=ExtResource("8_s3cml")]
+[node name="map" parent="cl" instance=ExtResource("14_ckd2u")]
 process_mode = 3
 visible = false
 
@@ -625,13 +640,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("12_0uav7")
+script = ExtResource("15_3ciag")
 
 [connection signal="boss_fight_end" from="." to="." method="_on_boss_fight_end"]
 [connection signal="end_arena" from="." to="." method="_on_end_arena"]
 [connection signal="game_end" from="." to="." method="_on_game_end"]
-[connection signal="finished" from="asp_fight" to="." method="_on_asp_fight_finished"]
-[connection signal="finished" from="asp_think" to="." method="_on_asp_think_finished"]
+[connection signal="finished" from="asp_fight" to="." method="start_sound_fight"]
+[connection signal="finished" from="asp_think" to="." method="start_sound_think"]
 [connection signal="timeout" from="enemy_summon_timer" to="." method="_on_enemy_summon_timer_timeout"]
 [connection signal="timeout" from="arena_timer" to="." method="_on_arena_timer_timeout"]
 [connection signal="button_down" from="cl/Control/die/b" to="." method="menu_exit"]

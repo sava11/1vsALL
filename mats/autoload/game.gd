@@ -118,11 +118,13 @@ var bosses={
 		"dificulty_lvl":{
 			dificulty.easy:{
 				"/attack.active":true,
-				"/summon.active":false,
+				"/summon.active":true,
+				"/summon2.active":false,
 			},
 			dificulty.norm:{
 				"/attack.active":true,
 				"/summon.active":true,
+				"/summon2.active":true,
 			},
 		}
 	},
@@ -156,7 +158,7 @@ var arenas={
 		"a3":"res://mats/lvls/lvl2/lvl2_2.tscn",
 	},
 	"l3":{
-		"a1":"res://mats/lvls/lvl3/lvl3.tscn",
+		"a1":"res://mats/lvls/lvl3/lvl3_2.tscn",
 		"a2":"res://mats/lvls/lvl3/lvl3_1.tscn",
 	}
 }

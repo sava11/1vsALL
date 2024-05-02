@@ -4,12 +4,15 @@ SETTINGS,settings,настройки
 AUTHORS,authors,авторы
 EXIT,exit,выход
 BACK,back,назад
+APPLY,apply,применить
+
 TITLE_PROGRAMMER,programmer:,программист:
 TITLE_PM,project mananger:,мененжер проекта:
 TITLE_KEY_HUMANS,key people:,ключевые люди:
 TITLE_SPECIAL_THANKS_TO,special thanks to:,большое спасибо:
 TITLE_DISIGNERS,disigners:,дизайнеры:
 TITLE_COMPOSITORS,composers:,композитор:
+
 SCR_SZ,window size,размер окна
 FULL_SCREEN_MODE,fullscreen,полноэкранный
 LANG,language,язык

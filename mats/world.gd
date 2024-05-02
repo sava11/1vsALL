@@ -102,6 +102,7 @@ func _ready():
 			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
 		if gameplay==gm.gameplay_type.bossrush:
 			summoning=false
+			dif=0.5
 			bossrush_update()
 			connect("end_arena",Callable(self,"bossrush_update"))
 			end_lvl=len(gm.bossrush)
@@ -209,7 +210,6 @@ func bossrush_update():
 		emit_signal("game_end")
 func boss_summon():
 	for e in cur_boss.keys():
-		
 		var en=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
 		en.load_scene=load(gm.bosses[cur_boss[e].name].s)
 		var x=0
@@ -263,7 +263,6 @@ func _on_enemy_summon_timer_timeout():
 	
 	wave_count+=1
 func menu_exit():
-	sls.sd.dinamic={}
 	get_tree().change_scene_to_file("res://menu.tscn")
 
 func boss_die(bname:int):
@@ -301,7 +300,10 @@ func stop():
 	at.stop()
 func start_game():
 	upd_lvl(lvl)
-	dif+=0.15
+	if gameplay!=gm.gameplay_type.bossrush:
+		dif+=0.5
+	else:
+		dif+=0.15
 	if !cur_boss.is_empty():
 		est.stop()
 		at.stop()
@@ -409,9 +411,3 @@ func start_sound_think():
 	$asp_think.play()
 func stop_sound_think():
 	$asp_think.stop()
-func _on_asp_think_finished():
-	pass # Replace with function body.
-
-
-func _on_asp_fight_finished():
-	pass # Replace with function body.

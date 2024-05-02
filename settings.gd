@@ -36,6 +36,7 @@ func _on_menu_value_changed(value):
 
 func _on_game_value_changed(value):
 	data.sound.gm=value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("game"), linear_to_db($menu/snd/c/game.value/100))
 
 
 func _on_sz_item_selected(i):

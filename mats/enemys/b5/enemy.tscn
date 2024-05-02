@@ -2038,7 +2038,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="base" type="RigidBody2D"]
+[node name="nec" type="RigidBody2D"]
 collision_layer = 17
 collision_mask = 17
 physics_material_override = SubResource("PhysicsMaterial_iu3cc")
@@ -2081,11 +2081,11 @@ collision_mask = 9
 [node name="boss_mark" parent="." instance=ExtResource("4_mawdm")]
 
 [node name="attack" parent="." instance=ExtResource("5_qe80n")]
+collision_layer = 0
 load_scene = ExtResource("6_l0csw")
 count = 12
 attack_name = "a1"
 attack_anim_name = "attack1"
-active = false
 drawing = false
 percent = 0.6
 attack_range = 200.0
@@ -2102,7 +2102,6 @@ libraries = {
 material = SubResource("ShaderMaterial_7rcvr")
 sprite_frames = SubResource("SpriteFrames_y8n8u")
 animation = &"attack2_left"
-frame = 6
 offset = Vector2(0, -15)
 
 [node name="summon" parent="." instance=ExtResource("32_wnw2d")]

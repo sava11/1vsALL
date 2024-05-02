@@ -4,7 +4,6 @@ var speed:float=100
 var mvd:Vector2=Vector2.ZERO
 var sqrt=200
 
-
 func past_ready():
 	drawing=false
 	global_position=start_pos

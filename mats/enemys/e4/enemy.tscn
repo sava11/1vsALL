@@ -1469,8 +1469,6 @@ stop_range_to = 200.0
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
-monitoring = false
-monitorable = false
 script = ExtResource("2_g2gpf")
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]

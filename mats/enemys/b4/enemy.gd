@@ -58,18 +58,6 @@ func _on_die():
 	$drop.drop()
 	$boss_mark.emit()
 func teleport():
-	var e=preload("res://mats/contents/damage/circle_wave/damage.tscn").instantiate()
-	fnc.setter(e,{
-		"collision_layer":2,
-		"autoset":true,
-		"damage":2.5,
-		"crit_damage":2.0,
-		"crit_chance":0.3,
-		"sqrt_per_sec":5,
-		"del_sqrt":250,
-	})
-	e.set_deferred("global_position",global_position)
-	get_tree().current_scene.ememys_path.add_child(e)
 	global_position=get_tree().current_scene.get_rand_pos()
 
 

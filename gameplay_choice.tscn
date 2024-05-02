@@ -51,7 +51,6 @@ text = "CLASSIC"
 [node name="Button2" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "door"
 text = "BOSSRUSH"
 
 [node name="Button3" type="Button" parent="HBoxContainer"]

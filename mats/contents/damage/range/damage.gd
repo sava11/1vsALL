@@ -21,7 +21,6 @@ func aiming():
 	e.global_position=global_position+Vector2(-e.size.x/2,-36)
 	get_tree().current_scene.ememys_path.add_child(e)
 func throw():
-	trowed=true
 	var ang=float(360)/float(count)
 	for e in range(count):
 		var a=load_scene.instantiate()
@@ -35,3 +34,4 @@ func throw():
 		a.sqrt=attack_range
 		a.active=false
 		get_tree().current_scene.ememys_path.add_child(a)
+	trowed=true
