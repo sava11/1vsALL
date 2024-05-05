@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dempgo5dfcrll"]
+
+[ext_resource type="Script" path="res://mats/UI/new_map/item/item.gd" id="2_1qgcb"]
+[ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="3_tcrh0"]
+
+[node name="item" type="HBoxContainer"]
+offset_right = 72.0
+offset_bottom = 16.0
+size_flags_horizontal = 3
+script = ExtResource("2_1qgcb")
+
+[node name="img" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("3_tcrh0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="item_name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "voidus"
+
+[node name="value" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "inf"

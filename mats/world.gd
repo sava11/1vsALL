@@ -97,27 +97,25 @@ func _ready():
 	if !debug:
 		if gameplay==gm.gameplay_type.clasic:
 			show_lvls()
-			#upd_lvl(lvl)
 			$cl/map.upd_b_stats()
 			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
-		if gameplay==gm.gameplay_type.bossrush:
-			summoning=false
-			dif=0.5
-			bossrush_update()
-			connect("end_arena",Callable(self,"bossrush_update"))
-			end_lvl=len(gm.bossrush)
-		if gameplay==gm.gameplay_type.train:
-			lvl=-1
-			$cl/map.name="del_map"
-			$cl/del_map.queue_free()
-			var m=preload("res://mats/UI/map/training_map.tscn").instantiate()
-			m.name="map"
-			$cl.add_child(m)
-			$cl.move_child(m,1)
-			$cl/Control/tip.show()
-			$cl/map.upd_b_stats()
-			show_lvls()
-			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
+		if gameplay==gm.gameplay_type.bossrush:pass
+			#summoning=false
+			#dif=0.5
+			#bossrush_update()
+			#connect("end_arena",Callable(self,"bossrush_update"))
+			#end_lvl=len(gm.bossrush)
+		if gameplay==gm.gameplay_type.train:pass
+			#lvl=-1
+			#$cl/map.name="del_map"
+			#$cl/del_map.queue_free()
+			#var m=preload("res://mats/UI/map/training_map.tscn").instantiate()
+			#m.name="map"
+			#$cl.add_child(m)
+			#$cl.move_child(m,1)
+			#$cl/Control/tip.show()
+			#show_lvls()
+			#connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
 			
 				
 	#cur_enemys=gm.maps[lvl].enemys.duplicate()

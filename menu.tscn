@@ -1,16 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c54d08vj25anr"]
+[gd_scene load_steps=6 format=3 uid="uid://c54d08vj25anr"]
 
 [ext_resource type="Script" path="res://mats/menu.gd" id="1_503lg"]
-[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_ga2il"]
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_hxr0v"]
 [ext_resource type="TileSet" uid="uid://csc8a81gx41m8" path="res://mats/lvls/sand&rock.tres" id="2_s4n4m"]
 [ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="4_cdxpy"]
 [ext_resource type="PackedScene" uid="uid://x3ex1nkvmxv8" path="res://settings.tscn" id="5_eaj24"]
-
-[sub_resource type="FontVariation" id="FontVariation_i36ra"]
-base_font = ExtResource("1_ga2il")
-
-[sub_resource type="Theme" id="Theme_0ws45"]
-default_font = SubResource("FontVariation_i36ra")
 
 [node name="menu" type="Control"]
 editor_description = "сцена долго грузиться, пресоздать 
@@ -21,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_0ws45")
+theme = ExtResource("1_hxr0v")
 script = ExtResource("1_503lg")
 
 [node name="bg" type="Control" parent="."]

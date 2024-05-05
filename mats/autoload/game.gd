@@ -12,7 +12,10 @@ const fonts={
 	}
 func set_font(font:String,theme:Theme):
 	theme.default_font=FontVariation.new()
-	theme.default_font.base_font=preload("res://mats/font/Puzzle-Tale-Pixel-Regular.ttf")
+	if cur_font=="Puzzle-Tale-Pixel":
+		theme.default_font.base_font=preload("res://mats/font/Puzzle-Tale-Pixel-Regular.ttf")
+	if cur_font=="zx spectrum-7":
+		theme.default_font.base_font=preload("res://mats/font/zx_spectrum-7.ttf")
 
 func get_cur_lvl():
 	return get_tree().current_scene.lvl
@@ -27,6 +30,7 @@ const images={
 			"sk_bo_u":"res://mats/imgs/icons/skel_bow_up.png",
 			"skelvas":"res://mats/imgs/icons/skel_boss.png",
 			"skelgener":"res://mats/imgs/icons/skel_boss.png",
+			"player":"res://mats/imgs/icons/Warrior Icon.png",
 			},
 		"stats":{
 			"hp":"res://mats/imgs/icons/skills/hp.png",
@@ -428,7 +432,40 @@ var game_stats={
 			"t":tr("%SPAWN_ELITE")
 			},
 }
-var cur_gm_stats={}
+#var cur_gm_stats={}
+var player_data={
+	"fighting":false,
+	"stats":{
+		"hp":3,
+		"hp_rgen":0.1,
+		"max_stamina":1.5,
+		"regen_stamina_point":0.3,
+		"def":1.2,
+		"dmg":1.2,
+		"crit_dmg":7,
+		"%crit_dmg":0.2,
+		#"+%att_speed":0.3,
+		"run_speed":90,
+		"roll_speed":140,
+		#"%sp":0,
+		"take_area":10
+		},
+	"prefs":{
+		"cur_hp":3000000,
+		"do_roll_cost":1,
+		"max_exp_start":40,
+		"max_exp_sc":1,
+		"run_scale":1,
+		"roll_timer":0.4,
+		"roll_scale":1
+		},
+}
+var game_prefs={
+	"dif":1,
+	"elite_chance":0.01,
+}
+func save_data():
+	return player_data
 var objs={}
 func upd_objs():
 	objs={

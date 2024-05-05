@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwst4slo578yk"]
+
+[ext_resource type="Script" path="res://mats/UI/new_map/place/place.gd" id="2_kjo2x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hda4k"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
+anti_aliasing = false
+
+[node name="place" type="Control" groups=["SN"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 24.0
+offset_bottom = 24.0
+script = ExtResource("2_kjo2x")
+place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([null])
+active = Color(0.403922, 0.403922, 0.403922, 1)
+inactive = Color(0.607843, 0.607843, 0.607843, 1)
+
+[node name="lines" type="Node2D" parent="."]
+
+[node name="visual" type="Panel" parent="."]
+self_modulate = Color(0.403922, 0.403922, 0.403922, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hda4k")
+
+[node name="btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="button_down" from="btn" to="." method="_on_button_down"]

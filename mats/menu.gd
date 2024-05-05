@@ -6,7 +6,7 @@ func _ready():
 	pass
 	#grab_focus()
 	#$main_menu/cont/buttons/play.call_deferred("grab_focus")
-	gm.set_font(gm.cur_font,theme)
+	#gm.set_font(gm.cur_font,theme)
 	
 
 func _process(delta):

@@ -1,0 +1,12 @@
+# Godot 4+ specific ignores
+.godot/
+*.exe
+*.x86_32
+*.x86_64
+*.txt
+*.docx
+*.rar
+*._*
+*.DS_STORE
+*.import
+*.tmp

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://75sadqvlf16"]
+
+[ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="1_nqn2u"]
+[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="2_37cv4"]
+[ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/new_map/map.tscn" id="3_ojpc5"]
+
+[node name="Game" type="Node"]
+
+[node name="cam" type="Camera2D" parent="."]
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="lvl" parent="world" node_paths=PackedStringArray("cam") instance=ExtResource("1_nqn2u")]
+cam = NodePath("../../cam")
+
+[node name="ent" type="Node2D" parent="world"]
+y_sort_enabled = true
+
+[node name="enemys" type="Node2D" parent="world/ent"]
+y_sort_enabled = true
+
+[node name="player" parent="world/ent" instance=ExtResource("2_37cv4")]
+
+[node name="rt" type="RemoteTransform2D" parent="world/ent/player"]
+remote_path = NodePath("../../../../cam")
+update_rotation = false
+update_scale = false
+
+[node name="cl" type="CanvasLayer" parent="."]
+
+[node name="pause" parent="cl" instance=ExtResource("3_ojpc5")]
+visible = false

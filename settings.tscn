@@ -57,12 +57,14 @@ size_flags_horizontal = 3
 
 [node name="menu" type="HSlider" parent="menu/snd/c"]
 layout_mode = 2
+focus_mode = 0
 max_value = 200.0
 step = 10.0
 value = 100.0
 
 [node name="game" type="HSlider" parent="menu/snd/c"]
 layout_mode = 2
+focus_mode = 0
 max_value = 200.0
 step = 10.0
 value = 100.0
@@ -77,6 +79,7 @@ offset_top = -40.0
 offset_right = 96.0
 offset_bottom = -8.0
 grow_vertical = 0
+focus_mode = 0
 text = "BACK"
 
 [node name="aply" type="Button" parent="menu"]
@@ -92,6 +95,7 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 text = "APPLY"
 
 [node name="scr_sz" type="VBoxContainer" parent="menu"]
@@ -107,6 +111,7 @@ text = "SCR_SZ"
 
 [node name="sz" type="OptionButton" parent="menu/scr_sz"]
 layout_mode = 2
+focus_mode = 0
 alignment = 2
 
 [node name="lng" type="HBoxContainer" parent="menu"]
@@ -123,6 +128,7 @@ text = "LANG"
 [node name="lng" type="OptionButton" parent="menu/lng"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 alignment = 2
 item_count = 2
 selected = 0
@@ -147,6 +153,7 @@ grow_vertical = 2
 
 [node name="cb" type="CheckButton" parent="menu/fscr"]
 layout_mode = 2
+focus_mode = 0
 
 [node name="fs" type="Label" parent="menu/fscr"]
 layout_mode = 2

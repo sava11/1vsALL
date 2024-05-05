@@ -14,7 +14,6 @@ extends RigidBody2D
 @export_range(-180,180) var angle_to:float=45
 @onready var at=$at
 @onready var hb=$hurt_box
-signal lvl_up(lvl:int)
 
 var roll:bool=false
 var attak:bool=false
@@ -49,12 +48,9 @@ func test_chamber(anim_name:String,value:float):
 				anim.track_set_key_time(tt,k,timer*k1)
 		anim.length=timer
 func _ready():
-	connect("lvl_up",Callable(get_tree().current_scene,"add_to_lvl_queue"))
-	cd=gm.objs["player"][gm.player_type].duplicate()
-	cd.stats=gm.objs["player"][gm.player_type].stats.duplicate()
-	cd.prefs=gm.objs["player"][gm.player_type].prefs.duplicate()
-	current_stamina=cd.stats["max_stamina"]
-	roll_timer=cd.prefs["roll_timer"]
+	cd=gm.objs.player.duplicate()
+	current_stamina=cd.stats["max_stamina"].duplicate()
+	roll_timer=cd.prefs["roll_timer"].duplicate()
 	#var roll_t=$ap.get_animation("roll_up").length/roll_timer
 	for e in ["roll_left","roll_up","roll_down","roll_right"]:
 		var anim:Animation=$ap.get_animation(e)

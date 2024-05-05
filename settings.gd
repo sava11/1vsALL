@@ -50,6 +50,7 @@ func _on_sz_item_selected(i):
 
 func _on_aply_button_down():
 	sls.save_data("settings.json",data)
+	set_data(sls.load_data("settings.json"))
 
 
 func _on_bc_button_down():

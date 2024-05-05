@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbkyx2cqwtfoj"]
+[gd_scene load_steps=8 format=3 uid="uid://bbkyx2cqwtfoj"]
 
 [ext_resource type="TileSet" uid="uid://csc8a81gx41m8" path="res://mats/lvls/sand&rock.tres" id="1_hgsil"]
+[ext_resource type="Script" path="res://mats/lvls/lvl_template.gd" id="1_o2h5b"]
 [ext_resource type="PackedScene" uid="uid://dfe22bmixbbc5" path="res://mats/boxes/custom_dmg_area.tscn" id="5_0o078"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeni"]
@@ -19,6 +20,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-300, -156, -300, 156, 
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="lvl" type="Node2D"]
+script = ExtResource("1_o2h5b")
 
 [node name="arena_brd" type="Panel" parent="."]
 offset_left = -304.0
