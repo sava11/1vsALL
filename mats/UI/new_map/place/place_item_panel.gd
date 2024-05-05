@@ -24,6 +24,7 @@ func _process(delta):
 		hide()
 func add_item(img:Texture2D,iname:String,value:float,value_suffix:String=""):
 	var itm=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
+	itm.value_type=3
 	$ScrollContainer/cont.add_child(itm)
 	itm.set_image(img)
 	itm.set_item_name(iname)

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="status" load_steps=3 format=3 uid="uid://dboror3nrebko"]
+
+[ext_resource type="Texture2D" uid="uid://ctyhiii24ogda" path="res://mats/imgs/icons/skills/crit_dmg.png" id="1_kr1d5"]
+[ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="2_n6a4u"]
+
+[resource]
+script = ExtResource("2_n6a4u")
+name = "CCRIT_DMG"
+image = ExtResource("1_kr1d5")

@@ -435,6 +435,9 @@ var game_stats={
 #var cur_gm_stats={}
 var player_data={
 	"fighting":false,
+	"other":{
+		"money":0.
+	},
 	"stats":{
 		"hp":3,
 		"hp_rgen":0.1,
@@ -461,7 +464,7 @@ var player_data={
 		},
 }
 var game_prefs={
-	"dif":1,
+	"dif":0,
 	"elite_chance":0.01,
 }
 func save_data():

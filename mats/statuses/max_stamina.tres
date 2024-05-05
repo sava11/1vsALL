@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="status" load_steps=3 format=3 uid="uid://co5662aeufqag"]
+
+[ext_resource type="Texture2D" uid="uid://cums7byuhl1jp" path="res://mats/imgs/icons/skills/stamina_regen.png" id="1_x1yhn"]
+[ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="2_31h8i"]
+
+[resource]
+script = ExtResource("2_31h8i")
+name = "CMAX_STAMINA_VALUE"
+image = ExtResource("1_x1yhn")

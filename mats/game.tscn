@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://mats/world.gd" id="1_5vrsg"]
 [ext_resource type="AudioStream" uid="uid://ba8igrseium1m" path="res://mats/sounds/фоновая2.mp3" id="2_llw5c"]
-[ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="3_bbsw8"]
+[ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="3_8d5w5"]
 [ext_resource type="PackedScene" uid="uid://bx5emspkwmndy" path="res://mats/enemys/e3/enemy.tscn" id="4_0ig2r"]
 [ext_resource type="PackedScene" uid="uid://bpqfjokxhc0hs" path="res://mats/lvls/lvl1/lvl1.tscn" id="4_h6kqa"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="4_i7aii"]
@@ -141,7 +141,7 @@ stream = ExtResource("2_llw5c")
 bus = &"game"
 
 [node name="asp_think" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_bbsw8")
+stream = ExtResource("3_8d5w5")
 bus = &"menu"
 
 [node name="enemy_summon_timer" type="Timer" parent="."]
@@ -390,8 +390,8 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 14960.0
-offset_right = 15120.0
+offset_left = 15920.0
+offset_right = 16080.0
 offset_bottom = 760.0
 grow_horizontal = 2
 

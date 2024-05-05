@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="status" load_steps=3 format=3 uid="uid://btrqjcsptp4ff"]
+
+[ext_resource type="Texture2D" uid="uid://nu3ntnwtu7jc" path="res://mats/imgs/icons/skills/def.png" id="1_npggb"]
+[ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="2_d7ggc"]
+
+[resource]
+script = ExtResource("2_d7ggc")
+name = "CDEF"
+image = ExtResource("1_npggb")

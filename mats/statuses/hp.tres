@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="status" load_steps=3 format=3 uid="uid://bcfdokfrcmlxu"]
+
+[ext_resource type="Texture2D" uid="uid://c00wrjavopulm" path="res://mats/imgs/icons/skills/hp.png" id="1_eoo32"]
+[ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="2_q3w15"]
+
+[resource]
+script = ExtResource("2_q3w15")
+name = "CHP"
+image = ExtResource("1_eoo32")

@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://75sadqvlf16"]
+[gd_scene load_steps=7 format=3 uid="uid://75sadqvlf16"]
 
 [ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="1_nqn2u"]
+[ext_resource type="Script" path="res://mats/test/game.gd" id="1_tg1vd"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="2_37cv4"]
 [ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/new_map/map.tscn" id="3_ojpc5"]
+[ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="5_25pn6"]
+[ext_resource type="AudioStream" uid="uid://ba8igrseium1m" path="res://mats/sounds/фоновая2.mp3" id="5_p6f36"]
 
 [node name="Game" type="Node"]
+script = ExtResource("1_tg1vd")
 
 [node name="cam" type="Camera2D" parent="."]
 
@@ -14,6 +18,7 @@
 cam = NodePath("../../cam")
 
 [node name="ent" type="Node2D" parent="world"]
+process_mode = 1
 y_sort_enabled = true
 
 [node name="enemys" type="Node2D" parent="world/ent"]
@@ -28,5 +33,24 @@ update_scale = false
 
 [node name="cl" type="CanvasLayer" parent="."]
 
-[node name="pause" parent="cl" instance=ExtResource("3_ojpc5")]
+[node name="game_ui" type="Control" parent="cl"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="pause" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
 visible = false
+level_container = NodePath("../../world")
+
+[node name="asp_think" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_25pn6")
+
+[node name="asp_fight" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_p6f36")
+
+[connection signal="location_added" from="cl/pause" to="." method="_on_pause_location_added"]
+[connection signal="finished" from="asp_think" to="." method="start_sound_think"]
+[connection signal="finished" from="asp_fight" to="." method="start_sound_fight"]

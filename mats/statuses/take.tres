@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="status" load_steps=3 format=3 uid="uid://bquw0as0hpq63"]
+
+[ext_resource type="Texture2D" uid="uid://d4fx7moiwyh3r" path="res://mats/imgs/icons/skills/take.png" id="1_tdoj1"]
+[ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="2_lngpv"]
+
+[resource]
+script = ExtResource("2_lngpv")
+name = "CCOLLECTING"
+image = ExtResource("1_tdoj1")

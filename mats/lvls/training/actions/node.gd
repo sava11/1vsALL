@@ -1,1 +1,0 @@
-class_name empty_node extends Resource

@@ -35,7 +35,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$buy.disabled=!fnc.get_hero().money>=value
+	$buy.disabled=!gm.player_data.other.money>=value
 	
 	pass
 
@@ -50,7 +50,7 @@ func _on_vs_value_changed(value):
 
 
 func _on_button_down():
-	fnc.get_hero().money-=value
+	gm.player_data.other.money-=value
 	fnc.get_hero().add_stats=stats
 	fnc.get_hero().merge_stats()
 	get_parent().get_parent().get_parent().upd_stats()

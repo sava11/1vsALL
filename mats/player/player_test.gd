@@ -115,9 +115,10 @@ func get_ang_move(angle:float,ex:float):
 var anim_finish:bool=false
 func _ready():
 	connect("lvl_up",Callable(get_tree().current_scene,"add_to_lvl_queue"))
-	cd=gm.objs["player"].duplicate()
-	cd.stats=gm.objs["player"].stats.duplicate()
-	cd.prefs=gm.objs["player"].prefs.duplicate()
+	cd=gm.player_data
+	#cd=gm.objs["player"].duplicate()
+	#cd.stats=gm.objs["player"].stats.duplicate()
+	#cd.prefs=gm.objs["player"].prefs.duplicate()
 	current_stamina=cd.stats["max_stamina"]
 	roll_timer=cd.prefs["roll_timer"]
 	#var roll_t=$ap.get_animation("roll_up").length/roll_timer
