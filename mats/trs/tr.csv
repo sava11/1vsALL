@@ -23,7 +23,7 @@ BACK_TO_TILTE,to main menu,вернуться в главное меню
 RUN_END_TIME,run time,время забега
 RUN_END_LVL,level in run,уровень в забеге
 END_RUN_ARENAS,complited arenas,пройдено арен
-
+TIME_TO_SURVIVE,Survive,Выжить
 HP,health points (HP),жизненная сила (ЖЗ)
 HP_REGEN,heals HP per second,лечение ЖЗ за секунду
 DMG,attack damage, уронон атаки
