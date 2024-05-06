@@ -9,6 +9,7 @@ var cur_loc:level_template
 var item_rare:float=0
 signal in_shop()
 signal location_added(n:level_template)
+signal place_completed()
 func save_data():
 	return {
 		"cur_pos":str(current_pos.get_path())
@@ -48,10 +49,12 @@ func _process(delta):
 			cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
 
 
-func level_completed(r:bool,cur_map_step):
-	gm.game_prefs.dif+=cur_map_step+global_difficulty_add_step*int(cur_map_step==0)
+func level_completed(n:place):
+	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
 	if gm.game_prefs.dif<0.5:
 		gm.game_prefs.dif=0.5
+	n.runned=true
+	emit_signal("place_completed")
 
 func dijkstra(s: int, t: int):
 	var inf =99999999999999999

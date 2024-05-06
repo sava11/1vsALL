@@ -213,6 +213,7 @@ process_mode = 3
 stream = ExtResource("5_p6f36")
 
 [connection signal="location_added" from="cl/pause" to="." method="_on_pause_location_added"]
+[connection signal="place_completed" from="cl/pause" to="." method="_on_place_completed"]
 [connection signal="finished" from="asp_think" to="." method="start_sound_think"]
 [connection signal="finished" from="asp_fight" to="." method="start_sound_fight"]
 

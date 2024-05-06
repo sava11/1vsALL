@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=42 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -8,11 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://d2iylodnns5c3" path="res://mats/UI/new_map/place/place_item_panel.tscn" id="6_o66ik"]
 [ext_resource type="Script" path="res://mats/statuses/scripts/ingame_status.gd" id="6_rde3b"]
 [ext_resource type="Texture2D" uid="uid://bq5s0f6ckf87k" path="res://mats/imgs/icons/skills/att.png" id="7_5tpil"]
-[ext_resource type="Script" path="res://mats/UI/new_map/actions/sub/summon_boss_data.gd" id="8_n8grr"]
 [ext_resource type="Texture2D" uid="uid://r3ay7qpv6g4x" path="res://mats/imgs/icons/skills/rolls.png" id="8_si7vb"]
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/sub/summon_enemys_data.gd" id="9_l0upw"]
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/arena.gd" id="10_emt1y"]
-[ext_resource type="Script" path="res://mats/UI/new_map/actions/shop/shop.gd" id="10_idmml"]
 [ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="10_kdwc0"]
 [ext_resource type="Resource" uid="uid://bcfdokfrcmlxu" path="res://mats/statuses/hp.tres" id="14_ho0hg"]
 [ext_resource type="Resource" uid="uid://btrqjcsptp4ff" path="res://mats/statuses/def.tres" id="15_53xg0"]
@@ -20,28 +18,10 @@
 [ext_resource type="Resource" uid="uid://dboror3nrebko" path="res://mats/statuses/crit_dmg.tres" id="16_3ascn"]
 [ext_resource type="Resource" uid="uid://dgyw2qyns3guo" path="res://mats/statuses/%crit_dmg.tres" id="17_1fanq"]
 [ext_resource type="Resource" uid="uid://bquw0as0hpq63" path="res://mats/statuses/take.tres" id="18_gglgd"]
-[ext_resource type="PackedScene" uid="uid://d0igc80flvs2u" path="res://mats/enemys/e1/enemy.tscn" id="18_mngvm"]
 [ext_resource type="Resource" uid="uid://4t5s26aq3412" path="res://mats/statuses/stamina_regen.tres" id="19_cyscp"]
 [ext_resource type="Resource" uid="uid://co5662aeufqag" path="res://mats/statuses/max_stamina.tres" id="20_ok0tt"]
 [ext_resource type="Resource" uid="uid://b22qalhp36kal" path="res://mats/statuses/hp_regeneration.tres" id="21_vxaej"]
 [ext_resource type="Resource" uid="uid://bhpfpv5atn5eg" path="res://mats/statuses/speed.tres" id="22_62275"]
-
-[sub_resource type="Resource" id="Resource_uj13p"]
-script = ExtResource("8_n8grr")
-boss_name = ""
-percent = 0.0
-count = 1
-
-[sub_resource type="Resource" id="Resource_m5inl"]
-script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_uj13p")])
-
-[sub_resource type="Resource" id="Resource_upnw3"]
-script = ExtResource("10_idmml")
-items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
-count_min = 4
-count_max = 4
-rarity = 0.0
 
 [sub_resource type="Resource" id="Resource_gkpp6"]
 script = ExtResource("5_gf3tx")
@@ -65,24 +45,6 @@ editable_status = SubResource("Resource_pf6fx")
 value = 0.1
 value_suffix = ""
 
-[sub_resource type="Resource" id="Resource_fxubq"]
-script = ExtResource("10_idmml")
-items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
-count_min = 4
-count_max = 4
-rarity = 0.0
-
-[sub_resource type="Resource" id="Resource_rw3br"]
-script = ExtResource("9_l0upw")
-enemy_name = ""
-percent = 0.0
-count_min = 1
-count_max = 1
-
-[sub_resource type="Resource" id="Resource_425m0"]
-script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_rw3br")])
-
 [sub_resource type="Resource" id="Resource_nfw7t"]
 script = ExtResource("5_gf3tx")
 name = "CHP"
@@ -105,17 +67,19 @@ editable_status = SubResource("Resource_0yfuu")
 value = 0.5
 value_suffix = ""
 
-[sub_resource type="Resource" id="Resource_lqv07"]
+[sub_resource type="Resource" id="Resource_tdgoh"]
 script = ExtResource("9_l0upw")
 enemy_name = "sk"
-enemy = ExtResource("18_mngvm")
+enemy = "res://mats/enemys/e1/enemy.tscn"
 percent = 0.5
-count_min = 1
-count_max = 1
 
-[sub_resource type="Resource" id="Resource_mhd38"]
+[sub_resource type="Resource" id="Resource_ohbl0"]
 script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_lqv07")])
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_tdgoh")])
+enemys_count_min = 1
+enemys_count_max = 8
+time_to_next_enemy_wave_min = 10
+time_to_next_enemy_wave_max = 10
 
 [sub_resource type="Resource" id="Resource_bim0u"]
 script = ExtResource("6_rde3b")
@@ -140,17 +104,6 @@ script = ExtResource("6_rde3b")
 editable_status = ExtResource("17_1fanq")
 value = 0.0
 value_suffix = ""
-
-[sub_resource type="Resource" id="Resource_lj1vx"]
-script = ExtResource("9_l0upw")
-enemy_name = ""
-percent = 0.0
-count_min = 1
-count_max = 1
-
-[sub_resource type="Resource" id="Resource_e72k1"]
-script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_lj1vx")])
 
 [sub_resource type="Resource" id="Resource_a2neo"]
 script = ExtResource("6_rde3b")
@@ -220,7 +173,6 @@ offset_top = 272.0
 offset_right = 272.0
 offset_bottom = 288.0
 level_time = 0.0
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_m5inl"), SubResource("Resource_upnw3")])
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
 neighbors = [NodePath("../place3")]
 place_panel_node = NodePath("../../../Panel_statuses")
@@ -231,7 +183,6 @@ offset_top = 240.0
 offset_right = 304.0
 offset_bottom = 256.0
 level_time = 0.0
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_fxubq")])
 neighbors = [NodePath("../place6"), NodePath("../place3")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -242,7 +193,6 @@ offset_right = 272.0
 offset_bottom = 256.0
 level = ExtResource("10_kdwc0")
 level_time = 15.0
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_425m0")])
 neighbors = [NodePath("../place"), NodePath("../place2"), NodePath("../place4")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -271,8 +221,7 @@ offset_top = 208.0
 offset_right = 272.0
 offset_bottom = 224.0
 level = ExtResource("10_kdwc0")
-level_time = 15.0
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_mhd38")])
+arena = SubResource("Resource_ohbl0")
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_bim0u"), SubResource("Resource_3ogom"), SubResource("Resource_hbyun"), SubResource("Resource_ywhdx")])
 neighbors = [NodePath("../place9"), NodePath("../place2"), NodePath("../place10")]
 place_panel_node = NodePath("../../../Panel_statuses")
@@ -283,7 +232,6 @@ offset_top = 208.0
 offset_right = 304.0
 offset_bottom = 224.0
 level_time = 0.0
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_e72k1")])
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_a2neo"), SubResource("Resource_h6g4g"), SubResource("Resource_651ti"), SubResource("Resource_efnvl"), SubResource("Resource_3w10r")])
 neighbors = [NodePath("../place10")]
 place_panel_node = NodePath("../../../Panel_statuses")

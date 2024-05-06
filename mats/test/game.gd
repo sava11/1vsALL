@@ -13,10 +13,12 @@ func _process(delta):
 	$cl/game_ui/status/stamina/value/cur.text=str(snapped($cl/game_ui/status/stamina.value,0.01))
 	$cl/game_ui/status/stamina/value/max.text=str(snapped($cl/game_ui/status/stamina.max_value,0.01))
 	$cl/game_ui/status/money.text=str(gm.player_data.prefs.money)
-	if (wrld.get_child(0) is level_template) and wrld.get_child(0).has_node("Timer"):
-		$cl/game_ui/status/time_cont/time.text=str(snapped(wrld.get_child(0).get_node("Timer").time_left,1))
-
-
+	if (wrld.get_child(0) is level_template) and wrld.get_child(0).get("timer")!=null:
+		if !$cl/game_ui/status/time_cont/time.visible:
+			$cl/game_ui/status/time_cont/time.show()
+		$cl/game_ui/status/time_cont/time.text=str(snapped(wrld.get_child(0).get("timer").time_left+1,1))
+	else:
+		$cl/game_ui/status/time_cont/time.hide()
 
 func show_lvls(b:bool=true):
 	if b==true:
@@ -40,6 +42,13 @@ func start_sound_think():
 	$asp_think.play()
 func stop_sound_think():
 	$asp_think.stop()
+func _on_place_completed():
+	if $world.get_child(0) is level_template:
+		$world.get_child(0).queue_free()
+	show_lvls()
+
+
 func _on_pause_location_added(n):
-	if $world.get_child(0) is level_template:$world.get_child(0).queue_free()
+	if $world.get_child(0) is level_template:
+		$world.get_child(0).queue_free()
 	show_lvls(false)

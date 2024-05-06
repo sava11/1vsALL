@@ -1,27 +1,27 @@
 class_name level_template extends Node2D
 @export var time:float
 @export var cam:Camera2D
-@export var enemys_data:Array[empty_entety_data]
+@export var enemys_data:arena_action
 var rsize:Vector2
 var rpos:Vector2
 var timer:Timer
-var ememys_path:Node
-signal completed(res:bool)
+var enemy_path=null
+signal completed()
 func start_timer():
 	timer=Timer.new()
 	timer.wait_time=time
 	timer.name="Timer"
+	timer.timeout.connect(Callable(self,"emit_signal").bind("completed"))
 	add_child(timer)
 	timer.start()
 func _ready():
-	if ememys_path!=null:
-		ememys_path=get_node("../ent/ememys")
+	if enemy_path==null:
+		enemy_path=get_node("../ent/ememys")
 	rsize=$arena_brd.size
 	rpos=$arena_brd.global_position
 	var cm_brd=$cam_brd
 	var cam_scale:float=fnc.get_prkt_win().x/cm_brd.size.x
 	if cam!=null:
-		timer.timeout.connect(Callable(self,"emit_signal").bind("completed",true))
 		if time>0:
 			start_timer()
 		if cam_scale>1.25:
@@ -31,6 +31,15 @@ func _ready():
 		cam.limit_bottom=cm_brd.position.y+cm_brd.size.y
 		cam.limit_right=cm_brd.position.x+cm_brd.size.x
 		fnc.get_hero().global_position=$pos.global_position
+var enemy_spawn_timer_temp:float=0
+var next_enemy_spawn_timer_temp:float=0
+func _physics_process(delta):
+	if enemys_data!=null:
+		enemy_spawn_timer_temp+=delta
+		if next_enemy_spawn_timer_temp<=enemy_spawn_timer_temp:
+			next_enemy_spawn_timer_temp=fnc.rnd.randi_range(enemys_data.time_to_next_enemy_wave_min,enemys_data.time_to_next_enemy_wave_max)
+			summon()
+			enemy_spawn_timer_temp=0
 
 func get_rand_pos():
 	var c:NavigationMesh=$nav.navigation_polygon.get_navigation_mesh()
@@ -86,24 +95,23 @@ func get_rand_pos():
 		#ememys_path.add_child(en)
 
 func summon(enemys_count=0):
-	for en in enemys_data:
-		if en is enemy_data:
-			if enemys_count==0:
-				enemys_count=randi_range(en.count_min,en.count_max)
-			
-			for ec in range(enemys_count):
-				if fnc._with_chance(en.percent):
-					var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
-					e.load_scene=en.enemy.instantiate()
-					var pos=get_rand_pos()
-					e.scene_data={
-						"global_position":pos,
-						"dif":gm.game_prefs.dif,
-						"elite":fnc._with_chance(gm.game_prefs.elite_chance)
-						}
-					#e.target_path=fnc.get_hero().get_path()
-					ememys_path.add_child(e)
-					e.global_position=pos
+	var items=enemys_data.get_summon_percents()
+	var local_percents=[]
+	for e in items.keys():
+		local_percents.append(items[e])
+	if enemys_count==0:enemys_count=fnc.rnd.randi_range(enemys_data.enemys_count_min,enemys_data.enemys_count_max)
+	for ec in range(enemys_count):
+		var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+		e.load_scene=load(enemys_data.enemys[items[fnc._with_chance_ulti(local_percents)]].enemy)
+		var pos=get_rand_pos()
+		e.scene_data={
+			"global_position":pos,
+			"dif":gm.game_prefs.dif,
+			"elite":fnc._with_chance(gm.game_prefs.elite_chance)
+			}
+		#e.target_path=fnc.get_hero().get_path()
+		enemy_path.add_child(e)
+		e.global_position=pos
 #func _on_enemy_summon_timer_timeout():
 	#if summoning:
 		#summon()
