@@ -386,8 +386,8 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 20400.0
-offset_right = 20560.0
+offset_left = 20720.0
+offset_right = 20880.0
 offset_bottom = 760.0
 grow_horizontal = 2
 
