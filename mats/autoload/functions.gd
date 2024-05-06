@@ -80,9 +80,7 @@ func get_ang_move(angle:float,ex:float):
 func _with_dific(v:float,dific:float):
 	return v+v*dific
 func _with_chance(chance:float):
-	if rnd.randf_range(0,1)>1-chance:
-		return true
-	return false
+	return rnd.randf_range(0,1)>1-chance
 func _with_chance_custom_values(chance:float,Tvalue,Fvalue):
 	if rnd.randf_range(0,1)>1-chance:
 		return Tvalue

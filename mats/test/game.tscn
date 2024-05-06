@@ -1,18 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://75sadqvlf16"]
+[gd_scene load_steps=19 format=3 uid="uid://75sadqvlf16"]
 
 [ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="1_nqn2u"]
 [ext_resource type="Script" path="res://mats/test/game.gd" id="1_tg1vd"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="2_37cv4"]
 [ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/new_map/map.tscn" id="3_ojpc5"]
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="4_ukj6c"]
 [ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="5_25pn6"]
+[ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="5_661l0"]
 [ext_resource type="AudioStream" uid="uid://ba8igrseium1m" path="res://mats/sounds/фоновая2.mp3" id="5_p6f36"]
+[ext_resource type="Texture2D" uid="uid://cvognw0q4medm" path="res://mats/imgs/warrior/hpbar_ico.png" id="6_p1lrm"]
+[ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="7_k67qa"]
+[ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="8_i041s"]
+[ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="9_lfoli"]
+[ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="11_stwkl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mhrv6"]
+font_color = Color(0.756863, 0.121569, 0.0862745, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dpvin"]
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wjaj"]
+font_color = Color(0.541176, 0.541176, 0.219608, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yof6w"]
+font_color = Color(0.643137, 0.647059, 0.317647, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cj41k"]
+font_color = Color(1, 0.866667, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [node name="Game" type="Node"]
 script = ExtResource("1_tg1vd")
 
 [node name="cam" type="Camera2D" parent="."]
+zoom = Vector2(1.25, 1.25)
 
 [node name="world" type="Node2D" parent="."]
+visible = false
 
 [node name="lvl" parent="world" node_paths=PackedStringArray("cam") instance=ExtResource("1_nqn2u")]
 cam = NodePath("../../cam")
@@ -35,9 +62,143 @@ update_scale = false
 
 [node name="game_ui" type="Control" parent="cl"]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_ukj6c")
+
+[node name="status" type="Control" parent="cl/game_ui"]
+layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 106.0
+offset_bottom = 50.0
+
+[node name="BarIco" type="Sprite2D" parent="cl/game_ui/status"]
+texture = ExtResource("5_661l0")
+centered = false
+
+[node name="hp" type="TextureProgressBar" parent="cl/game_ui/status"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 5.0
+offset_right = 104.0
+offset_bottom = 19.0
+step = 0.001
+value = 100.0
+texture_under = ExtResource("6_p1lrm")
+texture_progress = ExtResource("7_k67qa")
+texture_progress_offset = Vector2(4, 3)
+
+[node name="value" type="HBoxContainer" parent="cl/game_ui/status/hp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.024
+anchor_right = 1.024
+anchor_bottom = 1.071
+offset_left = 0.031996
+offset_right = 20.032
+offset_bottom = 0.00599861
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="cur" type="Label" parent="cl/game_ui/status/hp/value"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+label_settings = SubResource("LabelSettings_mhrv6")
+
+[node name="sep" type="Label" parent="cl/game_ui/status/hp/value"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/"
+horizontal_alignment = 1
+
+[node name="max" type="Label" parent="cl/game_ui/status/hp/value"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+label_settings = SubResource("LabelSettings_dpvin")
+
+[node name="stamina" type="TextureProgressBar" parent="cl/game_ui/status"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 19.0
+offset_right = 88.0
+offset_bottom = 29.0
+step = 0.001
+value = 100.0
+texture_under = ExtResource("8_i041s")
+texture_progress = ExtResource("9_lfoli")
+texture_progress_offset = Vector2(3, 2)
+
+[node name="value" type="HBoxContainer" parent="cl/game_ui/status/stamina"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.024
+anchor_right = 1.024
+anchor_bottom = 1.071
+offset_left = 16.536
+offset_top = -2.0
+offset_right = 36.536
+offset_bottom = 2.29
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="cur" type="Label" parent="cl/game_ui/status/stamina/value"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+label_settings = SubResource("LabelSettings_3wjaj")
+
+[node name="sep" type="Label" parent="cl/game_ui/status/stamina/value"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/"
+horizontal_alignment = 1
+
+[node name="max" type="Label" parent="cl/game_ui/status/stamina/value"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+label_settings = SubResource("LabelSettings_yof6w")
+
+[node name="money" type="Label" parent="cl/game_ui/status"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 30.0
+offset_right = 103.0
+offset_bottom = 45.0
+text = "99"
+label_settings = SubResource("LabelSettings_cj41k")
+
+[node name="money_img" type="Sprite2D" parent="cl/game_ui/status"]
+position = Vector2(28, 31)
+texture = ExtResource("11_stwkl")
+centered = false
+
+[node name="time_cont" type="HBoxContainer" parent="cl/game_ui/status"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 46.0
+offset_right = 142.0
+offset_bottom = 62.0
+theme_override_constants/separation = 2
+
+[node name="time_lbl" type="Label" parent="cl/game_ui/status/time_cont"]
+layout_mode = 2
+text = "TIME_TO_SURVIVE"
+
+[node name="sep" type="Label" parent="cl/game_ui/status/time_cont"]
+layout_mode = 2
+text = ":"
+
+[node name="time" type="Label" parent="cl/game_ui/status/time_cont"]
+layout_mode = 2
+text = "12"
 
 [node name="pause" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
 visible = false
@@ -54,3 +215,5 @@ stream = ExtResource("5_p6f36")
 [connection signal="location_added" from="cl/pause" to="." method="_on_pause_location_added"]
 [connection signal="finished" from="asp_think" to="." method="start_sound_think"]
 [connection signal="finished" from="asp_fight" to="." method="start_sound_fight"]
+
+[editable path="world/ent/player"]

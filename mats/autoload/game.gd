@@ -435,11 +435,8 @@ var game_stats={
 #var cur_gm_stats={}
 var player_data={
 	"fighting":false,
-	"other":{
-		"money":0.
-	},
 	"stats":{
-		"hp":3,
+		"hp":3.0,
 		"hp_rgen":0.1,
 		"max_stamina":1.5,
 		"regen_stamina_point":0.3,
@@ -454,7 +451,9 @@ var player_data={
 		"take_area":10
 		},
 	"prefs":{
-		"cur_hp":3000000,
+		"cur_hp":3000000.0,
+		"cur_stm":3000000.0,
+		"money":0,
 		"do_roll_cost":1,
 		"max_exp_start":40,
 		"max_exp_sc":1,

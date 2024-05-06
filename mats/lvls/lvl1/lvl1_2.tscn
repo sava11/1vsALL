@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbkyx2cqwtfoj"]
+[gd_scene load_steps=7 format=3 uid="uid://bbkyx2cqwtfoj"]
 
 [ext_resource type="TileSet" uid="uid://csc8a81gx41m8" path="res://mats/lvls/sand&rock.tres" id="1_hgsil"]
 [ext_resource type="Script" path="res://mats/lvls/lvl_template.gd" id="1_o2h5b"]
-[ext_resource type="PackedScene" uid="uid://dfe22bmixbbc5" path="res://mats/boxes/custom_dmg_area.tscn" id="5_0o078"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeni"]
 size = Vector2(608, 80)
@@ -71,8 +70,6 @@ shape = SubResource("RectangleShape2D_6ysjg")
 navigation_polygon = SubResource("NavigationPolygon_jxe6f")
 
 [node name="traps" type="Node2D" parent="."]
-
-[node name="custom_dmg_area" parent="traps" instance=ExtResource("5_0o078")]
 
 [node name="pos" type="Marker2D" parent="."]
 position = Vector2(-124, -12)

@@ -1,12 +1,15 @@
 @tool
 class_name place extends Control
+@export_group("level")
+@export var level:PackedScene
+@export var level_time:float=45.0
+@export_group("place")
 @export var runned:bool=false
 @export var local_difficulty_add_step:float=0
 @onready var last_runned=runned
-@export var level:PackedScene
+@export var place_statuses:Array[empty_node]
 @export var ingame_statuses:Array[ingame_status]
 @export var neighbors:Array[place]
-@export var place_statuses:Array[empty_node]
 @export var place_panel_node:Panel
 @export_group("colors")
 @export var original:Color
@@ -83,9 +86,12 @@ func play():
 	if level_container!=null and level!=null:
 		lvl=level.instantiate()
 		lvl.cam=get_tree().current_scene.get_node("cam")
+		lvl.time=level_time
+		lvl.completed.connect(Callable(map,"level_completed").bind(local_difficulty_add_step))
 		map.emit_signal("location_added",lvl)
 		level_container.add_child(lvl)
 		level_container.move_child(lvl,0)
+		
 	else:
 		runned=true
 	cancel()

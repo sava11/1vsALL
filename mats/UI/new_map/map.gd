@@ -46,6 +46,13 @@ func _process(delta):
 				e.get_node("btn").icon=load(gm.images.icons.charters.player)
 		for cur_place in $map/locs.get_children():
 			cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
+
+
+func level_completed(r:bool,cur_map_step):
+	gm.game_prefs.dif+=cur_map_step+global_difficulty_add_step*int(cur_map_step==0)
+	if gm.game_prefs.dif<0.5:
+		gm.game_prefs.dif=0.5
+
 func dijkstra(s: int, t: int):
 	var inf =99999999999999999
 	var visited: Array=[]

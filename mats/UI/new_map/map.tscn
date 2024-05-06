@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=53 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -20,10 +20,28 @@
 [ext_resource type="Resource" uid="uid://dboror3nrebko" path="res://mats/statuses/crit_dmg.tres" id="16_3ascn"]
 [ext_resource type="Resource" uid="uid://dgyw2qyns3guo" path="res://mats/statuses/%crit_dmg.tres" id="17_1fanq"]
 [ext_resource type="Resource" uid="uid://bquw0as0hpq63" path="res://mats/statuses/take.tres" id="18_gglgd"]
+[ext_resource type="PackedScene" uid="uid://d0igc80flvs2u" path="res://mats/enemys/e1/enemy.tscn" id="18_mngvm"]
 [ext_resource type="Resource" uid="uid://4t5s26aq3412" path="res://mats/statuses/stamina_regen.tres" id="19_cyscp"]
 [ext_resource type="Resource" uid="uid://co5662aeufqag" path="res://mats/statuses/max_stamina.tres" id="20_ok0tt"]
 [ext_resource type="Resource" uid="uid://b22qalhp36kal" path="res://mats/statuses/hp_regeneration.tres" id="21_vxaej"]
 [ext_resource type="Resource" uid="uid://bhpfpv5atn5eg" path="res://mats/statuses/speed.tres" id="22_62275"]
+
+[sub_resource type="Resource" id="Resource_uj13p"]
+script = ExtResource("8_n8grr")
+boss_name = ""
+percent = 0.0
+count = 1
+
+[sub_resource type="Resource" id="Resource_m5inl"]
+script = ExtResource("10_emt1y")
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_uj13p")])
+
+[sub_resource type="Resource" id="Resource_upnw3"]
+script = ExtResource("10_idmml")
+items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
 
 [sub_resource type="Resource" id="Resource_gkpp6"]
 script = ExtResource("5_gf3tx")
@@ -46,23 +64,6 @@ script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_pf6fx")
 value = 0.1
 value_suffix = ""
-
-[sub_resource type="Resource" id="Resource_uj13p"]
-script = ExtResource("8_n8grr")
-boss_name = ""
-percent = 0.0
-count = 1
-
-[sub_resource type="Resource" id="Resource_m5inl"]
-script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_uj13p")])
-
-[sub_resource type="Resource" id="Resource_upnw3"]
-script = ExtResource("10_idmml")
-items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
-count_min = 4
-count_max = 4
-rarity = 0.0
 
 [sub_resource type="Resource" id="Resource_fxubq"]
 script = ExtResource("10_idmml")
@@ -104,6 +105,18 @@ editable_status = SubResource("Resource_0yfuu")
 value = 0.5
 value_suffix = ""
 
+[sub_resource type="Resource" id="Resource_lqv07"]
+script = ExtResource("9_l0upw")
+enemy_name = "sk"
+enemy = ExtResource("18_mngvm")
+percent = 0.5
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="Resource_mhd38"]
+script = ExtResource("10_emt1y")
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_lqv07")])
+
 [sub_resource type="Resource" id="Resource_bim0u"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("14_ho0hg")
@@ -128,9 +141,16 @@ editable_status = ExtResource("17_1fanq")
 value = 0.0
 value_suffix = ""
 
-[sub_resource type="Resource" id="Resource_mhd38"]
+[sub_resource type="Resource" id="Resource_lj1vx"]
+script = ExtResource("9_l0upw")
+enemy_name = ""
+percent = 0.0
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="Resource_e72k1"]
 script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([])
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_lj1vx")])
 
 [sub_resource type="Resource" id="Resource_a2neo"]
 script = ExtResource("6_rde3b")
@@ -161,17 +181,6 @@ script = ExtResource("6_rde3b")
 editable_status = ExtResource("22_62275")
 value = 0.0
 value_suffix = ""
-
-[sub_resource type="Resource" id="Resource_lj1vx"]
-script = ExtResource("9_l0upw")
-enemy_name = ""
-percent = 0.0
-count_min = 1
-count_max = 1
-
-[sub_resource type="Resource" id="Resource_e72k1"]
-script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_lj1vx")])
 
 [node name="pause" type="Control" node_paths=PackedStringArray("current_pos")]
 process_mode = 3
@@ -210,9 +219,10 @@ offset_left = 256.0
 offset_top = 272.0
 offset_right = 272.0
 offset_bottom = 288.0
+level_time = 0.0
+place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_m5inl"), SubResource("Resource_upnw3")])
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
 neighbors = [NodePath("../place3")]
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_m5inl"), SubResource("Resource_upnw3")])
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place2" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -220,8 +230,9 @@ offset_left = 288.0
 offset_top = 240.0
 offset_right = 304.0
 offset_bottom = 256.0
-neighbors = [NodePath("../place6"), NodePath("../place3")]
+level_time = 0.0
 place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_fxubq")])
+neighbors = [NodePath("../place6"), NodePath("../place3")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place3" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -230,8 +241,9 @@ offset_top = 240.0
 offset_right = 272.0
 offset_bottom = 256.0
 level = ExtResource("10_kdwc0")
-neighbors = [NodePath("../place"), NodePath("../place2"), NodePath("../place4")]
+level_time = 15.0
 place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_425m0")])
+neighbors = [NodePath("../place"), NodePath("../place2"), NodePath("../place4")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place4" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -239,6 +251,7 @@ offset_left = 224.0
 offset_top = 240.0
 offset_right = 240.0
 offset_bottom = 256.0
+level_time = 0.0
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_fkgsc"), SubResource("Resource_dsfkb")])
 neighbors = [NodePath("../place3"), NodePath("../place5")]
 place_panel_node = NodePath("../../../Panel_statuses")
@@ -248,6 +261,7 @@ offset_left = 224.0
 offset_top = 208.0
 offset_right = 240.0
 offset_bottom = 224.0
+level_time = 0.0
 neighbors = [NodePath("../place8"), NodePath("../place4")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -256,9 +270,11 @@ offset_left = 256.0
 offset_top = 208.0
 offset_right = 272.0
 offset_bottom = 224.0
+level = ExtResource("10_kdwc0")
+level_time = 15.0
+place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_mhd38")])
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_bim0u"), SubResource("Resource_3ogom"), SubResource("Resource_hbyun"), SubResource("Resource_ywhdx")])
 neighbors = [NodePath("../place9"), NodePath("../place2"), NodePath("../place10")]
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_mhd38")])
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place7" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -266,9 +282,10 @@ offset_left = 288.0
 offset_top = 208.0
 offset_right = 304.0
 offset_bottom = 224.0
+level_time = 0.0
+place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_e72k1")])
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_a2neo"), SubResource("Resource_h6g4g"), SubResource("Resource_651ti"), SubResource("Resource_efnvl"), SubResource("Resource_3w10r")])
 neighbors = [NodePath("../place10")]
-place_statuses = Array[Resource("res://mats/UI/new_map/actions/node.gd")]([SubResource("Resource_e72k1")])
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place8" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -276,6 +293,7 @@ offset_left = 224.0
 offset_top = 176.0
 offset_right = 240.0
 offset_bottom = 192.0
+level_time = 0.0
 neighbors = [NodePath("../place9"), NodePath("../place5")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -284,6 +302,7 @@ offset_left = 256.0
 offset_top = 176.0
 offset_right = 272.0
 offset_bottom = 192.0
+level_time = 0.0
 neighbors = [NodePath("../place8"), NodePath("../place6")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -292,6 +311,7 @@ offset_left = 288.0
 offset_top = 176.0
 offset_right = 304.0
 offset_bottom = 192.0
+level_time = 0.0
 neighbors = [NodePath("../place7"), NodePath("../place6"), NodePath("../place11")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -300,6 +320,7 @@ offset_left = 320.0
 offset_top = 176.0
 offset_right = 336.0
 offset_bottom = 192.0
+level_time = 0.0
 neighbors = [NodePath("../place12")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -308,6 +329,7 @@ offset_left = 320.0
 offset_top = 208.0
 offset_right = 336.0
 offset_bottom = 224.0
+level_time = 0.0
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
 neighbors = [NodePath("../place11"), NodePath("../place7")]
 place_panel_node = NodePath("../../../Panel_statuses")
@@ -317,6 +339,7 @@ offset_left = 352.0
 offset_top = 176.0
 offset_right = 368.0
 offset_bottom = 192.0
+level_time = 0.0
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
 neighbors = [NodePath("../place11")]
 place_panel_node = NodePath("../../../Panel_statuses")

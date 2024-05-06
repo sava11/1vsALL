@@ -53,7 +53,6 @@ var attak:bool=false
 #НЕ ЗАБЫВАЙ ПОСЛЕ ОБНОВЛЕНИЯ ВРЕМЕНИ АНИМАЦИИ ОБНАВЛЯТЬ ТАЙМЕРЫ!!!!!!!!!!!!!
 var timer=0
 var roll_timer=0
-var current_stamina=0
 var cd={}
 var add_stats={}
 var money:int=0
@@ -119,7 +118,7 @@ func _ready():
 	#cd=gm.objs["player"].duplicate()
 	#cd.stats=gm.objs["player"].stats.duplicate()
 	#cd.prefs=gm.objs["player"].prefs.duplicate()
-	current_stamina=cd.stats["max_stamina"]
+	cd.prefs["cur_stm"]=cd.stats["max_stamina"]
 	roll_timer=cd.prefs["roll_timer"]
 	#var roll_t=$ap.get_animation("roll_up").length/roll_timer
 	for e in ["roll"]:
@@ -214,21 +213,21 @@ func find_status(_delta:float):
 				state="i"
 		roll=Input.is_action_just_pressed("roll")
 		attak=false
-		if roll and int(current_stamina)>0:
+		if roll and cd.prefs["cur_stm"]>=cd.prefs["do_roll_cost"]:
 			freezed_mvd=last_mvd
 			state="ro"
-			current_stamina-=cd.prefs["do_roll_cost"]
+			cd.prefs["cur_stm"]-=cd.prefs["do_roll_cost"]
 		for e in bs:
 			attak=true
 		if attak and state!="ro":
 			state="a"
 		#print(state)
 		if state=="a":
-			current_stamina=clamp(current_stamina+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
+			cd.prefs["cur_stm"]=clamp(cd.prefs["cur_stm"]+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
 			vec=vec.move_toward(mvd*(cd.stats["run_speed"]*cd.prefs["run_scale"]),_delta*cd.stats["run_speed"]*1000)
 			set_anim(statuses[state])
 		if state=="r":
-			current_stamina=clamp(current_stamina+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
+			cd.prefs["cur_stm"]=clamp(cd.prefs["cur_stm"]+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
 			vec=vec.move_toward(mvd*(cd.stats["run_speed"]*cd.prefs["run_scale"]),_delta*cd.stats["run_speed"]*1000)
 			set_anim(statuses[state])
 		if state=="ro":
@@ -240,7 +239,7 @@ func find_status(_delta:float):
 				state="i"
 			set_anim(statuses[state])
 		if state=="i":
-			current_stamina=clamp(current_stamina+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
+			cd.prefs["cur_stm"]=clamp(cd.prefs["cur_stm"]+_delta*(cd.stats["regen_stamina_point"]),0,cd.stats["max_stamina"])
 			vec=vec.move_toward(mvd*(cd.stats["run_speed"]*cd.prefs["run_scale"]),_delta*cd.stats["run_speed"]*1000)
 			set_anim(statuses[state])
 			vec=Vector2.ZERO
