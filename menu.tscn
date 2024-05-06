@@ -85,6 +85,7 @@ focus_neighbor_bottom = NodePath("../credits")
 text = "SETTINGS"
 
 [node name="credits" type="Button" parent="main_menu/cont/buttons"]
+visible = false
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 focus_neighbor_left = NodePath("../settings")

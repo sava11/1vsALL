@@ -99,23 +99,24 @@ func _ready():
 			show_lvls()
 			$cl/map.upd_b_stats()
 			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
-		if gameplay==gm.gameplay_type.bossrush:pass
-			#summoning=false
-			#dif=0.5
-			#bossrush_update()
-			#connect("end_arena",Callable(self,"bossrush_update"))
-			#end_lvl=len(gm.bossrush)
-		if gameplay==gm.gameplay_type.train:pass
-			#lvl=-1
-			#$cl/map.name="del_map"
-			#$cl/del_map.queue_free()
-			#var m=preload("res://mats/UI/map/training_map.tscn").instantiate()
-			#m.name="map"
-			#$cl.add_child(m)
-			#$cl.move_child(m,1)
-			#$cl/Control/tip.show()
-			#show_lvls()
-			#connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
+		if gameplay==gm.gameplay_type.bossrush:
+			summoning=false
+			dif=0.5
+			connect("end_arena",Callable(self,"bossrush_update"))
+			end_lvl=len(gm.bossrush)
+			bossrush_update()
+		if gameplay==gm.gameplay_type.train:
+			lvl=-1
+			$cl/map.name="del_map"
+			$cl/del_map.queue_free()
+			var m=preload("res://mats/UI/map/training_map.tscn").instantiate()
+			m.name="map"
+			$cl.add_child(m)
+			$cl.move_child(m,1)
+			$cl/Control/tip.show()
+			show_lvls()
+			$cl/map.upd_b_stats()
+			connect("end_arena",Callable(fnc.get_hero(),"merge_stats"))
 			
 				
 	#cur_enemys=gm.maps[lvl].enemys.duplicate()
@@ -138,7 +139,7 @@ func _physics_process(_delta):
 	$cl/Control/status/hp.value=fnc.get_hero().hb.he
 	#$cl/Control/stats/vc/stamina/pg/t.text="\t"+str(snapped(fnc.get_hero().current_stamina,0.01))
 	$cl/Control/status/stamina.max_value=fnc.get_hero().cd.stats.max_stamina
-	$cl/Control/status/stamina.value=fnc.get_hero().current_stamina
+	$cl/Control/status/stamina.value=fnc.get_hero().cd.prefs.cur_stm
 	if int(at.time_left)>0:
 		$cl/Control/time.show()
 		$cl/Control/time.text="time: "+str(int(at.time_left))
