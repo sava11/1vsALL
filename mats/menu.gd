@@ -22,7 +22,6 @@ func _process(delta):
 	#anim_player.play("shake")
 
 func _on_play_button_down():
-	#get_tree().change_scene_to_file("res://gameplay_choice.tscn")
 	var t=preload("res://gameplay_choice.tscn").instantiate()
 	add_child(t)
 	$bg.hide()

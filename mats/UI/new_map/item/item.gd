@@ -1,5 +1,5 @@
 extends HBoxContainer
-@export var only_value:=false
+@export var view:=false
 @onready var img=$img
 @onready var iname=$item_name
 @onready var vle=$value
@@ -8,7 +8,9 @@ extends HBoxContainer
 @export var max_value=0
 @export var value=0
 func _ready():
-	if only_value: iname.hide()
+	if view: 
+		iname.size_flags_horizontal=1
+		img.size_flags_horizontal=2
 func set_image(texture:Texture2D):
 	img.texture=texture
 func set_item_name(value:String="item"):
@@ -20,8 +22,8 @@ func set_value(v:float,prefix:String=""):
 		if v>max_value:
 			v=max_value
 	if prefix=="%":
-		vle.text=str(v)+" "+prefix
-		value=v/100
+		value=v*100
+		vle.text=str(value)+" "+prefix
 	else:
 		vle.text=str(v)+prefix
 		value=v

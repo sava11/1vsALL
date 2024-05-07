@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=43 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -26,46 +26,50 @@
 [sub_resource type="Resource" id="Resource_gkpp6"]
 script = ExtResource("5_gf3tx")
 name = "CHP"
+translation_name = ""
+suffix = ""
 image = ExtResource("4_tkcb6")
 
 [sub_resource type="Resource" id="Resource_4hf1g"]
 script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_gkpp6")
 value = 1.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_pf6fx"]
 script = ExtResource("5_gf3tx")
 name = "CDMG"
+translation_name = ""
+suffix = ""
 image = ExtResource("7_5tpil")
 
 [sub_resource type="Resource" id="Resource_nuuq7"]
 script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_pf6fx")
 value = 0.1
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_nfw7t"]
 script = ExtResource("5_gf3tx")
 name = "CHP"
+translation_name = ""
+suffix = ""
 image = ExtResource("4_tkcb6")
 
 [sub_resource type="Resource" id="Resource_fkgsc"]
 script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_nfw7t")
 value = -1.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_0yfuu"]
 script = ExtResource("5_gf3tx")
 name = ""
+translation_name = ""
+suffix = ""
 image = ExtResource("8_si7vb")
 
 [sub_resource type="Resource" id="Resource_dsfkb"]
 script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_0yfuu")
 value = 0.5
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_tdgoh"]
 script = ExtResource("9_l0upw")
@@ -85,55 +89,51 @@ time_to_next_enemy_wave_max = 10
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("14_ho0hg")
 value = -1.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_3ogom"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("15_53xg0")
 value = 0.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_hbyun"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("16_3ascn")
 value = 0.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_ywhdx"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("17_1fanq")
 value = 0.0
-value_suffix = ""
+
+[sub_resource type="Resource" id="Resource_4m35i"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("21_vxaej")
+value = 0.0
 
 [sub_resource type="Resource" id="Resource_a2neo"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("18_gglgd")
 value = 1.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_h6g4g"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("19_cyscp")
 value = 0.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_651ti"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("20_ok0tt")
 value = 0.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_efnvl"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("21_vxaej")
 value = 0.0
-value_suffix = ""
 
 [sub_resource type="Resource" id="Resource_3w10r"]
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("22_62275")
 value = 0.0
-value_suffix = ""
 
 [node name="pause" type="Control" node_paths=PackedStringArray("current_pos")]
 process_mode = 3
@@ -153,7 +153,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -512.0
+offset_left = -480.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_gyvyj")
@@ -222,7 +222,7 @@ offset_right = 272.0
 offset_bottom = 224.0
 level = ExtResource("10_kdwc0")
 arena = SubResource("Resource_ohbl0")
-ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_bim0u"), SubResource("Resource_3ogom"), SubResource("Resource_hbyun"), SubResource("Resource_ywhdx")])
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_bim0u"), SubResource("Resource_3ogom"), SubResource("Resource_hbyun"), SubResource("Resource_ywhdx"), SubResource("Resource_4m35i")])
 neighbors = [NodePath("../place9"), NodePath("../place2"), NodePath("../place10")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
@@ -299,7 +299,7 @@ layout_mode = 0
 
 [node name="stats" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 128.0
+offset_right = 160.0
 offset_bottom = 320.0
 
 [node name="cont" type="VBoxContainer" parent="stats"]

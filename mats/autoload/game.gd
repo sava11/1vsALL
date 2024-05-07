@@ -443,10 +443,10 @@ var game_stats={
 }
 #var cur_gm_stats={}
 var player_data={
-	"in_action":false,
+	"in_action":"",
 	"stats":{
 		"hp":3.0,
-		"hp_rgen":0.1,
+		"hp_regen":0.1,
 		"max_stamina":1.5,
 		"regen_stamina_point":0.3,
 		"def":1.2,
@@ -488,6 +488,9 @@ func save_data():
 func load_data(n:Dictionary):
 	player_data=n.player_data
 	game_prefs=n.game_prefs
+	if player_data.in_action!="":
+		print(player_data.in_action)
+		get_node(player_data.in_action).play()
 
 func _ready():
 	connect("save_data_changed",Callable(gm,"_save_node"))
@@ -510,7 +513,7 @@ func upd_objs():
 			"name":"Warrior",
 			"stats":{
 				"hp":3,
-				"hp_rgen":0.1,
+				"hp_regen":0.1,
 				"max_stamina":1.5,
 				"regen_stamina_point":0.3,
 				"def":1.2,
@@ -602,7 +605,7 @@ func upd_objs():
 			"ct":tr("CHP"),
 			"price":3.5
 			},
-		"hp_rgen":{
+		"hp_regen":{
 			"v":{
 				0:{"v":{"x":0.001,"y":0.005},"%":0.5,},
 				1:{"v":{"x":0.005,"y":0.008},"%":0.35,},

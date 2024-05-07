@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("2_r7ptr")
-name = "CSTAMINA_REGEN_VALUE"
+name = "regen_stamina_point"
+translation_name = "CSTAMINA_REGEN_VALUE"
 image = ExtResource("1_0pqy4")

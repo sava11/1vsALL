@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("2_q3w15")
-name = "CHP"
+name = "hp"
+translation_name = "CHP"
 image = ExtResource("1_eoo32")

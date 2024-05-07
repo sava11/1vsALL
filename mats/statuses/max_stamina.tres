@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("2_31h8i")
-name = "CMAX_STAMINA_VALUE"
+name = "max_stamina"
+translation_name = "CMAX_STAMINA_VALUE"
 image = ExtResource("1_x1yhn")

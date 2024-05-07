@@ -5,6 +5,7 @@ extends Control
 @export var global_difficulty_add_step:float=0
 @onready var shop=$shop/shop
 @onready var map=$map/locs
+@onready var stat_cont=$stats/cont/ScrollContainer/item_cont
 var cur_loc:level_template
 var item_rare:float=0
 signal in_shop()
@@ -50,7 +51,21 @@ func _ready():
 								gm.save_file_data()).bind(e)
 					)
 				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):return x.runned))
-		
+		var mny=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
+		stat_cont.add_child(mny)
+		mny.set_image(load(gm.images.icons.other.money))
+		mny.set_item_name(tr("MONEY"))
+		mny.set_value(gm.player_data.prefs.money)
+		var stats_keys=gm.player_data.stats.keys()
+		for e in DirAccess.get_files_at("res://mats/statuses"):
+			var res:status=load("res://mats/statuses/"+e)
+			var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
+			stat_cont.add_child(item)
+			item.set_image(res.image)
+			item.set_item_name(tr(res.translation_name))
+			item.set_value(gm.player_data.stats[res.name],res.suffix)
+			stat_cont.move_child(item,stats_keys.find(res.name))
+		stat_cont.move_child(mny,0)
 func _process(delta):
 	if !Engine.is_editor_hint():
 		for e in map.get_children():
@@ -67,6 +82,15 @@ func level_completed(n:place):
 	if gm.game_prefs.dif<0.5:
 		gm.game_prefs.dif=0.5
 	n.runned=true
+	for e in n.ingame_statuses:
+		fnc.get_hero().add_stats.merge({e.editable_status.name:e.value})
+		for i in stat_cont.get_children():
+			if i.get_node("item_name").text==tr(e.editable_status.translation_name):
+				i.set_value(e.value,e.editable_status.suffix)
+	gm.player_data.in_action=""
+	current_pos=n
+	fnc.get_hero().merge_stats()
+	gm.save_file_data()
 	emit_signal("place_completed")
 
 func dijkstra(s: int, t: int):

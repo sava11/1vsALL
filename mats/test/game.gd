@@ -45,6 +45,8 @@ func stop_sound_think():
 func _on_place_completed():
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
+	gm.player_data.in_action=""
+	gm.save_file_data()
 	show_lvls()
 
 

@@ -55,7 +55,7 @@ var timer=0
 var roll_timer=0
 var cd={}
 var add_stats={}
-var money:int=0
+
 var exp:int=0
 var lvl:int=0
 # Called when the node enters the scene tree for the first time.
@@ -179,7 +179,7 @@ func pre_status(_delta):
 	$get_money_area/c.shape.radius=cd.stats.take_area
 	if state!="d":
 		if hb.m_he>hb.he:
-			hb.set_he(hb.he+cd.stats["hp_rgen"]*_delta)
+			hb.set_he(hb.he+cd.stats["hp_regen"]*_delta)
 		if exp >= cd.prefs["max_exp_start"]:
 			lvl+=1
 			exp-=cd.prefs["max_exp_start"]
@@ -245,9 +245,8 @@ func find_status(_delta:float):
 			vec=Vector2.ZERO
 		new_dos(_delta)
 	else:
-		if anim_finish==false:
-			set_anim(statuses[state])
-			vec=Vector2.ZERO
+		set_anim(statuses[state])
+		vec=Vector2.ZERO
 func new_dos(_delta:float):
 	pass
 
@@ -282,7 +281,7 @@ func _on_hurt_box_no_he():
 
 func _on_get_money_area_area_entered(area):
 	if area.type==0:
-		money+=area.value
+		gm.player_data.prefs.money+=area.value
 	if area.type==1:
 		exp+=area.value
 	area.queue_free()

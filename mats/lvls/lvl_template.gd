@@ -20,13 +20,12 @@ func _ready():
 			enemy_path=get_node("../ent/enemys")
 		
 		timer=Timer.new()
-		timer.wait_time=time
 		timer.name="Timer"
 		timer.one_shot=true
 		timer.timeout.connect(Callable(self,"emit_signal").bind("completed"))
 		add_child(timer)
 		if time>0:
-			timer.start()
+			start_timer(time)
 		if cam_scale>1.25:
 			cam.zoom=Vector2(cam_scale,cam_scale)
 		cam.limit_left=cm_brd.position.x

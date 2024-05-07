@@ -70,7 +70,7 @@ func _on_button_down():
 			if place_panel_node.visible and !runned:
 				place_panel_node.global_position=p_pos
 				for e in ingame_statuses:
-					place_panel_node.add_item(e.editable_status.image,e.editable_status.name,e.value,e.value_suffix)
+					place_panel_node.add_item(e.editable_status.image,e.editable_status.translation_name,e.value,e.editable_status.suffix)
 				place_panel_node.connect_to(self,"play","cancel")
 			else:
 				if place_panel_node.visible:
@@ -100,12 +100,12 @@ func play():
 		lvl.cam=get_tree().current_scene.get_node("cam")
 		lvl.time=level_time
 		lvl.enemys_data=arena
-		gm.player_data.in_action=true
 		lvl.enemy_path=get_tree().current_scene.enemy_path
 		lvl.completed.connect(Callable(map,"level_completed").bind(self))
 		map.emit_signal("location_added",lvl)
 		level_container.add_child(lvl)
 		level_container.move_child(lvl,0)
+		gm.player_data.in_action=str(get_path())
 		gm.save_file_data()
 		
 	else:
@@ -117,3 +117,4 @@ func cancel():
 func shop_cancel():
 	place_panel_node.disconnect_from(self,"to_shop","shop_cancel")
 	place_panel_node.hide()
+
