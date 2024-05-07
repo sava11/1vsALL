@@ -52,3 +52,9 @@ func get_summon_names()->PackedFloat32Array:
 	for e in enemys:
 		names.append(e.enemy_name)
 	return names
+func get_bosses()->Array[boss_data]:
+	var ens:Array[boss_data] = []
+	for en in enemys:
+		if en is boss_data:
+			ens.append(en)
+	return ens

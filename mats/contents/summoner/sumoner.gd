@@ -2,7 +2,7 @@ extends Sprite2D
 @export var time_curve:Curve
 @export_range(0.0,99999.0) var time:float
 @export var load_scene:PackedScene
-@export var scene_params:Dictionary={}
+@export var scene_data:Dictionary={}
 var st=0
 func _ready():
 	pass # Replace with function body.
@@ -16,11 +16,11 @@ func _process(delta):
 		st+=delta
 		self_modulate.a=time_curve.sample_baked(st/time)
 	else:
-		var itm=load_scene.instantiate()
-		itm.set_deferred("global_position",global_position)
-		for e in scene_params.keys():
-			if itm.get(e)!=null:
-				itm.set(e,scene_params[e])
-		get_parent().add_child(itm)
+		if load_scene!=null:
+			var itm=load_scene.instantiate()
+			itm.set_deferred("global_position",global_position)
+			fnc.setter(itm,scene_data)
+			
+			get_parent().add_child(itm)
 		queue_free()
 	pass

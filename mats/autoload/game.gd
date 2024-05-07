@@ -465,6 +465,7 @@ var player_data={
 var game_prefs={
 	"dif":0,
 	"elite_chance":0.01,
+	"boss_elite_chance":0.01,
 }
 func save_data():
 	return player_data

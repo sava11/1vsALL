@@ -209,7 +209,7 @@ func bossrush_update():
 		emit_signal("game_end")
 func boss_summon():
 	for e in cur_boss.keys():
-		var en=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+		var en=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 		en.load_scene=load(gm.bosses[cur_boss[e].name].s)
 		var x=0
 		var y=0
@@ -236,7 +236,7 @@ func summon(enemys_count=0):
 	if enemys_count==0:enemys_count=randi_range(enemys_count_from,enemys_count_to)
 	
 	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+		var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 		var ens=cur_enemys.duplicate()
 		var itms_v=[]
 		var itms=[]

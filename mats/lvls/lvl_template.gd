@@ -31,6 +31,7 @@ func _ready():
 		cam.limit_bottom=cm_brd.position.y+cm_brd.size.y
 		cam.limit_right=cm_brd.position.x+cm_brd.size.x
 		fnc.get_hero().global_position=$pos.global_position
+	summon_bosses()
 var enemy_spawn_timer_temp:float=0
 var next_enemy_spawn_timer_temp:float=0
 func _physics_process(delta):
@@ -93,7 +94,21 @@ func get_rand_pos():
 		#en.global_position=pos
 		##e.target_path=fnc.get_hero().get_path()
 		#ememys_path.add_child(en)
-
+func summon_bosses():
+	if enemys_data!=null:
+		var bosses=enemys_data.get_bosses()
+		for b in bosses:
+			var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
+			e.load_scene=load(b.boss)
+			var pos=get_rand_pos()
+			e.scene_data={
+				"global_position":pos,
+				"dif":gm.game_prefs.dif,
+				"elite":fnc._with_chance(gm.game_prefs.boss_elite_chance)
+				}
+			#e.target_path=fnc.get_hero().get_path()
+			enemy_path.add_child(e)
+			e.global_position=pos
 func summon(enemys_count=0):
 	var items=enemys_data.get_summon_percents()
 	var local_percents=[]
@@ -101,7 +116,7 @@ func summon(enemys_count=0):
 		local_percents.append(items[e])
 	if enemys_count==0:enemys_count=fnc.rnd.randi_range(enemys_data.enemys_count_min,enemys_data.enemys_count_max)
 	for ec in range(enemys_count):
-		var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+		var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 		e.load_scene=load(enemys_data.enemys[items[fnc._with_chance_ulti(local_percents)]].enemy)
 		var pos=get_rand_pos()
 		e.scene_data={
