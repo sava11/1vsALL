@@ -1,4 +1,12 @@
 extends Node
+
+var sn={}
+var fname:="save"
+const suffix=".json"
+var save_path:="saves"
+signal _load_data(node:Object,path:String)
+signal save_data_changed(dict:Dictionary)
+
 enum dificulty{easy,norm,hard}
 enum gameplay_type{clasic,bossrush,inf,train}
 var cur_gameplay_type=gameplay_type.clasic
@@ -10,6 +18,7 @@ const fonts={
 		"scn":"res://mats/font/Puzzle-Tale-Pixel-Regular.ttf"
 		}
 	}
+	
 func set_font(font:String,theme:Theme):
 	theme.default_font=FontVariation.new()
 	if cur_font=="Puzzle-Tale-Pixel":
@@ -434,7 +443,7 @@ var game_stats={
 }
 #var cur_gm_stats={}
 var player_data={
-	"fighting":false,
+	"in_action":false,
 	"stats":{
 		"hp":3.0,
 		"hp_rgen":0.1,
@@ -467,8 +476,33 @@ var game_prefs={
 	"elite_chance":0.01,
 	"boss_elite_chance":0.01,
 }
+
 func save_data():
-	return player_data
+	return {
+		str(get_path()):{
+			"player_data":player_data,
+			"game_prefs":game_prefs
+			#"player_pos":str(get_tree().current_scene.get_node("cl/pause").current_pos.get_path())
+		}
+	}
+func load_data(n:Dictionary):
+	player_data=n.player_data
+	game_prefs=n.game_prefs
+
+func _ready():
+	connect("save_data_changed",Callable(gm,"_save_node"))
+	connect("_load_data",Callable(gm,"_load_node"))
+	if !sn.has(str(get_path())):
+		emit_signal("save_data_changed",save_data())
+	else:
+		emit_signal("_load_data",self,str(get_path()))
+	DirAccess.make_dir_absolute(save_path)
+	add_to_group("SN")
+	upd_objs()
+	await  get_tree().process_frame
+	#save_file_data()
+	load_file_data()
+
 var objs={}
 func upd_objs():
 	objs={
@@ -991,5 +1025,31 @@ func get_item(item_name:String,lvl:int):
 	var s=load(objs.items[item_name].scn).instantiate()
 	s.set_stats(stats)
 	fnc.get_hero().get_node("lvls").add_child(s)
-func _ready():
-	upd_objs()
+
+
+
+func save_file_data():
+	for e in get_tree().get_nodes_in_group("SN"):
+		_save_node(e.save_data())
+	var save_game := FileAccess.open(save_path+"/"+fname+suffix, FileAccess.WRITE)
+	save_game.store_line(JSON.stringify(sn))
+	save_game.close()
+func load_file_data():
+	if (FileAccess.file_exists(save_path+"/"+fname+suffix)):
+		var save_game := FileAccess.open(save_path+"/"+fname+suffix, FileAccess.READ)
+		if save_game.get_length()!=0:
+			sn=JSON.parse_string(save_game.get_line())
+			for e in sn.keys():
+				get_node(e).load_data(sn[e])
+		else:
+			print("save is clear")
+		save_game.close()
+	else:
+		print("save isn't exists")
+
+
+func _save_node(d:Dictionary):
+	sn.merge(d,true)
+func _load_node(n,path):
+	var d=sn[path]
+	n.load_data(d)

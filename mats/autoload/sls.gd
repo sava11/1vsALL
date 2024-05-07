@@ -14,6 +14,5 @@ func load_data(path:String):
 		save_game.close()
 	else:
 		print("save isn't exists")
-func _ready():
-	DirAccess.make_dir_absolute("saves")
+
 

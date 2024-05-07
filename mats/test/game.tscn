@@ -203,6 +203,7 @@ text = "12"
 [node name="pause" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
 visible = false
 level_container = NodePath("../../world")
+global_difficulty_add_step = 0.15
 
 [node name="asp_think" type="AudioStreamPlayer" parent="."]
 process_mode = 3

@@ -7,23 +7,26 @@ var rpos:Vector2
 var timer:Timer
 var enemy_path=null
 signal completed()
-func start_timer():
-	timer=Timer.new()
-	timer.wait_time=time
-	timer.name="Timer"
-	timer.timeout.connect(Callable(self,"emit_signal").bind("completed"))
-	add_child(timer)
+func start_timer(new_time:float):
+	timer.wait_time=new_time
 	timer.start()
 func _ready():
-	if enemy_path==null:
-		enemy_path=get_node("../ent/ememys")
 	rsize=$arena_brd.size
 	rpos=$arena_brd.global_position
 	var cm_brd=$cam_brd
 	var cam_scale:float=fnc.get_prkt_win().x/cm_brd.size.x
 	if cam!=null:
+		if enemy_path==null:
+			enemy_path=get_node("../ent/enemys")
+		
+		timer=Timer.new()
+		timer.wait_time=time
+		timer.name="Timer"
+		timer.one_shot=true
+		timer.timeout.connect(Callable(self,"emit_signal").bind("completed"))
+		add_child(timer)
 		if time>0:
-			start_timer()
+			timer.start()
 		if cam_scale>1.25:
 			cam.zoom=Vector2(cam_scale,cam_scale)
 		cam.limit_left=cm_brd.position.x

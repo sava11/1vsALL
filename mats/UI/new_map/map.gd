@@ -10,19 +10,31 @@ var item_rare:float=0
 signal in_shop()
 signal location_added(n:level_template)
 signal place_completed()
-func save_data():
-	return {
-		"cur_pos":str(current_pos.get_path())
-	}
-func load_data(n:Dictionary):
-	current_pos=get_node(n["cur_pos"])
 func set_item_rare():
 	var runned:int
 	for e in $map/locs.get_children():
 		runned+=int(e.runned)
 	item_rare=float(runned)/float($map/locs.get_child_count())
+
+signal _load_data(node:Object,path:String)
+signal save_data_changed(dict:Dictionary)
+func save_data():
+	return {
+		str(get_path()):{
+			"cur_pos":str(current_pos.get_path()),
+		}
+	}
+func load_data(n:Dictionary):
+	current_pos=get_node(n["cur_pos"])
 func _ready():
 	if !Engine.is_editor_hint():
+		connect("save_data_changed",Callable(gm,"_save_node"))
+		connect("_load_data",Callable(gm,"_load_node"))
+		add_to_group("SN")
+		if !gm.sn.has(str(get_path())):
+			emit_signal("save_data_changed",save_data())
+		else:
+			emit_signal("_load_data",self,str(get_path()))
 		$stats/cont/back.hide()
 		$shop.hide()
 		$map.show()
@@ -30,14 +42,15 @@ func _ready():
 		current_pos.runned=true
 		for e in $map/locs.get_children():
 			if is_instance_valid(e):
-				e.runned_changed.connect(Callable(func(b:bool):if b:current_pos=e))
 				e.get_node("btn").button_down.connect(
 					Callable(
 						func(b:place):
 							if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
-								current_pos=b).bind(e)
+								current_pos=b
+								gm.save_file_data()).bind(e)
 					)
 				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):return x.runned))
+		
 func _process(delta):
 	if !Engine.is_editor_hint():
 		for e in map.get_children():

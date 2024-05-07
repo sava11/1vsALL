@@ -183,7 +183,7 @@ offset_top = 240.0
 offset_right = 304.0
 offset_bottom = 256.0
 level_time = 0.0
-neighbors = [NodePath("../place6"), NodePath("../place3")]
+neighbors = [NodePath("../place6"), NodePath("../place3"), NodePath("../place12")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place3" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -232,6 +232,7 @@ offset_top = 208.0
 offset_right = 304.0
 offset_bottom = 224.0
 level_time = 0.0
+runned = true
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_a2neo"), SubResource("Resource_h6g4g"), SubResource("Resource_651ti"), SubResource("Resource_efnvl"), SubResource("Resource_3w10r")])
 neighbors = [NodePath("../place10")]
 place_panel_node = NodePath("../../../Panel_statuses")
@@ -279,7 +280,7 @@ offset_right = 336.0
 offset_bottom = 224.0
 level_time = 0.0
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
-neighbors = [NodePath("../place11"), NodePath("../place7")]
+neighbors = [NodePath("../place11"), NodePath("../place7"), NodePath("../place2")]
 place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="place13" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
