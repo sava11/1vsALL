@@ -65,6 +65,7 @@ func _ready():
 			item.set_item_name(tr(res.translation_name))
 			item.set_value(gm.player_data.stats[res.name],res.suffix)
 			stat_cont.move_child(item,stats_keys.find(res.name))
+			res.free()
 		stat_cont.move_child(mny,0)
 func _process(delta):
 	if !Engine.is_editor_hint():
