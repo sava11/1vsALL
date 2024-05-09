@@ -10,9 +10,9 @@ func _ready():
 			var save_obj=preload("res://mats/test/save_item/save_item.tscn").instantiate()
 			save_obj.get_node("cont/death/value").text=str(data.player_data.deaths)
 			save_obj.get_node("cont/lvls/value").text=str(data.player_data.runned_lvls)
-			save_obj.name=e
 			save_obj.get_node("Button").button_down.connect(
 				Callable(func():
+					gm.fname=e
 					gm.load_file_data()
 					get_tree().change_scene_to_file("res://mats/test/game.tscn")))
 			$saves.add_child(save_obj)
