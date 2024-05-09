@@ -444,7 +444,10 @@ var game_stats={
 #var cur_gm_stats={}
 var player_data={
 	"in_action":"",
+	"deaths":0,
+	"runned_lvls":0,
 	"stats":{
+		"money":0,
 		"hp":3.0,
 		"hp_regen":0.1,
 		"max_stamina":1.5,
@@ -462,7 +465,6 @@ var player_data={
 	"prefs":{
 		"cur_hp":3000000.0,
 		"cur_stm":3000000.0,
-		"money":0,
 		"do_roll_cost":1,
 		"max_exp_start":40,
 		"max_exp_sc":1,
@@ -503,8 +505,7 @@ func _ready():
 	add_to_group("SN")
 	upd_objs()
 	await  get_tree().process_frame
-	#save_file_data()
-	load_file_data()
+	save_file_data()
 
 var objs={}
 func upd_objs():
@@ -789,7 +790,7 @@ func upd_objs():
 			"lvls":{
 				0:{
 					"stats":{
-						"hp_rgen":{"x":0.2,"y":0.65},
+						"hp_regen":{"x":0.2,"y":0.65},
 						"hp":{"x":0.6,"y":1.1},
 						"regen_stamina_point":{"x":0.035,"y":0.08},
 						"max_stamina":0.03,
@@ -799,7 +800,7 @@ func upd_objs():
 				},
 				1:{
 					"stats":{
-						"hp_rgen":{"x":0.7,"y":1.75},
+						"hp_regen":{"x":0.7,"y":1.75},
 						"hp":{"x":0.6,"y":1.1},
 						"regen_stamina_point":{"x":0.1,"y":0.8},
 						"max_stamina":0.03,
@@ -841,7 +842,7 @@ func upd_objs():
 			"lvls":{
 				0:{
 					"stats":{
-						"hp_rgen":{"x":0.05,"y":0.1},
+						"hp_regen":{"x":0.05,"y":0.1},
 						"hp":{"x":0.5,"y":1},
 						"dmg":{"x":0.5,"y":1.5},
 						},
@@ -849,7 +850,7 @@ func upd_objs():
 				},
 				1:{
 					"stats":{
-						"hp_rgen":{"x":0.05,"y":0.1},
+						"hp_regen":{"x":0.05,"y":0.1},
 						"hp":2,
 						"dmg":{"x":1.5,"y":3},
 						},
@@ -864,7 +865,7 @@ func upd_objs():
 			"lvls":{
 				0:{
 					"stats":{
-						"hp_rgen":{"x":0.2,"y":0.65},
+						"hp_regen":{"x":0.2,"y":0.65},
 						"hp":{"x":0.6,"y":1.1},
 						"regen_stamina_point":{"x":0.035,"y":0.08},
 						"max_stamina":0.03,
@@ -874,7 +875,7 @@ func upd_objs():
 				},
 				1:{
 					"stats":{
-						"hp_rgen":{"x":0.7,"y":1.75},
+						"hp_regen":{"x":0.7,"y":1.75},
 						"hp":{"x":0.6,"y":1.1},
 						"regen_stamina_point":{"x":0.1,"y":0.8},
 						"max_stamina":0.03,
@@ -912,7 +913,7 @@ func upd_objs():
 			"lvls":{
 				0:{
 					"stats":{
-						"hp_rgen":{"x":0.025,"y":0.08},
+						"hp_regen":{"x":0.025,"y":0.08},
 						"hp":{"x":0.25,"y":0.5},
 						"def":{"x":0.09,"y":0.5},
 						"dmg":{"x":0.3,"y":0.5},
@@ -921,7 +922,7 @@ func upd_objs():
 				},
 				1:{
 					"stats":{
-						"hp_rgen":{"x":0.15,"y":0.5},
+						"hp_regen":{"x":0.15,"y":0.5},
 						"hp":{"x":0.75,"y":1.5},
 						"def":{"x":0.6,"y":1.3},
 						"dmg":{"x":0.5,"y":1},
@@ -988,7 +989,7 @@ func upd_objs():
 		#	"t":tr("ZALLE_VOID_TEXT"),
 		#	"lvls":{
 		#		0:{"stats":{"hp":3,"dmg":-3,"crit_dmg":-1},"rare":Vector2(0,0.1),"value":22},
-		#		1:{"stats":{"def":3,"hp":-1,"hp_rgen":0.01},"rare":Vector2(0.2,0.4),"value":35},
+		#		1:{"stats":{"def":3,"hp":-1,"hp_regen":0.01},"rare":Vector2(0.2,0.4),"value":35},
 		#		}
 		#	},
 		#"FALLE_VOID":{
@@ -1043,7 +1044,8 @@ func load_file_data():
 		if save_game.get_length()!=0:
 			sn=JSON.parse_string(save_game.get_line())
 			for e in sn.keys():
-				get_node(e).load_data(sn[e])
+				if get_node_or_null(e)!=null:
+					get_node(e).load_data(sn[e])
 		else:
 			print("save is clear")
 		save_game.close()

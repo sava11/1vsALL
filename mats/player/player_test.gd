@@ -267,6 +267,7 @@ func _on_ap_animation_finished(anim_name):
 
 func delete():
 	state="d"
+	gm.player_data.deaths+=1
 
 func _on_hurt_box_h_ch(v):
 	if v>0:
@@ -281,7 +282,7 @@ func _on_hurt_box_no_he():
 
 func _on_get_money_area_area_entered(area):
 	if area.type==0:
-		gm.player_data.prefs.money+=area.value
+		gm.player_data.stats.money+=area.value
 	if area.type==1:
 		exp+=area.value
 	area.queue_free()

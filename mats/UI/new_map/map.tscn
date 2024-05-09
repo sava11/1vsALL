@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=45 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/sub/summon_enemys_data.gd" id="9_l0upw"]
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/arena.gd" id="10_emt1y"]
 [ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="10_kdwc0"]
+[ext_resource type="Script" path="res://mats/UI/new_map/actions/shop/shop.gd" id="12_vtmdr"]
 [ext_resource type="Resource" uid="uid://bcfdokfrcmlxu" path="res://mats/statuses/hp.tres" id="14_ho0hg"]
 [ext_resource type="Resource" uid="uid://btrqjcsptp4ff" path="res://mats/statuses/def.tres" id="15_53xg0"]
 [ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="15_bd4u6"]
@@ -84,6 +85,13 @@ enemys_count_min = 1
 enemys_count_max = 8
 time_to_next_enemy_wave_min = 10
 time_to_next_enemy_wave_max = 10
+
+[sub_resource type="Resource" id="Resource_j7qq7"]
+script = ExtResource("12_vtmdr")
+items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
 
 [sub_resource type="Resource" id="Resource_bim0u"]
 script = ExtResource("6_rde3b")
@@ -221,7 +229,9 @@ offset_top = 208.0
 offset_right = 272.0
 offset_bottom = 224.0
 level = ExtResource("10_kdwc0")
+level_time = 5.0
 arena = SubResource("Resource_ohbl0")
+shop = SubResource("Resource_j7qq7")
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_bim0u"), SubResource("Resource_3ogom"), SubResource("Resource_hbyun"), SubResource("Resource_ywhdx"), SubResource("Resource_4m35i")])
 neighbors = [NodePath("../place9"), NodePath("../place2"), NodePath("../place10")]
 place_panel_node = NodePath("../../../Panel_statuses")
@@ -295,6 +305,7 @@ place_panel_node = NodePath("../../../Panel_statuses")
 
 [node name="Panel_statuses" parent="." instance=ExtResource("6_o66ik")]
 visible = false
+modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 0
 
 [node name="stats" type="Panel" parent="."]
@@ -333,7 +344,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 128.0
+offset_left = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_bd4u6")

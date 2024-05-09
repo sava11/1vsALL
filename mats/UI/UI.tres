@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://de15vct77vcwe"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://de15vct77vcwe"]
 
 [ext_resource type="Texture2D" uid="uid://7i5tlqjh3gdk" path="res://mats/UI/imgs/ratio/ratio_checked.png" id="1_w5lhx"]
 [ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_ym2d8"]
@@ -183,6 +183,27 @@ corner_radius_bottom_left = 5
 corner_detail = 3
 anti_aliasing_size = 0.25
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i73vm"]
+draw_center = false
+border_width_top = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bw3oi"]
+bg_color = Color(0, 0.443137, 0.498039, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
 [sub_resource type="FontVariation" id="FontVariation_5yrwh"]
 base_font = ExtResource("1_ym2d8")
 spacing_top = 2
@@ -203,3 +224,5 @@ PopupMenu/icons/radio_checked_disabled = ExtResource("2_irfdw")
 PopupMenu/icons/radio_unchecked = ExtResource("3_sk12f")
 PopupMenu/icons/radio_unchecked_disabled = ExtResource("4_iwbul")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_85c6g")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_i73vm")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_bw3oi")

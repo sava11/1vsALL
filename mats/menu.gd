@@ -22,7 +22,7 @@ func _process(delta):
 	#anim_player.play("shake")
 
 func _on_play_button_down():
-	var t=preload("res://gameplay_choice.tscn").instantiate()
+	var t=preload("res://mats/test/save_choice.tscn").instantiate()
 	add_child(t)
 	$bg.hide()
 	$main_menu.hide()

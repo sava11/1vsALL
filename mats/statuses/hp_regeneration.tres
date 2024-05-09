@@ -7,5 +7,5 @@
 script = ExtResource("2_batn0")
 name = "hp_regen"
 translation_name = "CHP_REGEN"
-suffix = "%"
+suffix = ""
 image = ExtResource("1_pfm4a")

@@ -48,4 +48,5 @@ clip_text = true
 icon_alignment = 1
 expand_icon = true
 
+[connection signal="runned_changed" from="." to="." method="_on_runned_changed"]
 [connection signal="button_down" from="btn" to="." method="_on_button_down"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://g010wphv23oo"]
+[gd_scene load_steps=3 format=3 uid="uid://g010wphv23oo"]
 
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_sr53k"]
+[ext_resource type="Script" path="res://mats/test/save_choice.gd" id="2_et61c"]
 
 [node name="save_choice" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sr53k")
+script = ExtResource("2_et61c")
 
 [node name="saves" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -19,18 +21,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -96.0
+offset_top = -44.0
 offset_right = 256.0
-offset_bottom = 96.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="saves"]
-custom_minimum_size = Vector2(128, 2.08165e-12)
-layout_mode = 2
-
-[node name="Button" type="Button" parent="saves/Panel"]
-layout_mode = 0
-offset_top = 160.0
-offset_right = 64.0
-offset_bottom = 192.0

@@ -22,8 +22,8 @@ func set_value(v:float,prefix:String=""):
 		if v>max_value:
 			v=max_value
 	if prefix=="%":
-		value=v*100
-		vle.text=str(value)+" "+prefix
+		value=v
+		vle.text=str(value*100)+" "+prefix
 	else:
 		vle.text=str(v)+prefix
 		value=v

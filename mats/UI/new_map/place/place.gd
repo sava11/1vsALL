@@ -5,6 +5,7 @@ class_name place extends Control
 @export var level_time:float=45.0
 @export_group("place")
 @export var runned:bool=false
+@onready var last_runned=runned
 @export var local_difficulty_add_step:float=0
 @export_subgroup("statuses")
 @export var arena:arena_action
@@ -21,6 +22,8 @@ var map:Node
 var lvl:level_template
 signal _load_data(node:Object,path:String)
 signal save_data_changed(dict:Dictionary)
+signal runned_changed(res:bool)
+
 func save_data():
 	return {
 		str(get_path()):{
@@ -36,7 +39,6 @@ func load_data(n:Dictionary):
 	#neigbors.remove_at(neigbors.find(n))
 	#n.neigbors.remove_at(n.neigbors.find(self))
 func _ready():
-	
 	map=get_node("../../../")
 	map.connect("location_added",Callable(func(lvl):map.cur_loc=lvl))
 	if !Engine.is_editor_hint():
@@ -62,6 +64,9 @@ func _process(delta):
 		$visual.self_modulate=Color(original.r*active,original.g*active,original.b*active)
 	else:
 		$visual.self_modulate=Color(original.r*unactive,original.g*unactive,original.b*unactive)
+	if last_runned!=runned:
+		emit_signal("runned_changed",runned)
+		last_runned=runned
 func _on_button_down():
 	var p_pos=global_position-Vector2(place_panel_node.size.x/2,place_panel_node.size.y)*place_panel_node.scale+Vector2(size.x/2,-size.y/4)
 	if !runned:
@@ -118,3 +123,8 @@ func shop_cancel():
 	place_panel_node.disconnect_from(self,"to_shop","shop_cancel")
 	place_panel_node.hide()
 
+
+
+func _on_runned_changed(res:bool):
+	if res:
+		gm.player_data.runned_lvls+=1

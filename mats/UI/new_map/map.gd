@@ -55,7 +55,7 @@ func _ready():
 		stat_cont.add_child(mny)
 		mny.set_image(load(gm.images.icons.other.money))
 		mny.set_item_name(tr("MONEY"))
-		mny.set_value(gm.player_data.prefs.money)
+		mny.set_value(gm.player_data.stats.money)
 		var stats_keys=gm.player_data.stats.keys()
 		for e in DirAccess.get_files_at("res://mats/statuses"):
 			var res:status=load("res://mats/statuses/"+e)
@@ -86,10 +86,10 @@ func level_completed(n:place):
 		fnc.get_hero().add_stats.merge({e.editable_status.name:e.value})
 		for i in stat_cont.get_children():
 			if i.get_node("item_name").text==tr(e.editable_status.translation_name):
-				i.set_value(e.value,e.editable_status.suffix)
+				i.set_value(i.value+e.value,e.editable_status.suffix)
+	fnc.get_hero().merge_stats()
 	gm.player_data.in_action=""
 	current_pos=n
-	fnc.get_hero().merge_stats()
 	gm.save_file_data()
 	emit_signal("place_completed")
 
