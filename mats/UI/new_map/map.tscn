@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=55 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -55,10 +55,22 @@ name = "sk"
 die = false
 boss = "res://mats/enemys/b2/enemy.tscn"
 
+[sub_resource type="Resource" id="Resource_uu4dg"]
+script = ExtResource("9_l0upw")
+name = ""
+enemy = null
+percent = 0.5
+
+[sub_resource type="Resource" id="Resource_fe0l4"]
+script = ExtResource("9_l0upw")
+name = ""
+enemy = null
+percent = 0.5
+
 [sub_resource type="Resource" id="Resource_xbfx6"]
 script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_oood7")])
-spawning = true
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_oood7"), SubResource("Resource_uu4dg"), SubResource("Resource_fe0l4")])
+spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
 time_to_next_enemy_wave_min = 1
@@ -90,14 +102,14 @@ value = 0.5
 
 [sub_resource type="Resource" id="Resource_4k3sr"]
 script = ExtResource("9_l0upw")
-enemy_name = ""
-enemy = "res://mats/enemys/e1/enemy.tscn"
+name = ""
+enemy = null
 percent = 0.5
 
 [sub_resource type="Resource" id="Resource_2a6jt"]
 script = ExtResource("9_l0upw")
-enemy_name = ""
-enemy = "res://mats/enemys/e2/enemy.tscn"
+name = ""
+enemy = null
 percent = 0.5
 
 [sub_resource type="Resource" id="Resource_getgl"]

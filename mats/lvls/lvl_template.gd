@@ -111,7 +111,7 @@ func summon_bosses():
 				"/boss_mark.scene_to_add":get_tree().current_scene.get_node("cl/game_ui/st"),
 				"/boss_mark.scene_to_func":self,
 				"/boss_mark.scene_func":"boss_die",
-				"/boss_mark.bname":e.name
+				"/boss_mark.bname":b.name
 				}
 			#e.target_path=fnc.get_hero().get_path()
 			enemy_path.add_child(e)

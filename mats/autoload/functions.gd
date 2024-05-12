@@ -121,8 +121,6 @@ func setter(itm,data:Dictionary):
 			var me=e
 			if e.begins_with("/"):me=e.erase(0)
 			var str=me.split(".")
-			print(str[0])
-			print(itm.get_path())
 			var n=itm.get_node(str[0])
 			if is_instance_valid(n):
 				if !str[1].contains("()"):n.set(str[1],data[e])
