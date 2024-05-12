@@ -70,7 +70,7 @@ func _process(delta):
 		if fnc._with_chance(area.crit_chance):
 			dmg+=area.crit_damage
 			var crit=preload("res://mats/font/crit.tscn").instantiate()
-			get_tree().current_scene.ememys_path.add_child.call_deferred(crit)
+			get_tree().current_scene.enemy_path.add_child.call_deferred(crit)
 			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
 		set_he(he-dmg/float(def)*delta)
 		
@@ -85,7 +85,7 @@ func _on_area_entered(area):
 			if area.crit_chance>1:
 				dmg*=area.crit_chance
 			var crit=preload("res://mats/font/crit.tscn").instantiate()
-			get_node("../../").add_child.call_deferred(crit)
+			get_tree().current_scene.enemy_path.add_child.call_deferred(crit)
 			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
 		set_he(he-float(dmg)/float(def))
 

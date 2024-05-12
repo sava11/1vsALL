@@ -24,7 +24,7 @@ func _ready():
 		timer.one_shot=true
 		timer.timeout.connect(Callable(self,"emit_signal").bind("completed"))
 		add_child(timer)
-		if time>0:
+		if time>0 and !enemys_data.has_bosses():
 			start_timer(time)
 		if cam_scale>1.25:
 			cam.zoom=Vector2(cam_scale,cam_scale)
@@ -33,15 +33,16 @@ func _ready():
 		cam.limit_bottom=cm_brd.position.y+cm_brd.size.y
 		cam.limit_right=cm_brd.position.x+cm_brd.size.x
 		fnc.get_hero().global_position=$pos.global_position
-	summon_bosses()
+		summon_bosses()
 var enemy_spawn_timer_temp:float=0
 var next_enemy_spawn_timer_temp:float=0
 func _physics_process(delta):
-	if enemys_data!=null:
+	if enemys_data!=null and enemys_data.spawning:
 		enemy_spawn_timer_temp+=delta
 		if next_enemy_spawn_timer_temp<=enemy_spawn_timer_temp:
 			next_enemy_spawn_timer_temp=fnc.rnd.randi_range(enemys_data.time_to_next_enemy_wave_min,enemys_data.time_to_next_enemy_wave_max)
-			summon()
+			if enemys_data.has_enemys():
+				summon()
 			enemy_spawn_timer_temp=0
 
 func get_rand_pos():
@@ -106,7 +107,11 @@ func summon_bosses():
 			e.scene_data={
 				"global_position":pos,
 				"dif":gm.game_prefs.dif,
-				"elite":fnc._with_chance(gm.game_prefs.boss_elite_chance)
+				"elite":fnc._with_chance(gm.game_prefs.boss_elite_chance),
+				"/boss_mark.scene_to_add":get_tree().current_scene.get_node("cl/game_ui/st"),
+				"/boss_mark.scene_to_func":self,
+				"/boss_mark.scene_func":"boss_die",
+				"/boss_mark.bname":e.name
 				}
 			#e.target_path=fnc.get_hero().get_path()
 			enemy_path.add_child(e)
@@ -138,9 +143,12 @@ func summon(enemys_count=0):
 	#wave_count+=1
 #func menu_exit():
 	#get_tree().change_scene_to_file("res://menu.tscn")
-#
-#func boss_die(bname:int):
-	#cur_boss[bname].die=true
-	#if all_bosses_died():
-		#at.start(10)
-		#emit_signal("boss_fight_end")
+func all_bosses_died():
+	var res:int=0
+	for b in enemys_data.get_bosses():
+		res+=int(enemys_data.get_boss_by_name(b.name).die)
+	return res==enemys_data.get_bosses().size()
+func boss_die(bname:String):
+	enemys_data.get_boss_by_name(bname).die=true
+	if all_bosses_died():
+		start_timer(10)

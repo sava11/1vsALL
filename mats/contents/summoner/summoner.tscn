@@ -1,39 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://5ufri5swwh1v"]
+[gd_scene load_steps=3 format=3 uid="uid://5ufri5swwh1v"]
 
 [ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="1_45ml2"]
-
-[sub_resource type="GDScript" id="GDScript_sp5yx"]
-script/source = "extends Sprite2D
-@export var time_curve:Curve
-@export_range(0.0,99999.0) var time:float
-@export var load_scene:PackedScene
-@export var scene_data:Dictionary={}
-var st=0
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if fnc.get_hero().state==\"d\":
-		queue_free()
-	if time!=0.0 and st<time:
-		st+=delta
-		self_modulate.a=time_curve.sample_baked(st/time)
-	else:
-		if load_scene!=null:
-			var itm=load_scene.instantiate()
-			itm.set_deferred(\"global_position\",global_position)
-			fnc.setter(itm,scene_data)
-			
-			get_parent().add_child(itm)
-		queue_free()
-	pass
-"
-
-[sub_resource type="Curve" id="Curve_1hlri"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.134021, 0.389474), 0.0, 0.0, 0, 0, Vector2(0.190722, 0.968421), 0.0, 0.0, 0, 0, Vector2(0.314433, 0.421053), 0.0, 0.0, 0, 0, Vector2(0.402062, 0.863158), 2.89083e-07, 2.89083e-07, 0, 0, Vector2(0.505155, 0.494737), 0.0, 0.0, 0, 0, Vector2(0.587629, 0.694737), 0.0, 0.0, 0, 0, Vector2(0.685567, 0.336842), 0.0, 0.0, 0, 0, Vector2(0.747423, 0.789474), 0.0, 0.0, 0, 0, Vector2(0.835052, 0.210526), 0.0, 0.0, 0, 0, Vector2(0.902062, 0.978947), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 12
+[ext_resource type="Script" path="res://mats/contents/summoner/sumoner.gd" id="2_edkuk"]
 
 [node name="summoner" type="Sprite2D"]
 position = Vector2(76, 39)
@@ -41,6 +9,4 @@ rotation = 0.436332
 scale = Vector2(0.01, 0.01)
 skew = 0.698132
 texture = ExtResource("1_45ml2")
-script = SubResource("GDScript_sp5yx")
-time_curve = SubResource("Curve_1hlri")
-time = 2.5
+script = ExtResource("2_edkuk")

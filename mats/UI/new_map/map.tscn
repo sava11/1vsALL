@@ -1,17 +1,18 @@
-[gd_scene load_steps=45 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=53 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
+[ext_resource type="Texture2D" uid="uid://df16ud3cfcbxw" path="res://mats/UI/new_map/imgs/map.png" id="3_e6gjm"]
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/new_map/place/place.tscn" id="3_k2fw6"]
 [ext_resource type="Texture2D" uid="uid://c00wrjavopulm" path="res://mats/imgs/icons/skills/hp.png" id="4_tkcb6"]
 [ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="5_gf3tx"]
 [ext_resource type="PackedScene" uid="uid://d2iylodnns5c3" path="res://mats/UI/new_map/place/place_item_panel.tscn" id="6_o66ik"]
 [ext_resource type="Script" path="res://mats/statuses/scripts/ingame_status.gd" id="6_rde3b"]
 [ext_resource type="Texture2D" uid="uid://bq5s0f6ckf87k" path="res://mats/imgs/icons/skills/att.png" id="7_5tpil"]
+[ext_resource type="Script" path="res://mats/UI/new_map/actions/sub/summon_boss_data.gd" id="8_6rri8"]
 [ext_resource type="Texture2D" uid="uid://r3ay7qpv6g4x" path="res://mats/imgs/icons/skills/rolls.png" id="8_si7vb"]
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/sub/summon_enemys_data.gd" id="9_l0upw"]
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/arena.gd" id="10_emt1y"]
-[ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="10_kdwc0"]
 [ext_resource type="Script" path="res://mats/UI/new_map/actions/shop/shop.gd" id="12_vtmdr"]
 [ext_resource type="Resource" uid="uid://bcfdokfrcmlxu" path="res://mats/statuses/hp.tres" id="14_ho0hg"]
 [ext_resource type="Resource" uid="uid://btrqjcsptp4ff" path="res://mats/statuses/def.tres" id="15_53xg0"]
@@ -48,6 +49,21 @@ script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_pf6fx")
 value = 0.1
 
+[sub_resource type="Resource" id="Resource_oood7"]
+script = ExtResource("8_6rri8")
+name = "sk"
+die = false
+boss = "res://mats/enemys/b2/enemy.tscn"
+
+[sub_resource type="Resource" id="Resource_xbfx6"]
+script = ExtResource("10_emt1y")
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_oood7")])
+spawning = true
+enemys_count_min = 1
+enemys_count_max = 1
+time_to_next_enemy_wave_min = 1
+time_to_next_enemy_wave_max = 1
+
 [sub_resource type="Resource" id="Resource_nfw7t"]
 script = ExtResource("5_gf3tx")
 name = "CHP"
@@ -72,26 +88,26 @@ script = ExtResource("6_rde3b")
 editable_status = SubResource("Resource_0yfuu")
 value = 0.5
 
-[sub_resource type="Resource" id="Resource_tdgoh"]
+[sub_resource type="Resource" id="Resource_4k3sr"]
 script = ExtResource("9_l0upw")
-enemy_name = "sk"
+enemy_name = ""
 enemy = "res://mats/enemys/e1/enemy.tscn"
 percent = 0.5
 
-[sub_resource type="Resource" id="Resource_ohbl0"]
-script = ExtResource("10_emt1y")
-enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_tdgoh")])
-enemys_count_min = 1
-enemys_count_max = 8
-time_to_next_enemy_wave_min = 10
-time_to_next_enemy_wave_max = 10
+[sub_resource type="Resource" id="Resource_2a6jt"]
+script = ExtResource("9_l0upw")
+enemy_name = ""
+enemy = "res://mats/enemys/e2/enemy.tscn"
+percent = 0.5
 
-[sub_resource type="Resource" id="Resource_j7qq7"]
-script = ExtResource("12_vtmdr")
-items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
-count_min = 4
-count_max = 4
-rarity = 0.0
+[sub_resource type="Resource" id="Resource_getgl"]
+script = ExtResource("10_emt1y")
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_4k3sr"), SubResource("Resource_2a6jt")])
+spawning = true
+enemys_count_min = 1
+enemys_count_max = 1
+time_to_next_enemy_wave_min = 1
+time_to_next_enemy_wave_max = 1
 
 [sub_resource type="Resource" id="Resource_bim0u"]
 script = ExtResource("6_rde3b")
@@ -143,6 +159,42 @@ script = ExtResource("6_rde3b")
 editable_status = ExtResource("22_62275")
 value = 0.0
 
+[sub_resource type="Resource" id="Resource_rflif"]
+script = ExtResource("12_vtmdr")
+items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
+
+[sub_resource type="Resource" id="Resource_5v3ii"]
+script = ExtResource("8_6rri8")
+name = ""
+die = false
+boss = null
+
+[sub_resource type="Resource" id="Resource_u8od0"]
+script = ExtResource("10_emt1y")
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_5v3ii")])
+spawning = true
+enemys_count_min = 1
+enemys_count_max = 1
+time_to_next_enemy_wave_min = 1
+time_to_next_enemy_wave_max = 1
+
+[sub_resource type="Resource" id="Resource_dpojv"]
+script = ExtResource("12_vtmdr")
+items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
+
+[sub_resource type="Resource" id="Resource_n2rxx"]
+script = ExtResource("12_vtmdr")
+items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
+
 [node name="pause" type="Control" node_paths=PackedStringArray("current_pos")]
 process_mode = 3
 layout_mode = 3
@@ -153,21 +205,37 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gyvyj")
 script = ExtResource("1_3h318")
-current_pos = NodePath("map/locs/place10")
+current_pos = NodePath("map/cont/locs/map/place5")
 
-[node name="map" type="ColorRect" parent="."]
+[node name="map" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -480.0
+offset_left = -512.0
+offset_bottom = -52.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_gyvyj")
-color = Color(0.717647, 0.564706, 0.32549, 1)
+texture = ExtResource("3_e6gjm")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="locs" type="Control" parent="map"]
+[node name="cont" type="Control" parent="map"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="locs" type="Control" parent="map/cont"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -175,142 +243,244 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="place" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 256.0
-offset_top = 272.0
-offset_right = 272.0
-offset_bottom = 288.0
+[node name="map" type="Control" parent="map/cont/locs"]
+layout_mode = 2
+anchors_preset = 0
+
+[node name="place" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 48.0
+offset_top = 192.0
+offset_right = 64.0
+offset_bottom = 208.0
 level_time = 0.0
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
 neighbors = [NodePath("../place3")]
-place_panel_node = NodePath("../../../Panel_statuses")
+place_panel_node = NodePath("../../Panel")
 
-[node name="place2" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 288.0
-offset_top = 240.0
-offset_right = 304.0
-offset_bottom = 256.0
+[node name="place2" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 96.0
+offset_top = 144.0
+offset_right = 112.0
+offset_bottom = 160.0
 level_time = 0.0
-neighbors = [NodePath("../place6"), NodePath("../place3"), NodePath("../place12")]
-place_panel_node = NodePath("../../../Panel_statuses")
+neighbors = [NodePath("../place3"), NodePath("../place6"), NodePath("../place16"), NodePath("../place12")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place3" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 256.0
-offset_top = 240.0
-offset_right = 272.0
-offset_bottom = 256.0
-level = ExtResource("10_kdwc0")
+[node name="place3" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 48.0
+offset_top = 144.0
+offset_right = 64.0
+offset_bottom = 160.0
 level_time = 15.0
-neighbors = [NodePath("../place"), NodePath("../place2"), NodePath("../place4")]
-place_panel_node = NodePath("../../../Panel_statuses")
+neighbors = [NodePath("../place"), NodePath("../place4"), NodePath("../place2")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place4" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 224.0
-offset_top = 240.0
-offset_right = 240.0
-offset_bottom = 256.0
-level_time = 0.0
+[node name="place4" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_top = 144.0
+offset_bottom = 160.0
+level = "res://mats/lvls/lvl1/lvl1_2.tscn"
+arena = SubResource("Resource_xbfx6")
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_fkgsc"), SubResource("Resource_dsfkb")])
 neighbors = [NodePath("../place3"), NodePath("../place5")]
-place_panel_node = NodePath("../../../Panel_statuses")
+place_panel_node = NodePath("../../Panel")
 
-[node name="place5" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 224.0
-offset_top = 208.0
-offset_right = 240.0
-offset_bottom = 224.0
+[node name="place5" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_top = 96.0
+offset_bottom = 112.0
 level_time = 0.0
-neighbors = [NodePath("../place8"), NodePath("../place4")]
-place_panel_node = NodePath("../../../Panel_statuses")
+neighbors = [NodePath("../place4"), NodePath("../place8")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place6" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 256.0
-offset_top = 208.0
-offset_right = 272.0
-offset_bottom = 224.0
-level = ExtResource("10_kdwc0")
-level_time = 5.0
-arena = SubResource("Resource_ohbl0")
-shop = SubResource("Resource_j7qq7")
+[node name="place6" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 64.0
+offset_bottom = 112.0
+level = "res://mats/lvls/lvl1/lvl1_2.tscn"
+arena = SubResource("Resource_getgl")
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_bim0u"), SubResource("Resource_3ogom"), SubResource("Resource_hbyun"), SubResource("Resource_ywhdx"), SubResource("Resource_4m35i")])
-neighbors = [NodePath("../place9"), NodePath("../place2"), NodePath("../place10")]
-place_panel_node = NodePath("../../../Panel_statuses")
+neighbors = [NodePath("../place10"), NodePath("../place9"), NodePath("../place2")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place7" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 288.0
-offset_top = 208.0
-offset_right = 304.0
-offset_bottom = 224.0
+[node name="place7" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 96.0
+offset_top = 96.0
+offset_right = 112.0
+offset_bottom = 112.0
 level_time = 0.0
-runned = true
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_a2neo"), SubResource("Resource_h6g4g"), SubResource("Resource_651ti"), SubResource("Resource_efnvl"), SubResource("Resource_3w10r")])
 neighbors = [NodePath("../place10")]
-place_panel_node = NodePath("../../../Panel_statuses")
+place_panel_node = NodePath("../../Panel")
 
-[node name="place8" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 224.0
-offset_top = 176.0
-offset_right = 240.0
-offset_bottom = 192.0
+[node name="place8" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_top = 48.0
+offset_bottom = 64.0
 level_time = 0.0
-neighbors = [NodePath("../place9"), NodePath("../place5")]
-place_panel_node = NodePath("../../../Panel_statuses")
+shop = SubResource("Resource_rflif")
+neighbors = [NodePath("../place5"), NodePath("../place9")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place9" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 256.0
-offset_top = 176.0
-offset_right = 272.0
-offset_bottom = 192.0
+[node name="place9" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 64.0
+offset_bottom = 64.0
 level_time = 0.0
 neighbors = [NodePath("../place8"), NodePath("../place6")]
-place_panel_node = NodePath("../../../Panel_statuses")
+place_panel_node = NodePath("../../Panel")
 
-[node name="place10" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 288.0
-offset_top = 176.0
-offset_right = 304.0
-offset_bottom = 192.0
+[node name="place10" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 96.0
+offset_top = 48.0
+offset_right = 112.0
+offset_bottom = 64.0
 level_time = 0.0
-neighbors = [NodePath("../place7"), NodePath("../place6"), NodePath("../place11")]
-place_panel_node = NodePath("../../../Panel_statuses")
+arena = SubResource("Resource_u8od0")
+neighbors = [NodePath("../place6"), NodePath("../place11"), NodePath("../place7")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place11" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 320.0
-offset_top = 176.0
-offset_right = 336.0
-offset_bottom = 192.0
+[node name="place11" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 144.0
+offset_top = 48.0
+offset_right = 160.0
+offset_bottom = 64.0
 level_time = 0.0
 neighbors = [NodePath("../place12")]
-place_panel_node = NodePath("../../../Panel_statuses")
+place_panel_node = NodePath("../../Panel")
 
-[node name="place12" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 320.0
-offset_top = 208.0
-offset_right = 336.0
-offset_bottom = 224.0
+[node name="place12" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 144.0
+offset_top = 96.0
+offset_right = 160.0
+offset_bottom = 112.0
 level_time = 0.0
 ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
-neighbors = [NodePath("../place11"), NodePath("../place7"), NodePath("../place2")]
-place_panel_node = NodePath("../../../Panel_statuses")
+neighbors = [NodePath("../place2"), NodePath("../place11"), NodePath("../place7")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="place13" parent="map/locs" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
-offset_left = 352.0
-offset_top = 176.0
-offset_right = 368.0
-offset_bottom = 192.0
-level_time = 0.0
-ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_4hf1g"), SubResource("Resource_nuuq7")])
-neighbors = [NodePath("../place11")]
-place_panel_node = NodePath("../../../Panel_statuses")
+[node name="place16" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 96.0
+offset_top = 192.0
+offset_right = 112.0
+offset_bottom = 208.0
+neighbors = [NodePath("../place2"), NodePath("../place17")]
+place_panel_node = NodePath("../../Panel")
 
-[node name="Panel_statuses" parent="." instance=ExtResource("6_o66ik")]
+[node name="place17" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 144.0
+offset_top = 192.0
+offset_right = 160.0
+offset_bottom = 208.0
+neighbors = [NodePath("../place16"), NodePath("../place18"), NodePath("../place24")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place18" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 208.0
+offset_bottom = 208.0
+neighbors = [NodePath("../place22"), NodePath("../place17")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place19" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 240.0
+offset_top = 192.0
+offset_right = 256.0
+offset_bottom = 208.0
+neighbors = [NodePath("../place22")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place20" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 288.0
+offset_top = 192.0
+offset_right = 304.0
+offset_bottom = 208.0
+shop = SubResource("Resource_dpojv")
+neighbors = [NodePath("../place19"), NodePath("../place21")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place21" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 288.0
+offset_top = 144.0
+offset_right = 304.0
+offset_bottom = 160.0
+neighbors = [NodePath("../place20")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place22" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 240.0
+offset_top = 144.0
+offset_right = 256.0
+offset_bottom = 160.0
+neighbors = [NodePath("../place21"), NodePath("../place18"), NodePath("../place23")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place23" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 192.0
+offset_top = 144.0
+offset_right = 208.0
+offset_bottom = 160.0
+neighbors = [NodePath("../place24"), NodePath("../place22")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place24" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 144.0
+offset_top = 144.0
+offset_right = 160.0
+offset_bottom = 160.0
+neighbors = [NodePath("../place25")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place25" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 208.0
+offset_bottom = 112.0
+shop = SubResource("Resource_n2rxx")
+neighbors = [NodePath("../place24"), NodePath("../place26")]
+place_panel_node = NodePath("../../Panel")
+shop_color = Color(0.745098, 0.658824, 0, 1)
+
+[node name="place26" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 240.0
+offset_top = 96.0
+offset_right = 256.0
+offset_bottom = 112.0
+neighbors = [NodePath("../place22"), NodePath("../place25"), NodePath("../place27")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place27" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 288.0
+offset_top = 96.0
+offset_right = 304.0
+offset_bottom = 112.0
+neighbors = [NodePath("../place28")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place28" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 240.0
+offset_top = 48.0
+offset_right = 256.0
+offset_bottom = 64.0
+neighbors = [NodePath("../place27")]
+place_panel_node = NodePath("../../Panel")
+
+[node name="place14" parent="map/cont/locs/map" node_paths=PackedStringArray("place_panel_node") instance=ExtResource("3_k2fw6")]
+offset_left = 192.0
+offset_top = 48.0
+offset_right = 208.0
+offset_bottom = 64.0
+secret = true
+place_panel_node = NodePath("../../Panel")
+
+[node name="Panel" parent="map/cont/locs" instance=ExtResource("6_o66ik")]
 visible = false
-modulate = Color(1, 1, 1, 0.784314)
-layout_mode = 0
+z_index = 1
+layout_mode = 2
 
 [node name="stats" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 160.0
+offset_right = 128.0
 offset_bottom = 320.0
 
 [node name="cont" type="VBoxContainer" parent="stats"]
@@ -344,7 +514,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 160.0
+offset_left = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_bd4u6")

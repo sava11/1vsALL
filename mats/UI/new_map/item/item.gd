@@ -3,6 +3,7 @@ extends HBoxContainer
 @onready var img=$img
 @onready var iname=$item_name
 @onready var vle=$value
+@export var item_name:String
 @export_flags("greater:1","less:2") var value_type
 @export var min_value=0
 @export var max_value=0

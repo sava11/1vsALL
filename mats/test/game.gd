@@ -1,6 +1,7 @@
 extends Node
 @onready var enemy_path=$world/ent/enemys
 @onready var wrld=$world
+var cur_loc=null
 func _ready():
 	show_lvls()
 func _process(delta):
@@ -22,14 +23,14 @@ func _process(delta):
 
 func show_lvls(b:bool=true):
 	if b==true:
-		start_sound_think()
-		stop_sound_fight()
+		#start_sound_think()
+		#stop_sound_fight()
 		$world.hide()
 		$cl/game_ui.hide()
 		$cl/pause.show()
 	else:
-		stop_sound_think()
-		start_sound_fight()
+		#stop_sound_think()
+		#start_sound_fight()
 		$world.show()
 		$cl/game_ui.show()
 		$cl/pause.hide()
@@ -53,4 +54,5 @@ func _on_place_completed():
 func _on_pause_location_added(n):
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
+	cur_loc=n
 	show_lvls(false)

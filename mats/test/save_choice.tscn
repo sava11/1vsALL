@@ -13,16 +13,29 @@ grow_vertical = 2
 theme = ExtResource("1_sr53k")
 script = ExtResource("2_et61c")
 
-[node name="saves" type="HBoxContainer" parent="."]
+[node name="sc" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 320.0
+horizontal_scroll_mode = 0
+
+[node name="saves" type="VBoxContainer" parent="sc"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Panel" type="Panel" parent="sc/saves"]
+custom_minimum_size = Vector2(2.08165e-12, 64)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="sc/saves/Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -44.0
-offset_right = 256.0
-offset_bottom = 44.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "ADD_SAVE"
+flat = true
+
+[connection signal="button_down" from="sc/saves/Panel/Button" to="." method="_on_button_button_down"]

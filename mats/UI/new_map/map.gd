@@ -4,8 +4,9 @@ extends Control
 @export var current_pos:place
 @export var global_difficulty_add_step:float=0
 @onready var shop=$shop/shop
-@onready var map=$map/locs
+@onready var map=$map/cont/locs/map
 @onready var stat_cont=$stats/cont/ScrollContainer/item_cont
+@export_category("zone_colors")
 var cur_loc:level_template
 var item_rare:float=0
 signal in_shop()
@@ -13,9 +14,9 @@ signal location_added(n:level_template)
 signal place_completed()
 func set_item_rare():
 	var runned:int
-	for e in $map/locs.get_children():
+	for e in $map/cont/locs/map.get_children():
 		runned+=int(e.runned)
-	item_rare=float(runned)/float($map/locs.get_child_count())
+	item_rare=float(runned)/float($map/cont/locs/map.get_child_count())
 
 signal _load_data(node:Object,path:String)
 signal save_data_changed(dict:Dictionary)
@@ -27,8 +28,10 @@ func save_data():
 	}
 func load_data(n:Dictionary):
 	current_pos=get_node(n["cur_pos"])
+
 func _ready():
 	if !Engine.is_editor_hint():
+		#rand_lvl_gen(50)
 		connect("save_data_changed",Callable(gm,"_save_node"))
 		connect("_load_data",Callable(gm,"_load_node"))
 		add_to_group("SN")
@@ -39,10 +42,10 @@ func _ready():
 		$stats/cont/back.hide()
 		$shop.hide()
 		$map.show()
-		current_pos.get_node("btn").icon=load(gm.images.icons.charters.player)
 		current_pos.runned=true
-		for e in $map/locs.get_children():
+		for e in $map/cont/locs/map.get_children():
 			if is_instance_valid(e):
+				e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
 				e.get_node("btn").button_down.connect(
 					Callable(
 						func(b:place):
@@ -50,32 +53,50 @@ func _ready():
 								current_pos=b
 								gm.save_file_data()).bind(e)
 					)
-				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):return x.runned))
-		var mny=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
-		stat_cont.add_child(mny)
-		mny.set_image(load(gm.images.icons.other.money))
-		mny.set_item_name(tr("MONEY"))
-		mny.set_value(gm.player_data.stats.money)
+				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
 		var stats_keys=gm.player_data.stats.keys()
 		for e in DirAccess.get_files_at("res://mats/statuses"):
 			var res:status=load("res://mats/statuses/"+e)
 			var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
+			item.item_name=res.name
 			stat_cont.add_child(item)
 			item.set_image(res.image)
 			item.set_item_name(tr(res.translation_name))
 			item.set_value(gm.player_data.stats[res.name],res.suffix)
-			stat_cont.move_child(item,stats_keys.find(res.name))
-		stat_cont.move_child(mny,0)
-func _process(delta):
-	if !Engine.is_editor_hint():
-		for e in map.get_children():
-			if e!=current_pos and e.get_node("btn").icon!=null and e.get_node("btn").icon.resource_path==gm.images.icons.charters.player :
-				e.get_node("btn").icon=null
-			if e==current_pos and (e.get_node("btn").icon==null or e.get_node("btn").icon.resource_path!=gm.images.icons.charters.player) and e.runned:
-				e.get_node("btn").icon=load(gm.images.icons.charters.player)
-		for cur_place in $map/locs.get_children():
-			cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
+		for i in stat_cont.get_children():
+			var id=stats_keys.find(i.item_name)
+			if id!=i.get_index():
+				stat_cont.move_child(i,id)
 
+var move_temp:Vector2=Vector2.ZERO
+func get_max_map_lenght():
+	var mx=Vector2.ZERO
+	for e in map.get_children():
+		if e.position.x+e.size.x>mx.x:
+			mx.x=e.position.x+e.size.x
+		if e.position.y>mx.y:
+			mx.y=e.position.y+e.size.y
+	return mx
+func _process(delta):
+	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
+		if Input.is_action_just_pressed("rmb"):
+			move_temp=$map/cont/locs.global_position-get_global_mouse_position()
+		if Input.is_action_pressed("rmb"):
+			$map/cont/locs.global_position=get_global_mouse_position()+move_temp
+		var mx=get_max_map_lenght()
+		$map/cont/locs.global_position.x=clamp($map/cont/locs.global_position.x,0,mx.x*1.5)
+		$map/cont/locs.global_position.y=clamp($map/cont/locs.global_position.y,-mx.y/2,mx.y/2)
+		for e in $map/cont/locs/map.get_children():
+			e.player_here=e==current_pos
+			
+			if e.player_here and !e.last_player_here:
+				$map/cont/locs.position=$map/cont.position+$map/cont.size/2-e.position-e.size/2
+				#slow
+				#$map/cont/locs/map.position=$map/cont/locs.position.move_toward($map/cont.position+$map/cont.size/2-e.position-e.size/2,130*delta)
+		if current_pos!=null:
+			for cur_place in $map/cont/locs/map.get_children():
+				cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
+		
 
 func level_completed(n:place):
 	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
@@ -109,7 +130,7 @@ func dijkstra(s: int, t: int):
 	while true:
 		var min_distance: int = inf
 		var min_vertex: int = -1
-		for i in range($map/locs.get_child_count()):
+		for i in range(map.get_child_count()):
 			if not visited[i] and distance[i] < min_distance:
 				min_distance = distance[i]
 				min_vertex = i
@@ -118,12 +139,13 @@ func dijkstra(s: int, t: int):
 			break
 
 		visited[min_vertex] = true
-		var vertices=$map/locs.get_children()
+		var vertices=map.get_children()
 		for neighbor in vertices[min_vertex].neighbors:
-			var neighbor_id=neighbor.get_index()
-			if not visited[neighbor_id] and distance[neighbor_id] > distance[min_vertex] + 1 and neighbor.runned:
-				distance[neighbor_id] = distance[min_vertex] + 1
-				prev[neighbor_id] = min_vertex
+			if is_instance_valid(neighbor):
+				var neighbor_id=neighbor.get_index()
+				if not visited[neighbor_id] and distance[neighbor_id] > distance[min_vertex] + 1 and neighbor.runned:
+					distance[neighbor_id] = distance[min_vertex] + 1
+					prev[neighbor_id] = min_vertex
 
 	if distance[t] == inf:
 		return []
@@ -134,6 +156,47 @@ func dijkstra(s: int, t: int):
 			path.push_front(current)
 			current = prev[current]
 		return path
+
+#func maket_dijkstra(s: int, t: int,data):
+	#var inf =99999999999999999
+	#var visited: Array=[]
+	#for e in range(len(data)):
+		#visited.append(false)
+	#var distance: Array = []
+	#for e in range(len(data)):
+		#distance.append(inf)
+	#var prev: Array=[]
+	#for e in range(len(data)):
+		#prev.append(-1)
+	#distance[s] = 0
+#
+	#while true:
+		#var min_distance: int = inf
+		#var min_vertex: int = -1
+		#for i in range(len(data)):
+			#if not visited[i] and distance[i] < min_distance:
+				#min_distance = distance[i]
+				#min_vertex = i
+#
+		#if min_vertex == -1:
+			#break
+#
+		#visited[min_vertex] = true
+		#var vertices=data
+		#for neighbor in vertices[min_vertex]:
+			#if not visited[neighbor] and distance[neighbor] > distance[min_vertex] + 1:
+				#distance[neighbor] = distance[min_vertex] + 1
+				#prev[neighbor] = min_vertex
+#
+	#if distance[t] == inf:
+		#return []
+	#else:
+		#var path: Array = []
+		#var current: int = t
+		#while current != -1:
+			#path.push_front(current)
+			#current = prev[current]
+		#return path
 
 var shop_items={}#object:[item1,...]
 
@@ -213,3 +276,8 @@ func get_end_price(sts:Dictionary):
 	for e in sts.keys():
 		p+=sts[e]*gm.objs.stats[e].price
 	return p
+func rand_lvl_gen(dot_count:int):
+	for e in map.get_children():
+		e.queue_free()
+	for e in dot_count:
+		var b 

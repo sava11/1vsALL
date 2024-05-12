@@ -200,6 +200,16 @@ text = ":"
 layout_mode = 2
 text = "12"
 
+[node name="st" type="HFlowContainer" parent="cl/game_ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 52.0
+grow_horizontal = 2
+
 [node name="pause" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
 visible = false
 level_container = NodePath("../../world")
@@ -208,10 +218,12 @@ global_difficulty_add_step = 0.15
 [node name="asp_think" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("5_25pn6")
+bus = &"game"
 
 [node name="asp_fight" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("5_p6f36")
+bus = &"game"
 
 [connection signal="location_added" from="cl/pause" to="." method="_on_pause_location_added"]
 [connection signal="place_completed" from="cl/pause" to="." method="_on_place_completed"]

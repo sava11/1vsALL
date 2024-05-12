@@ -4,7 +4,7 @@
 
 [node name="Panel" type="Panel"]
 offset_right = 160.0
-offset_bottom = 160.0
+offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1e7dq")
 metadata/_edit_group_ = true
@@ -15,7 +15,7 @@ modulate = Color(1, 1, 1, 0.584314)
 position = Vector2(80, 180)
 polygon = PackedVector2Array(-88, -188, -88, -20, -24, 12, -24, 28, 24, 28, 24, 12, 88, -20, 88, -188)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="scont" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="cont" type="VBoxContainer" parent="ScrollContainer"]
+[node name="cont" type="VBoxContainer" parent="scont"]
 layout_mode = 2
 size_flags_horizontal = 3
 

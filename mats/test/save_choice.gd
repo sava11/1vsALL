@@ -1,10 +1,12 @@
 extends Control
+var tp=[]
 var cur_name=""
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for e in DirAccess.get_files_at(gm.save_path):
 		var f=FileAccess.open(gm.save_path+"/"+e,FileAccess.READ)
 		var data={}
+		tp.append(e)
 		if f.get_length()!=0:
 			data=JSON.parse_string(f.get_line())["/root/gm"]
 			var save_obj=preload("res://mats/test/save_item/save_item.tscn").instantiate()
@@ -15,10 +17,16 @@ func _ready():
 					gm.fname=e
 					gm.load_file_data()
 					get_tree().change_scene_to_file("res://mats/test/game.tscn")))
-			$saves.add_child(save_obj)
+			$sc/saves.add_child(save_obj)
+	var max_id=0
+	for e in tp:
+		if max_id<int(e):
+			max_id=int(e)
+	cur_name="save"+str(max_id)
 		#$saves.add_child()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_button_button_down():
+	gm.fname=cur_name
+	gm.save_file_data()
+	get_tree().change_scene_to_file("res://mats/test/game.tscn")
+	

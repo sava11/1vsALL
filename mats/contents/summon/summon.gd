@@ -33,11 +33,10 @@ func summon():
 				var rast=75
 				var pos=fnc.move(ang+e*ang1)*rast+global_position
 				var en=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
-				var perc=[]
-				for enemy in gm.maps[gm.get_cur_lvl()].enemys.keys():
-					perc.append(gm.maps[gm.get_cur_lvl()].enemys[enemy])
-				var enemy=gm.maps[gm.get_cur_lvl()].enemys.keys()[fnc._with_chance_ulti(perc)]
-				en.load_scene=load(gm.enemys[enemy].s)
+
+				var enemys=get_tree().current_scene.cur_loc.enemys_data.get_enemys()
+				var perc=fnc._with_chance_ulti(get_tree().current_scene.cur_loc.enemys_data.get_summon_percents())
+				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
 					"elite":fnc._with_chance(0.1)
@@ -51,11 +50,10 @@ func summon():
 				var rast=75
 				var pos=get_tree().current_scene.get_rand_pos()
 				var en=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
-				var perc=[]
-				for enemy in gm.maps[gm.get_cur_lvl()].enemys.keys():
-					perc.append(gm.maps[gm.get_cur_lvl()].enemys[enemy])
-				var enemy=gm.maps[gm.get_cur_lvl()].enemys.keys()[fnc._with_chance_ulti(perc)]
-				en.load_scene=load(gm.enemys[enemy].s)
+
+				var enemys=get_tree().current_scene.cur_loc.enemys_data.get_enemys()
+				var perc=fnc._with_chance_ulti(get_tree().current_scene.cur_loc.enemys_data.get_summon_percents())
+				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
 					"elite":fnc._with_chance(0.1)
