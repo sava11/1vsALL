@@ -28,6 +28,9 @@ func _process(delta):
 	$cl/game_ui/status/stamina/value/cur.text=str(snapped($cl/game_ui/status/stamina.value,0.01))
 	$cl/game_ui/status/stamina/value/max.text=str(snapped($cl/game_ui/status/stamina.max_value,0.01))
 	$cl/game_ui/status/money.text=str(gm.player_data.stats.money)
+	for i in $cl/pause.stat_cont.get_children():
+		if i.get_node("item_name").text==tr("MONEY"):
+			i.set_value(snapped(float($cl/game_ui/status/money.text),0.001))
 	if (wrld.get_child(0) is level_template) and wrld.get_child(0).get("timer")!=null:
 		if !$cl/game_ui/status/time_cont/time.visible:
 			$cl/game_ui/status/time_cont/time.show()

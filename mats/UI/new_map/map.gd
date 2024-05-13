@@ -115,6 +115,14 @@ func _process(delta):
 				cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
 		
 
+func upd_by_sts(data):
+	print(data)
+	for e in data:
+		for i in stat_cont.get_children():
+			print(i.get_node("item_name").text," ",e.editable_status.translation_name)
+			if i.get_node("item_name").text==tr(e.editable_status.translation_name):
+				i.set_value(i.value+e.value,e.editable_status.suffix)
+
 func level_completed(n:place):
 	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
 	if gm.game_prefs.dif<0.5:

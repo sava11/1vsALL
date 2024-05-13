@@ -346,7 +346,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -512.0
+offset_left = -496.0
 offset_bottom = -52.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -356,7 +356,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="cont" type="ScrollContainer" parent="map"]
-clip_contents = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -694,7 +693,6 @@ neighbors = [NodePath("../death3"), NodePath("../death2")]
 place_panel_node = NodePath("../../Control/Panel")
 
 [node name="Control" type="Control" parent="map/cont/locs"]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -706,7 +704,7 @@ offset_bottom = 38.0
 
 [node name="stats" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 128.0
+offset_right = 144.0
 offset_bottom = 320.0
 
 [node name="cont" type="VBoxContainer" parent="stats"]
@@ -740,7 +738,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 128.0
+offset_left = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_bd4u6")

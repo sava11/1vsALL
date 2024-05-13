@@ -537,33 +537,6 @@ func _ready():
 var objs={}
 func upd_objs():
 	objs={
-	"player":{
-			"name":"Warrior",
-			"stats":{
-				"hp":3,
-				"hp_regen":0.1,
-				"max_stamina":1.5,
-				"regen_stamina_point":0.3,
-				"def":1.2,
-				"dmg":1.2,
-				"crit_dmg":7,
-				"%crit_dmg":0.2,
-				#"+%att_speed":0.3,
-				"run_speed":90,
-				"roll_speed":140,
-				#"%sp":0,
-				"take_area":10
-				},
-			"prefs":{
-				"cur_hp":3000000,
-				"do_roll_cost":1,
-				"max_exp_start":40,
-				"max_exp_sc":1,
-				"run_scale":1,
-				"roll_timer":0.4,
-				"roll_scale":1
-				},
-	},
 	"stats":{
 		#"%sp":{
 		#	"v":{

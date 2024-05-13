@@ -20,7 +20,7 @@ func clean():
 		$btns/cancel.disconnect("button_down",e.callable)
 	for e in $scont/cont.get_children():
 		e.queue_free()
-	size.y=40
+	size.y=38
 	cur_place=null
 	hide()
 #func _process(delta):
