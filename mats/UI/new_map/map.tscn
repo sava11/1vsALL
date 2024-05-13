@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=81 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -176,6 +176,23 @@ value = 10.0
 script = ExtResource("6_rde3b")
 editable_status = ExtResource("18_gglgd")
 value = 10.0
+
+[sub_resource type="Resource" id="Resource_xmb7x"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("22_62275")
+value = 10.0
+
+[sub_resource type="Resource" id="Resource_3sobj"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("14_ho0hg")
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_jl6a5"]
+script = ExtResource("12_vtmdr")
+items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
 
 [sub_resource type="Resource" id="Resource_rc0tq"]
 script = ExtResource("6_rde3b")
@@ -467,7 +484,7 @@ offset_top = 20.0
 offset_right = 114.0
 offset_bottom = 36.0
 arena = SubResource("Resource_207ej")
-ingame_statuses = Array[ExtResource("6_rde3b")]([null, null])
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_xmb7x"), SubResource("Resource_3sobj")])
 neighbors = [NodePath("../place11"), NodePath("../place7"), NodePath("../place6")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -477,6 +494,7 @@ offset_top = 20.0
 offset_right = 162.0
 offset_bottom = 36.0
 arena = SubResource("Resource_207ej")
+shop = SubResource("Resource_jl6a5")
 neighbors = [NodePath("../place12")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -622,6 +640,7 @@ place_panel_node = NodePath("../../Control/Panel")
 shop_color = Color(0.745098, 0.658824, 0, 1)
 
 [node name="place14" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+visible = false
 offset_left = 194.0
 offset_top = 20.0
 offset_right = 210.0

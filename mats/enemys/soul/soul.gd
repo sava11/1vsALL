@@ -8,7 +8,7 @@ func past_ready():
 
 func _on_t_timeout():
 	delete()
-	var e=preload("res://mats/enemys/summoner/summoner.tscn").instantiate()
+	var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 	var ens=get_tree().current_scene.cur_enemys.duplicate()
 	var itms_v=[]
 	var itms=[]
