@@ -122,17 +122,17 @@ var shop_changed:bool=false
 var arena_changed:bool=false
 func set_pnl_pos():
 	var pnl_glb_size=Vector2(place_panel_node.size.x,place_panel_node.size.y)*place_panel_node.scale
-	var p_pos=global_position-Vector2(pnl_glb_size.x/2,pnl_glb_size.y)+Vector2(size.x/2,-size.y/4)
+	var p_pos=global_position-Vector2(pnl_glb_size.x/2,pnl_glb_size.y)+Vector2(size.x/2,-size.y/2)
 	place_panel_node.global_position=p_pos
 func _on_button_down():
 	place_panel_node.clean()
 	if !runned:
+		place_panel_node.visible=!place_panel_node.visible
 		if arena!=null:
-			place_panel_node.visible=!place_panel_node.visible
-			if place_panel_node.visible and !runned:
+			if place_panel_node.visible:
 				for e in ingame_statuses:
-					if e!=null:
-						place_panel_node.add_item(e.editable_status.image,e.editable_status.translation_name,e.value,e.editable_status.suffix)
+					if e!=null and e.status!="":
+						place_panel_node.add_item(load(gm.objs.stats[e.status].i),tr(gm.objs.stats[e.status].ct),e.value,gm.objs.stats[e.status].postfix)
 				set_pnl_pos()
 				place_panel_node.connect_to(self,"play","cancel")
 			else:
@@ -148,6 +148,7 @@ func _on_button_down():
 			runned=true
 	else:
 		if shop!=null:
+			place_panel_node.visible=!place_panel_node.visible
 			set_pnl_pos()
 			place_panel_node.visible=true
 			runned=true

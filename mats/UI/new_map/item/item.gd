@@ -10,6 +10,7 @@ extends HBoxContainer
 @export var value=0
 func _ready():
 	if view: 
+		iname.hide()
 		iname.size_flags_horizontal=1
 		img.size_flags_horizontal=2
 func set_image(texture:Texture2D):

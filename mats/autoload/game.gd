@@ -531,47 +531,19 @@ func _ready():
 		emit_signal("_load_data",self,str(get_path()))
 	DirAccess.make_dir_absolute(save_path)
 	add_to_group("SN")
-	upd_objs()
 	await get_tree().process_frame
 
-var objs={}
-func upd_objs():
-	objs={
+var objs={
 	"stats":{
-		#"%sp":{
-		#	"v":{
-		#		0:{"v":{"x":0.005,"y":0.01},"%":0.5,},
-		#		1:{"v":{"x":0.05,"y":0.1},"%":0.35,},
-		#		2:{"v":{"x":0.11,"y":0.3},"%":0.10,},
-		#		3:{"v":{"x":0.3,"y":0.4},"%":0.05,},
-		#		},
-		#	"-v":{
-		#		0:{"v":{"x":-0.5,"y":-0.45},"%":0.5,},
-		#		1:{"v":{"x":-0.4,"y":-0.3},"%":0.35,},
-		#		2:{"v":{"x":-0.3,"y":-0.35},"%":0.10,},
-		#		3:{"v":{"x":-0.1,"y":-0.25},"%":0.05,},
-		#		},
-		#	"min_v":-0.5,
-		#	"i":images.icons.stats["%sp"],
-		#	"t":tr("%SPEED"),
-		#	"price":120
-		#	},
-		#"do_roll_cost":{
-		#	"v":Vector2(0.2,0.5),
-		#	"i":"res://mats/imgs/icons/skills/rolls.png",
-		#	"t":tr("MAX_STAMINA_VALUE")
-		#	},
-		#"+%att_speed":{
-		#	"v":Vector2(0.005,0.01),
-		#	"-v":Vector2(-0.005,-0.01),
-		#	"min_v":0.2,
-		#	"i":images.icons.stats["+%att_speed"],
-		#	"t":tr("%ATT_SPEED")
-		#	},
 		"money":{
+			"postfix":"",
 			"min_v":0,
+			"i":images.icons.other.money,
+			"t":"MONEY",
+			"ct":"MONEY",
 			},
-		"run_speed":{
+		"roll_speed":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":1,"y":2},"%":0.5,},
 				1:{"v":{"x":2,"y":5},"%":0.35,},
@@ -586,11 +558,32 @@ func upd_objs():
 				},
 			"min_v":50,
 			"i":images.icons.stats["%sp"],
-			"t":tr("%SPEED"),
-			"ct":tr("C%SPEED"),
+			"t":"ROLL",
+			"ct":"CROLL",
+			"price":2.5
+		},
+		"run_speed":{
+			"postfix":"",
+			"v":{
+				0:{"v":{"x":1,"y":2},"%":0.5,},
+				1:{"v":{"x":2,"y":5},"%":0.35,},
+				2:{"v":{"x":6,"y":9},"%":0.10,},
+				3:{"v":{"x":10,"y":14},"%":0.05,},
+				},
+			"-v":{
+				0:{"v":{"x":-1,"y":-2},"%":0.5,},
+				1:{"v":{"x":-2,"y":-7},"%":0.35,},
+				2:{"v":{"x":-7,"y":-10},"%":0.10,},
+				3:{"v":{"x":-10,"y":-13},"%":0.05,},
+				},
+			"min_v":50,
+			"i":images.icons.stats["%sp"],
+			"t":"SPEED",
+			"ct":"CSPEED",
 			"price":2.5
 			},
 		"hp":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":1,"y":1.5},"%":0.5,},
 				1:{"v":{"x":1.5,"y":2},"%":0.35,},
@@ -605,11 +598,12 @@ func upd_objs():
 				},
 			"min_v":1,
 			"i":images.icons.stats.hp,
-			"t":tr("HP"),
-			"ct":tr("CHP"),
+			"t":"HP",
+			"ct":"CHP",
 			"price":3.5
 			},
 		"hp_regen":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":0.001,"y":0.005},"%":0.5,},
 				1:{"v":{"x":0.005,"y":0.008},"%":0.35,},
@@ -624,11 +618,12 @@ func upd_objs():
 				},
 			"min_v":0,
 			"i":images.icons.stats.hp_regen,
-			"t":tr("HP_REGEN"),
-			"ct":tr("CHP_REGEN"),
+			"t":"HP_REGEN",
+			"ct":"CHP_REGEN",
 			"price":4
 			},
 		"dmg":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":0.5,"y":1.0},"%":0.5,},
 				1:{"v":{"x":1,"y":1.3},"%":0.35,},
@@ -643,11 +638,12 @@ func upd_objs():
 				},
 			"min_v":0,
 			"i":images.icons.stats.dmg,
-			"t":tr("DMG"),
-			"ct":tr("CDMG"),
+			"t":"DMG",
+			"ct":"CDMG",
 			"price":5
 			},
 		"crit_dmg":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":0.8,"y":1},"%":0.5,},
 				1:{"v":{"x":1,"y":1.3},"%":0.35,},
@@ -662,11 +658,12 @@ func upd_objs():
 				},
 			"min_v":0,
 			"i":images.icons.stats["crit_dmg"],
-			"t":tr("CRIT_DMG"),
-			"ct":tr("CCRIT_DMG"),
+			"t":"CRIT_DMG",
+			"ct":"CCRIT_DMG",
 			"price":3.5
 			},
 		"%crit_dmg":{
+			"postfix":"%",
 			"v":{
 				0:{"v":{"x":0.01,"y":0.05},"%":0.5,},
 				1:{"v":{"x":0.05,"y":0.08},"%":0.35,},
@@ -681,11 +678,12 @@ func upd_objs():
 				},
 			"min_v":0,
 			"i":images.icons.stats["%crit_dmg"],
-			"t":tr("%CRIT_DMG"),
-			"ct":tr("C%CRIT_DMG"),
+			"t":"%CRIT_DMG",
+			"ct":"C%CRIT_DMG",
 			"price":4
 			},
 		"def":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":0.6,"y":1},"%":0.5,},
 				1:{"v":{"x":1,"y":0.5},"%":0.35,},
@@ -700,11 +698,12 @@ func upd_objs():
 				},
 			"min_v":1,
 			"i":images.icons.stats.def,
-			"t":tr("DEF"),
-			"ct":tr("CDEF"),
+			"t":"DEF",
+			"ct":"CDEF",
 			"price":5.5
 			},
 		"max_stamina":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":1,"y":1.5},"%":0.5,},
 				1:{"v":{"x":1.5,"y":2},"%":0.35,},
@@ -719,11 +718,12 @@ func upd_objs():
 				},
 			"min_v":0.5,
 			"i":images.icons.stats.max_stamina,
-			"t":tr("MAX_STAMINA_VALUE"),
-			"ct":tr("CMAX_STAMINA_VALUE"),
+			"t":"MAX_STAMINA_VALUE",
+			"ct":"CMAX_STAMINA_VALUE",
 			"price":3.2
 			},
 		"regen_stamina_point":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":0.1,"y":0.45},"%":0.5,},
 				1:{"v":{"x":0.5,"y":0.67},"%":0.35,},
@@ -738,11 +738,12 @@ func upd_objs():
 				},
 			"min_v":0.1,
 			"i":images.icons.stats.regen_stamina_point,
-			"t":tr("STAMINA_REGEN_VALUE"),
-			"ct":tr("CSTAMINA_REGEN_VALUE"),
+			"t":"STAMINA_REGEN_VALUE",
+			"ct":"CSTAMINA_REGEN_VALUE",
 			"price":4.2
 			},
 		"take_area":{
+			"postfix":"",
 			"v":{
 				0:{"v":{"x":1,"y":1.5},"%":0.5,},
 				1:{"v":{"x":1.5,"y":2},"%":0.35,},
@@ -757,8 +758,8 @@ func upd_objs():
 				},
 			"min_v":10,
 			"i":images.icons.stats.take_area,
-			"t":tr("COLLECTING"),
-			"ct":tr("CCOLLECTING"),
+			"t":"COLLECTING",
+			"ct":"CCOLLECTING",
 			"price":2.6
 			}
 		},
@@ -766,7 +767,7 @@ func upd_objs():
 		"agility":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("AGILITY_TEXT"),
+			"t":"AGILITY_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -789,7 +790,7 @@ func upd_objs():
 		"agility_hp":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("AGILITY-HP_TEXT"),
+			"t":"AGILITY-HP_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -816,7 +817,7 @@ func upd_objs():
 		"agility_def":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("AGILITY-DEF_TEXT"),
+			"t":"AGILITY-DEF_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -841,7 +842,7 @@ func upd_objs():
 		"hp":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("HP_TEXT"),
+			"t":"HP_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -864,7 +865,7 @@ func upd_objs():
 		"hp_agility":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("AGILITY-HP_TEXT"),
+			"t":"AGILITY-HP_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -891,7 +892,7 @@ func upd_objs():
 		"def":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("DEF_TEXT"),
+			"t":"DEF_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -912,7 +913,7 @@ func upd_objs():
 		"def_hp":{
 			"i":images.undef,
 			"unlocked":false,
-			"t":tr("DEF-HP_TEXT"),
+			"t":"DEF-HP_TEXT",
 			"lvls":{
 				0:{
 					"stats":{
@@ -1004,26 +1005,6 @@ func upd_objs():
 		#		1:{"stats":{"hp":2.2,"dmg":3,"crit_dmg":-5,"max_stamina":1.5,"def":-4},"rare":Vector2(0.1,0.2),"value":34},
 		#		}
 		#	},
-	},
-	"items":{
-		"surikens":{
-			"i":images.undef,
-			"unlocked":false,
-			"t":tr("SURIKEN_TEXT"),
-			"scn":"res://mats/items/sur/sur_spawner.tscn",
-			"lvls":{
-				0:{"stats":{
-					"dmg":1,
-					"crit_dmg":0,
-					"%crit_dmg":0,
-					"item_count":3,
-					"item_spawn_time":5,
-					},
-				"rare":Vector2(0,0.5),
-				"value":40
-				},
-			}
-		}
 	}
 }
 

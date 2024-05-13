@@ -33,7 +33,7 @@ CRIT_DMG,critical damage,критический урон
 DEF,defnce,защита
 MAX_STAMINA_VALUE,stamina,выносливось
 STAMINA_REGEN_VALUE,regenration of stamina per second,восполнение выносливости в секунду
-%SPEED,movement speed,скорость движения
+SPEED,movement speed,скорость движения
 COLLECTING,item collecting range,расстояние сбора предметов
 MONEY,money,деньги
 CHP,health,здровье
@@ -45,7 +45,7 @@ C%ATT_SPEED,attack speed,скорость аттаки
 CDEF,defnce,защита
 CMAX_STAMINA_VALUE,stamina,выносливость
 CSTAMINA_REGEN_VALUE,regen. stamina,восстановление
-C%SPEED,move speed,скорость
+CSPEED,move speed,скорость
 CCOLLECTING,collecting,сбор
 
 THE_SWORD_TEXT,sword upgrade,улучшение меча

@@ -64,19 +64,20 @@ func _ready():
 				Callable(
 					func(b:place):
 						if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
+							if b.shop==null:
+								$map/cont/locs/Control/Panel.hide()
 							current_pos=b
 							gm.save_file_data()).bind(e)
 				)
 			e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
 	var stats_keys=gm.player_data.stats.keys()
-	for e in DirAccess.get_files_at("res://mats/statuses"):
-		var res:status=load("res://mats/statuses/"+e)
+	for e in gm.player_data.stats:
 		var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
-		item.item_name=res.name
+		item.item_name=e
 		stat_cont.add_child(item)
-		item.set_image(res.image)
-		item.set_item_name(tr(res.translation_name))
-		item.set_value(snapped(gm.player_data.stats[res.name],0.001),res.suffix)
+		item.set_image(load(gm.objs.stats[e].i))
+		item.set_item_name(tr(gm.objs.stats[e].ct))
+		item.set_value(snapped(gm.player_data.stats[e],0.001),gm.objs.stats[e].postfix)
 	for i in stat_cont.get_children():
 		var id=stats_keys.find(i.item_name)
 		if id!=i.get_index():
@@ -116,12 +117,10 @@ func _process(delta):
 		
 
 func upd_by_sts(data):
-	print(data)
 	for e in data:
 		for i in stat_cont.get_children():
-			print(i.get_node("item_name").text," ",e.editable_status.translation_name)
-			if i.get_node("item_name").text==tr(e.editable_status.translation_name):
-				i.set_value(i.value+e.value,e.editable_status.suffix)
+			if gm.objs.stats.has(e.status) and i.get_node("item_name").text==tr(gm.objs.stats[e.status].ct):
+				i.set_value(i.value+e.value,gm.objs.stats[e.status].postfix)
 
 func level_completed(n:place):
 	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
@@ -129,10 +128,10 @@ func level_completed(n:place):
 		gm.game_prefs.dif=0.5
 	n.runned=true
 	for e in n.ingame_statuses:
-		fnc.get_hero().add_stats.merge({e.editable_status.name:e.value})
+		fnc.get_hero().add_stats.merge({e.status:e.value})
 		for i in stat_cont.get_children():
-			if i.get_node("item_name").text==tr(e.editable_status.translation_name):
-				i.set_value(i.value+e.value,e.editable_status.suffix)
+			if gm.objs.stats.has(e.status) and i.get_node("item_name").text==tr(gm.objs.stats[e.status].ct):
+				i.set_value(i.value+e.value,gm.objs.stats[e.status].postfix)
 	fnc.get_hero().merge_stats()
 	gm.player_data.in_action=""
 	current_pos=n

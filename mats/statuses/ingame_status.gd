@@ -1,4 +1,5 @@
 class_name ingame_status extends Resource
-@export var editable_status:status
+@export var status:String
 @export var value:float
+
 

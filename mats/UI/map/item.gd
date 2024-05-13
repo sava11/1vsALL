@@ -27,10 +27,7 @@ func load_item(item_name:String):
 		e1.txt=str(stats[e])
 		e1.popup_text=n.t
 		var res=ingame_status.new()
-		res.editable_status=status.new()
-		res.editable_status.image=load(n.i)
-		res.editable_status.name=e
-		res.editable_status.translation_name=n.ct
+		res.status=e
 		res.value=snapped(float(e1.txt),0.001)
 		statuses.append(res)
 		$cont/tcont/c.add_child(e1)
