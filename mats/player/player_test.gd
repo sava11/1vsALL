@@ -278,7 +278,6 @@ func _on_hurt_box_h_ch(v):
 		#state=idle
 
 func _on_hurt_box_no_he():
-	set_deferred("freeze",true)
 	set_linear_velocity(Vector2.ZERO)
 	delete()
 

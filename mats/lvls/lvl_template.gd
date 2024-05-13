@@ -18,7 +18,6 @@ func _ready():
 	if cam!=null:
 		if enemy_path==null:
 			enemy_path=get_node("../ent/enemys")
-		
 		timer=Timer.new()
 		timer.name="Timer"
 		timer.one_shot=true
@@ -44,7 +43,7 @@ func _physics_process(delta):
 			if enemys_data.has_enemys():
 				summon()
 			enemy_spawn_timer_temp=0
-
+			
 func get_rand_pos():
 	var c:NavigationMesh=$nav.navigation_polygon.get_navigation_mesh()
 	var gpols=[]

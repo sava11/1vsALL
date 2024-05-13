@@ -1,4 +1,3 @@
-@tool
 extends Control
 @export var level_container:Node
 @export var current_pos:place
@@ -28,45 +27,60 @@ func save_data():
 	}
 func load_data(n:Dictionary):
 	current_pos=get_node(n["cur_pos"])
-
-func _ready():
-	if !Engine.is_editor_hint():
-		#rand_lvl_gen(50)
-		connect("save_data_changed",Callable(gm,"_save_node"))
-		connect("_load_data",Callable(gm,"_load_node"))
-		add_to_group("SN")
-		if !gm.sn.has(str(get_path())):
-			emit_signal("save_data_changed",save_data())
+func show_death(b:bool=true):
+	for e in map.get_children():
+		if b:
+			e.visible=e.name.contains("death")
 		else:
-			emit_signal("_load_data",self,str(get_path()))
-		$stats/cont/back.hide()
-		$shop.hide()
-		$map.show()
-		current_pos.runned=true
-		for e in $map/cont/locs/map.get_children():
-			if is_instance_valid(e):
-				#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
-				e.get_node("btn").button_down.connect(
-					Callable(
-						func(b:place):
-							if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
-								current_pos=b
-								gm.save_file_data()).bind(e)
-					)
-				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
-		var stats_keys=gm.player_data.stats.keys()
-		for e in DirAccess.get_files_at("res://mats/statuses"):
-			var res:status=load("res://mats/statuses/"+e)
-			var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
-			item.item_name=res.name
-			stat_cont.add_child(item)
-			item.set_image(res.image)
-			item.set_item_name(tr(res.translation_name))
-			item.set_value(snapped(gm.player_data.stats[res.name],0.001),res.suffix)
-		for i in stat_cont.get_children():
-			var id=stats_keys.find(i.item_name)
-			if id!=i.get_index():
-				stat_cont.move_child(i,id)
+			e.visible=!e.name.contains("death")
+		
+func _ready():
+	#rand_lvl_gen(50)
+	var mx=get_max_map_lenght()
+	$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
+	$map/cont/locs.set("theme_override_constants/margin_right",mx.x/2)
+	$map/cont/locs.set("theme_override_constants/margin_top",mx.y/2)
+	$map/cont/locs.set("theme_override_constants/margin_bottom",mx.y/2)
+	get_node("map/cont/locs/map").custom_minimum_size=get_max_map_lenght()
+	connect("save_data_changed",Callable(gm,"_save_node"))
+	connect("_load_data",Callable(gm,"_load_node"))
+	add_to_group("SN")
+	if !gm.sn.has(str(get_path())):
+		emit_signal("save_data_changed",save_data())
+	else:
+		emit_signal("_load_data",self,str(get_path()))
+	$stats/cont/back.hide()
+	$shop.hide()
+	$map.show()
+	current_pos.runned=true
+	var w=current_pos.position.x+$map/cont/locs.get("theme_override_constants/margin_left")/2.5
+	$map/cont.scroll_horizontal=w
+	var h=current_pos.position.y-$map/cont/locs.get("theme_override_constants/margin_top")/2.5
+	$map/cont.scroll_vertical=h
+	for e in $map/cont/locs/map.get_children():
+		if is_instance_valid(e):
+			#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
+			e.get_node("btn").button_down.connect(
+				Callable(
+					func(b:place):
+						if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
+							current_pos=b
+							gm.save_file_data()).bind(e)
+				)
+			e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
+	var stats_keys=gm.player_data.stats.keys()
+	for e in DirAccess.get_files_at("res://mats/statuses"):
+		var res:status=load("res://mats/statuses/"+e)
+		var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
+		item.item_name=res.name
+		stat_cont.add_child(item)
+		item.set_image(res.image)
+		item.set_item_name(tr(res.translation_name))
+		item.set_value(snapped(gm.player_data.stats[res.name],0.001),res.suffix)
+	for i in stat_cont.get_children():
+		var id=stats_keys.find(i.item_name)
+		if id!=i.get_index():
+			stat_cont.move_child(i,id)
 
 func get_max_map_lenght():
 	var mx=-Vector2(999999999,999999999)
@@ -78,14 +92,13 @@ func get_max_map_lenght():
 				mx.y=e.position.y+(e.size.y-20)
 	return mx
 func _process(delta):
-	if has_node("map/cont/locs/map"):
+	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
 		var mx=get_max_map_lenght()
 		$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
 		$map/cont/locs.set("theme_override_constants/margin_right",mx.x/2)
 		$map/cont/locs.set("theme_override_constants/margin_top",mx.y/2)
 		$map/cont/locs.set("theme_override_constants/margin_bottom",mx.y/2)
 		get_node("map/cont/locs/map").custom_minimum_size=get_max_map_lenght()
-	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
 		for e in $map/cont/locs/map.get_children():
 			e.player_here=e==current_pos
 			if e.player_here and !e.last_player_here:
@@ -279,3 +292,14 @@ func get_end_price(sts:Dictionary):
 	for e in sts.keys():
 		p+=sts[e]*gm.objs.stats[e].price
 	return p
+
+
+func _on_player_no_he():
+	current_pos=$map/cont/locs/map/place
+	if get_tree().current_scene.get_node("world").get_child(0) is level_template:
+		get_tree().current_scene.get_node("world").get_child(0).queue_free()
+	for e in get_tree().current_scene.enemy_path.get_children():
+		e.queue_free()
+	gm.player_data.prefs.cur_hp=gm.player_data.stats.hp
+	get_tree().current_scene.recreate_player()
+	get_tree().current_scene.show_lvls()

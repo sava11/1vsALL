@@ -442,6 +442,37 @@ var game_stats={
 			},
 }
 #var cur_gm_stats={}
+const start_player_data={
+	"in_action":"",
+	"deaths":0,
+	"runned_lvls":0,
+	"stats":{
+		"money":0,
+		"hp":3.0,
+		"hp_regen":0.1,
+		"max_stamina":1.5,
+		"regen_stamina_point":0.3,
+		"def":1.2,
+		"dmg":1.2,
+		"crit_dmg":7,
+		"%crit_dmg":0.2,
+		#"+%att_speed":0.3,
+		"run_speed":90,
+		"roll_speed":140,
+		#"%sp":0,
+		"take_area":10
+		},
+	"prefs":{
+		"cur_hp":3000000.0,
+		"cur_stm":3000000.0,
+		"do_roll_cost":1,
+		"max_exp_start":40,
+		"max_exp_sc":1,
+		"run_scale":1,
+		"roll_timer":0.4,
+		"roll_scale":1
+		},
+}
 var player_data={
 	"in_action":"",
 	"deaths":0,
@@ -490,9 +521,6 @@ func save_data():
 func load_data(n:Dictionary):
 	player_data=n.player_data
 	game_prefs=n.game_prefs
-	if player_data.in_action!="":
-		print(player_data.in_action)
-		get_node(player_data.in_action).play()
 
 func _ready():
 	connect("save_data_changed",Callable(gm,"_save_node"))
@@ -504,8 +532,7 @@ func _ready():
 	DirAccess.make_dir_absolute(save_path)
 	add_to_group("SN")
 	upd_objs()
-	await  get_tree().process_frame
-	save_file_data()
+	await get_tree().process_frame
 
 var objs={}
 func upd_objs():
@@ -1039,7 +1066,7 @@ func save_file_data():
 	for e in get_tree().get_nodes_in_group("SN"):
 		_save_node(e.save_data())
 	var save_game := FileAccess.open(save_path+"/"+fname+suffix, FileAccess.WRITE)
-	save_game.store_line(JSON.stringify(sn))
+	save_game.store_line(JSON.stringify(sn,"",false))
 	save_game.close()
 func load_file_data():
 	if (FileAccess.file_exists(save_path+"/"+fname+suffix)):

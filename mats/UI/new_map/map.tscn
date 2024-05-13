@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=78 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/new_map/place/place.tscn" id="3_k2fw6"]
 [ext_resource type="Texture2D" uid="uid://c00wrjavopulm" path="res://mats/imgs/icons/skills/hp.png" id="4_tkcb6"]
 [ext_resource type="Script" path="res://mats/statuses/scripts/status_template.gd" id="5_gf3tx"]
+[ext_resource type="Script" path="res://mats/UI/new_map/actions/sub/summon_boss_data.gd" id="6_nemxn"]
 [ext_resource type="PackedScene" uid="uid://d2iylodnns5c3" path="res://mats/UI/new_map/place/place_item_panel.tscn" id="6_o66ik"]
 [ext_resource type="Script" path="res://mats/statuses/scripts/ingame_status.gd" id="6_rde3b"]
 [ext_resource type="Texture2D" uid="uid://bq5s0f6ckf87k" path="res://mats/imgs/icons/skills/att.png" id="7_5tpil"]
@@ -41,8 +42,8 @@ script = ExtResource("10_emt1y")
 enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_pkmmg"), SubResource("Resource_t4nhv")])
 spawning = true
 enemys_count_min = 1
-enemys_count_max = 1
-time_to_next_enemy_wave_min = 10.0
+enemys_count_max = 10
+time_to_next_enemy_wave_min = 5.0
 time_to_next_enemy_wave_max = 10.0
 
 [sub_resource type="Resource" id="Resource_gkpp6"]
@@ -181,10 +182,40 @@ script = ExtResource("6_rde3b")
 editable_status = ExtResource("14_ho0hg")
 value = 0.2
 
-[sub_resource type="Resource" id="Resource_0exxf"]
+[sub_resource type="Resource" id="Resource_lla73"]
 script = ExtResource("6_rde3b")
-editable_status = ExtResource("16_3ascn")
-value = 2.0
+editable_status = ExtResource("17_1fanq")
+value = -0.1
+
+[sub_resource type="Resource" id="Resource_sxyio"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("20_ok0tt")
+value = 0.5
+
+[sub_resource type="Resource" id="Resource_b5hqd"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("15_53xg0")
+value = 0.7
+
+[sub_resource type="Resource" id="Resource_c4gbw"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("14_273sx")
+value = -5.0
+
+[sub_resource type="Resource" id="Resource_djo0a"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("14_273sx")
+value = -3.0
+
+[sub_resource type="Resource" id="Resource_enchb"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("15_53xg0")
+value = -0.25
+
+[sub_resource type="Resource" id="Resource_ca6t4"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("20_ok0tt")
+value = 0.5
 
 [sub_resource type="Resource" id="Resource_dpojv"]
 script = ExtResource("12_vtmdr")
@@ -193,12 +224,85 @@ count_min = 4
 count_max = 4
 rarity = 0.0
 
+[sub_resource type="Resource" id="Resource_h5t70"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("21_vxaej")
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_wke8r"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("18_gglgd")
+value = 10.0
+
+[sub_resource type="Resource" id="Resource_dag18"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("21_vxaej")
+value = 0.05
+
+[sub_resource type="Resource" id="Resource_y5oga"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("19_cyscp")
+value = -0.02
+
+[sub_resource type="Resource" id="Resource_ml0ac"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("14_ho0hg")
+value = -0.5
+
+[sub_resource type="Resource" id="Resource_ei7bl"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("16_3ascn")
+value = 5.0
+
+[sub_resource type="Resource" id="Resource_yr241"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("17_1fanq")
+value = 0.1
+
+[sub_resource type="Resource" id="Resource_8v8uv"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("21_vxaej")
+value = 0.3
+
 [sub_resource type="Resource" id="Resource_n2rxx"]
 script = ExtResource("12_vtmdr")
 items = Array[Resource("res://mats/UI/new_map/actions/shop/items/item_data.gd")]([])
 count_min = 4
 count_max = 4
 rarity = 0.0
+
+[sub_resource type="Resource" id="Resource_j85et"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("14_ho0hg")
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_3ctgp"]
+script = ExtResource("6_rde3b")
+editable_status = ExtResource("16_3ascn")
+value = 5.0
+
+[sub_resource type="Resource" id="Resource_ut5oq"]
+script = ExtResource("6_nemxn")
+name = "sk br"
+die = false
+boss = "res://mats/enemys/b2/enemy.tscn"
+
+[sub_resource type="Resource" id="Resource_vavpb"]
+script = ExtResource("10_emt1y")
+enemys = Array[Resource("res://mats/UI/new_map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_pkmmg"), SubResource("Resource_t4nhv"), SubResource("Resource_ut5oq")])
+spawning = true
+enemys_count_min = 1
+enemys_count_max = 10
+time_to_next_enemy_wave_min = 5.0
+time_to_next_enemy_wave_max = 10.0
+
+[sub_resource type="Resource" id="Resource_fwhve"]
+script = ExtResource("6_rde3b")
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_84s3h"]
+script = ExtResource("6_rde3b")
+value = 0.0
 
 [sub_resource type="Resource" id="Resource_2hkko"]
 script = ExtResource("12_vtmdr")
@@ -235,17 +339,17 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="cont" type="ScrollContainer" parent="map"]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 14.0
+offset_left = 16.0
 offset_top = 8.0
-offset_right = -14.0
+offset_right = -12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-scroll_horizontal = 100
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
@@ -253,13 +357,9 @@ vertical_scroll_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 153
-theme_override_constants/margin_top = 103
-theme_override_constants/margin_right = 153
-theme_override_constants/margin_bottom = 103
 
 [node name="map" type="Control" parent="map/cont/locs"]
-custom_minimum_size = Vector2(306, 206)
+custom_minimum_size = Vector2(48, -4)
 layout_mode = 2
 
 [node name="place" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
@@ -347,7 +447,6 @@ offset_left = 2.0
 offset_top = 20.0
 offset_right = 18.0
 offset_bottom = 36.0
-arena = SubResource("Resource_207ej")
 shop = SubResource("Resource_rflif")
 neighbors = [NodePath("../place5"), NodePath("../place9")]
 place_panel_node = NodePath("../../Control/Panel")
@@ -407,7 +506,7 @@ offset_top = 164.0
 offset_right = 162.0
 offset_bottom = 180.0
 arena = SubResource("Resource_207ej")
-ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_0exxf"), null])
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_lla73"), SubResource("Resource_sxyio")])
 neighbors = [NodePath("../place16"), NodePath("../place24"), NodePath("../place18")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -417,6 +516,7 @@ offset_top = 164.0
 offset_right = 210.0
 offset_bottom = 180.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_b5hqd"), SubResource("Resource_c4gbw")])
 neighbors = [NodePath("../place22"), NodePath("../place17")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -426,6 +526,7 @@ offset_top = 164.0
 offset_right = 258.0
 offset_bottom = 180.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_djo0a"), SubResource("Resource_enchb"), SubResource("Resource_ca6t4")])
 neighbors = [NodePath("../place22")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -445,6 +546,7 @@ offset_top = 116.0
 offset_right = 306.0
 offset_bottom = 132.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_h5t70"), SubResource("Resource_wke8r")])
 neighbors = [NodePath("../place20")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -454,6 +556,7 @@ offset_top = 116.0
 offset_right = 258.0
 offset_bottom = 132.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_dag18"), SubResource("Resource_y5oga")])
 neighbors = [NodePath("../place21"), NodePath("../place23"), NodePath("../place18")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -463,6 +566,7 @@ offset_top = 116.0
 offset_right = 210.0
 offset_bottom = 132.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_ml0ac"), SubResource("Resource_ei7bl")])
 neighbors = [NodePath("../place22"), NodePath("../place24")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -472,6 +576,7 @@ offset_top = 116.0
 offset_right = 162.0
 offset_bottom = 132.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_yr241"), SubResource("Resource_8v8uv")])
 neighbors = [NodePath("../place25"), NodePath("../place23")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -491,6 +596,7 @@ offset_top = 68.0
 offset_right = 258.0
 offset_bottom = 84.0
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_j85et"), SubResource("Resource_3ctgp")])
 neighbors = [NodePath("../place25"), NodePath("../place27")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -499,7 +605,8 @@ offset_left = 290.0
 offset_top = 68.0
 offset_right = 306.0
 offset_bottom = 84.0
-arena = SubResource("Resource_207ej")
+arena = SubResource("Resource_vavpb")
+ingame_statuses = Array[ExtResource("6_rde3b")]([SubResource("Resource_fwhve"), SubResource("Resource_84s3h")])
 neighbors = [NodePath("../place28"), NodePath("../place21")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -508,8 +615,8 @@ offset_left = 242.0
 offset_top = 20.0
 offset_right = 258.0
 offset_bottom = 36.0
-arena = SubResource("Resource_207ej")
 shop = SubResource("Resource_2hkko")
+ingame_statuses = Array[ExtResource("6_rde3b")]([null, null])
 neighbors = [NodePath("../place27")]
 place_panel_node = NodePath("../../Control/Panel")
 shop_color = Color(0.745098, 0.658824, 0, 1)
@@ -521,10 +628,54 @@ offset_right = 210.0
 offset_bottom = 36.0
 secret = true
 arena = SubResource("Resource_207ej")
+ingame_statuses = Array[ExtResource("6_rde3b")]([null, null])
 neighbors = [NodePath("../place12")]
 place_panel_node = NodePath("../../Control/Panel")
 
+[node name="death" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+visible = false
+offset_top = 8.0
+offset_bottom = 24.0
+level = ""
+level_time = 2.0
+neighbors = [NodePath("../death2")]
+place_panel_node = NodePath("../../Control/Panel")
+
+[node name="death2" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+visible = false
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 24.0
+level = ""
+level_time = 2.0
+neighbors = [NodePath("../death3"), NodePath("../death4")]
+place_panel_node = NodePath("../../Control/Panel")
+
+[node name="death3" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+visible = false
+offset_left = 48.0
+offset_top = 56.0
+offset_right = 64.0
+offset_bottom = 72.0
+level = ""
+level_time = 2.0
+neighbors = [NodePath("../death2"), NodePath("../death4")]
+place_panel_node = NodePath("../../Control/Panel")
+
+[node name="death4" parent="map/cont/locs/map" node_paths=PackedStringArray("neighbors", "place_panel_node") instance=ExtResource("3_k2fw6")]
+visible = false
+offset_left = 88.0
+offset_top = 32.0
+offset_right = 104.0
+offset_bottom = 48.0
+level = ""
+level_time = 2.0
+neighbors = [NodePath("../death3"), NodePath("../death2")]
+place_panel_node = NodePath("../../Control/Panel")
+
 [node name="Control" type="Control" parent="map/cont/locs"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 

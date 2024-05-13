@@ -50,7 +50,7 @@ func img_think():
 	if !player_here and !secret:
 		if shop!=null:
 			$visual.texture=preload("res://mats/UI/new_map/imgs/shop.png")
-			if arena!=null and !runned and arena.has_bosses():
+			if arena!=null and !runned:
 				original=boss_color
 			else:
 				original=shop_color

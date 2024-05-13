@@ -81,3 +81,5 @@ THIS_IS_OCUPED_SHOP,This square is an occupied store. Kill the enemies in this p
 THIS_IS_ARENA,This  area is a battlefield. First you will destroy the enemies and only then will you be able to gain safe passage.,Эта территория является полем боя. Сначала вы уничтожите врагов и только тогда сможете получить безопасный проход.
 THIS_IS_EXIT,Your target may be in this area. You must reach the target.,На этой области может находится ваша цель. Вы должны достичь цели.
 TRAINING_END,At this moment you can left-click on the next active battlefield/shop button.,когда это сообщение закроется вы можете щелкнуть левой кнопкой мыши по кнопке следующего активного поля боя/магазина.
+
+ADD_SAVE,new game,новая игра
