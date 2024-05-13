@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2iylodnns5c3"]
+[gd_scene load_steps=3 format=3 uid="uid://d2iylodnns5c3"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/place/place_item_panel.gd" id="1_1e7dq"]
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_jy4r2"]
 
 [node name="Panel" type="Panel"]
 offset_right = 160.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
+offset_bottom = 37.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("1_jy4r2")
 script = ExtResource("1_1e7dq")
 metadata/_edit_group_ = true
 
@@ -39,9 +41,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
-offset_top = -36.0
+offset_top = -32.0
 offset_right = -4.0
-offset_bottom = -4.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 

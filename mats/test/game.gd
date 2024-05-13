@@ -54,5 +54,7 @@ func _on_place_completed():
 func _on_pause_location_added(n):
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
+	for e in enemy_path.get_children():
+		e.queue_free()
 	cur_loc=n
 	show_lvls(false)

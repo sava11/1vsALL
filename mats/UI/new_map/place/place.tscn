@@ -9,6 +9,7 @@ anchors_preset = 0
 offset_right = 16.0
 offset_bottom = 16.0
 script = ExtResource("2_kjo2x")
+level = "res://mats/lvls/lvl1/lvl1_2.tscn"
 unactive = 0.7
 arena_color = Color(1, 1, 1, 1)
 player_color = Color(0.631373, 0.8, 1, 1)
@@ -23,6 +24,8 @@ anchors_preset = -1
 anchor_top = -1.2
 anchor_right = 1.0
 anchor_bottom = -0.2
+offset_top = -0.799999
+offset_bottom = -0.8
 grow_horizontal = 2
 
 [node name="arena" type="TextureRect" parent="."]

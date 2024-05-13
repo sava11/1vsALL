@@ -18,6 +18,6 @@ func _ready():
 	hurtbox.connect("h_ch",Callable(self,"set_value"))
 	await get_tree().process_frame
 	pb.max_value=hurtbox.m_he
-func set_value(h,_delta):
+func set_value(h):
 	if is_instance_valid(pb):
 		pb.value=h

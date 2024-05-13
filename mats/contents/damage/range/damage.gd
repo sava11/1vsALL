@@ -19,7 +19,7 @@ func aiming():
 	e.hide()
 	e.texture=load(gm.images.icons.other.aim)
 	e.global_position=global_position+Vector2(-e.size.x/2,-36)
-	get_tree().current_scene.ememys_path.add_child(e)
+	get_tree().current_scene.enemy_path.add_child(e)
 func throw():
 	var ang=float(360)/float(count)
 	for e in range(count):
@@ -33,5 +33,5 @@ func throw():
 		a.speed=100
 		a.sqrt=attack_range
 		a.active=false
-		get_tree().current_scene.ememys_path.add_child(a)
+		get_tree().current_scene.enemy_path.add_child(a)
 	trowed=true

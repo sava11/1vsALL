@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://5ufri5swwh1v"]
+[gd_scene load_steps=4 format=3 uid="uid://5ufri5swwh1v"]
 
 [ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="1_45ml2"]
 [ext_resource type="Script" path="res://mats/contents/summoner/sumoner.gd" id="2_edkuk"]
+
+[sub_resource type="Curve" id="Curve_rwxgn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.13089, 0.748555), 0.0, 0.0, 0, 0, Vector2(0.23822, 0.991329), 0.0, 0.0, 0, 0, Vector2(0.319372, 0.439306), 0.0, 0.0, 0, 0, Vector2(0.52356, 0.604046), 0.0, 0.0, 0, 0, Vector2(0.696335, 0.32948), 0.0, 0.0, 0, 0, Vector2(0.767016, 0.601156), 0.0, 0.0, 0, 0, Vector2(1, 0.0144509), 0.0, 0.0, 0, 0]
+point_count = 8
 
 [node name="summoner" type="Sprite2D"]
 position = Vector2(76, 39)
@@ -10,3 +14,5 @@ scale = Vector2(0.01, 0.01)
 skew = 0.698132
 texture = ExtResource("1_45ml2")
 script = ExtResource("2_edkuk")
+time_curve = SubResource("Curve_rwxgn")
+time = 1.5

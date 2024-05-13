@@ -42,7 +42,7 @@ func summon():
 					"elite":fnc._with_chance(0.1)
 				}
 				en.global_position=pos
-				get_tree().current_scene.ememys_path.add_child(en)
+				get_tree().current_scene.enemy_path.add_child(en)
 		1:
 			var spwn_ang=360
 			var ang1=spwn_ang/float(count)
@@ -59,7 +59,7 @@ func summon():
 					"elite":fnc._with_chance(0.1)
 				}
 				en.global_position=pos
-				get_tree().current_scene.ememys_path.add_child(en)
+				get_tree().current_scene.enemy_path.add_child(en)
 		2:
 			var ang=360.0/float(count)
 			for i in range(count):

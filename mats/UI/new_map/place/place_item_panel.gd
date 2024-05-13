@@ -37,4 +37,4 @@ func add_item(img:Texture2D,iname:String,value:float,value_suffix:String=""):
 	itm.set_item_name(iname)
 	itm.set_value(value,value_suffix)
 	position.y-=itm.size.y/2
-	size.y=(itm.size.y)*$scont/cont.get_child_count()+40
+	size.y=(itm.size.y)*$scont/cont.get_child_count()+38

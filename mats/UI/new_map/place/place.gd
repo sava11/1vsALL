@@ -122,14 +122,16 @@ var shop_changed:bool=false
 var arena_changed:bool=false
 func _on_button_down():
 	place_panel_node.clean()
-	var p_pos=global_position-Vector2(place_panel_node.size.x/2,place_panel_node.size.y)*place_panel_node.scale+Vector2(size.x/2,-size.y/4)
+	var pnl_glb_size=Vector2(place_panel_node.size.x,place_panel_node.size.y)*place_panel_node.scale
+	var p_pos=global_position-Vector2(pnl_glb_size.x/2,pnl_glb_size.y)+Vector2(size.x/2,-size.y/4)
 	if !runned:
 		if arena!=null:
 			place_panel_node.visible=!place_panel_node.visible
 			if place_panel_node.visible and !runned:
 				place_panel_node.global_position=p_pos
 				for e in ingame_statuses:
-					place_panel_node.add_item(e.editable_status.image,e.editable_status.translation_name,e.value,e.editable_status.suffix)
+					if e!=null:
+						place_panel_node.add_item(e.editable_status.image,e.editable_status.translation_name,e.value,e.editable_status.suffix)
 				place_panel_node.connect_to(self,"play","cancel")
 			else:
 				if place_panel_node.visible:

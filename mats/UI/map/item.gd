@@ -50,10 +50,9 @@ func _on_vs_value_changed(value):
 
 
 func _on_button_down():
-	gm.player_data.other.money-=value
+	gm.player_data.stats.money-=value
 	fnc.get_hero().add_stats=stats
 	fnc.get_hero().merge_stats()
-	get_parent().get_parent().get_parent().upd_stats()
-	get_parent().get_parent().get_parent().shop_items[get_parent().get_parent().get_parent().posid].erase(del_name)
+	get_parent().get_parent().get_parent().shop_items[get_parent().get_parent().get_parent().current_pos].erase(del_name)
 	queue_free()
 	pass # Replace with function body.

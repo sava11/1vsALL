@@ -568,6 +568,9 @@ func upd_objs():
 		#	"i":images.icons.stats["+%att_speed"],
 		#	"t":tr("%ATT_SPEED")
 		#	},
+		"money":{
+			"min_v":0,
+			},
 		"run_speed":{
 			"v":{
 				0:{"v":{"x":1,"y":2},"%":0.5,},

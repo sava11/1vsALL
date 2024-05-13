@@ -177,9 +177,12 @@ func pre_status(_delta):
 	$get_enemy_area.rotation_degrees=fnc.angle(last_mvd)
 	$hirtbox.rotation_degrees=$get_enemy_area.rotation_degrees
 	$get_money_area/c.shape.radius=cd.stats.take_area
+	#cd.stats.hp=hb.m_he
+	cd.prefs.cur_hp=hb.he
 	if state!="d":
 		if hb.m_he>hb.he:
 			hb.set_he(hb.he+cd.stats["hp_regen"]*_delta)
+			
 		if exp >= cd.prefs["max_exp_start"]:
 			lvl+=1
 			exp-=cd.prefs["max_exp_start"]

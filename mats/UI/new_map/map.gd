@@ -45,7 +45,7 @@ func _ready():
 		current_pos.runned=true
 		for e in $map/cont/locs/map.get_children():
 			if is_instance_valid(e):
-				e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
+				#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
 				e.get_node("btn").button_down.connect(
 					Callable(
 						func(b:place):
@@ -62,35 +62,39 @@ func _ready():
 			stat_cont.add_child(item)
 			item.set_image(res.image)
 			item.set_item_name(tr(res.translation_name))
-			item.set_value(gm.player_data.stats[res.name],res.suffix)
+			item.set_value(snapped(gm.player_data.stats[res.name],0.001),res.suffix)
 		for i in stat_cont.get_children():
 			var id=stats_keys.find(i.item_name)
 			if id!=i.get_index():
 				stat_cont.move_child(i,id)
 
-var move_temp:Vector2=Vector2.ZERO
 func get_max_map_lenght():
-	var mx=Vector2.ZERO
+	var mx=-Vector2(999999999,999999999)
 	for e in map.get_children():
-		if e.position.x+e.size.x>mx.x:
-			mx.x=e.position.x+e.size.x
-		if e.position.y>mx.y:
-			mx.y=e.position.y+e.size.y
+		if e.visible:
+			if e.position.x+e.size.x>mx.x:
+				mx.x=e.position.x+e.size.x
+			if e.position.y>mx.y:
+				mx.y=e.position.y+(e.size.y-20)
 	return mx
 func _process(delta):
-	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
-		if Input.is_action_just_pressed("rmb"):
-			move_temp=$map/cont/locs.global_position-get_global_mouse_position()
-		if Input.is_action_pressed("rmb"):
-			$map/cont/locs.global_position=get_global_mouse_position()+move_temp
+	if has_node("map/cont/locs/map"):
 		var mx=get_max_map_lenght()
-		$map/cont/locs.global_position.x=clamp($map/cont/locs.global_position.x,0,mx.x*1.5)
-		$map/cont/locs.global_position.y=clamp($map/cont/locs.global_position.y,-mx.y/2,mx.y/2)
+		$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
+		$map/cont/locs.set("theme_override_constants/margin_right",mx.x/2)
+		$map/cont/locs.set("theme_override_constants/margin_top",mx.y/2)
+		$map/cont/locs.set("theme_override_constants/margin_bottom",mx.y/2)
+		get_node("map/cont/locs/map").custom_minimum_size=get_max_map_lenght()
+	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
 		for e in $map/cont/locs/map.get_children():
 			e.player_here=e==current_pos
-			
 			if e.player_here and !e.last_player_here:
-				$map/cont/locs.position=$map/cont.position+$map/cont.size/2-e.position-e.size/2
+				var w=e.position.x+$map/cont/locs.get("theme_override_constants/margin_left")/2.5
+				$map/cont.scroll_horizontal=w
+				var h=e.position.y-$map/cont/locs.get("theme_override_constants/margin_top")/2.5
+				$map/cont.scroll_vertical=h
+				
+				#$map/cont/locs.position=$map/cont.position+$map/cont.size/2-e.position-e.size/2
 				#slow
 				#$map/cont/locs/map.position=$map/cont/locs.position.move_toward($map/cont.position+$map/cont.size/2-e.position-e.size/2,130*delta)
 		if current_pos!=null:
@@ -268,7 +272,6 @@ func _upd_items_values():
 			for n in shop_items[shop].keys():
 				var item_lvl=shop_items[shop][n].lvl#get_item_lvl(, shop_items[shop])
 				var sd=gm.objs.updates[n.split("/")[0]]["lvls"][item_lvl]
-				
 				var v=fnc._with_dific(sd.value,fnc.rnd.randf_range(sd.rare.x+gm.game_prefs.dif,sd.rare.y+gm.game_prefs.dif))
 				shop_items[shop][n].val=v
 func get_end_price(sts:Dictionary):
@@ -276,8 +279,3 @@ func get_end_price(sts:Dictionary):
 	for e in sts.keys():
 		p+=sts[e]*gm.objs.stats[e].price
 	return p
-func rand_lvl_gen(dot_count:int):
-	for e in map.get_children():
-		e.queue_free()
-	for e in dot_count:
-		var b 

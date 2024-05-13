@@ -1,6 +1,5 @@
-[gd_scene load_steps=19 format=3 uid="uid://75sadqvlf16"]
+[gd_scene load_steps=18 format=3 uid="uid://75sadqvlf16"]
 
-[ext_resource type="PackedScene" uid="uid://bbkyx2cqwtfoj" path="res://mats/lvls/lvl1/lvl1_2.tscn" id="1_nqn2u"]
 [ext_resource type="Script" path="res://mats/test/game.gd" id="1_tg1vd"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="2_37cv4"]
 [ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/new_map/map.tscn" id="3_ojpc5"]
@@ -39,10 +38,6 @@ script = ExtResource("1_tg1vd")
 zoom = Vector2(1.25, 1.25)
 
 [node name="world" type="Node2D" parent="."]
-visible = false
-
-[node name="lvl" parent="world" node_paths=PackedStringArray("cam") instance=ExtResource("1_nqn2u")]
-cam = NodePath("../../cam")
 
 [node name="ent" type="Node2D" parent="world"]
 process_mode = 1
@@ -172,7 +167,7 @@ offset_left = 46.0
 offset_top = 30.0
 offset_right = 103.0
 offset_bottom = 45.0
-text = "99"
+text = "0"
 label_settings = SubResource("LabelSettings_cj41k")
 
 [node name="money_img" type="Sprite2D" parent="cl/game_ui/status"]

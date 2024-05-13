@@ -118,13 +118,10 @@ func summon_bosses():
 			e.global_position=pos
 func summon(enemys_count=0):
 	var items=enemys_data.get_summon_percents()
-	var local_percents=[]
-	for e in items.keys():
-		local_percents.append(items[e])
 	if enemys_count==0:enemys_count=fnc.rnd.randi_range(enemys_data.enemys_count_min,enemys_data.enemys_count_max)
 	for ec in range(enemys_count):
 		var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
-		e.load_scene=load(enemys_data.enemys[items[fnc._with_chance_ulti(local_percents)]].enemy)
+		e.load_scene=load(enemys_data.enemys[fnc._with_chance_ulti(items)].enemy)
 		var pos=get_rand_pos()
 		e.scene_data={
 			"global_position":pos,
