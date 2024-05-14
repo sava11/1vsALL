@@ -4,7 +4,6 @@ var stats={}
 var value:int=0
 var lvl=0
 var del_name
-var statuses:Array[ingame_status]
 # Called when the node enters the scene tree for the first time.
 func load_item(item_name:String):
 	var sd=gm.objs.updates[item_name].duplicate(true)
@@ -26,10 +25,6 @@ func load_item(item_name:String):
 		e1.img=load(n.i)
 		e1.txt=str(stats[e])
 		e1.popup_text=n.t
-		var res=ingame_status.new()
-		res.status=e
-		res.value=snapped(float(e1.txt),0.001)
-		statuses.append(res)
 		$cont/tcont/c.add_child(e1)
 		#e1.img=load(cd[e].i)
 
@@ -58,7 +53,7 @@ func _on_button_down():
 	gm.player_data.stats.money-=value
 	fnc.get_hero().add_stats=stats
 	fnc.get_hero().merge_stats()
-	get_parent().get_parent().get_parent().upd_by_sts(statuses)
+	get_parent().get_parent().get_parent().upd_by_sts()
 	get_parent().get_parent().get_parent().shop_items[get_parent().get_parent().get_parent().current_pos].erase(del_name)
 	queue_free()
 	pass # Replace with function body.

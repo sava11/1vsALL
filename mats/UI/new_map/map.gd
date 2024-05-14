@@ -95,14 +95,13 @@ func get_max_map_lenght():
 				mx.y=e.position.y+(e.size.y-20)
 	return mx
 func _process(delta):
-	if Engine.is_editor_hint():
-		for e in $map/cont/locs/map.get_children():
-			e.modulate=Color.WHITE
-			if e is place and e.ingame_statuses!=null:
-				for i in e.ingame_statuses:
-					if i.status=="":
-						e.modulate=Color.YELLOW_GREEN
-					
+	#if Engine.is_editor_hint():
+		#for e in $map/cont/locs/map.get_children():
+			#e.modulate=Color.WHITE
+			#if e is place and e.ingame_statuses!=null:
+				#for i in e.ingame_statuses:
+					#if i.status=="":
+						#e.modulate=Color.YELLOW_GREEN
 	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
 		var mx=get_max_map_lenght()
 		$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
@@ -126,11 +125,11 @@ func _process(delta):
 				cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
 		
 
-func upd_by_sts(data):
-	for e in data:
+func upd_by_sts():
+	for e in gm.player_data.stats:
 		for i in stat_cont.get_children():
-			if gm.objs.stats.has(e.status) and i.get_node("item_name").text==tr(gm.objs.stats[e.status].ct):
-				i.set_value(i.value+e.value,gm.objs.stats[e.status].postfix)
+			if i.get_node("item_name").text==tr(gm.objs.stats[e].ct):
+				i.set_value(gm.player_data.stats[e],gm.objs.stats[e].postfix)
 
 func level_completed(n:place):
 	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
@@ -139,10 +138,8 @@ func level_completed(n:place):
 	n.runned=true
 	for e in n.ingame_statuses:
 		fnc.get_hero().add_stats.merge({e.status:e.value})
-		for i in stat_cont.get_children():
-			if gm.objs.stats.has(e.status) and i.get_node("item_name").text==tr(gm.objs.stats[e.status].ct):
-				i.set_value(i.value+e.value,gm.objs.stats[e.status].postfix)
 	fnc.get_hero().merge_stats()
+	upd_by_sts()
 	gm.player_data.in_action=""
 	current_pos=n
 	gm.save_file_data()
@@ -319,4 +316,5 @@ func _on_player_no_he():
 		e.queue_free()
 	gm.player_data.prefs.cur_hp=gm.player_data.stats.hp
 	get_tree().current_scene.recreate_player()
+	gm.save_file_data()
 	get_tree().current_scene.show_lvls()

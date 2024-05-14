@@ -15,7 +15,7 @@ func disconnect_from(n:Node,play:String,cancel:String):
 	$cont/btns/play.button_down.disconnect(Callable(n,play))
 	clean()
 func clean():
-	size.y=24
+	size.y=26
 	for e in $cont/btns/play.get_signal_connection_list("button_down"):
 		$cont/btns/play.disconnect("button_down",e.callable)
 	for e in $cont/btns/cancel.get_signal_connection_list("button_down"):
@@ -37,4 +37,4 @@ func add_item(img:Texture2D,iname:String,value:float,value_suffix:String=""):
 	itm.set_item_name(iname)
 	itm.set_value(value,value_suffix)
 	position.y-=(itm.size.y*scale.y)
-	size.y=(itm.size.y*scale.y)*$cont/scont/cont.get_child_count()+24
+	size.y=(itm.size.y*scale.y)*$cont/scont/cont.get_child_count()+26

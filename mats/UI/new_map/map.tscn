@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=59 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/new_map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
@@ -113,7 +113,12 @@ rarity = 0.0
 [sub_resource type="Resource" id="Resource_o04sm"]
 script = ExtResource("7_q8r3s")
 status = "money"
-value = 10.0
+value = 5.0
+
+[sub_resource type="Resource" id="Resource_tf0d0"]
+script = ExtResource("7_q8r3s")
+status = "hp"
+value = -1.0
 
 [sub_resource type="Resource" id="Resource_xmb7x"]
 script = ExtResource("7_q8r3s")
@@ -418,7 +423,7 @@ offset_right = 66.0
 offset_bottom = 36.0
 level_time = 2.0
 arena = SubResource("Resource_207ej")
-ingame_statuses = Array[ExtResource("7_q8r3s")]([SubResource("Resource_o04sm")])
+ingame_statuses = Array[ExtResource("7_q8r3s")]([SubResource("Resource_o04sm"), SubResource("Resource_tf0d0")])
 neighbors = [NodePath("../place8"), NodePath("../place6")]
 place_panel_node = NodePath("../../Control/Panel")
 
@@ -505,7 +510,6 @@ offset_top = 164.0
 offset_right = 306.0
 offset_bottom = 180.0
 level_time = 2.0
-arena = SubResource("Resource_207ej")
 shop = SubResource("Resource_dpojv")
 neighbors = [NodePath("../place19")]
 place_panel_node = NodePath("../../Control/Panel")
@@ -655,7 +659,6 @@ neighbors = [NodePath("../death3"), NodePath("../death2")]
 place_panel_node = NodePath("../../Control/Panel")
 
 [node name="Control" type="Control" parent="map/cont/locs"]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 
