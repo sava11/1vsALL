@@ -47,7 +47,7 @@ CMAX_STAMINA_VALUE,stamina,выносливость
 CSTAMINA_REGEN_VALUE,regen. stamina,восстановление
 CSPEED,move speed,скорость
 CCOLLECTING,collecting,сбор
-
+CROLL,roll speed,быстрота переката
 THE_SWORD_TEXT,sword upgrade,улучшение меча
 ARMOR_TEXT,armor upgrade,улучшение брони
 BOOTS_TEXT,boots upgrade,улучшение обуви

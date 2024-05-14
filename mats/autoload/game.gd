@@ -52,6 +52,7 @@ const images={
 			"max_stamina":"res://mats/imgs/icons/skills/max_stamina.png",
 			"regen_stamina_point":"res://mats/imgs/icons/skills/stamina_regen.png",
 			"%sp":"res://mats/imgs/icons/skills/speed.png",
+			"rsp":"res://mats/imgs/icons/skills/roll speed.png",
 			"take_area":"res://mats/imgs/icons/skills/take.png",
 		},
 		"other":{
@@ -557,7 +558,7 @@ var objs={
 				3:{"v":{"x":-10,"y":-13},"%":0.05,},
 				},
 			"min_v":50,
-			"i":images.icons.stats["%sp"],
+			"i":images.icons.stats["rsp"],
 			"t":"ROLL",
 			"ct":"CROLL",
 			"price":2.5

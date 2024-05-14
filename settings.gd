@@ -77,4 +77,4 @@ func _on_lng_item_selected(i):
 	elif i==1:
 		TranslationServer.set_locale("en")
 	data.lang=i
-	gm.upd_objs()
+	#gm.upd_objs()
