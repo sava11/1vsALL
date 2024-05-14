@@ -485,7 +485,7 @@ var player_data={
 		"regen_stamina_point":0.3,
 		"def":1.2,
 		"dmg":1.2,
-		"crit_dmg":7,
+		"crit_dmg":3,
 		"%crit_dmg":0.2,
 		#"+%att_speed":0.3,
 		"run_speed":90,

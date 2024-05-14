@@ -1,3 +1,4 @@
+@tool
 extends Control
 @export var level_container:Node
 @export var current_pos:place
@@ -35,53 +36,54 @@ func show_death(b:bool=true):
 			e.visible=!e.name.contains("death")
 		
 func _ready():
-	#rand_lvl_gen(50)
-	var mx=get_max_map_lenght()
-	$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
-	$map/cont/locs.set("theme_override_constants/margin_right",mx.x/2)
-	$map/cont/locs.set("theme_override_constants/margin_top",mx.y/2)
-	$map/cont/locs.set("theme_override_constants/margin_bottom",mx.y/2)
-	get_node("map/cont/locs/map").custom_minimum_size=get_max_map_lenght()
-	connect("save_data_changed",Callable(gm,"_save_node"))
-	connect("_load_data",Callable(gm,"_load_node"))
-	add_to_group("SN")
-	if !gm.sn.has(str(get_path())):
-		emit_signal("save_data_changed",save_data())
-	else:
-		emit_signal("_load_data",self,str(get_path()))
-	$stats/cont/back.hide()
-	$shop.hide()
-	$map.show()
-	current_pos.runned=true
-	var w=current_pos.position.x+$map/cont/locs.get("theme_override_constants/margin_left")/2.5
-	$map/cont.scroll_horizontal=w
-	var h=current_pos.position.y-$map/cont/locs.get("theme_override_constants/margin_top")/2.5
-	$map/cont.scroll_vertical=h
-	for e in $map/cont/locs/map.get_children():
-		if is_instance_valid(e):
-			#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
-			e.get_node("btn").button_down.connect(
-				Callable(
-					func(b:place):
-						if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
-							if b.shop==null:
-								$map/cont/locs/Control/Panel.hide()
-							current_pos=b
-							gm.save_file_data()).bind(e)
-				)
-			e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
-	var stats_keys=gm.player_data.stats.keys()
-	for e in gm.player_data.stats:
-		var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
-		item.item_name=e
-		stat_cont.add_child(item)
-		item.set_image(load(gm.objs.stats[e].i))
-		item.set_item_name(tr(gm.objs.stats[e].ct))
-		item.set_value(snapped(gm.player_data.stats[e],0.001),gm.objs.stats[e].postfix)
-	for i in stat_cont.get_children():
-		var id=stats_keys.find(i.item_name)
-		if id!=i.get_index():
-			stat_cont.move_child(i,id)
+	if !Engine.is_editor_hint():
+		#rand_lvl_gen(50)
+		var mx=get_max_map_lenght()
+		$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
+		$map/cont/locs.set("theme_override_constants/margin_right",mx.x/2)
+		$map/cont/locs.set("theme_override_constants/margin_top",mx.y/2)
+		$map/cont/locs.set("theme_override_constants/margin_bottom",mx.y/2)
+		get_node("map/cont/locs/map").custom_minimum_size=get_max_map_lenght()
+		connect("save_data_changed",Callable(gm,"_save_node"))
+		connect("_load_data",Callable(gm,"_load_node"))
+		add_to_group("SN")
+		if !gm.sn.has(str(get_path())):
+			emit_signal("save_data_changed",save_data())
+		else:
+			emit_signal("_load_data",self,str(get_path()))
+		$stats/cont/back.hide()
+		$shop.hide()
+		$map.show()
+		current_pos.runned=true
+		var w=current_pos.position.x+$map/cont/locs.get("theme_override_constants/margin_left")/2.5
+		$map/cont.scroll_horizontal=w
+		var h=current_pos.position.y-$map/cont/locs.get("theme_override_constants/margin_top")/2.5
+		$map/cont.scroll_vertical=h
+		for e in $map/cont/locs/map.get_children():
+			if is_instance_valid(e):
+				#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
+				e.get_node("btn").button_down.connect(
+					Callable(
+						func(b:place):
+							if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
+								if b.shop==null:
+									$map/cont/locs/Control/Panel.hide()
+								current_pos=b
+								gm.save_file_data()).bind(e)
+					)
+				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
+		var stats_keys=gm.player_data.stats.keys()
+		for e in gm.player_data.stats:
+			var item=preload("res://mats/UI/new_map/item/item.tscn").instantiate()
+			item.item_name=e
+			stat_cont.add_child(item)
+			item.set_image(load(gm.objs.stats[e].i))
+			item.set_item_name(tr(gm.objs.stats[e].ct))
+			item.set_value(snapped(gm.player_data.stats[e],0.001),gm.objs.stats[e].postfix)
+		for i in stat_cont.get_children():
+			var id=stats_keys.find(i.item_name)
+			if id!=i.get_index():
+				stat_cont.move_child(i,id)
 
 func get_max_map_lenght():
 	var mx=-Vector2(999999999,999999999)
@@ -93,6 +95,14 @@ func get_max_map_lenght():
 				mx.y=e.position.y+(e.size.y-20)
 	return mx
 func _process(delta):
+	if Engine.is_editor_hint():
+		for e in $map/cont/locs/map.get_children():
+			e.modulate=Color.WHITE
+			if e is place and e.ingame_statuses!=null:
+				for i in e.ingame_statuses:
+					if i.status=="":
+						e.modulate=Color.YELLOW_GREEN
+					
 	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
 		var mx=get_max_map_lenght()
 		$map/cont/locs.set("theme_override_constants/margin_left",mx.x/2)
