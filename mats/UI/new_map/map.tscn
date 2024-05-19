@@ -281,6 +281,7 @@ script = ExtResource("1_3h318")
 current_pos = NodePath("map/cont/locs/map/place")
 
 [node name="map" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -672,7 +673,6 @@ layout_mode = 2
 text = "BACK"
 
 [node name="shop" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -689,13 +689,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 13.0
 offset_top = 17.0
-offset_right = -257.0
+offset_right = -247.0
 offset_bottom = -159.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
-theme_override_constants/h_separation = 1
-theme_override_constants/v_separation = 1
 columns = 4
 
 [connection signal="in_shop" from="." to="." method="_on_in_shop"]

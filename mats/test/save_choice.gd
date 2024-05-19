@@ -23,7 +23,7 @@ func _ready():
 	for e in tp:
 		if max_id<int(e):
 			max_id=int(e)
-	cur_name="save"+str(max_id)
+	cur_name="save"+str(max_id+1)
 		#$saves.add_child()
 
 func _on_button_button_down():
