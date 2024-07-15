@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cwuikrlxnv87j" path="res://mats/contents/damage/mele/damage.tscn" id="3_r6g3s"]
 [ext_resource type="PackedScene" uid="uid://d4bnt6s48h516" path="res://mats/contents/summon/summon.tscn" id="4_skmij"]
 [ext_resource type="PackedScene" uid="uid://nv6tpxtgw35c" path="res://mats/enemys/smart_fireball/smart_fireball.tscn" id="5_6f4hp"]
-[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="6_rn0bm"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="6_rn0bm"]
 [ext_resource type="Texture2D" uid="uid://buiutkjqamrfp" path="res://mats/imgs/sorceress/Down/SorceressDownAttack01.png" id="7_5c0yb"]
 [ext_resource type="Texture2D" uid="uid://012dhue6knw5" path="res://mats/imgs/sorceress/Left/SorceressLeftAttack01.png" id="8_2t6ng"]
 [ext_resource type="Texture2D" uid="uid://blfolqc1kq5s8" path="res://mats/imgs/sorceress/Right/SorceressRighAttack01.png" id="9_pc5i1"]

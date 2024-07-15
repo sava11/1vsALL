@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw82qadqqwww6"]
+
+[ext_resource type="Texture2D" uid="uid://cqca0br2nws0p" path="res://mats/UI/imgs/card.png" id="1_6gwo8"]
+[ext_resource type="Script" path="res://mats/UI/map/shop_item/item.gd" id="1_ikc56"]
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_n5edf"]
+[ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="2_sxmxu"]
+[ext_resource type="Texture2D" uid="uid://dwfua03w2t8nq" path="res://mats/UI/imgs/card_rare.png" id="3_bofn4"]
+
+[node name="item" type="TextureRect"]
+custom_minimum_size = Vector2(56, 119)
+offset_right = 56.0
+offset_bottom = 119.0
+theme = ExtResource("1_n5edf")
+texture = ExtResource("1_6gwo8")
+script = ExtResource("1_ikc56")
+item_name = "agility"
+
+[node name="Panel" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bofn4")
+
+[node name="whatIs" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.0
+offset_top = 5.0
+offset_right = 8.0
+offset_bottom = 21.0
+grow_horizontal = 2
+texture = ExtResource("2_sxmxu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="txt" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 4.0
+offset_top = 28.0
+offset_right = 212.0
+offset_bottom = 140.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "hihifhesh fh ish sifhsihfiu hifhishdfuih ufhiuh eu ufh ufheu h ufhuh  heu ufheu h"
+
+[node name="cont" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 60.0
+offset_right = 48.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="cnt" type="VBoxContainer" parent="cont"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="buy" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 60.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+focus_mode = 0
+flat = true
+
+[node name="value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -12.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "9999"
+
+[connection signal="button_down" from="buy" to="." method="_on_button_down"]

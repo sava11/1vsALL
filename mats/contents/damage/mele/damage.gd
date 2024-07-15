@@ -73,7 +73,7 @@ func _ready():
 			damage*=elite_damage_scale
 	past_ready()
 func past_ready():pass
-func past_proc(d:float):pass
+func past_proc(_d:float):pass
 var bs=[]
 func _physics_process(delta):
 	queue_redraw()

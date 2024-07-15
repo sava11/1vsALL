@@ -1,8 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://75sadqvlf16"]
 
 [ext_resource type="Script" path="res://mats/test/game.gd" id="1_tg1vd"]
-[ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="2_37cv4"]
-[ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/new_map/map.tscn" id="3_ojpc5"]
+[ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/map/map.tscn" id="3_ojpc5"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="4_ukj6c"]
 [ext_resource type="AudioStream" uid="uid://wsa3fjb310au" path="res://mats/sounds/фоновая1.mp3" id="5_25pn6"]
 [ext_resource type="Texture2D" uid="uid://tujlvyon1k8y" path="res://mats/imgs/warrior/bar_ico.png" id="5_661l0"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="8_i041s"]
 [ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="9_lfoli"]
 [ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="11_stwkl"]
+[ext_resource type="PackedScene" uid="uid://113bvm1ichd2" path="res://mats/UI/dialog/dialog.tscn" id="11_usu0i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mhrv6"]
 font_color = Color(0.756863, 0.121569, 0.0862745, 1)
@@ -32,26 +32,14 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
 [node name="Game" type="Node"]
+process_mode = 3
 script = ExtResource("1_tg1vd")
 
 [node name="cam" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
 
 [node name="world" type="Node2D" parent="."]
-
-[node name="ent" type="Node2D" parent="world"]
 process_mode = 1
-y_sort_enabled = true
-
-[node name="enemys" type="Node2D" parent="world/ent"]
-y_sort_enabled = true
-
-[node name="player" parent="world/ent" instance=ExtResource("2_37cv4")]
-
-[node name="rt" type="RemoteTransform2D" parent="world/ent/player"]
-remote_path = NodePath("../../../../cam")
-update_rotation = false
-update_scale = false
 
 [node name="cl" type="CanvasLayer" parent="."]
 
@@ -205,38 +193,52 @@ offset_right = 128.0
 offset_bottom = 52.0
 grow_horizontal = 2
 
-[node name="pause" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
-visible = false
+[node name="map" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
 level_container = NodePath("../../world")
 global_difficulty_add_step = 0.15
 
-[node name="charter_ui" type="Control" parent="cl"]
+[node name="dialog" parent="cl" instance=ExtResource("11_usu0i")]
+
+[node name="pause" type="ColorRect" parent="cl"]
 visible = false
-layout_mode = 3
+z_index = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_ukj6c")
+color = Color(0, 0, 0, 0.247059)
 
-[node name="TextureRect" type="ColorRect" parent="cl/charter_ui"]
-layout_mode = 0
-offset_right = 192.0
-offset_bottom = 320.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="cl/charter_ui"]
+[node name="vbc" type="VBoxContainer" parent="cl/pause"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 192.0
-offset_top = -64.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -38.0
+offset_right = 48.0
+offset_bottom = 38.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/normal_font_size = 18
-text = "vavikgjd do oiois jfiw j89 q889uw83r hfihwfiuh uis udfhuhw d uwfhueh  uwefi  wuehf   hw9f fi  iw efiw  iwuef  wf"
+grow_vertical = 2
+
+[node name="cnt" type="Button" parent="cl/pause/vbc"]
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="settings" type="Button" parent="cl/pause/vbc"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="etm" type="Button" parent="cl/pause/vbc"]
+layout_mode = 2
+text = "EXIT_TO_MENU"
+
+[node name="efg" type="Button" parent="cl/pause/vbc"]
+layout_mode = 2
+text = "EXIT_FROM_GAME"
 
 [node name="asp_think" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -248,10 +250,14 @@ process_mode = 3
 stream = ExtResource("5_p6f36")
 bus = &"game"
 
-[connection signal="no_he" from="world/ent/player/hurt_box" to="cl/pause" method="_on_player_no_he"]
-[connection signal="location_added" from="cl/pause" to="." method="_on_pause_location_added"]
-[connection signal="place_completed" from="cl/pause" to="." method="_on_place_completed"]
+[connection signal="location_added" from="cl/map" to="." method="_on_pause_location_added"]
+[connection signal="place_completed" from="cl/map" to="." method="_on_place_completed"]
+[connection signal="button_down" from="cl/pause/vbc/cnt" to="." method="_on_cnt_button_down"]
+[connection signal="button_down" from="cl/pause/vbc/settings" to="." method="to_settings"]
+[connection signal="button_down" from="cl/pause/vbc/etm" to="." method="to_menu"]
+[connection signal="button_down" from="cl/pause/vbc/efg" to="." method="exit_from_game"]
 [connection signal="finished" from="asp_think" to="." method="start_sound_think"]
 [connection signal="finished" from="asp_fight" to="." method="start_sound_fight"]
 
-[editable path="world/ent/player"]
+[editable path="cl/map"]
+[editable path="cl/map/map/cont/locs/map"]

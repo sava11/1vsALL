@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bgshayat5m2pr" path="res://mats/contents/arrow/arrow.tscn" id="4_6ac1a"]
 [ext_resource type="PackedScene" uid="uid://bjq6lohvs8mw1" path="res://mats/contents/drop/drop.tscn" id="5_3kdqb"]
 [ext_resource type="Texture2D" uid="uid://moti38jfedhr" path="res://mats/imgs/gob_range/Down/GoblinSlingerDownAttack01.png" id="5_dc1el"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="6_8n5mw"]
 [ext_resource type="Texture2D" uid="uid://dsk72ae1db3q0" path="res://mats/imgs/gob_range/Left/GoblinSlingerLeftAttack01.png" id="6_lqw4q"]
-[ext_resource type="Shader" path="res://mats/UI/outline.gdshader" id="6_vwxfy"]
 [ext_resource type="Texture2D" uid="uid://ch6ptjxrox68a" path="res://mats/imgs/gob_range/Right/GoblinSlingerRightAttack01.png" id="7_x5ooa"]
 [ext_resource type="Texture2D" uid="uid://tbgwdkcpi8av" path="res://mats/imgs/gob_range/Up/GoblinSlingerUpAttack01.png" id="8_4smlo"]
 [ext_resource type="Texture2D" uid="uid://201cughumwi4" path="res://mats/imgs/gob_range/Down/GoblinSlingerDownDeath.png" id="9_17lwg"]
@@ -33,7 +33,7 @@ radius = 4.12311
 radius = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dia3y"]
-shader = ExtResource("6_vwxfy")
+shader = ExtResource("6_8n5mw")
 shader_parameter/line_color = Color(1, 0.301961, 0, 1)
 shader_parameter/line_thickness = 1.0
 

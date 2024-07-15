@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://bb3mue0x2wotr"]
+
+[ext_resource type="Texture2D" uid="uid://dqycwf45oweo3" path="res://mats/imgs/icons/skel_boss.png" id="1_nax4c"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_4xgon"]
+
+[resource]
+script = ExtResource("2_4xgon")
+name = "DEATH_1_LVL"
+BDI_text = "ALIVE_1_LVL"
+left_speeking = false
+right_char_img = ExtResource("1_nax4c")
+right_speeking = true
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])

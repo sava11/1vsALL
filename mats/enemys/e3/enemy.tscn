@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://mats/enemys/e3/enemy.gd" id="1_bc843"]
 [ext_resource type="PackedScene" uid="uid://bjq6lohvs8mw1" path="res://mats/contents/drop/drop.tscn" id="2_7fpp4"]
 [ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="2_iy63k"]
-[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="3_2cink"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="3_2cink"]
 [ext_resource type="Texture2D" uid="uid://p5niidc31kw0" path="res://mats/imgs/goblin_berserk/Down/GoblinDownAttack01.png" id="4_eq5vy"]
 [ext_resource type="Texture2D" uid="uid://qiyspqm40eb0" path="res://mats/imgs/goblin_berserk/Left/GoblinLeftAttack01.png" id="5_jnopq"]
 [ext_resource type="Texture2D" uid="uid://b20m6neabxoae" path="res://mats/imgs/goblin_berserk/Right/GoblinRightAttack01.png" id="6_o0gph"]

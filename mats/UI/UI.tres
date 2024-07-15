@@ -1,10 +1,10 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://de15vct77vcwe"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://de15vct77vcwe"]
 
 [ext_resource type="Texture2D" uid="uid://7i5tlqjh3gdk" path="res://mats/UI/imgs/ratio/ratio_checked.png" id="1_w5lhx"]
-[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_ym2d8"]
 [ext_resource type="Texture2D" uid="uid://dfpvmoqgep7yc" path="res://mats/UI/imgs/ratio/ratio_checked_disabled.png" id="2_irfdw"]
 [ext_resource type="Texture2D" uid="uid://clvf6x1jf1k5q" path="res://mats/UI/imgs/ratio/ratio_unchecked.png" id="3_sk12f"]
 [ext_resource type="Texture2D" uid="uid://dj0mmak7iunnf" path="res://mats/UI/imgs/ratio/ratio_unchecked_disabled.png" id="4_iwbul"]
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/UI/font/Puzzle-Tale-Pixel-Regular.ttf" id="5_fl2q2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kv1m"]
 content_margin_left = 2.0
@@ -165,6 +165,22 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing_size = 0.25
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihytk"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85c6g"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -204,8 +220,28 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
+[sub_resource type="FontVariation" id="FontVariation_rlyk4"]
+base_font = ExtResource("5_fl2q2")
+spacing_top = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r50at"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.210507, 0.210507, 0.210507, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
 [sub_resource type="FontVariation" id="FontVariation_5yrwh"]
-base_font = ExtResource("1_ym2d8")
+base_font = ExtResource("5_fl2q2")
 spacing_top = 2
 
 [resource]
@@ -221,6 +257,7 @@ LineEdit/styles/focus = SubResource("StyleBoxFlat_g6hnc")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_taxw3")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_7soje")
 Panel/styles/panel = SubResource("StyleBoxFlat_ahtkx")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ihytk")
 PopupMenu/icons/radio_checked = ExtResource("1_w5lhx")
 PopupMenu/icons/radio_checked_disabled = ExtResource("2_irfdw")
 PopupMenu/icons/radio_unchecked = ExtResource("3_sk12f")
@@ -228,3 +265,8 @@ PopupMenu/icons/radio_unchecked_disabled = ExtResource("4_iwbul")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_85c6g")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_i73vm")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_bw3oi")
+TooltipLabel/constants/shadow_offset_x = 0
+TooltipLabel/constants/shadow_offset_y = 0
+TooltipLabel/font_sizes/font_size = 14
+TooltipLabel/fonts/font = SubResource("FontVariation_rlyk4")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_r50at")

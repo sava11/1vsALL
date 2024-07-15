@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://sk5yck025m5j"]
-
-[ext_resource type="Script" path="res://mats/contents/elite_unit_mark/elite_unit_mark.gd" id="1_mspjf"]
-
-[node name="elite_unit_mark" type="Node"]
-script = ExtResource("1_mspjf")

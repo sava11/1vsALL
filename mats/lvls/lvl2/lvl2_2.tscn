@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://gp5pcpy5eyq"]
 
-[ext_resource type="Texture2D" uid="uid://c32ryp6pyv6vf" path="res://mats/imgs/pesok.png" id="1_ylqfq"]
-[ext_resource type="Texture2D" uid="uid://w4j6erli1dnu" path="res://mats/imgs/pesok_2_1.png" id="2_5xk25"]
-[ext_resource type="Texture2D" uid="uid://gffkg16g3adb" path="res://mats/imgs/kamn.png" id="3_4k8h5"]
+[ext_resource type="Texture2D" uid="uid://c32ryp6pyv6vf" path="res://mats/imgs/tiles/ground/pesok.png" id="1_ylqfq"]
+[ext_resource type="Texture2D" uid="uid://w4j6erli1dnu" path="res://mats/imgs/tiles/ground/pesok_2_1.png" id="2_5xk25"]
+[ext_resource type="Texture2D" uid="uid://gffkg16g3adb" path="res://mats/imgs/tiles/ground/kamn.png" id="3_4k8h5"]
 [ext_resource type="PackedScene" uid="uid://dfe22bmixbbc5" path="res://mats/boxes/custom_dmg_area.tscn" id="4_wqaj6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vf4d"]

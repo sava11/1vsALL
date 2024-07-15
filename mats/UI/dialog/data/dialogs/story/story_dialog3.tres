@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://bi6gnquqbwt5l"]
+
+[ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="1_gjbr8"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_67a5g"]
+
+[resource]
+script = ExtResource("2_67a5g")
+name = "STORY_DIALOG3"
+BDI_text = "TRAIN_DIALOG_2"
+function_node_path = NodePath("cl/map/map/cont/locs/map")
+function_name = "train_dialog_end"
+function_arguments = [true, true]
+left_char_img = ExtResource("1_gjbr8")
+left_speeking = true
+right_speeking = false
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = true
+paused = 0

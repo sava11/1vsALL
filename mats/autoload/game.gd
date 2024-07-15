@@ -10,7 +10,7 @@ signal save_data_changed(dict:Dictionary)
 enum dificulty{easy,norm,hard}
 enum gameplay_type{clasic,bossrush,inf,train}
 var cur_gameplay_type=gameplay_type.clasic
-var cur_dif=dificulty.norm
+var cur_dif=dificulty.easy
 enum ivents{none,arena,upg_arena,boss_arena,stats_map,shop}
 var cur_font="Puzzle-Tale-Pixel"
 const fonts={
@@ -22,9 +22,9 @@ const fonts={
 func set_font(font:String,theme:Theme):
 	theme.default_font=FontVariation.new()
 	if cur_font=="Puzzle-Tale-Pixel":
-		theme.default_font.base_font=preload("res://mats/font/Puzzle-Tale-Pixel-Regular.ttf")
+		theme.default_font.base_font=preload("res://mats/UI/font/Puzzle-Tale-Pixel-Regular.ttf")
 	if cur_font=="zx spectrum-7":
-		theme.default_font.base_font=preload("res://mats/font/zx_spectrum-7.ttf")
+		theme.default_font.base_font=preload("res://mats/UI/font/zx_spectrum-7.ttf")
 
 func get_cur_lvl():
 	return get_tree().current_scene.lvl
@@ -63,7 +63,7 @@ const images={
 		}
 	}
 }
-var enemys={
+const enemys={
 	"sk_sw":{
 		"s":"res://mats/enemys/e1/enemy.tscn",
 		"i":images.icons.charters.sk_sw,
@@ -91,9 +91,8 @@ var enemys={
 		},
 }
 
-var bosses={
+const bosses={
 	"skelvas":{
-		"s":"res://mats/enemys/b2/enemy.tscn",
 		"i":images.icons.other.boss_crown1,
 		"dificulty_lvl":{
 			dificulty.easy:{
@@ -109,7 +108,6 @@ var bosses={
 		}
 	},
 	"skelgener":{
-		"s":"res://mats/enemys/b3/enemy.tscn",
 		"i":images.icons.other.boss_crown1,
 		"dificulty_lvl":{
 			dificulty.easy:{
@@ -176,271 +174,9 @@ var arenas={
 		"a2":"res://mats/lvls/lvl3/lvl3_1.tscn",
 	}
 }
-var bossrush={
-	0:{
-		"bosses":PackedStringArray(["skelvas"]),
-		"boss_arena":{
-				0:{
-					"l":arenas.l1.a1,
-					"color":Color(50,200,50),
-					"%":0.2
-				},
-				1:{
-					"l":arenas.l1.a2,
-					"color":Color(50,200,90),
-					"%":0.65
-				},
-				2:{
-					"l":arenas.l1.a3,
-					"color":Color(50,200,90),
-					"%":0.15
-				}
-			},
-		},
-	1:{
-		"bosses":PackedStringArray(["skelgener"]),
-		"boss_arena":{
-				0:{
-					"l":arenas.l1.a1,
-					"color":Color(50,200,50),
-					"%":0.2
-				},
-				1:{
-					"l":arenas.l1.a2,
-					"color":Color(50,200,90),
-					"%":0.65
-				},
-				2:{
-					"l":arenas.l1.a3,
-					"color":Color(50,200,90),
-					"%":0.15
-				}
-			},
-		},
-	2:{
-		"bosses":PackedStringArray(["necromancer"]),
-		"boss_arena":{
-				0:{
-					"l":arenas.l1.a1,
-					"color":Color(50,200,50),
-					"%":0.2
-				},
-				1:{
-					"l":arenas.l1.a2,
-					"color":Color(50,200,90),
-					"%":0.65
-				},
-				2:{
-					"l":arenas.l1.a3,
-					"color":Color(50,200,90),
-					"%":0.15
-				}
-			},
-		},
-	3:{
-		"bosses":PackedStringArray(["fire_women"]),
-		"boss_arena":{
-				0:{
-					"l":arenas.l1.a1,
-					"color":Color(50,200,50),
-					"%":0.2
-				},
-				1:{
-					"l":arenas.l1.a2,
-					"color":Color(50,200,90),
-					"%":0.65
-				},
-				2:{
-					"l":arenas.l1.a3,
-					"color":Color(50,200,90),
-					"%":0.15
-				}
-			},
-		},
-}
-var maps={
-		-1:{"locs":{
-				0:{
-					"l":arenas.train.t1,
-					"color":Color(50,200,50),
-					"%":1
-				},
-			},
-			"lvl_color":{
-				"normal":{"bg":Color("c29644"),"brd":Color("f0c986")},
-				"pressed":{"bg":Color("a07a33"),"brd":Color("dc7938")},
-				"hover":{"bg":Color("a07a33"),"brd":Color("c29600")},
-				"disabled":{"bg":Color("8f6e00"),"brd":Color("bf9443")},
-				},
-			"ecount":Vector2(4,8),
-			"bosses":PackedStringArray([]),
-			"panel":{"bg":Color("8f6F50"),"brd":Color("bf9443")},
-			"boss_arena":{
-					0:{
-						"l":arenas.train.t1,
-						"%":1
-					},
-					
-				},
-			"enemys":{
-				"sk_sw":1,
-			}
-		},
-		0:{
-			
-			"locs":{
-				0:{
-					"l":arenas.l1.a1,
-					"color":Color(50,200,50),
-					"%":0.2
-				},
-				1:{
-					"l":arenas.l1.a2,
-					"color":Color(50,200,90),
-					"%":0.15
-				},
-				2:{
-					"l":arenas.l1.a3,
-					"color":Color(50,200,90),
-					"%":0.65
-				}
-			},
-			"lvl_color":{
-				"normal":{"bg":Color("c29644"),"brd":Color("f0c986")},
-				"pressed":{"bg":Color("a07a33"),"brd":Color("dc7938")},
-				"hover":{"bg":Color("a07a33"),"brd":Color("c29600")},
-				"disabled":{"bg":Color("8f6e00"),"brd":Color("bf9443")},
-				},
-			"ecount":Vector2(8,12),
-			"bosses":PackedStringArray(["skelvas"]),
-			"panel":{"bg":Color("8f6F50"),"brd":Color("bf9443")},
-			"boss_arena":{
-					0:{
-						"l":arenas.l1.a2,
-						"%":1
-					},
-					
-				},
-			"enemys":{
-				"sk_sw":0.9,
-				"sk_bo":0.1,
-			}
-		},
-		1:{
-			"locs":{
-				0:{
-					"l":arenas.l2.a1,
-					"color":Color(50,200,50),
-					"%":0.5
-				},
-				1:{
-					"l":arenas.l2.a2,
-					"%":0.35
-				},
-				2:{
-					"l":arenas.l2.a3,
-					"%":0.15
-				}
-			},
-			"ecount":Vector2(8,15),
-			"bosses":PackedStringArray(["skelvas","necromancer"]),
-			"panel":{"bg":Color("8f6eA0"),"brd":Color("bf9443")},
-			"boss_arena":{
-					0:{
-						"l":arenas.l1.a2,#вход в гору
-						"%":1.0
-					}
-				},
-			"enemys":{
-				"sk_sw":0.85,
-				"sk_bo":0.15,
-			}
-		},
-		2:{#Гора
-			"locs":{
-				0:{
-					"l":arenas.l3.a1,
-					"color":Color(50,200,50),
-					"%":0.9
-				},
-				1:{
-					"l":arenas.l3.a2,
-					"color":Color(50,200,50),
-					"%":0.1
-				}
-			},
-			"ecount":Vector2(8,15),
-			"bosses":PackedStringArray(["skelgener"]),
-			"panel":{"bg":Color("8f6eA0"),"brd":Color("bf9443")},
-			"boss_arena":{
-					0:{
-						"l":arenas.l1.a2,
-						"%":1.0
-					}
-				},
-			"enemys":{
-				"sk_sw":0.5,
-				"gob_be":0.2,
-				"gob_range":0.3
-			}
-		},
-		3:{
-			"locs":{
-				0:{
-					"l":arenas.l3.a1,
-					"color":Color(50,200,50),
-					"%":1
-				}
-			},
-			"ecount":Vector2(8,15),
-			"bosses":PackedStringArray(["fire_women"]),
-			"panel":{"bg":Color("8f6eA0"),"brd":Color("bf9443")},
-			"boss_arena":{
-					0:{
-						"l":arenas.l1.a2,#выход из горы
-						"%":1.0
-					}
-				},
-			"enemys":{
-				"sk_sw":0.75,
-				"gob_be":0.25,
-			}
-		},
-		4:{
-			"locs":{
-				0:{
-					"l":arenas.l3.a2,
-					"color":Color(50,200,50),
-					"%":1
-				}
-			},
-			"ecount":Vector2(8,15),
-			"bosses":PackedStringArray([]),
-			"panel":{"bg":Color("8f6eA0"),"brd":Color("bf9443")},
-			"boss_arena":{
-					0:{
-						"l":arenas.l1.a2,
-						"%":1.0
-					}
-				},
-			"enemys":{
-				"sk_sw":0.1,
-				"sk_bo":0.1,
-				"gob_be":0.2,
-				"gob_range":0.4,
-				#"cultist":0.2
-			}
-		}
-		
-	}
 
-var game_stats={
-	"%spawn_elite":{
-			"v":Vector2(0.01,0.1),
-			"min_v":0.01,
-			"i":images.icons.charters.sk_sw,
-			"t":tr("%SPAWN_ELITE")
-			},
+const train_scenario={
+	
 }
 #var cur_gm_stats={}
 const start_player_data={
@@ -474,43 +210,21 @@ const start_player_data={
 		"roll_scale":1
 		},
 }
-var player_data={
-	"in_action":"",
-	"deaths":0,
-	"runned_lvls":0,
-	"stats":{
-		"money":0,
-		"hp":3.0,
-		"hp_regen":0.1,
-		"max_stamina":1.5,
-		"regen_stamina_point":0.3,
-		"def":1.2,
-		"dmg":1.2,
-		"crit_dmg":3,
-		"%crit_dmg":0.2,
-		#"+%att_speed":0.3,
-		"run_speed":90,
-		"roll_speed":140,
-		#"%sp":0,
-		"take_area":10
-		},
-	"prefs":{
-		"cur_hp":3000000.0,
-		"cur_stm":3000000.0,
-		"do_roll_cost":1,
-		"max_exp_start":40,
-		"max_exp_sc":1,
-		"run_scale":1,
-		"roll_timer":0.4,
-		"roll_scale":1
-		},
-}
-var game_prefs={
+var player_data=start_player_data.duplicate(true)
+
+func merge_stats(stats:Dictionary):
+	for e in stats.keys():
+		if player_data.stats.get(e)!=null:
+			player_data.stats[e]=clamp(player_data.stats[e]+stats[e],gm.objs.stats[e].min_v,999999999)
+var start_game_prefs={
+	"seed":-1,
+	"traied":false,
+	"message_to_train_accepted":false,
 	"dif":0,
 	"elite_chance":0.01,
-	"boss_elite_chance":0.01,
+	"boss_elite_chance":0.001,
 }
-
+var game_prefs=start_game_prefs.duplicate(true)
 func save_data():
 	return {
 		str(get_path()):{
@@ -522,6 +236,7 @@ func save_data():
 func load_data(n:Dictionary):
 	player_data=n.player_data
 	game_prefs=n.game_prefs
+	fnc.rnd.seed=game_prefs.seed
 
 func _ready():
 	connect("save_data_changed",Callable(gm,"_save_node"))
@@ -533,6 +248,11 @@ func _ready():
 	DirAccess.make_dir_absolute(save_path)
 	add_to_group("SN")
 	await get_tree().process_frame
+
+func make_dialog(d:dialog_data):
+	if get_tree().current_scene.get_node("cl/dialog")!=null:
+		get_tree().current_scene.get_node("cl/dialog").show()
+		get_tree().current_scene.get_node("cl/dialog").start(d)
 
 var objs={
 	"stats":{
@@ -1021,6 +741,8 @@ func save_file_data():
 	for e in get_tree().get_nodes_in_group("SN"):
 		_save_node(e.save_data())
 	var save_game := FileAccess.open(save_path+"/"+fname+suffix, FileAccess.WRITE)
+	#save_game.store_buffer(dict_to_buf(sn))
+	#print(dict_to_buf(sn))
 	save_game.store_line(JSON.stringify(sn,"",false))
 	save_game.close()
 func load_file_data():
@@ -1028,6 +750,7 @@ func load_file_data():
 		var save_game := FileAccess.open(save_path+"/"+fname+suffix, FileAccess.READ)
 		if save_game.get_length()!=0:
 			sn=JSON.parse_string(save_game.get_line())
+			#sn=save_game.get_buffer(save_game.get_length())
 			for e in sn.keys():
 				if get_node_or_null(e)!=null:
 					get_node(e).load_data(sn[e])
@@ -1043,3 +766,10 @@ func _save_node(d:Dictionary):
 func _load_node(n,path):
 	var d=sn[path]
 	n.load_data(d)
+
+#func dict_to_array(d:Dictionary)
+#
+#func dict_to_buf(d:Dictionary):
+	#return PackedByteArray([d.values()])
+#func buf_to_dict(b:PackedByteArray):
+	#return Array(b)[0]

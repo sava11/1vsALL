@@ -1,0 +1,166 @@
+[gd_scene load_steps=3 format=3 uid="uid://x3ex1nkvmxv8"]
+
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_crikf"]
+[ext_resource type="Script" path="res://game/settings.gd" id="2_adkca"]
+
+[node name="settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_crikf")
+script = ExtResource("2_adkca")
+
+[node name="menu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -140.0
+offset_right = 192.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="snd" type="HBoxContainer" parent="menu"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 52.0
+offset_right = 264.0
+offset_bottom = 88.0
+scale = Vector2(0.75, 0.75)
+
+[node name="txt" type="VBoxContainer" parent="menu/snd"]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="snd" type="Label" parent="menu/snd/txt"]
+layout_mode = 2
+text = "STT_SOUND_MN"
+
+[node name="snd2" type="Label" parent="menu/snd/txt"]
+layout_mode = 2
+text = "STT_SOUND_GM"
+
+[node name="c" type="VBoxContainer" parent="menu/snd"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="menu" type="HSlider" parent="menu/snd/c"]
+layout_mode = 2
+focus_mode = 0
+max_value = 200.0
+step = 10.0
+value = 100.0
+
+[node name="game" type="HSlider" parent="menu/snd/c"]
+layout_mode = 2
+focus_mode = 0
+max_value = 200.0
+step = 10.0
+value = 100.0
+
+[node name="bc" type="Button" parent="menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -40.0
+offset_right = 96.0
+offset_bottom = -8.0
+grow_vertical = 0
+focus_mode = 0
+text = "BACK"
+
+[node name="aply" type="Button" parent="menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -40.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+text = "APPLY"
+
+[node name="scr_sz" type="VBoxContainer" parent="menu"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 44.0
+offset_right = 376.0
+offset_bottom = 84.0
+
+[node name="t" type="Label" parent="menu/scr_sz"]
+layout_mode = 2
+text = "SCR_SZ"
+
+[node name="sz" type="OptionButton" parent="menu/scr_sz"]
+layout_mode = 2
+focus_mode = 0
+alignment = 2
+
+[node name="lng" type="HBoxContainer" parent="menu"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 84.0
+offset_right = 200.0
+offset_bottom = 104.0
+
+[node name="t" type="Label" parent="menu/lng"]
+layout_mode = 2
+text = "LANG"
+
+[node name="lng" type="OptionButton" parent="menu/lng"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+alignment = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Русский"
+popup/item_0/id = 0
+popup/item_1/text = "English"
+popup/item_1/id = 1
+
+[node name="fscr" type="HBoxContainer" parent="menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.375
+anchor_right = 0.8
+anchor_bottom = 0.375
+offset_left = -75.2
+offset_top = -21.0
+offset_right = 69.8
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="cb" type="CheckButton" parent="menu/fscr"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="fs" type="Label" parent="menu/fscr"]
+layout_mode = 2
+text = "FULL_SCREEN_MODE"
+
+[connection signal="value_changed" from="menu/snd/c/menu" to="." method="_on_menu_value_changed"]
+[connection signal="value_changed" from="menu/snd/c/game" to="." method="_on_game_value_changed"]
+[connection signal="button_down" from="menu/bc" to="." method="_on_bc_button_down"]
+[connection signal="button_down" from="menu/aply" to="." method="_on_aply_button_down"]
+[connection signal="item_selected" from="menu/scr_sz/sz" to="." method="_on_sz_item_selected"]
+[connection signal="item_selected" from="menu/lng/lng" to="." method="_on_lng_item_selected"]
+[connection signal="pressed" from="menu/fscr/cb" to="." method="_on_cb_pressed"]
+[connection signal="toggled" from="menu/fscr/cb" to="." method="_on_cb_toggled"]

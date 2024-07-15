@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://us76n43nbhy"]
+
+[ext_resource type="Texture2D" uid="uid://du61g72mptpch" path="res://mats/imgs/icons/skelV1.png" id="1_6v7uc"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_6c04k"]
+
+[resource]
+script = ExtResource("2_6c04k")
+name = "DEATH_1_LVL"
+BDI_text = "DEATH_2_LVL"
+left_char_img = ExtResource("1_6v7uc")
+left_speeking = false
+right_speeking = false
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])

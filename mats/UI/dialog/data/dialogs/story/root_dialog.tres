@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=6 format=3 uid="uid://u765kfb3p6v2"]
+
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_02gu3"]
+[ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="2_a1243"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="2_af555"]
+
+[sub_resource type="Resource" id="Resource_sb8k4"]
+script = ExtResource("2_af555")
+name = "CONTINUE"
+color = Color(0, 0.788235, 0.796078, 1)
+disabled = false
+dialog_data_path = "res://mats/UI/dialog/data/dialogs/dialog1.tres"
+node_path = null
+function = ""
+function_arguments = []
+
+[sub_resource type="Resource" id="Resource_4mv1b"]
+script = ExtResource("2_af555")
+name = "CANCEL_TRAINING"
+color = Color(0.909804, 0.537255, 0, 1)
+disabled = true
+dialog_data_path = null
+node_path = null
+function = ""
+function_arguments = []
+
+[resource]
+script = ExtResource("2_02gu3")
+name = "NEW_DATA"
+BDI_text = "HELLO_TEXT"
+left_char_img = ExtResource("2_a1243")
+left_speeking = true
+right_speeking = false
+buttons = Array[ExtResource("2_af555")]([SubResource("Resource_sb8k4"), SubResource("Resource_4mv1b")])
+interactive = false
+paused = 0

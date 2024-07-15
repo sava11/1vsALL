@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=5 format=3 uid="uid://c85wpjjfqlqo"]
+
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_27ra1"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_vludt"]
+
+[sub_resource type="Resource" id="Resource_8rtkp"]
+script = ExtResource("1_27ra1")
+name = "START_TRAIN"
+color = Color(1, 1, 1, 1)
+disabled = false
+dialog_data_path = "res://mats/UI/dialog/data/dialogs/story/story_dialog2.tres"
+function_node_path = null
+function_name = ""
+function_arguments = []
+
+[sub_resource type="Resource" id="Resource_ek0am"]
+script = ExtResource("1_27ra1")
+name = "BREAK_TRAIN"
+color = Color(1, 1, 1, 1)
+disabled = true
+dialog_data_path = null
+function_node_path = null
+function_name = ""
+function_arguments = []
+
+[resource]
+script = ExtResource("2_vludt")
+name = "FIRST_STORY_DIALOG"
+BDI_text = "F_S_D"
+function_node_path = null
+function_name = ""
+function_arguments = []
+left_speeking = false
+right_speeking = false
+buttons = Array[ExtResource("1_27ra1")]([SubResource("Resource_8rtkp"), SubResource("Resource_ek0am")])
+interactive = false
+paused = 0

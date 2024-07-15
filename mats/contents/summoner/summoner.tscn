@@ -8,6 +8,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.13089, 0.748555), 0.0, 0.0, 0,
 point_count = 8
 
 [node name="summoner" type="Sprite2D"]
+process_mode = 1
 position = Vector2(76, 39)
 rotation = 0.436332
 scale = Vector2(0.01, 0.01)

@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://csc8a81gx41m8" path="res://mats/lvls/sand&rock.tres" id="1_ulso2"]
 [ext_resource type="PackedScene" uid="uid://dfe22bmixbbc5" path="res://mats/boxes/custom_dmg_area.tscn" id="2_hof2f"]
-[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/contents/fier_plate/a.tscn" id="3_nr8tl"]
+[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/contents/fire_plate/a.tscn" id="3_nr8tl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeni"]
 size = Vector2(608, 80)

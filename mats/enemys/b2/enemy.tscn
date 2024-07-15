@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d4bnt6s48h516" path="res://mats/contents/summon/summon.tscn" id="5_psr2t"]
 [ext_resource type="Script" path="res://mats/boxes/hurt_box.gd" id="6_ocbs2"]
 [ext_resource type="PackedScene" uid="uid://cwuikrlxnv87j" path="res://mats/contents/damage/mele/damage.tscn" id="7_w7gfq"]
-[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="8_q4kuu"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="8_q4kuu"]
 [ext_resource type="Texture2D" uid="uid://dhn2oxoruesya" path="res://mats/imgs/SkeletonBoss/Down/SkeletonKingDownAttack03.png" id="9_pee28"]
 [ext_resource type="Texture2D" uid="uid://vamqfn4mdtw3" path="res://mats/imgs/SkeletonBoss/Down/SkeletonKingDownAttack02.png" id="10_dbcpa"]
 [ext_resource type="Texture2D" uid="uid://bcuhrls31ho3a" path="res://mats/imgs/SkeletonBoss/Left/SkeletonKingLeftAttack03.png" id="11_cerd4"]

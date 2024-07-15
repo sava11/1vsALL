@@ -39,6 +39,17 @@ text = "RUNNED_LVLS"
 layout_mode = 2
 text = "88"
 
+[node name="seed" type="HBoxContainer" parent="cont"]
+layout_mode = 2
+
+[node name="lbl" type="Label" parent="cont/seed"]
+layout_mode = 2
+text = "SEED"
+
+[node name="num" type="Label" parent="cont/seed"]
+layout_mode = 2
+text = "0"
+
 [node name="bosses" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12

@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://uxwpjiuinj83" path="res://mats/contents/boss_mark/boss_mark.tscn" id="4_mawdm"]
 [ext_resource type="PackedScene" uid="uid://cnpiy06dqixao" path="res://mats/contents/damage/range/damage.tscn" id="5_qe80n"]
 [ext_resource type="Texture2D" uid="uid://e7bb2lobr7g7" path="res://mats/imgs/necromancer/Down/NecromancerDownAttack01.png" id="6_5iolk"]
-[ext_resource type="Shader" path="res://mats/UI/outline.gdshader" id="6_jyiad"]
 [ext_resource type="PackedScene" uid="uid://y3p620ewju3r" path="res://mats/contents/blood_arrow/blood_arrow.tscn" id="6_l0csw"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="7_cl1m2"]
 [ext_resource type="Texture2D" uid="uid://hfhbnb8xfnh4" path="res://mats/imgs/necromancer/Left/NecromancerLeftAttack01.png" id="7_yuw5y"]
 [ext_resource type="Texture2D" uid="uid://bq27x3fxeixj7" path="res://mats/imgs/necromancer/Right/NecromancerRightAttack01.png" id="8_l3g1x"]
 [ext_resource type="Texture2D" uid="uid://bjkv2l1t5dn7f" path="res://mats/imgs/necromancer/Up/NecromancerUpAttack01.png" id="9_mqmig"]
@@ -281,7 +281,7 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7rcvr"]
-shader = ExtResource("6_jyiad")
+shader = ExtResource("7_cl1m2")
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/line_thickness = 1.0
 

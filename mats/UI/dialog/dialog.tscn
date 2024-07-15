@@ -1,0 +1,184 @@
+[gd_scene load_steps=9 format=3 uid="uid://113bvm1ichd2"]
+
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_133nm"]
+[ext_resource type="Script" path="res://mats/UI/dialog/dialog.gd" id="2_qetud"]
+
+[sub_resource type="Animation" id="Animation_asj1n"]
+resource_name = "action"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("charL:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_ekrmg"]
+resource_name = "back"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("charL:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kuphe"]
+_data = {
+"action": SubResource("Animation_asj1n"),
+"back": SubResource("Animation_ekrmg")
+}
+
+[sub_resource type="Animation" id="Animation_xjeyq"]
+resource_name = "action"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_jsn47"]
+resource_name = "back"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.48787e-16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxfa3"]
+_data = {
+"action": SubResource("Animation_xjeyq"),
+"back": SubResource("Animation_jsn47")
+}
+
+[node name="Control" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_133nm")
+script = ExtResource("2_qetud")
+
+[node name="charL" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -224.0
+offset_right = 128.0
+offset_bottom = -96.0
+grow_vertical = 0
+rotation = -0.0635518
+pivot_offset = Vector2(64, 64)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ap" type="AnimationPlayer" parent="charL"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_kuphe")
+}
+
+[node name="charR" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -224.0
+offset_bottom = -96.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(64, 64)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ap" type="AnimationPlayer" parent="charR"]
+libraries = {
+"": SubResource("AnimationLibrary_bxfa3")
+}
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 236.0
+offset_right = 544.0
+offset_bottom = 320.0
+
+[node name="hbc" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="txt" type="RichTextLabel" parent="Panel/hbc"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 20
+bbcode_enabled = true
+text = "[u][i][b]998bv[/b][/i][color=light green]HELLO_TEXT[/color][/u] ehjdbkadfwhiqwhiru hwi rwi3uhr iuw3rhiuw3hriuwq3hrwqhriq3rhiuwhriuqhriuqhiugqwiurgqiurgiuwgriugtiuy2rtkjq3joirq398r25928qrorrwiurhiuwhiuwgtiuu goiehiuwriq3wor w4i 9w4gh owh iowh oiwia4ytqy98ty ai"
+
+[node name="sc" type="ScrollContainer" parent="Panel/hbc"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="vbc" type="VBoxContainer" parent="Panel/hbc/sc"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]

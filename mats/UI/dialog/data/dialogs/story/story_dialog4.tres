@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://c26seorhw4ti4"]
+
+[ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="1_knem3"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_hfiwc"]
+
+[resource]
+script = ExtResource("2_hfiwc")
+name = "NEW_DATA"
+BDI_text = "INGAME_MOVEMANT"
+left_char_img = ExtResource("1_knem3")
+left_speeking = true
+right_speeking = false
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = false
+paused = 1

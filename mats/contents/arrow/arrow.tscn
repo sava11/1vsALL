@@ -1,12 +1,34 @@
 [gd_scene load_steps=8 format=3 uid="uid://bgshayat5m2pr"]
 
-[ext_resource type="Shader" path="res://mats/UI/outline.gdshader" id="1_aqxjf"]
 [ext_resource type="Script" path="res://mats/contents/arrow/arrow.gd" id="2_e0ord"]
 [ext_resource type="Texture2D" uid="uid://dl36x6ysd67r8" path="res://mats/imgs/skelet_bow/arrow.png" id="3_g50x0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_stwfb"]
+[sub_resource type="Shader" id="Shader_fe6el"]
+code = "shader_type canvas_item;
+
+uniform vec4 line_color : source_color = vec4(1);
+uniform float line_thickness : hint_range(0, 10) = 1.0;
+
+void fragment() {
+	vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
+	
+	float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+	outline = min(outline, 1.0);
+	
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, line_color, outline - color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ia3o6"]
 resource_local_to_scene = true
-shader = ExtResource("1_aqxjf")
+shader = SubResource("Shader_fe6el")
 shader_parameter/line_color = Color(1, 0, 0, 1)
 shader_parameter/line_thickness = 1.0
 
@@ -43,7 +65,7 @@ length = 10.0
 
 [node name="arrow" type="Area2D"]
 z_index = 1
-material = SubResource("ShaderMaterial_stwfb")
+material = SubResource("ShaderMaterial_ia3o6")
 collision_layer = 11
 collision_mask = 9
 script = ExtResource("2_e0ord")

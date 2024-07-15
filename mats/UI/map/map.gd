@@ -1,30 +1,211 @@
 extends Control
-@export_range(1,999) var colums:int=1
-@export_range(1,999) var rows:int=1
-var start_position:Vector2=Vector2(-1,-1)
-@export var max_size:Vector2=Vector2(200,90)
-@export var boss_spawn_ids:Array[int]=[14,19,9]
-@export_range(0,999) var shop_count:int=3
-@export_range(0,999) var start_posid:int=10
-signal in_shop
-var posid=0
-var bst={}
-var b_boss={}
-var shop_items={}#shop_id:[iem_id, ...]
+@export var level_container:Node
+@export var current_pos:place
+@export var global_difficulty_add_step:float=0
+@onready var shop=$shop/shop
+@onready var map=$map/cont/locs/map
+@onready var stat_cont=$stats/cont/ScrollContainer/item_cont
+
+var cur_loc:level_template
 var item_rare:float=0
-var max_column=0
-@onready var map_execptions=PackedInt32Array([start_posid])
-@onready var shop=$arenas/shop
-@onready var arenas=$arenas/gc
-@onready var stats_cont=$stats/cont/gc
-@onready var stats_tcont=$stats/cont
-var bossid=0
-func get_id_in_cont(bid:int,offset:Vector2=Vector2.ZERO,clamps:Vector2=Vector2(1,1)):
-	var x=bid%int(clamps.x)
-	var y=clamp(int(clamps.y+offset.y),1,9999999)
-	var y1=(bid-x+clamps.x*offset.y)/y
-	var e=int(x+y1*clamps.y)
-	return int(e)
+signal in_shop()
+signal location_added(n:level_template)
+signal place_completed()
+func set_item_rare():
+	var runned:int
+	for e in map.get_children():
+		runned+=int(e.runned)
+	item_rare=float(runned)/float(map.get_child_count())
+
+signal _load_data(node:Object,path:String)
+signal save_data_changed(dict:Dictionary)
+func save_data():
+	return {
+		str(get_path()):{
+			"cur_pos":str(current_pos.get_path()),
+		}
+	}
+func load_data(n:Dictionary):
+	current_pos=get_node(n["cur_pos"])
+func show_death(b:bool=true):
+	for e in map.get_children():
+		if b:
+			e.visible=e.name.contains("death")
+		else:
+			e.visible=!e.name.contains("death")
+func set_cur_pos(pos:place):
+	if pos!=null:
+		current_pos=pos
+	else:
+		current_pos=map.get_children()[fnc.rnd.randi_range(0,map.get_child_count()-1)]
+	current_pos.runned=true
+	var w=current_pos.position.x+$map/cont/locs.get("theme_override_constants/margin_left")/2
+	$map/cont.scroll_horizontal=w
+	var h=current_pos.position.y-$map/cont/locs.get("theme_override_constants/margin_top")/2
+	$map/cont.scroll_vertical=h
+func _ready():
+	if !Engine.is_editor_hint():
+		#rand_lvl_gen(50)
+		map.custom_minimum_size=get_max_map_lenght()
+		set_cur_pos(current_pos)
+		connect("save_data_changed",Callable(gm,"_save_node"))
+		connect("_load_data",Callable(gm,"_load_node"))
+		add_to_group("SN")
+		if !gm.sn.has(str(get_path())):
+			emit_signal("save_data_changed",save_data())
+		else:
+			emit_signal("_load_data",self,str(get_path()))
+		$stats/cont/back.hide()
+		$shop.hide()
+		$map.show()
+		for e in map.get_children():
+			if is_instance_valid(e):
+				#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
+				e.get_node("btn").button_down.connect(
+					Callable(
+						func(b:place):
+							if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
+								current_pos=b
+								gm.save_file_data()).bind(e)
+					)
+				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
+		var stats_keys=gm.player_data.stats.keys()
+		for e in gm.player_data.stats:
+			var item=preload("res://mats/UI/map/status_item/item.tscn").instantiate()
+			item.item_name=e
+			stat_cont.add_child(item)
+			item.set_image(load(gm.objs.stats[e].i))
+			item.set_item_name(tr(gm.objs.stats[e].ct))
+			item.set_tooltip(tr(gm.objs.stats[e].t))
+			item.set_value(snapped(gm.player_data.stats[e],0.001),gm.objs.stats[e].postfix)
+		for i in stat_cont.get_children():
+			var id=stats_keys.find(i.item_name)
+			if id!=i.get_index():
+				stat_cont.move_child(i,id)
+
+func get_max_map_lenght():
+	var mn:=Vector2(999999999,999999999)
+	var mx=-Vector2(999999999,999999999)
+	for e in map.get_children():
+		if e.visible:
+			if e.position.x+e.size.x<mn.x:
+				mn.x=e.position.x+e.size.x
+			if e.position.y<mn.y:
+				mn.y=e.position.y+(e.size.y)#-20)
+	for e in map.get_children():
+		if e.visible:
+			if e.position.x+e.size.x>mx.x:
+				mx.x=e.position.x+e.size.x
+			if e.position.y>mx.y:
+				mx.y=e.position.y+(e.size.y)#-20)
+	
+	return mx-mn
+var temp_drag:=Vector2.ZERO
+func _process(delta):
+	#if Engine.is_editor_hint():
+		#for e in map.get_children():
+			#e.modulate=Color.WHITE
+			#if e is place and e.ingame_statuses!=null:
+				#for i in e.ingame_statuses:
+					#if i.status=="":
+						#e.modulate=Color.YELLOW_GREEN
+	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
+		map.custom_minimum_size=get_max_map_lenght()
+		for e in map.get_children():
+			e.player_here=e==current_pos
+			if e.player_here and !e.last_player_here:
+				var w=e.position.x
+				$map/cont.scroll_horizontal=w+e.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")
+				var h=e.position.y
+				$map/cont.scroll_vertical=h+e.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")
+		
+		var s=fnc.get_prkt_win()
+		var a=get_local_mouse_position() - s * 0.5
+		var cur_drag:Vector2=Vector2($map/cont.scroll_horizontal,$map/cont.scroll_vertical)
+		if Input.is_action_just_pressed("rmb"):
+			temp_drag=cur_drag+a
+		if Input.is_action_pressed("rmb"):
+			cur_drag=-a+temp_drag
+			$map/cont.scroll_horizontal=cur_drag.x
+			$map/cont.scroll_vertical=cur_drag.y
+		if current_pos!=null:
+			for cur_place in map.get_children():
+				cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
+				
+func upd_by_sts():
+	for e in gm.player_data.stats:
+		for i in stat_cont.get_children():
+			if i.get_node("item_name").text==tr(gm.objs.stats[e].ct):
+				i.set_value(gm.player_data.stats[e],gm.objs.stats[e].postfix)
+
+func level_completed(n:place):
+	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
+	if gm.game_prefs.dif<0.5:
+		gm.game_prefs.dif=0.5
+	n.runned=true
+	var temp_d={}
+	for e in n.ingame_statuses:
+		temp_d.merge({e.status:e.value})
+	gm.merge_stats(temp_d)
+	upd_by_sts()
+	gm.player_data.in_action=""
+	current_pos=n
+	gm.save_file_data()
+	emit_signal("place_completed")
+
+func dijkstra(s: int, t: int):
+	var inf =99999999999999999
+	var visited: Array=[]
+	for e in range(map.get_child_count()):
+		visited.append(false)
+	var distance: Array = []
+	for e in range(map.get_child_count()):
+		distance.append(inf)
+	var prev: Array=[]
+	for e in range(map.get_child_count()):
+		prev.append(-1)
+	distance[s] = 0
+
+	while true:
+		var min_distance: int = inf
+		var min_vertex: int = -1
+		for i in range(map.get_child_count()):
+			if not visited[i] and distance[i] < min_distance:
+				min_distance = distance[i]
+				min_vertex = i
+
+		if min_vertex == -1:
+			break
+
+		visited[min_vertex] = true
+		var vertices=map.get_children()
+		for neighbor in vertices[min_vertex].neighbors:
+			if is_instance_valid(neighbor):
+				var neighbor_id=neighbor.get_index()
+				if not visited[neighbor_id] and distance[neighbor_id] > distance[min_vertex] + 1 and neighbor.runned:
+					distance[neighbor_id] = distance[min_vertex] + 1
+					prev[neighbor_id] = min_vertex
+
+	if distance[t] == inf:
+		return []
+	else:
+		var path: Array = []
+		var current: int = t
+		while current != -1:
+			path.push_front(current)
+			current = prev[current]
+		return path
+
+var shop_items={}#object:[item1,...]
+func cr_stats():
+	var d0:Dictionary={}
+	var d:Dictionary=gm.objs["stats"].duplicate()
+	var d1:Dictionary=gm.player_data.stats.duplicate()
+	
+	for e in d1.keys():
+		if fnc.i_search(d.keys(),e)!=-1:
+			d0.merge({e:d[e]})
+	return d0
 func get_item_lvl(item_name,rare):
 	var rares:PackedVector2Array=PackedVector2Array([])
 	var lvls:PackedInt32Array=PackedInt32Array([])
@@ -33,170 +214,18 @@ func get_item_lvl(item_name,rare):
 		lvls.append(e)
 	var c=fnc.find_betwen_lines(rare,rares)
 	return lvls[c]
-func cr_shops():
-	for e in shop.get_children():
-		e.queue_free()
-	for tt in range(shop_count):
-		var id=fnc.rnd.randi_range(0,colums*rows-1)
-		while bossid==id or shop_items.has(id)==true or id==start_posid:
-			id=fnc.rnd.randi_range(0,colums*rows-1)
-			#items_names.remove_at(fnc.i_search(items_names,n))
-		shop_items.merge({id:{"":0}})
-func cr_stats():
-	var d0:Dictionary={}
-	var d:Dictionary=gm.objs["stats"].duplicate()
-	var d1:Dictionary=fnc.get_hero().cd.stats.duplicate()
-	
-	for e in d1.keys():
-		if fnc.i_search(d.keys(),e)!=-1:
-			d0.merge({e:d[e]})
-	return d0
-func _ready():
-	#gm.set_font(gm.cur_font,theme)
-	posid=start_posid
-	bossid=boss_spawn_ids[fnc.rnd.randi_range(0,len(boss_spawn_ids)-1)]
-	var cd=cr_stats()
-	var tt:Array=cd.keys()
-	for e in range(len(tt)):
-		var e1=preload("res://mats/UI/map/elems.tscn").instantiate()
-		e1.img=load(cd[tt[e]].i)
-		e1.txt=str(fnc.get_hero().cd.stats[tt[e]])
-		e1.popup_text=cd[tt[e]].t
-		e1.get_node("ext").text=cd[tt[e]].ct
-		e1.show_popup_text=true
-		e1.ext_vis=true
-		stats_cont.add_child(e1)
-		
-	var point=posid
-	if get_tree().current_scene.gameplay==gm.gameplay_type.clasic or get_tree().current_scene.gameplay==gm.gameplay_type.train:
-		cr_shops()
-		var w=int((arenas.size.x+4)/colums)
-		var h=(arenas.size.y+4)/rows
-		arenas.columns=colums
-		var bid=0
-		for e in arenas.get_children():
-			e.queue_free()
-		for e in range(colums*rows):
-			var b1=preload("res://mats/UI/map/button.tscn").instantiate()
-			if max_size.x<w:
-				b1.custom_minimum_size.x=max_size.x
-			else:
-				b1.custom_minimum_size.x=w-4
-			if max_size.y<h:
-				b1.custom_minimum_size.y=max_size.y
-			else:
-				b1.custom_minimum_size.y=h-4
-			arenas.add_child(b1)
-	#upd(point)
-func upd(point:int):
-	var pointy=(point-point%rows)/rows
-	var w=int(arenas.size.x/colums)
-	var h=arenas.size.y/rows
-	#arenas.columns=colums
-	if max_column<posid%colums:
-		max_column=posid%colums
-	var bid=0
-	for e in range(colums*rows):
-		var b1=arenas.get_child(e)
-		b1.disabled=true
-		if b1.get_index()==point:
-			b1.text="("+tr("PLAYER_ARENA_POS")+")"
-			bid=b1.get_index()
-		elif fnc.i_search(map_execptions,e)!=-1:
-			b1.text="X"
-		else:
-			b1.text=""
-		
-	for e in range(clamp(bid%rows-1,0,rows)+clamp(pointy-1,0,colums-1)*rows, 
-	clamp(bid%rows+2,0,rows)+clamp(pointy-1,0,colums-1)*rows):
-		if e != bid:
-			upd_stats_(arenas.get_child(e))
-			arenas.get_child(e).disabled=false
-	for e in range(clamp(bid%rows-1,0,rows)+clamp(pointy,0,colums-1)*rows, 
-	clamp(bid%rows+2,0,rows)+clamp(pointy,0,colums-1)*rows):
-		if e != bid or arenas.get_child(e).shop!=0:
-			upd_stats_(arenas.get_child(e))
-			arenas.get_child(e).disabled=false
-	for e in range(clamp(bid%rows-1,0,rows)+clamp(pointy+1,0,colums-1)*rows, 
-	clamp(bid%rows+2,0,rows)+clamp(pointy+1,0,colums-1)*rows):
-		if e != bid:
-			upd_stats_(arenas.get_child(e))
-			arenas.get_child(e).disabled=false
-	item_rare=float(get_tree().current_scene.lvl*colums+(max_column))/float((gm.maps.keys().max()+1)*colums)
-func upd_stats_(b1:Button):
-	var rmax=clamp(fnc.rnd.randi_range(1,4),0,99)*int(!bool(b1.shop) and b1.shop!=2) 
-	if rmax>0:
-		b1.min_range=1
-		b1.max_range=rmax
-	else:
-		b1.min_range=0
-		b1.max_range=0
-	b1.upd_stats()
-func upd_stats():
-	stats_cont.size.y=240
-	stats_cont.position.y=0
-	var cd=cr_stats()
-	var tt:Array=cd.keys()
-	for e in range(stats_cont.get_child_count()):
-		var e1=stats_cont.get_child(e)
-		e1.txt=str(fnc.get_hero().cd.stats[tt[e]])
-func _physics_process(delta):
-	#if gm.cur_font!=theme.default_font["resource_name"]:
-	#	gm.set_font(gm.cur_font,theme)
-	$hero_values/cont/money.txt=str(fnc.get_hero().money)
-	$hero_values/cont/xp/pg.value=fnc.get_hero().exp
-	$hero_values/cont/xp/pg.max_value=fnc.get_hero().cd.prefs["max_exp_start"]
-	$hero_values/cont/xp/pg/txt.text="\tlvl - "+str(fnc.get_hero().lvl)
-func upd_b_stats():
-	var cd=cr_stats()
-	shop_items.clear()
-	posid=start_posid
-	bossid=boss_spawn_ids[fnc.rnd.randi_range(0,len(boss_spawn_ids)-1)]
-	bst.clear()
-	map_execptions=PackedInt32Array([posid])
-	max_column=posid%colums
-	cr_shops()
-	for e in range(colums*rows):
-		var b1=arenas.get_child(e)
-		b1.clear()
-		b1.cd=cd
-		if e == bossid:
-			b1.exit=true
-			b1.ivents_imgs.append(gm.images.icons.other.lvl_exit)
-			if !gm.maps[get_tree().current_scene.lvl].bosses.is_empty():
-				var list=PackedStringArray(gm.maps[get_tree().current_scene.lvl].bosses)
-				var boss_d=list[fnc.rnd.randi_range(0,len(list)-1)]
-				var b_list=[]
-				for b in gm.bosses.keys():
-					if fnc.i_search(list,b)!=-1:
-						b_list.append(gm.bosses[b])
-				b1.boss=list
-				for ei in b_list:
-					b1.ivents_imgs.append(ei.i)
-		if fnc.i_search(shop_items.keys(),e)!=-1:
-			b1.ivents_imgs.append(gm.images.icons.other.money)
-			b1.shop=fnc._with_chance_custom_values(0.3,2,1)
-			if b1.shop==2:
-				for ei in gm.maps[get_tree().current_scene.lvl].enemys:
-					if fnc.i_search(b1.ivents_imgs,gm.enemys[ei].i)==-1:
-						b1.ivents_imgs.append(gm.enemys[ei].i)
-		b1.show_icons()
-		
-	
-	upd(posid)
-	upd_stats()
 func _on_in_shop():
 	for e in shop.get_children():
 		e.queue_free()
 	var all_items=gm.objs["updates"].duplicate()
 	var items_names=all_items.keys()
-	if shop_items[posid].has(""):
-		shop_items[posid].erase("")
-		for e in range(4):
+	if shop_items[current_pos].has(""):
+		shop_items[current_pos].erase("")
+		for e in range(shop.columns):
 			var n=all_items.keys()[fnc.rnd.randi_range(0,all_items.size()-1)]
 			var item_lvl=get_item_lvl(n,item_rare)
 			var sd=gm.objs.updates[n]
-			var v=fnc._with_dific(sd["lvls"][item_lvl].value,fnc.rnd.randf_range(sd["lvls"][item_lvl].rare.x+get_tree().current_scene.dif,sd["lvls"][item_lvl].rare.y+get_tree().current_scene.dif))
+			var v=fnc._with_dific(sd["lvls"][item_lvl].value,fnc.rnd.randf_range(sd["lvls"][item_lvl].rare.x+gm.game_prefs.dif,sd["lvls"][item_lvl].rare.y+gm.game_prefs.dif))
 			#updates.merge({n+"/"+str(e):})
 			#добавить случайные значения
 			var c_stats=sd["lvls"][item_lvl].stats.duplicate(true)
@@ -209,25 +238,25 @@ func _on_in_shop():
 					else:
 						t=fnc.rnd.randi_range(sd["lvls"][item_lvl].stats[e1].x,sd["lvls"][item_lvl].stats[e1].y)
 					c_stats[e1]=t
-			shop_items[posid].merge({n+"/"+str(e):{"lvl":item_lvl,"stats":c_stats,"val":fnc._with_dific(get_end_price(c_stats),get_tree().current_scene.dif)}})
+			shop_items[current_pos].merge({n+"/"+str(e):{"lvl":item_lvl,"stats":c_stats,"val":fnc._with_dific(get_end_price(c_stats),gm.game_prefs.dif)}})
 			
-	arenas.hide()
-	shop.show()
-	$arenas/shop_button.show()
-	for e in shop_items[posid].keys():
-		var item=preload("res://mats/UI/map/item.tscn").instantiate()
+	$map.hide()
+	$shop.show()
+	$stats/cont/back.show()
+	for e in shop_items[current_pos].keys():
+		var item=preload("res://mats/UI/map/shop_item/item.tscn").instantiate()
 		item.item_name=e.split("/")[0]
 		item.del_name=e
-		item.lvl=shop_items[posid][e].lvl
-		item.stats=shop_items[posid][e].stats
-		item.value=shop_items[posid][e].val
+		item.lvl=shop_items[current_pos][e].lvl
+		item.stats=shop_items[current_pos][e].stats
+		item.value=shop_items[current_pos][e].val
 		shop.add_child(item)
 func _on_shop_exit_down():
-	arenas.show()
-	shop.hide()
-	$arenas/shop_button.hide()
-	if shop_items[posid].is_empty():
-		map_execptions.append(posid)
+	$map.show()
+	$shop.hide()
+	$stats/cont/back.hide()
+	if shop_items[current_pos].is_empty():
+		current_pos.runned=true
 	for e in shop.get_children():
 		e.queue_free()
 func _upd_items_values():
@@ -236,16 +265,25 @@ func _upd_items_values():
 			for n in shop_items[shop].keys():
 				var item_lvl=shop_items[shop][n].lvl#get_item_lvl(, shop_items[shop])
 				var sd=gm.objs.updates[n.split("/")[0]]["lvls"][item_lvl]
-				
-				var v=fnc._with_dific(sd.value,fnc.rnd.randf_range(sd.rare.x+get_tree().current_scene.dif,sd.rare.y+get_tree().current_scene.dif))
+				var v=fnc._with_dific(sd.value,fnc.rnd.randf_range(sd.rare.x+gm.game_prefs.dif,sd.rare.y+gm.game_prefs.dif))
 				shop_items[shop][n].val=v
 func get_end_price(sts:Dictionary):
 	var p=0.0
 	for e in sts.keys():
 		p+=sts[e]*gm.objs.stats[e].price
 	return p
-func _on_vs_value_changed(value):
-	var t=(stats_cont.size.y*stats_cont.scale.y)/(stats_tcont.size.y*stats_tcont.scale.y)
-	if t>1.0:
-		stats_cont.position.y=(stats_tcont.size.y*stats_tcont.scale.y-stats_cont.size.y*stats_cont.scale.y)*(value)
-	else:stats_cont.position.y=0
+func _on_player_no_he():
+	for e in map.get_children():
+		e.runned=false
+	set_cur_pos(null)
+	if get_tree().current_scene.get_node("world").get_child(0) is level_template:
+		get_tree().current_scene.get_node("world").get_child(0).queue_free()
+	for e in get_tree().current_scene.enemy_path.get_children():
+		e.queue_free()
+	await get_tree().process_frame
+	get_tree().current_scene.recreate_player()
+	gm.game_prefs.seed=randi()
+	fnc.rnd.seed=gm.game_prefs.seed
+	gm.save_file_data()
+	get_tree().current_scene.show_lvls()
+

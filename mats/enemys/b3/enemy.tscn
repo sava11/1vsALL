@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d4bnt6s48h516" path="res://mats/contents/summon/summon.tscn" id="5_4wpdd"]
 [ext_resource type="PackedScene" uid="uid://uxwpjiuinj83" path="res://mats/contents/boss_mark/boss_mark.tscn" id="5_jgfj0"]
 [ext_resource type="PackedScene" uid="uid://b5m0vipdvpn6x" path="res://mats/contents/stages/stages.tscn" id="6_6o0pi"]
-[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="7_bmkcm"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="7_bmkcm"]
 [ext_resource type="Texture2D" uid="uid://b725dav12321x" path="res://mats/imgs/skeleton_ancient/Down/AncientSkeletonDownAttack01.png" id="8_1rwtd"]
 [ext_resource type="Texture2D" uid="uid://cgvrvgsg7q6v2" path="res://mats/imgs/skeleton_ancient/Left/AncientSkeletonLeftAttack01.png" id="9_b2srx"]
 [ext_resource type="Texture2D" uid="uid://bdoul1iys3i11" path="res://mats/imgs/skeleton_ancient/Right/AncientSkeletonRightAttack01.png" id="10_alp70"]

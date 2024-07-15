@@ -1,11 +1,13 @@
 class_name level_template extends Node2D
+signal time_event(event_id:int)
 @export var time:float
+@export var time_events:PackedFloat32Array
 @export var cam:Camera2D
 @export var enemys_data:arena_action
 var rsize:Vector2
 var rpos:Vector2
 var timer:Timer
-var enemy_path=null
+@onready var enemy_path=$ent/enemys
 signal completed()
 func start_timer(new_time:float):
 	timer.wait_time=new_time
@@ -16,8 +18,6 @@ func _ready():
 	var cm_brd=$cam_brd
 	var cam_scale:float=fnc.get_prkt_win().x/cm_brd.size.x
 	if cam!=null:
-		if enemy_path==null:
-			enemy_path=get_node("../ent/enemys")
 		timer=Timer.new()
 		timer.name="Timer"
 		timer.one_shot=true
@@ -31,11 +31,17 @@ func _ready():
 		cam.limit_top=cm_brd.position.y
 		cam.limit_bottom=cm_brd.position.y+cm_brd.size.y
 		cam.limit_right=cm_brd.position.x+cm_brd.size.x
-		fnc.get_hero().global_position=$pos.global_position
 		summon_bosses()
 var enemy_spawn_timer_temp:float=0
 var next_enemy_spawn_timer_temp:float=0
+var cur_step_time:float=0
+var cur_step_id=0
 func _physics_process(delta):
+	cur_step_time+=delta
+	if !time_events.is_empty() and cur_step_id<len(time_events) and cur_step_time>=time_events[cur_step_id]:
+		emit_signal("time_event",cur_step_id)
+		cur_step_time=0
+		cur_step_id+=1
 	if enemys_data!=null and enemys_data.spawning:
 		enemy_spawn_timer_temp+=delta
 		if next_enemy_spawn_timer_temp<=enemy_spawn_timer_temp:
@@ -43,7 +49,7 @@ func _physics_process(delta):
 			if enemys_data.has_enemys():
 				summon()
 			enemy_spawn_timer_temp=0
-			
+	
 func get_rand_pos():
 	var c:NavigationMesh=$nav.navigation_polygon.get_navigation_mesh()
 	var gpols=[]
@@ -106,12 +112,14 @@ func summon_bosses():
 			e.scene_data={
 				"global_position":pos,
 				"dif":gm.game_prefs.dif,
+				"target":$ent/player,
 				"elite":fnc._with_chance(gm.game_prefs.boss_elite_chance),
 				"/boss_mark.scene_to_add":get_tree().current_scene.get_node("cl/game_ui/st"),
 				"/boss_mark.scene_to_func":self,
 				"/boss_mark.scene_func":"boss_die",
 				"/boss_mark.bname":b.name
 				}
+			e.scene_data.merge(gm.bosses[b.name].dificulty_lvl[gm.cur_dif])
 			#e.target_path=fnc.get_hero().get_path()
 			enemy_path.add_child(e)
 			e.global_position=pos
@@ -125,6 +133,7 @@ func summon(enemys_count=0):
 		e.scene_data={
 			"global_position":pos,
 			"dif":gm.game_prefs.dif,
+			"target":$ent/player,
 			"elite":fnc._with_chance(gm.game_prefs.elite_chance)
 			}
 		#e.target_path=fnc.get_hero().get_path()

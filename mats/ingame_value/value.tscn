@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxaofsmi8406d"]
 
 [ext_resource type="Script" path="res://mats/ingame_value/value.gd" id="1_5gfn0"]
-[ext_resource type="Texture2D" uid="uid://ql03bevivc73" path="res://mats/imgs/Full Coinss.png" id="2_jn0b8"]
+[ext_resource type="Texture2D" uid="uid://4j7txu0c0euu" path="res://mats/UI/imgs/coin.png" id="2_ao0m8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_517dh"]
 radius = 5.0
@@ -12,10 +12,7 @@ collision_mask = 0
 script = ExtResource("1_5gfn0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.3, 0)
-scale = Vector2(0.15873, 0.15625)
-texture = ExtResource("2_jn0b8")
-hframes = 8
+texture = ExtResource("2_ao0m8")
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_517dh")

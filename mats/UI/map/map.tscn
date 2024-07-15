@@ -1,0 +1,232 @@
+[gd_scene load_steps=10 format=3 uid="uid://bi0tc3pn6sgha"]
+
+[ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_3h318"]
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
+[ext_resource type="Texture2D" uid="uid://df16ud3cfcbxw" path="res://mats/UI/map/imgs/map.png" id="3_e6gjm"]
+[ext_resource type="PackedScene" uid="uid://lfervjgmrcn8" path="res://mats/UI/map/locs/training/training.tscn" id="8_66scv"]
+[ext_resource type="Texture2D" uid="uid://bfvhd4vvmo1qr" path="res://mats/UI/imgs/scroll.png" id="11_1v8av"]
+[ext_resource type="Texture2D" uid="uid://b843pwetjevm0" path="res://mats/UI/map/imgs/shop.png" id="12_00ogn"]
+[ext_resource type="Texture2D" uid="uid://b4vbj22132bp2" path="res://mats/UI/map/imgs/boss.png" id="13_0rooc"]
+[ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="15_bd4u6"]
+[ext_resource type="Texture2D" uid="uid://c0xm12txf3qk8" path="res://mats/UI/map/imgs/hero.png" id="15_rt4od"]
+
+[node name="map" type="Control" node_paths=PackedStringArray("current_pos")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gyvyj")
+script = ExtResource("1_3h318")
+current_pos = NodePath("map/cont/locs/map/place")
+
+[node name="tr" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 144.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("11_1v8av")
+expand_mode = 1
+
+[node name="mc" type="MarginContainer" parent="tr"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="vbc" type="HBoxContainer" parent="tr/mc"]
+layout_mode = 2
+alignment = 1
+
+[node name="cnt" type="VBoxContainer" parent="tr/mc/vbc"]
+layout_mode = 2
+
+[node name="itm6" type="HBoxContainer" parent="tr/mc/vbc/cnt"]
+custom_minimum_size = Vector2(2.08165e-12, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="tr3" type="TextureRect" parent="tr/mc/vbc/cnt/itm6"]
+self_modulate = Color(1, 0.313726, 0.431373, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("12_00ogn")
+expand_mode = 1
+
+[node name="l" type="Label" parent="tr/mc/vbc/cnt/itm6"]
+self_modulate = Color(1, 0.313726, 0.431373, 1)
+layout_mode = 2
+text = "OCUPATED_LEGEND"
+
+[node name="itm" type="HBoxContainer" parent="tr/mc/vbc/cnt"]
+custom_minimum_size = Vector2(2.08165e-12, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="tr" type="TextureRect" parent="tr/mc/vbc/cnt/itm"]
+self_modulate = Color(0, 0.752941, 0.733333, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("12_00ogn")
+expand_mode = 1
+
+[node name="l" type="Label" parent="tr/mc/vbc/cnt/itm"]
+self_modulate = Color(0, 0.752941, 0.733333, 1)
+layout_mode = 2
+text = "SHOP_LEGEND"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="tr/mc/vbc"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="tr/mc/vbc/HBoxContainer"]
+layout_mode = 2
+
+[node name="itm2" type="HBoxContainer" parent="tr/mc/vbc/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="tr" type="TextureRect" parent="tr/mc/vbc/HBoxContainer/HBoxContainer/itm2"]
+self_modulate = Color(1, 0.313726, 0.431373, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("13_0rooc")
+expand_mode = 1
+
+[node name="l" type="Label" parent="tr/mc/vbc/HBoxContainer/HBoxContainer/itm2"]
+self_modulate = Color(1, 0.313726, 0.431373, 1)
+layout_mode = 2
+text = "BOSS_LEGEND"
+
+[node name="itm4" type="HBoxContainer" parent="tr/mc/vbc/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="tr" type="TextureRect" parent="tr/mc/vbc/HBoxContainer/HBoxContainer/itm4"]
+self_modulate = Color(0.215686, 0.443137, 0.631373, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("15_rt4od")
+expand_mode = 1
+
+[node name="l" type="Label" parent="tr/mc/vbc/HBoxContainer/HBoxContainer/itm4"]
+self_modulate = Color(0.215686, 0.443137, 0.631373, 1)
+layout_mode = 2
+text = "YOU"
+
+[node name="map" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -496.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_gyvyj")
+texture = ExtResource("3_e6gjm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cont" type="ScrollContainer" parent="map"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="locs" type="MarginContainer" parent="map/cont"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 117
+theme_override_constants/margin_top = 62
+theme_override_constants/margin_right = 117
+theme_override_constants/margin_bottom = 62
+
+[node name="map" parent="map/cont/locs" instance=ExtResource("8_66scv")]
+layout_mode = 2
+
+[node name="stats" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 320.0
+
+[node name="cont" type="VBoxContainer" parent="stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="stats/cont"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="item_cont" type="VBoxContainer" parent="stats/cont/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="back" type="Button" parent="stats/cont"]
+layout_mode = 2
+text = "BACK"
+
+[node name="shop" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_bd4u6")
+
+[node name="shop" type="GridContainer" parent="shop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 21.0
+offset_right = -243.0
+offset_bottom = -155.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_constants/h_separation = 2
+columns = 4
+
+[connection signal="in_shop" from="." to="." method="_on_in_shop"]
+[connection signal="button_down" from="stats/cont/back" to="." method="_on_shop_exit_down"]
+
+[editable path="map/cont/locs/map"]

@@ -45,8 +45,6 @@ var vec=Vector2.ZERO
 var last_att_speed=0.3
 var state="i"
 @onready var cur_anim=statuses[state]
-signal lvl_up(lvl:int)
-
 var roll:bool=false
 var attak:bool=false
 
@@ -54,15 +52,10 @@ var attak:bool=false
 var timer=0
 var roll_timer=0
 var cd={}
-var add_stats={}
-
-var exp:int=0
-var lvl:int=0
+#
+#var exp:int=0
+#var lvl:int=0
 # Called when the node enters the scene tree for the first time.
-func merge_stats():
-	for e in cd.stats.keys():
-		if add_stats.get(e)!=null:
-			cd.stats[e]=clamp(cd.stats[e]+add_stats[e],gm.objs.stats[e].min_v,999999999)
 func test_chamber(anim_name:String,value:float):
 	var timer=value
 	for e in [anim_name]:
@@ -113,14 +106,14 @@ func get_ang_move(angle:float,ex:float):
 			return e
 var anim_finish:bool=false
 func _ready():
-	connect("lvl_up",Callable(get_tree().current_scene,"add_to_lvl_queue"))
+	upd_player_data()
+func upd_player_data():
 	cd=gm.player_data
-	#cd=gm.objs["player"].duplicate()
-	#cd.stats=gm.objs["player"].stats.duplicate()
-	#cd.prefs=gm.objs["player"].prefs.duplicate()
+	#print(cd)
 	cd.prefs["cur_stm"]=cd.stats["max_stamina"]
+	cd.prefs["cur_hp"]=cd.stats["hp"]
 	roll_timer=cd.prefs["roll_timer"]
-	#var roll_t=$ap.get_animation("roll_up").length/roll_timer
+	state="i"
 	for e in ["roll"]:
 		var anim:Animation=$ap.get_animation(e)
 		var tc=anim.get_track_count()
@@ -129,17 +122,13 @@ func _ready():
 		for tt in range(tc):
 			for k in range(anim.track_get_key_count(tt)):
 				var k1=anim.track_get_key_time(tt,k)/last_length
-				#print(t," ",k)
-				#print(anim.track_get_key_time(t,k),"-----")
 				anim.track_set_key_time(tt,k,roll_timer*k1)
-	hb.monitorable=true
-	hb.monitoring=true
+	hb.set_deferred("monitorable",true)
+	hb.set_deferred("monitoring",true)
 	hb.s_m_h(cd.stats["hp"])
 	hb.set_he(cd.prefs["cur_hp"])
 	hb.s_m_d(cd.stats["def"])
 	hb.set_def(cd.stats["def"])
-	#$hirtbox.damage=damage
-	
 	set_att_zone()
 func set_att_zone():
 	var pol=PackedVector2Array([])
@@ -183,11 +172,11 @@ func pre_status(_delta):
 		if hb.m_he>hb.he:
 			hb.set_he(hb.he+cd.stats["hp_regen"]*_delta)
 			
-		if exp >= cd.prefs["max_exp_start"]:
-			lvl+=1
-			exp-=cd.prefs["max_exp_start"]
-			cd.prefs["max_exp_start"]=cd.prefs["max_exp_start"]*cd.prefs["max_exp_sc"]
-			emit_signal("lvl_up",lvl)
+		#if exp >= cd.prefs["max_exp_start"]:
+			#lvl+=1
+			#exp-=cd.prefs["max_exp_start"]
+			#cd.prefs["max_exp_start"]=cd.prefs["max_exp_start"]*cd.prefs["max_exp_sc"]
+			#emit_signal("lvl_up",lvl)
 		if cd.stats.hp!=hb.m_he:
 			hb.s_m_h(cd.stats["hp"])
 			hb.set_he(cd.stats["hp"])
@@ -285,8 +274,8 @@ func _on_hurt_box_no_he():
 func _on_get_money_area_area_entered(area):
 	if area.type==0:
 		gm.player_data.stats.money+=area.value
-	if area.type==1:
-		exp+=area.value
+	#if area.type==1:
+		#exp+=area.value
 	area.queue_free()
 
 var bs=[]

@@ -1,8 +1,6 @@
 extends Node
 
 var rnd=RandomNumberGenerator.new()
-func get_hero():
-	return get_tree().current_scene.get_node("world/ent/player")
 func get_world_node():
 	return get_tree().current_scene.get_node("world")
 func get_camera():
@@ -10,13 +8,15 @@ func get_camera():
 func get_view_win():
 	return get_viewport().get_visible_rect().size
 func get_prkt_win():
-	return Vector2(ProjectSettings.get("display/window/size/viewport_width"),ProjectSettings.get("display/window/size/viewport_height"))
+	return Vector2(ProjectSettings.get("display/window/size/viewport_width"),
+	ProjectSettings.get("display/window/size/viewport_height"))
 func in_area(p,point):
 	var result = false;
 	var size=len(p)
 	var j = size - 1;
 	for i  in range(0,size):
-		if ( (p[i].y < point.y && p[j].y >= point.y or p[j].y < point.y && p[i].y >= point.y) and (p[i].x + (point.y - p[i].y) / (p[j].y - p[i].y) * (p[j].x - p[i].x) < point.x) ):
+		if ( (p[i].y < point.y && p[j].y >= point.y or p[j].y < point.y && p[i].y >= point.y) and (
+			p[i].x + (point.y - p[i].y) / (p[j].y - p[i].y) * (p[j].x - p[i].x) < point.x) ):
 			result = !result;
 		j = i;
 	return result
@@ -36,8 +36,7 @@ func sqrtV(v:Vector2):
 func move(ang):
 	return Vector2(cos(deg_to_rad(ang)),sin(deg_to_rad(ang)))
 func jos(a,b):
-	if b!=0:
-		return b*round(a/b)
+	if b!=0:return b*round(a/b)
 	else:return 0
 func circ(a,mn,mx):
 	return abs(mx+a)%abs(mx)+mn
@@ -123,7 +122,8 @@ func setter(itm,data:Dictionary):
 			var str=me.split(".")
 			var n=itm.get_node(str[0])
 			if is_instance_valid(n):
-				if !str[1].contains("()"):n.set(str[1],data[e])
+				if !str[1].contains("()"):
+					n.set(str[1],data[e])
 				else:
 					var var_type=typeof(data[e])
 					var callable=Callable(n,str[1].split("()")[0])
@@ -138,7 +138,8 @@ func setter(itm,data:Dictionary):
 		else:
 			var str=e.split(".")[len(e.split("."))-1]
 			if is_instance_valid(itm):
-				if !str.contains("()"):itm.set(str,data[e])
+				if !str.contains("()"):
+					itm.set(str,data[e])
 				else:
 					var var_type=typeof(data[e])
 					var callable=Callable(itm,str.split("()")[0])
@@ -150,7 +151,33 @@ func setter(itm,data:Dictionary):
 					callable.call()
 			else:
 				printerr("can't set/call parametr ",e," with ",data[e])
-
-
-func _ready():
-	rnd.randomize()
+func setter1(itm,data:Dictionary):
+	for e in data.keys():
+		if e is String:
+			var itm_data=e.split(".")
+			#var function=e.ends_with(")") or e.contains("(")
+			#var dots=e.count(".")
+			#var node=e.begins_with("/")
+			#var varible=!e.ends_with(")")
+			#print(e," ",function," ",node," ",dots," ",varible,"\n",itm_data)
+			var res=itm
+			for i in range(len(itm_data)):
+				var obj=itm_data[i]
+				if obj.contains("("):
+					var var_type=typeof(data[e])
+					var callable=Callable(itm,obj)
+					if var_type!=TYPE_NIL:
+						if var_type!=TYPE_ARRAY:
+							callable=callable.bindv([data[e]])
+						else:
+							callable=callable.bindv(data[e])
+					res=callable.call()
+				else:
+					if obj.contains("/"):
+						res=res.get_node(obj)
+					else:
+						if !itm_data[(i+1)%len(itm_data)].contains("(") and (i+1)==len(itm_data):
+							res.set(obj,data[e])
+						else:
+							res=res.get(itm_data[i])
+		

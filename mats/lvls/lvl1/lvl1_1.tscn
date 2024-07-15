@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://dtjdo5yay44q1"]
 
-[ext_resource type="Texture2D" uid="uid://c32ryp6pyv6vf" path="res://mats/imgs/pesok.png" id="1_gc0kl"]
-[ext_resource type="Texture2D" uid="uid://w4j6erli1dnu" path="res://mats/imgs/pesok_2_1.png" id="2_8whw2"]
-[ext_resource type="Texture2D" uid="uid://gffkg16g3adb" path="res://mats/imgs/kamn.png" id="3_swj51"]
+[ext_resource type="Texture2D" uid="uid://c32ryp6pyv6vf" path="res://mats/imgs/tiles/ground/pesok.png" id="1_gc0kl"]
+[ext_resource type="Texture2D" uid="uid://w4j6erli1dnu" path="res://mats/imgs/tiles/ground/pesok_2_1.png" id="2_8whw2"]
+[ext_resource type="Texture2D" uid="uid://gffkg16g3adb" path="res://mats/imgs/tiles/ground/kamn.png" id="3_swj51"]
 [ext_resource type="Script" path="res://mats/contents/fire_tower/ft.gd" id="4_d36ux"]
 [ext_resource type="PackedScene" uid="uid://dfe22bmixbbc5" path="res://mats/boxes/custom_dmg_area.tscn" id="5_ehlxg"]
 [ext_resource type="PackedScene" uid="uid://heog28crk5py" path="res://mats/boxes/hurt_box.tscn" id="6_2vbep"]
-[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/contents/fier_plate/a.tscn" id="7_fk7uf"]
+[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/contents/fire_plate/a.tscn" id="7_fk7uf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vf4d"]
 texture = ExtResource("1_gc0kl")

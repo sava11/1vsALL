@@ -16,7 +16,7 @@ signal h_ch(v)
 signal d_ch(v)
 signal m_h_ch(v)
 signal m_d_ch(v)
-
+var health_empty:=bool(he)
 func s_m_h(v):
 	m_he=v
 	self.he=min(he,m_he)
@@ -32,12 +32,14 @@ func set_def(value):
 		emit_signal("no_def")
 		def=1
 func set_he(value):
-	
 	he=value
 	emit_signal("h_ch",he)
-	if he<=0:
+	if he<=0 and !health_empty:
 		emit_signal("no_he")
 		he=0
+		health_empty=true
+	else:
+		health_empty=false
 func _ready():
 	if !is_connected("area_exited",Callable(self,"_on_area_exited")):
 		connect("area_exited",Callable(self,"_on_area_exited"))
@@ -69,7 +71,7 @@ func _process(delta):
 		var dmg=area.damage
 		if fnc._with_chance(area.crit_chance):
 			dmg+=area.crit_damage
-			var crit=preload("res://mats/font/crit.tscn").instantiate()
+			var crit=preload("res://mats/UI/crit_idicator/crit.tscn").instantiate()
 			get_tree().current_scene.enemy_path.add_child.call_deferred(crit)
 			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
 		set_he(he-dmg/float(def)*delta)
@@ -84,7 +86,7 @@ func _on_area_entered(area):
 			dmg+=area.crit_damage
 			if area.crit_chance>1:
 				dmg*=area.crit_chance
-			var crit=preload("res://mats/font/crit.tscn").instantiate()
+			var crit=preload("res://mats/UI/crit_idicator/crit.tscn").instantiate()
 			get_tree().current_scene.enemy_path.add_child.call_deferred(crit)
 			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
 		set_he(he-float(dmg)/float(def))

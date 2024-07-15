@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=5 format=3 uid="uid://bdf3vrnv8ixor"]
+
+[ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="2_dvwx7"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="2_kqdfn"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_72kpq"]
+
+[sub_resource type="Resource" id="Resource_tjh0j"]
+script = ExtResource("2_kqdfn")
+name = "button_name"
+color = Color(1, 1, 1, 1)
+disabled = false
+dialog_data_path = "res://mats/UI/dialog/data/dialogs/dialog2.tres"
+node_path = null
+function = ""
+function_arguments = []
+
+[resource]
+script = ExtResource("3_72kpq")
+name = "NEW_DATA1"
+BDI_text = "TRAIN_DIALOG_1"
+left_char_img = ExtResource("2_dvwx7")
+left_speeking = true
+right_speeking = false
+buttons = Array[ExtResource("2_kqdfn")]([SubResource("Resource_tjh0j")])

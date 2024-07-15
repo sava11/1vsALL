@@ -10,8 +10,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if fnc.get_hero().state=="d":
-		queue_free()
 	if time!=0.0 and st<time:
 		st+=delta
 		self_modulate.a=time_curve.sample_baked(st/time)
@@ -20,7 +18,7 @@ func _process(delta):
 			var itm=load_scene.instantiate()
 			itm.set_deferred("global_position",global_position)
 			fnc.setter(itm,scene_data)
-			
+
 			get_parent().add_child(itm)
 		queue_free()
 	pass

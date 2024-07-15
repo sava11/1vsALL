@@ -12,5 +12,6 @@ func new_dos(_delta:float):
 		set_anim(statuses[state],target.global_position)
 		state="wait_anim"
 		na.set_velocity(Vector2.ZERO)
+	
 func _on_die():
 	$drop.drop()

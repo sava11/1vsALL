@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cnpiy06dqixao" path="res://mats/contents/damage/range/damage.tscn" id="3_kcsf4"]
 [ext_resource type="PackedScene" uid="uid://btyifdisya4aa" path="res://mats/enemys/e2/visual.tscn" id="4_6kixi"]
 [ext_resource type="PackedScene" uid="uid://bgshayat5m2pr" path="res://mats/contents/arrow/arrow.tscn" id="4_6vp1t"]
-[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="4_n6ux5"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="4_n6ux5"]
 [ext_resource type="PackedScene" uid="uid://bjq6lohvs8mw1" path="res://mats/contents/drop/drop.tscn" id="5_kk0o2"]
 [ext_resource type="Texture2D" uid="uid://c0l5vikarh04i" path="res://mats/imgs/skelet_bow/Down/SkeletonWithBowDownAttack01.png" id="6_xg4xh"]
 [ext_resource type="Texture2D" uid="uid://ddsn1t04amfln" path="res://mats/imgs/skelet_bow/Left/SkeletonWithBowLeftAttack01.png" id="7_cbuiy"]

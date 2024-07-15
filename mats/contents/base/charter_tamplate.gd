@@ -18,7 +18,7 @@ extends RigidBody2D
 @export_range(1,99999) var hp_from:float=1
 @export_range(1,99999) var hp_to:float=1
 
-@onready var target=fnc.get_hero()
+var target
 @onready var hb=$hurt_box
 @onready var na=$na
 @onready var sp=get_node_or_null("visual/sp")
@@ -108,6 +108,7 @@ func _process(_delta):
 	queue_redraw()
 func _integrate_forces(st):
 	#see.rotation_degrees=fnc.angle(target.global_position-global_position)
+
 	see.target_position=target.global_position-global_position
 	if target.state!="d":
 		if state!="wait_anim" and state!="d":

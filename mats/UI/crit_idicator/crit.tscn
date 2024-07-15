@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj5wux8v83slb"]
+
+[ext_resource type="Texture2D" uid="uid://77bd2m03gk3f" path="res://mats/imgs/icons/skills/%crit.png" id="1_sol0l"]
+[ext_resource type="Script" path="res://mats/UI/crit_idicator/crit.gd" id="2_tkajn"]
+
+[node name="crit" type="TextureRect"]
+modulate = Color(1, 1, 1, 0.752941)
+z_index = 1
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("1_sol0l")
+expand_mode = 1
+script = ExtResource("2_tkajn")
+
+[node name="DEL_T" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="DEL_T" to="." method="_on_del_t_timeout"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=154 format=3 uid="uid://btyifdisya4aa"]
 
-[ext_resource type="Shader" path="res://mats/enemys/outline.gdshader" id="1_rvbw3"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="1_rvbw3"]
 [ext_resource type="Texture2D" uid="uid://c0l5vikarh04i" path="res://mats/imgs/skelet_bow/Down/SkeletonWithBowDownAttack01.png" id="2_prv24"]
 [ext_resource type="Texture2D" uid="uid://ddsn1t04amfln" path="res://mats/imgs/skelet_bow/Left/SkeletonWithBowLeftAttack01.png" id="3_txgco"]
 [ext_resource type="Texture2D" uid="uid://brkau8c7x6r1w" path="res://mats/imgs/skelet_bow/Right/SkeletonWithBowRightAttack01.png" id="4_elcxm"]

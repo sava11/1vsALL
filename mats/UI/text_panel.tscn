@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ejhsq4mdl2tu"]
 
-[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_mt30o"]
+[ext_resource type="FontFile" uid="uid://bbkp7g4md08hy" path="res://mats/UI/font/Puzzle-Tale-Pixel-Regular.ttf" id="1_mt30o"]
 [ext_resource type="Script" path="res://mats/UI/text_panel.gd" id="1_xv5s0"]
 
 [sub_resource type="FontVariation" id="FontVariation_li2yg"]

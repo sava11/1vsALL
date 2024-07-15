@@ -1,0 +1,180 @@
+[gd_scene load_steps=21 format=3 uid="uid://lfervjgmrcn8"]
+
+[ext_resource type="Script" path="res://mats/UI/map/locs/training/training.gd" id="1_1vgx1"]
+[ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/map/place/place.tscn" id="2_uri1g"]
+[ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_enemys_data.gd" id="3_s17os"]
+[ext_resource type="Script" path="res://mats/UI/map/actions/arena.gd" id="4_gl7wn"]
+[ext_resource type="Script" path="res://mats/UI/map/statuses/ingame_status.gd" id="5_e34vk"]
+[ext_resource type="Script" path="res://mats/UI/map/actions/shop/shop.gd" id="6_cvgou"]
+
+[sub_resource type="Resource" id="Resource_outis"]
+script = ExtResource("3_s17os")
+name = "sk"
+enemy = "res://mats/enemys/e1/enemy.tscn"
+percent = 0.0
+
+[sub_resource type="Resource" id="Resource_udkax"]
+script = ExtResource("4_gl7wn")
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_outis")])
+spawning = true
+enemys_count_min = 8
+enemys_count_max = 12
+time_to_next_enemy_wave_min = 10.0
+time_to_next_enemy_wave_max = 10.0
+
+[sub_resource type="Resource" id="Resource_cvj4s"]
+script = ExtResource("5_e34vk")
+status = "hp"
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_gvf2v"]
+script = ExtResource("5_e34vk")
+status = "def"
+value = 0.4
+
+[sub_resource type="Resource" id="Resource_ucglk"]
+script = ExtResource("5_e34vk")
+status = "take_area"
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_yrem4"]
+script = ExtResource("5_e34vk")
+status = "roll_speed"
+value = 10.0
+
+[sub_resource type="Resource" id="Resource_0rlqj"]
+script = ExtResource("3_s17os")
+name = "sk_sw"
+enemy = "res://mats/enemys/e1/enemy.tscn"
+percent = 0.5
+
+[sub_resource type="Resource" id="Resource_1qyqo"]
+script = ExtResource("3_s17os")
+name = "sk_bw"
+enemy = "res://mats/enemys/e2/enemy.tscn"
+percent = 0.5
+
+[sub_resource type="Resource" id="Resource_bqu0m"]
+script = ExtResource("4_gl7wn")
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_0rlqj"), SubResource("Resource_1qyqo")])
+spawning = true
+enemys_count_min = 9
+enemys_count_max = 18
+time_to_next_enemy_wave_min = 10.0
+time_to_next_enemy_wave_max = 10.0
+
+[sub_resource type="Resource" id="Resource_r8r2q"]
+script = ExtResource("6_cvgou")
+items = Array[Resource("res://mats/UI/map/actions/shop/items/item_data.gd")]([])
+count_min = 4
+count_max = 4
+rarity = 0.0
+
+[sub_resource type="Resource" id="Resource_d4xrw"]
+script = ExtResource("3_s17os")
+name = "sk_sw"
+enemy = "res://mats/enemys/e1/enemy.tscn"
+percent = 0.4
+
+[sub_resource type="Resource" id="Resource_3qqmk"]
+script = ExtResource("3_s17os")
+name = "sk_bw"
+enemy = "res://mats/enemys/e2/enemy.tscn"
+percent = 0.6
+
+[sub_resource type="Resource" id="Resource_g8yoc"]
+script = ExtResource("4_gl7wn")
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_d4xrw"), SubResource("Resource_3qqmk")])
+spawning = true
+enemys_count_min = 4
+enemys_count_max = 12
+time_to_next_enemy_wave_min = 10.0
+time_to_next_enemy_wave_max = 10.0
+
+[sub_resource type="Resource" id="Resource_5snhk"]
+script = ExtResource("5_e34vk")
+status = "hp"
+value = 0.5
+
+[node name="map" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1vgx1")
+
+[node name="place" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_top = 64.0
+offset_bottom = 80.0
+neighbors = [NodePath("../place2")]
+
+[node name="place2" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 48.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 80.0
+arena = SubResource("Resource_udkax")
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_cvj4s"), SubResource("Resource_gvf2v"), SubResource("Resource_ucglk"), SubResource("Resource_yrem4")])
+neighbors = [NodePath("../place3")]
+
+[node name="place3" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 112.0
+offset_bottom = 80.0
+arena = SubResource("Resource_bqu0m")
+shop = SubResource("Resource_r8r2q")
+neighbors = [NodePath("../place2"), NodePath("../place4")]
+
+[node name="place4" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 144.0
+offset_top = 64.0
+offset_right = 160.0
+offset_bottom = 80.0
+arena = SubResource("Resource_g8yoc")
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_5snhk")])
+neighbors = [NodePath("../place3"), NodePath("../place5")]
+
+[node name="place5" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 208.0
+offset_bottom = 80.0
+neighbors = [NodePath("../place6"), NodePath("../place4"), NodePath("../place10")]
+
+[node name="place6" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 192.0
+offset_top = 16.0
+offset_right = 208.0
+offset_bottom = 32.0
+secret = true
+neighbors = [NodePath("../place7"), NodePath("../place5")]
+
+[node name="place10" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 240.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 80.0
+secret = true
+neighbors = [NodePath("../place5")]
+
+[node name="place7" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 144.0
+offset_right = 160.0
+secret = true
+neighbors = [NodePath("../place6"), NodePath("../place8")]
+
+[node name="place8" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 32.0
+secret = true
+neighbors = [NodePath("../place7")]
+
+[connection signal="choice_panel_showed" from="place2" to="." method="_on_place_2_choice_panel_showed"]
+[connection signal="lvl_end" from="place2" to="." method="_on_place_2_lvl_end"]
+[connection signal="lvl_start" from="place2" to="." method="_on_place_2_lvl_start"]
+[connection signal="choice_panel_showed" from="place3" to="." method="_on_place_3_choice_panel_showed"]

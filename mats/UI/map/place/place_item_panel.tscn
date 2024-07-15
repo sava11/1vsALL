@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2iylodnns5c3"]
+
+[ext_resource type="Script" path="res://mats/UI/map/place/place_item_panel.gd" id="1_1e7dq"]
+[ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_jy4r2"]
+
+[node name="Panel" type="MarginContainer"]
+process_mode = 3
+z_index = 2
+offset_right = 92.0
+offset_bottom = 24.0
+theme = ExtResource("1_jy4r2")
+script = ExtResource("1_1e7dq")
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="mc" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="cont" type="VBoxContainer" parent="mc"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="btns" type="HBoxContainer" parent="mc/cont"]
+layout_mode = 2
+alignment = 2
+
+[node name="cancel" type="Button" parent="mc/cont/btns"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="play" type="Button" parent="mc/cont/btns"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">"
+clip_text = true
+
+[node name="stats" type="HFlowContainer" parent="mc/cont"]
+layout_mode = 2
+size_flags_horizontal = 3

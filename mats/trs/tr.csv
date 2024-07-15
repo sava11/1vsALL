@@ -2,10 +2,10 @@
 PLAY,play,играть
 SETTINGS,settings,настройки
 AUTHORS,authors,авторы
-EXIT,exit,выход
+EXIT_FROM_GAME,exit from game,выход из игры
+EXIT_TO_MENU,exit to menu,выйти в меню
 BACK,back,назад
 APPLY,apply,применить
-
 TITLE_PROGRAMMER,programmer:,программист:
 TITLE_PM,project mananger:,мененжер проекта:
 TITLE_KEY_HUMANS,key people:,ключевые люди:
@@ -81,5 +81,15 @@ THIS_IS_OCUPED_SHOP,This square is an occupied store. Kill the enemies in this p
 THIS_IS_ARENA,This  area is a battlefield. First you will destroy the enemies and only then will you be able to gain safe passage.,Эта территория является полем боя. Сначала вы уничтожите врагов и только тогда сможете получить безопасный проход.
 THIS_IS_EXIT,Your target may be in this area. You must reach the target.,На этой области может находится ваша цель. Вы должны достичь цели.
 TRAINING_END,At this moment you can left-click on the next active battlefield/shop button.,когда это сообщение закроется вы можете щелкнуть левой кнопкой мыши по кнопке следующего активного поля боя/магазина.
-
 ADD_SAVE,new game,новая игра
+START_TRAIN,I'll go first,я иду первым
+BREAK_TRAIN,I know it,я знаю это
+INGAME_MOVEMANT,To move in battle use wasd. To dodge use shift or right mouse button.,Для движения в битве используйте wasd. Для уворота используйте shift или правую кнопку мыши.
+TRAIN_DIALOG_1,To move around the map use the left mouse button on the adjacent square.,Для движения по карте используйте левую кнопку мыши на соседнем квадрате.
+TRAIN_DIALOG_2,*to start the study you need to press '>'. to cancel the study you need to press 'X'*,*для начала исследования нужно нажать '>'. для отмены исследования нужно нажать 'X'*
+OCUPATED_LEGEND,ocupacted shop/altar,захваченный магазин/алтарь
+SHOP_LEGEND,shop/altar,магазин/алтарь
+BOSS_LEGEND,monstr,монстр
+SECRET_LEGEND,hided place,скрытое место
+YOU,you,ты
+F_S_D,[color=gold]Employers[/color]: [color=gold]We[/color] hired [color=3771a1]you[/color] to escort [color=gold]us[/color] to the [color=silver]local temple[/color] and lead [color=gold]us[/color] inside [color=silver]it[/color]. It is your duty to ensure [color=gold]our[/color] safety in this [color=silver]temple[/color]. We follow you.,[color=gold]Работодатели[/color]: [color=gold]Мы[/color] наняли [color=3771a1]вас[/color] для сопровождения [color=gold]нас[/color] в [color=silver]местный храм[/color] и провели [color=gold]нас[/color] внутри [color=silver]его[/color]. Ваша обязанность - обеспечить [color=gold]нам[/color] безопасность в этом [color=silver]храмe[/color]. Мы следуем затобой.

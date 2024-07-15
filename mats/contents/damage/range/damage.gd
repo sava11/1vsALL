@@ -15,7 +15,7 @@ func _what_draw():
 		draw_line(Vector2.ZERO,Vector2(attack_range,0),Color(1.0,0,0,0.2),width,true)
 func aiming():
 	trowed=false
-	var e=preload("res://mats/font/crit.tscn").instantiate()
+	var e=preload("res://mats/imgs/icons/aimed.png").instantiate()
 	e.hide()
 	e.texture=load(gm.images.icons.other.aim)
 	e.global_position=global_position+Vector2(-e.size.x/2,-36)
@@ -31,7 +31,7 @@ func throw():
 		a.start_pos=global_position+fnc.move(global_rotation_degrees)*10
 		a.global_rotation_degrees=ang*e+global_rotation_degrees-90
 		a.speed=100
-		a.sqrt=attack_range
+		a._sqrt=attack_range
 		a.active=false
 		get_tree().current_scene.enemy_path.add_child(a)
 	trowed=true

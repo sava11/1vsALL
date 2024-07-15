@@ -15,8 +15,8 @@ script = ExtResource("2_et61c")
 
 [node name="sc" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_right = 120.0
-offset_bottom = 320.0
+offset_right = 128.0
+offset_bottom = 296.0
 horizontal_scroll_mode = 0
 
 [node name="saves" type="VBoxContainer" parent="sc"]
@@ -38,4 +38,15 @@ grow_vertical = 2
 text = "ADD_SAVE"
 flat = true
 
+[node name="back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 128.0
+grow_vertical = 0
+text = "BACK"
+
 [connection signal="button_down" from="sc/saves/Panel/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="back" to="." method="_on_back_button_down"]

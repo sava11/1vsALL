@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://br0dekfcarmgd"]
+
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="1_8uhp8"]
+[ext_resource type="Texture2D" uid="uid://du61g72mptpch" path="res://mats/imgs/icons/skelV1.png" id="1_pxmyc"]
+
+[resource]
+script = ExtResource("1_8uhp8")
+name = "TRAIN_DIALOG2"
+BDI_text = "TRAIN_INGAME_DIALOG_1"
+left_char_img = ExtResource("1_pxmyc")
+left_speeking = true
+right_speeking = false
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
