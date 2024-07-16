@@ -4,11 +4,7 @@ var cur_loc=null
 var game_was_paused:=false
 func _ready():
 	show_lvls()
-	
 
-func recreate_player():
-	gm.player_data=gm.start_player_data.duplicate(true)
-	$cl/map.upd_by_sts()
 func _process(delta):
 	$cl/game_ui/status/stamina.max_value=gm.player_data.stats["max_stamina"]
 	$cl/game_ui/status/stamina.value=gm.player_data.prefs["cur_stm"]
@@ -61,15 +57,13 @@ func start_sound_think():
 func stop_sound_think():
 	$asp_think.stop()
 func _on_place_completed():
-	if $world.get_child(0) is level_template:
+	if $world.get_child_count()>0 and $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
 	gm.player_data.in_action=""
-	gm.player_data.prefs.cur_hp=gm.player_data.stats.hp
-	get_tree().current_scene.recreate_player()
 	gm.save_file_data()
 	show_lvls()
 func _on_pause_location_added(n):
-	if $world.get_child(0) is level_template:
+	if $world.get_child_count()>0 and $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
 	cur_loc=n
 	show_lvls(false)
@@ -85,9 +79,24 @@ func to_settings():
 	scn.z_index=3
 func from_settings():
 	$cl/pause.show()
-
-
 func _on_cnt_button_down():
 	$cl/pause.hide()
 	if game_was_paused:
 		get_tree().set_deferred("paused",false)
+
+
+func _on_retry_button_down():
+	for e in $cl/map.map.get_children():
+		e.runned=false
+	if gm.game_prefs.scripts.traied:
+		$cl/map.set_cur_pos(null)
+		gm.game_prefs.seed=randi()
+		fnc.rnd.seed=gm.game_prefs.seed
+	else:
+		$cl/map.set_cur_pos($cl/map/map/cont/locs/map/place)
+	if $world.get_child(0) is level_template:
+		$world.get_child(0).queue_free()
+	#await get_tree().process_frame
+	gm.save_file_data()
+	get_tree().current_scene.show_lvls()
+	$cl/game_ui/death.hide()

@@ -1452,6 +1452,8 @@ monitorable = false
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
+monitoring = false
+monitorable = false
 script = ExtResource("19_0i1a1")
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]

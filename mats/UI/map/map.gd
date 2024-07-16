@@ -147,6 +147,7 @@ func level_completed(n:place):
 	for e in n.ingame_statuses:
 		temp_d.merge({e.status:e.value})
 	gm.merge_stats(temp_d)
+	print(temp_d)
 	upd_by_sts()
 	gm.player_data.in_action=""
 	current_pos=n
@@ -273,17 +274,6 @@ func get_end_price(sts:Dictionary):
 		p+=sts[e]*gm.objs.stats[e].price
 	return p
 func _on_player_no_he():
-	for e in map.get_children():
-		e.runned=false
-	set_cur_pos(null)
-	if get_tree().current_scene.get_node("world").get_child(0) is level_template:
-		get_tree().current_scene.get_node("world").get_child(0).queue_free()
-	for e in get_tree().current_scene.enemy_path.get_children():
-		e.queue_free()
-	await get_tree().process_frame
-	get_tree().current_scene.recreate_player()
-	gm.game_prefs.seed=randi()
-	fnc.rnd.seed=gm.game_prefs.seed
-	gm.save_file_data()
-	get_tree().current_scene.show_lvls()
+	get_parent().get_node("game_ui/death").show()
+	get_tree().set_deferred("paused",true)
 

@@ -237,7 +237,6 @@ func find_status(_delta:float):
 			vec=Vector2.ZERO
 		new_dos(_delta)
 	else:
-		set_anim(statuses[state])
 		vec=Vector2.ZERO
 func new_dos(_delta:float):
 	pass
@@ -260,6 +259,7 @@ func _on_ap_animation_finished(anim_name):
 func delete():
 	state="d"
 	gm.player_data.deaths+=1
+	set_anim(statuses[state])
 
 func _on_hurt_box_h_ch(v):
 	if v>0:

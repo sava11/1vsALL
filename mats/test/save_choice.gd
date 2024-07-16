@@ -11,15 +11,19 @@ func _ready():
 			if f.get_length()!=0:
 				data=JSON.parse_string(f.get_line())["/root/gm"]
 				var save_obj=preload("res://mats/test/save_item/save_item.tscn").instantiate()
-				save_obj.get_node("cont/death/value").text=str(data.player_data.deaths)
-				save_obj.get_node("cont/lvls/value").text=str(data.player_data.runned_lvls)
-				save_obj.get_node("cont/seed/num").text=str(data.game_prefs.seed)
-				save_obj.get_node("Button").button_down.connect(
+				save_obj.get_node("data/cont/death/value").text=str(data.player_data.deaths)
+				save_obj.get_node("data/cont/lvls/value").text=str(data.player_data.runned_lvls)
+				save_obj.get_node("data/cont/seed/num").text=str(data.game_prefs.seed)
+				save_obj.get_node("Panel/btns/Button").button_down.connect(
 					Callable(func():
 						gm.fname=e.split(".")[0]
 						gm.load_file_data()
 						gm.player_data.runned_lvls=0
 						get_tree().change_scene_to_file("res://mats/test/game.tscn")))
+				save_obj.get_node("Panel/btns/del").button_down.connect(Callable(
+					func():
+						DirAccess.remove_absolute(gm.save_path+"/"+e)
+						save_obj.queue_free()))
 				$sc/saves.add_child(save_obj)
 	var max_id=0
 	for e in tp:

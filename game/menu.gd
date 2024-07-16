@@ -3,12 +3,13 @@ var data:=false
 @onready var t=$main_menu/cont/buttons/play
 func printo(data):
 	print(data)
+	return data
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	fnc.setter1(self,{"data":true})
-	fnc.setter1(self,{"t.disabled":true})
-	fnc.setter1(self,{"printo()":[]})
-	fnc.setter1(self,{"main_menu/cont/buttons/play.disabled":false})
+	#fnc.setter1(self,{"data":true})
+	#fnc.setter1(self,{"t.disabled":true})
+	#fnc.setter1(self,{"printo()":["a|ds"]})
+	#fnc.setter1(self,{"main_menu/cont/buttons/play.disabled":false})
 	$asp.play()
 	#shake($Label,Vector2.UP*4)
 	pass

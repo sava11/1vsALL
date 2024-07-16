@@ -7,7 +7,7 @@ func save_data():
 	for e in exceptions:
 		pos.append([e.x,e.y])
 	return {
-		str(get_path()):{"n":neighbors,"p":pos}
+		str(get_path()):{"n":neighbors.duplicate(),"p":pos}
 	}
 
 func load_data(n:Dictionary):
@@ -40,6 +40,10 @@ func _ready():
 	else:
 		emit_signal("_load_data",self,str(get_path()))
 	upd()
+func _process(delta):
+	if Input.is_action_just_pressed("esc"):
+		gm.load_file_data()
+		upd()
 func upd():
 	if exceptions.is_empty() and neighbors.is_empty():
 		var place_count=fnc.rnd.randi_range(col*row/4,col*row)
@@ -55,7 +59,10 @@ func upd():
 			var dist_a = a.distance_to(Vector2.ZERO)
 			var dist_b = b.distance_to(Vector2.ZERO)
 			return dist_a < dist_b and a!=Vector2.ZERO and b!=Vector2.ZERO))
-	else:print("miner")
+	else:
+		for e in get_children():
+			e.free()
+		#print("miner")
 	gen_map_v1(exceptions,neighbors)
 	emit_signal("map_generated")
 func gen_map_v1(positions,neighbors):
@@ -63,7 +70,8 @@ func gen_map_v1(positions,neighbors):
 		var scn=preload("res://mats/UI/map/place/place.tscn").instantiate()
 		scn.position=e*48#16+32
 		add_child(scn)
-	print(get_child_count())
+	#print(get_child_count())
+	await get_tree().process_frame
 	var mass:=get_children()
 	var d:={}
 	var temp_mass=mass.duplicate(true)
@@ -78,6 +86,10 @@ func gen_map_v1(positions,neighbors):
 			if local_angles.find(cur_ang)==-1:
 				local_angles.append(cur_ang)
 				e.neighbors.append(temp_mass[k])
-				#if len(mass[id].neighbors)<len(max_neighbors) and fnc._with_chance(0.9):
+				if len(temp_mass[k].neighbors)<=2 and fnc._with_chance(0.05):
+					#e.secret=true
+					temp_mass[k].secret=true
 				temp_mass[k].neighbors.append(e)
-		neighbors[e.get_index()]=len(e.neighbors)
+				#await get_tree().process_frame
+		#neighbors[e.get_index()]=len(e.neighbors)
+	gm.save_file_data()

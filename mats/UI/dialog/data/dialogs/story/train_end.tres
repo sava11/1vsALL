@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://ct8xn1k8kacn0"]
+
+[ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="2_xvwjs"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_womhu"]
+
+[resource]
+script = ExtResource("3_womhu")
+name = "NEW_DATA"
+BDI_text = "[color]Вы[/color]: наказать предателей..."
+function_node_path = null
+function_name = ""
+function_arguments = []
+left_char_img = ExtResource("2_xvwjs")
+left_speeking = true
+right_speeking = false
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = false
+paused = 0

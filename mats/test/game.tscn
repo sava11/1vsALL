@@ -193,11 +193,46 @@ offset_right = 128.0
 offset_bottom = 52.0
 grow_horizontal = 2
 
+[node name="death" type="Control" parent="cl/game_ui"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vbc" type="VBoxContainer" parent="cl/game_ui/death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="retry" type="Button" parent="cl/game_ui/death/vbc"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "RETRY"
+
+[node name="etm" type="Button" parent="cl/game_ui/death/vbc"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "EXIT_TO_MAIN_MENU"
+
 [node name="map" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
+visible = false
 level_container = NodePath("../../world")
 global_difficulty_add_step = 0.15
 
 [node name="dialog" parent="cl" instance=ExtResource("11_usu0i")]
+visible = false
 
 [node name="pause" type="ColorRect" parent="cl"]
 visible = false
@@ -250,6 +285,8 @@ process_mode = 3
 stream = ExtResource("5_p6f36")
 bus = &"game"
 
+[connection signal="button_down" from="cl/game_ui/death/vbc/retry" to="." method="_on_retry_button_down"]
+[connection signal="button_down" from="cl/game_ui/death/vbc/etm" to="." method="to_menu"]
 [connection signal="location_added" from="cl/map" to="." method="_on_pause_location_added"]
 [connection signal="place_completed" from="cl/map" to="." method="_on_place_completed"]
 [connection signal="button_down" from="cl/pause/vbc/cnt" to="." method="_on_cnt_button_down"]

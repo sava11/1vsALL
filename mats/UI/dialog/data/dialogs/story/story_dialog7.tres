@@ -1,18 +1,7 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=5 format=3 uid="uid://bhri1br8h85co"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://bhri1br8h85co"]
 
-[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_ch12m"]
 [ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="2_x8mn8"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_16ybe"]
-
-[sub_resource type="Resource" id="Resource_46h7r"]
-script = ExtResource("1_ch12m")
-name = "button_name"
-color = Color(1, 1, 1, 1)
-disabled = false
-dialog_data_path = "res://mats/UI/dialog/data/dialogs/story/story_dialog6.tres"
-function_node_path = null
-function_name = ""
-function_arguments = []
 
 [resource]
 script = ExtResource("3_16ybe")
@@ -24,6 +13,6 @@ function_arguments = []
 left_char_img = ExtResource("2_x8mn8")
 left_speeking = true
 right_speeking = false
-buttons = Array[ExtResource("1_ch12m")]([SubResource("Resource_46h7r")])
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
 interactive = false
 paused = 0

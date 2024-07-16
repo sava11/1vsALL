@@ -92,6 +92,15 @@ grow_vertical = 2
 theme = ExtResource("1_133nm")
 script = ExtResource("2_qetud")
 
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="charL" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -154,6 +163,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="txt" type="RichTextLabel" parent="Panel/hbc"]
+custom_minimum_size = Vector2(368, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -167,8 +177,8 @@ bbcode_enabled = true
 text = "[u][i][b]998bv[/b][/i][color=light green]HELLO_TEXT[/color][/u] ehjdbkadfwhiqwhiru hwi rwi3uhr iuw3rhiuw3hriuwq3hrwqhriq3rhiuwhriuqhriuqhiugqwiurgqiurgiuwgriugtiuy2rtkjq3joirq398r25928qrorrwiurhiuwhiuwgtiuu goiehiuwriq3wor w4i 9w4gh owh iowh oiwia4ytqy98ty ai"
 
 [node name="sc" type="ScrollContainer" parent="Panel/hbc"]
-visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
@@ -181,4 +191,5 @@ mouse_filter = 2
 theme_override_constants/separation = 4
 alignment = 1
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]

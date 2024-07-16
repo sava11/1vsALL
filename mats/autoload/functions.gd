@@ -165,7 +165,7 @@ func setter1(itm,data:Dictionary):
 				var obj=itm_data[i]
 				if obj.contains("("):
 					var var_type=typeof(data[e])
-					var callable=Callable(itm,obj)
+					var callable=Callable(itm,obj.split("(")[0])
 					if var_type!=TYPE_NIL:
 						if var_type!=TYPE_ARRAY:
 							callable=callable.bindv([data[e]])

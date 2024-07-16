@@ -1,5 +1,6 @@
 @tool
 class_name place extends Control
+signal player_in()
 signal choice_panel_showed()
 signal choice_panel_hided()
 signal choice_shop()
@@ -127,6 +128,8 @@ func _process(delta):
 	
 	if last_player_here!=player_here:
 		img_think()
+		if player_here:
+			emit_signal("player_in")
 		if place_panel_node!=null and !player_here:
 			cancel()
 		
@@ -143,6 +146,9 @@ func _process(delta):
 	if arena==null and arena_changed:
 		img_think()
 		arena_changed=false
+	if secret!=secret_changed:
+		img_think()
+		secret_changed=secret
 	if !Engine.is_editor_hint():
 		if secret:
 			if neighbors.any(Callable(
@@ -153,7 +159,7 @@ func _process(delta):
 
 var shop_changed:bool=false
 var arena_changed:bool=false
-
+var secret_changed:bool=false
 func create_panel():
 	if place_panel_node==null:
 		place_panel_node=preload("res://mats/UI/map/place/place_item_panel.tscn").instantiate()
@@ -172,7 +178,8 @@ func _on_button_down():
 			create_panel()
 			for e in ingame_statuses:
 				if e!=null and e.status!="":
-					place_panel_node.add_item(load(gm.objs.stats[e.status].i),tr(gm.objs.stats[e.status].ct),e.value,gm.objs.stats[e.status].postfix)
+					place_panel_node.add_item(load(gm.objs.stats[e.status].i),
+					tr(gm.objs.stats[e.status].ct),e.value,gm.objs.stats[e.status].postfix)
 			place_panel_node.connect_to(self,"play","cancel")
 		elif shop!=null:
 			create_panel()
@@ -207,13 +214,14 @@ func play():
 		lvl.time=level_time
 		lvl.enemys_data=arena
 		lvl.completed.connect(Callable(map,"level_completed").bind(self))
+		lvl.uncompleted.connect(
+			Callable(self,"emit_signal").bind("runned_changed",runned)
+			)
+		lvl.uncompleted.connect(
+			Callable(map,"_on_player_no_he"))
 		emit_signal("lvl_start")
 		lvl.time_events=time_events.duplicate()
 		lvl.time_event.connect(Callable(self,"_time_events"))
-		print(lvl.get_node("ent").get_children())
-		lvl.get_node("ent/player/hurt_box").no_he.connect(
-			Callable(self,"emit_signal").bind("runned_changed",runned)
-			)
 		map.emit_signal("location_added",lvl)
 		level_container.add_child(lvl)
 		level_container.move_child(lvl,0)

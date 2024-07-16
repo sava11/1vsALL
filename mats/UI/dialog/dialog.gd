@@ -23,7 +23,6 @@ func load_data(d:dialog_data):
 		dialog=d
 		if d.left_char_img!=$charL.texture:
 			$charL.texture=d.left_char_img
-
 		if d.right_char_img!=$charR.texture:
 			$charR.texture=d.right_char_img
 		if d.right_speeking:
@@ -34,6 +33,8 @@ func load_data(d:dialog_data):
 			$charL/ap.play("action")
 		else:
 			$charL/ap.play("back")
+		$Panel/hbc/sc.visible=d.short_answers
+		$Panel/hbc/txt.visible=!d.short_answers
 		$Panel/hbc/txt.text=tr(d.BDI_text)
 		if d.function_node_path!=null:
 			var node=get_tree().current_scene.get_node_or_null(d.function_node_path)
@@ -53,13 +54,13 @@ func load_data(d:dialog_data):
 					first_button=b
 				b.icon=ep.dialog_icon
 				b.expand_icon=true
-				if d.function_node_path!=null:
+				if ep.function_node_path!=null:
 					var node1=get_tree().current_scene.get_node_or_null(ep.function_node_path)
 					if node1!=null:
-						if d.function_arguments.is_empty():
-							Callable(node1,ep.function_name).call()
+						if ep.function_arguments.is_empty():
+							b.button_down.connect(Callable(node1,ep.function_name))
 						else:
-							Callable(node1,ep.function_name).callv(ep.function_arguments)
+							b.button_down.connect(Callable(node1,ep.function_name).bindv(ep.function_arguments))
 				if ep.dialog_data_path!=null:
 					b.button_down.connect(Callable(self,"load_data").bind(load(ep.dialog_data_path)))
 				else:
@@ -108,4 +109,9 @@ func _input(_e):
 
 func _on_panel_gui_input(_e):
 	if Input.is_action_just_pressed("lmb"):
+		end_dialog()
+
+
+func _on_gui_input(_e):
+	if Input.is_action_just_pressed("lmb") and !dialog.interactive:
 		end_dialog()

@@ -1,5 +1,7 @@
 class_name level_template extends Node2D
 signal time_event(event_id:int)
+signal completed()
+signal uncompleted()
 @export var time:float
 @export var time_events:PackedFloat32Array
 @export var cam:Camera2D
@@ -8,7 +10,6 @@ var rsize:Vector2
 var rpos:Vector2
 var timer:Timer
 @onready var enemy_path=$ent/enemys
-signal completed()
 func start_timer(new_time:float):
 	timer.wait_time=new_time
 	timer.start()
@@ -22,6 +23,7 @@ func _ready():
 		timer.name="Timer"
 		timer.one_shot=true
 		timer.timeout.connect(Callable(self,"emit_signal").bind("completed"))
+		$ent/player/hurt_box.no_he.connect(Callable(self,"emit_signal").bind("uncompleted"))
 		add_child(timer)
 		if time>0 and !enemys_data.has_bosses():
 			start_timer(time)
@@ -49,7 +51,6 @@ func _physics_process(delta):
 			if enemys_data.has_enemys():
 				summon()
 			enemy_spawn_timer_temp=0
-	
 func get_rand_pos():
 	var c:NavigationMesh=$nav.navigation_polygon.get_navigation_mesh()
 	var gpols=[]

@@ -216,10 +216,19 @@ func merge_stats(stats:Dictionary):
 	for e in stats.keys():
 		if player_data.stats.get(e)!=null:
 			player_data.stats[e]=clamp(player_data.stats[e]+stats[e],gm.objs.stats[e].min_v,999999999)
-var start_game_prefs={
+		print(e," ",player_data.stats.get(e))
+const start_game_prefs={
 	"seed":-1,
-	"traied":false,
-	"message_to_train_accepted":false,
+	"scripts":{
+		"traied":false,
+		"message_to_train_accepted":false,
+		"lvl1_runned":false,
+		"lvl2_runned":false,
+		"lvl3_runned":false,
+		"lvl4_runned":false,
+		"lvl5_runned":false,
+		"lvl6_runned":false
+		},
 	"dif":0,
 	"elite_chance":0.01,
 	"boss_elite_chance":0.001,
@@ -251,8 +260,12 @@ func _ready():
 
 func make_dialog(d:dialog_data):
 	if get_tree().current_scene.get_node("cl/dialog")!=null:
-		get_tree().current_scene.get_node("cl/dialog").show()
-		get_tree().current_scene.get_node("cl/dialog").start(d)
+		if !d==null:
+			get_tree().current_scene.get_node("cl/dialog").show()
+			get_tree().current_scene.get_node("cl/dialog").start(d)
+		else:
+			get_tree().current_scene.get_node("cl/dialog").hide()
+			get_tree().current_scene.get_node("cl/dialog").clean_dialog()
 
 var objs={
 	"stats":{
@@ -751,9 +764,13 @@ func load_file_data():
 		if save_game.get_length()!=0:
 			sn=JSON.parse_string(save_game.get_line())
 			#sn=save_game.get_buffer(save_game.get_length())
+			load_data(sn["/root/gm"])
+			await get_tree().process_frame
+			sn.erase("/root/gm")
 			for e in sn.keys():
 				if get_node_or_null(e)!=null:
 					get_node(e).load_data(sn[e])
+			sn.merge(save_data())
 		else:
 			print("save is clear")
 		save_game.close()

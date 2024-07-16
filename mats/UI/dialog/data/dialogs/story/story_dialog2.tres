@@ -6,11 +6,12 @@
 script = ExtResource("2_t1v80")
 name = "STORY_DIALOG2"
 BDI_text = "TRAIN_DIALOG_1"
-function_node_path = null
-function_name = ""
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = false
+short_answers = false
+function_node_path = NodePath("cl/map/map/cont/locs/map")
+function_name = "start_dialog_ended"
 function_arguments = []
 left_speeking = false
 right_speeking = false
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
-interactive = false
 paused = 0
