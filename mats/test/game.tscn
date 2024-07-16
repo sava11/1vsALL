@@ -297,4 +297,3 @@ bus = &"game"
 [connection signal="finished" from="asp_fight" to="." method="start_sound_fight"]
 
 [editable path="cl/map"]
-[editable path="cl/map/map/cont/locs/map"]

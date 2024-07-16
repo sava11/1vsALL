@@ -7,12 +7,13 @@
 script = ExtResource("2_67a5g")
 name = "STORY_DIALOG3"
 BDI_text = "TRAIN_DIALOG_2"
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = true
+short_answers = false
 function_node_path = NodePath("cl/map/map/cont/locs/map")
 function_name = "train_dialog_end"
 function_arguments = [false, true]
 left_char_img = ExtResource("1_gjbr8")
 left_speeking = true
 right_speeking = false
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
-interactive = true
 paused = 0

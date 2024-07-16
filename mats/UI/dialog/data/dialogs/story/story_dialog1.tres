@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=5 format=3 uid="uid://c85wpjjfqlqo"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=6 format=3 uid="uid://c85wpjjfqlqo"]
 
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_27ra1"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_vludt"]
+[ext_resource type="Texture2D" uid="uid://ck4m06sahhdya" path="res://mats/imgs/icons/X.png" id="2_wwmpk"]
 
 [sub_resource type="Resource" id="Resource_8rtkp"]
 script = ExtResource("1_27ra1")
@@ -15,23 +16,25 @@ function_arguments = [false, true]
 
 [sub_resource type="Resource" id="Resource_ek0am"]
 script = ExtResource("1_27ra1")
+dialog_icon = ExtResource("2_wwmpk")
 name = "BREAK_TRAIN"
 color = Color(1, 1, 1, 1)
 disabled = true
 dialog_data_path = null
-function_node_path = null
-function_name = ""
-function_arguments = []
+function_node_path = NodePath("cl/map/map/cont/locs/map")
+function_name = "train_dialog"
+function_arguments = [true, false]
 
 [resource]
 script = ExtResource("2_vludt")
 name = "FIRST_STORY_DIALOG"
 BDI_text = "F_S_D"
+buttons = Array[ExtResource("1_27ra1")]([SubResource("Resource_8rtkp"), SubResource("Resource_ek0am")])
+interactive = false
+large_answers = false
 function_node_path = null
 function_name = ""
 function_arguments = []
 left_speeking = false
 right_speeking = false
-buttons = Array[ExtResource("1_27ra1")]([SubResource("Resource_8rtkp"), SubResource("Resource_ek0am")])
-interactive = false
 paused = 0

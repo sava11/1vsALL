@@ -5,14 +5,15 @@
 
 [resource]
 script = ExtResource("3_womhu")
-name = "NEW_DATA"
+name = "END_TRAIN"
 BDI_text = "[color]Вы[/color]: наказать предателей..."
-function_node_path = null
-function_name = ""
-function_arguments = []
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = false
+short_answers = false
+function_node_path = NodePath("cl/map/map/cont/locs/map")
+function_name = "train_dialog"
+function_arguments = [true, true]
 left_char_img = ExtResource("2_xvwjs")
 left_speeking = true
 right_speeking = false
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
-interactive = false
 paused = 0

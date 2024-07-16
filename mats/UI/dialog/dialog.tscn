@@ -151,15 +151,10 @@ offset_bottom = 320.0
 
 [node name="hbc" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 444.0
+offset_bottom = 80.0
 mouse_filter = 2
 
 [node name="txt" type="RichTextLabel" parent="Panel/hbc"]
@@ -186,6 +181,7 @@ vertical_scroll_mode = 3
 [node name="vbc" type="VBoxContainer" parent="Panel/hbc/sc"]
 custom_minimum_size = Vector2(64, 2.08165e-12)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 4

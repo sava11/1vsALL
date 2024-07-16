@@ -1,8 +1,16 @@
 extends Node
 @onready var wrld=$world
+@onready var locs_cont=$cl/map/map/cont/locs
 var cur_loc=null
 var game_was_paused:=false
 func _ready():
+	var lvl=null
+	#сделать перемну уровней!
+	if gm.game_prefs.scripts.traied:
+		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
+	else:
+		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
+	locs_cont.add_child(lvl)
 	show_lvls()
 
 func _process(delta):
@@ -92,6 +100,7 @@ func _on_retry_button_down():
 		$cl/map.set_cur_pos(null)
 		gm.game_prefs.seed=randi()
 		fnc.rnd.seed=gm.game_prefs.seed
+		locs_cont.upd()
 	else:
 		$cl/map.set_cur_pos($cl/map/map/cont/locs/map/place)
 	if $world.get_child(0) is level_template:

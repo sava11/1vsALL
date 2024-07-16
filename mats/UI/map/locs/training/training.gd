@@ -12,6 +12,11 @@ func train_dialog(trained:bool,message_to_train_accepted:bool):
 	gm.game_prefs.scripts.traied=trained
 	gm.game_prefs.scripts.message_to_train_accepted=message_to_train_accepted
 	gm.save_file_data()
+	if gm.game_prefs.scripts.traied:
+		name="deled_"+name
+		var lvl_gen=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
+		get_parent().add_child(lvl_gen)
+		queue_free()
 func _on_place_2_choice_panel_showed():
 	gm.make_dialog(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog3.tres"))
 
@@ -30,9 +35,9 @@ func _on_place_2_runned_changed(res):
 		gm.save_file_data()
 
 
-func _on_place_6_runned_changed(res):
-	if res and !gm.game_prefs.scripts.lvl6_runned:
+func _on_place_5_runned_changed(res):
+	if res and !gm.game_prefs.scripts.lvl5_runned:
 		gm.make_dialog(preload("res://mats/UI/dialog/data/dialogs/story/train_end.tres"))
-		gm.game_prefs.scripts.lvl6_runned=true
+		gm.game_prefs.scripts.lvl5_runned=true
 		gm.save_file_data()
 
