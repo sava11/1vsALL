@@ -90,3 +90,6 @@ y_sort_enabled = true
 
 [node name="player" parent="ent" instance=ExtResource("3_tfwna")]
 position = Vector2(-108, -12)
+
+[node name="Camera2D" type="Camera2D" parent="ent/player"]
+zoom = Vector2(1.5, 1.5)

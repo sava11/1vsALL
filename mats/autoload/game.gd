@@ -1,6 +1,6 @@
 extends Node
 
-var sn={}
+var sn:={}
 var fname:="save"
 const suffix=".json"
 var save_path:="saves"
@@ -245,8 +245,7 @@ func save_data():
 func load_data(n:Dictionary):
 	player_data=n.player_data
 	game_prefs=n.game_prefs
-	fnc.rnd.seed=game_prefs.seed
-
+	fnc.rnd.seed=int(game_prefs.seed)
 func _ready():
 	connect("save_data_changed",Callable(gm,"_save_node"))
 	connect("_load_data",Callable(gm,"_load_node"))
@@ -256,7 +255,7 @@ func _ready():
 		emit_signal("_load_data",self,str(get_path()))
 	DirAccess.make_dir_absolute(save_path)
 	add_to_group("SN")
-	await get_tree().process_frame
+	#await get_tree().process_frame
 
 func make_dialog(d:dialog_data):
 	if get_tree().current_scene.get_node("cl/dialog")!=null:
@@ -764,13 +763,9 @@ func load_file_data():
 		if save_game.get_length()!=0:
 			sn=JSON.parse_string(save_game.get_line())
 			#sn=save_game.get_buffer(save_game.get_length())
-			load_data(sn["/root/gm"])
-			await get_tree().process_frame
-			sn.erase("/root/gm")
 			for e in sn.keys():
 				if get_node_or_null(e)!=null:
 					get_node(e).load_data(sn[e])
-			sn.merge(save_data())
 		else:
 			print("save is clear")
 		save_game.close()

@@ -35,9 +35,6 @@ shadow_size = 0
 process_mode = 3
 script = ExtResource("1_tg1vd")
 
-[node name="cam" type="Camera2D" parent="."]
-zoom = Vector2(1.25, 1.25)
-
 [node name="world" type="Node2D" parent="."]
 process_mode = 1
 
@@ -226,9 +223,8 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "EXIT_TO_MAIN_MENU"
 
-[node name="map" parent="cl" node_paths=PackedStringArray("level_container") instance=ExtResource("3_ojpc5")]
+[node name="map" parent="cl" instance=ExtResource("3_ojpc5")]
 visible = false
-level_container = NodePath("../../world")
 global_difficulty_add_step = 0.15
 
 [node name="dialog" parent="cl" instance=ExtResource("11_usu0i")]

@@ -81,6 +81,7 @@ func img_think():
 			$visual.texture=preload("res://mats/UI/map/imgs/hero.png")
 			original=player_color
 func _ready():
+	name="place"+str(get_index())
 	map=get_node_or_null("../../../../../")
 	if !Engine.is_editor_hint():
 		if map!=null:
@@ -210,7 +211,6 @@ func play():
 	var level_container=get_parent().level_container
 	if level_container!=null and level!="":
 		lvl=load(level).instantiate()
-		lvl.cam=get_tree().current_scene.get_node("cam")
 		lvl.time=level_time
 		lvl.enemys_data=arena
 		lvl.completed.connect(Callable(map,"level_completed").bind(self))

@@ -35,11 +35,10 @@ func _ready():
 func _on_button_button_down():
 	gm.fname=cur_name
 	if gm.game_prefs.seed==-1:
-		fnc.rnd.randomize()
-		gm.game_prefs.seed=fnc.rnd.seed
+		gm.game_prefs.seed=randi()
+		fnc.rnd.seed=gm.game_prefs.seed
 	
 	gm.save_file_data()
-	print(gm.game_prefs.seed)
 	get_tree().change_scene_to_file("res://mats/test/game.tscn")
 	
 

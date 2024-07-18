@@ -9,14 +9,9 @@ func past_ready():
 func _on_t_timeout():
 	delete()
 	var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
-	var ens=get_tree().current_scene.cur_enemys.duplicate()
-	var itms_v=[]
-	var itms=[]
-	for en in ens.keys():
-		itms_v.append(ens[en])
-	for en in ens.keys():
-		itms.append(en)
-	e.load_scene=load(gm.enemys[itms[fnc._with_chance_ulti(itms_v)]].s)
+	var ens=get_node("../../../").enemys_data.get_summon_names()
+	var itms_v=get_node("../../../").enemys_data.get_summon_percents()
+	e.load_scene=load(ens[fnc._with_chance_ulti(itms_v)])
 	e.time=0.5
 	e.time_curve=Curve.new()
 	e.time_curve.add_point(Vector2(0,1))
@@ -25,11 +20,11 @@ func _on_t_timeout():
 	e.scene_data={
 		"global_position":global_position,
 		"dif":dif,
-		"elite":fnc._with_chance(0.01)
+		"elite":gm.game_prefs.elite_chance
 		}
 	#e.target_path=fnc.get_hero().get_path()
-	get_tree().current_scene.ememys_path.add_child(e)
 	e.global_position=global_position
+	get_parent().add_child(e)
 	queue_free()
 
 

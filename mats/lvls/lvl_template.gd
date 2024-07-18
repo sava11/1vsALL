@@ -4,7 +4,7 @@ signal completed()
 signal uncompleted()
 @export var time:float
 @export var time_events:PackedFloat32Array
-@export var cam:Camera2D
+@onready var cam:Camera2D=$ent/player/Camera2D
 @export var enemys_data:arena_action
 var rsize:Vector2
 var rpos:Vector2

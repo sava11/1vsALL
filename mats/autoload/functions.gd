@@ -80,10 +80,6 @@ func _with_dific(v:float,dific:float):
 	return v+v*dific
 func _with_chance(chance:float):
 	return rnd.randf_range(0,1)>1-chance
-func _with_chance_custom_values(chance:float,Tvalue,Fvalue):
-	if rnd.randf_range(0,1)>1-chance:
-		return Tvalue
-	return Fvalue
 func _with_chance_ulti(chances=[0.5,0.5]):
 	var sum=sum(chances)
 	var cur_value=rnd.randf_range(0,sum)

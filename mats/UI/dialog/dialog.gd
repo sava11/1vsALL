@@ -66,8 +66,9 @@ func load_data(d:dialog_data):
 				if ep.dialog_data_path!=null:
 					b.button_down.connect(Callable(self,"load_data").bind(load(ep.dialog_data_path)))
 				else:
-					b.button_down.connect(Callable(self,"clean_dialog"))
-					b.button_down.connect(Callable(self,"emit_signal").bind("dialog_ended",ep.name))
+					b.button_down.connect(Callable(self,"end_dialog"))
+					#b.button_down.connect(Callable(self,"clean_dialog"))
+					#b.button_down.connect(Callable(self,"emit_signal").bind("dialog_ended",ep.name))
 				b.icon_alignment=HORIZONTAL_ALIGNMENT_LEFT
 				b.self_modulate=ep.color
 				b.text=tr(ep.name)
@@ -104,8 +105,15 @@ func end_dialog():
 	get_tree().set_deferred("paused",tree_real_pause)
 	if btn_cont.get_child_count()>0 and btn_cont.get_parent_control().visible==false:
 		btn_cont.get_child(0).emit_signal("button_down")
-	if btn_cont.get_child_count()==0 and dialog!=null:
+	if dialog!=null:
 		emit_signal("dialog_ended",dialog.name)
+		if dialog.function_node_path!=null:
+			var node=get_tree().current_scene.get_node_or_null(dialog.function_node_path)
+			if node!=null:
+				if dialog.function_arguments.is_empty():
+					Callable(node,dialog.function_name).call()
+				else:
+					Callable(node,dialog.function_name).callv(dialog.function_arguments)
 		clean_dialog()
 		hide()
 

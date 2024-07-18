@@ -6,7 +6,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_g42mb"]
 font_size = 8
 
-[node name="place" type="Control" groups=["SN"]]
+[node name="place0" type="Control" groups=["SN"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 16.0
@@ -71,7 +71,7 @@ offset_right = 20.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "place"
+text = "place0"
 label_settings = SubResource("LabelSettings_g42mb")
 horizontal_alignment = 1
 

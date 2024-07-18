@@ -1,9 +1,9 @@
 extends Control
-@export var level_container:Node
-@export var current_pos:place
+
+var current_pos:place
 @export var global_difficulty_add_step:float=0
 @onready var shop=$shop/shop
-@onready var map=$map/cont/locs/map
+@onready var map
 @onready var stat_cont=$stats/cont/ScrollContainer/item_cont
 
 var cur_loc:level_template
@@ -17,61 +17,18 @@ func set_item_rare():
 		runned+=int(e.runned)
 	item_rare=float(runned)/float(map.get_child_count())
 
-signal _load_data(node:Object,path:String)
-signal save_data_changed(dict:Dictionary)
-func save_data():
-	var pos=""
-	if current_pos!=null:
-		pos=str(current_pos.get_path())
-	return {
-		str(get_path()):{
-			"cur_pos":pos,
-		}
-	}
-func load_data(n:Dictionary):
-	current_pos=get_node(n["cur_pos"])
 #func show_death(b:bool=true):
 	#for e in map.get_children():
 		#if b:
 			#e.visible=e.name.contains("death")
 		#else:
 			#e.visible=!e.name.contains("death")
-func set_cur_pos(pos:place):
-	if map!=null:
-		if pos!=null:current_pos=pos
-		else:current_pos=map.get_children()[
-		fnc.rnd.randi_range(0,map.get_child_count()-1)
-		]
-		current_pos.runned=true
-		var w=pos.position.x+pos.size.x/2
-		$map/cont.scroll_horizontal=w-$map/cont/locs.get("theme_override_constants/margin_left")
-		var h=pos.position.y+pos.size.y/2
-		$map/cont.scroll_vertical=h-$map/cont/locs.get("theme_override_constants/margin_bottom")
 func _ready():
 	if !Engine.is_editor_hint():
 		#rand_lvl_gen(50)
-		#set_cur_pos(current_pos)
-		connect("save_data_changed",Callable(gm,"_save_node"))
-		connect("_load_data",Callable(gm,"_load_node"))
-		add_to_group("SN")
-		if !gm.sn.has(str(get_path())):
-			emit_signal("save_data_changed",save_data())
-		else:
-			emit_signal("_load_data",self,str(get_path()))
 		$stats/cont/back.hide()
 		$shop.hide()
 		$map.show()
-		for e in map.get_children():
-			if is_instance_valid(e):
-				#e.runned_changed.connect(Callable(func(res):if res:current_pos=e))
-				e.get_node("btn").button_down.connect(
-					Callable(
-						func(b:place):
-							if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
-								current_pos=b
-								gm.save_file_data()).bind(e)
-					)
-				e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
 		var stats_keys=gm.player_data.stats.keys()
 		for e in gm.player_data.stats:
 			var item=preload("res://mats/UI/map/status_item/item.tscn").instantiate()
@@ -114,12 +71,9 @@ func _process(delta):
 				#for i in e.ingame_statuses:
 					#if i.status=="":
 						#e.modulate=Color.YELLOW_GREEN
-	if has_node("map/cont/locs/map") and !Engine.is_editor_hint():
+	if $map/cont/locs.get_child_count()==1 and !Engine.is_editor_hint():
+		map=get_node("map/cont/locs").get_child(0)
 		map.custom_minimum_size=get_max_map_lenght()
-		for e in map.get_children():
-			e.player_here=e==current_pos
-			if e.player_here and !e.last_player_here:
-				set_cur_pos(e)
 		var s=fnc.get_prkt_win()
 		var a=get_local_mouse_position() - s * 0.5
 		var cur_drag:Vector2=Vector2($map/cont.scroll_horizontal,$map/cont.scroll_vertical)
@@ -141,8 +95,8 @@ func upd_by_sts():
 
 func level_completed(n:place):
 	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
-	if gm.game_prefs.dif<0.5:
-		gm.game_prefs.dif=0.5
+	#if gm.game_prefs.dif<0.5:
+		#gm.game_prefs.dif=0.5
 	n.runned=true
 	var temp_d={}
 	for e in n.ingame_statuses:
@@ -150,53 +104,15 @@ func level_completed(n:place):
 	gm.merge_stats(temp_d)
 	upd_by_sts()
 	gm.player_data.in_action=""
-	current_pos=n
+	set_cur_pos(n)
 	emit_signal("place_completed")
 	gm.save_file_data()
-
-func dijkstra(s: int, t: int):
-	var inf =99999999999999999
-	var visited: Array=[]
-	for e in range(map.get_child_count()):
-		visited.append(false)
-	var distance: Array = []
-	for e in range(map.get_child_count()):
-		distance.append(inf)
-	var prev: Array=[]
-	for e in range(map.get_child_count()):
-		prev.append(-1)
-	distance[s] = 0
-
-	while true:
-		var min_distance: int = inf
-		var min_vertex: int = -1
-		for i in range(map.get_child_count()):
-			if not visited[i] and distance[i] < min_distance:
-				min_distance = distance[i]
-				min_vertex = i
-
-		if min_vertex == -1:
-			break
-
-		visited[min_vertex] = true
-		var vertices=map.get_children()
-		for neighbor in vertices[min_vertex].neighbors:
-			if is_instance_valid(neighbor):
-				var neighbor_id=neighbor.get_index()
-				if not visited[neighbor_id] and distance[neighbor_id] > distance[min_vertex] + 1 and neighbor.runned:
-					distance[neighbor_id] = distance[min_vertex] + 1
-					prev[neighbor_id] = min_vertex
-
-	if distance[t] == inf:
-		return []
-	else:
-		var path: Array = []
-		var current: int = t
-		while current != -1:
-			path.push_front(current)
-			current = prev[current]
-		return path
-
+func set_cur_pos(p:place):
+	current_pos=p
+	var w=p.position.x
+	$map/cont.scroll_horizontal=w+p.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")
+	var h=p.position.y
+	$map/cont.scroll_vertical=h+p.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")
 var shop_items={}#object:[item1,...]
 func cr_stats():
 	var d0:Dictionary={}
@@ -276,4 +192,3 @@ func get_end_price(sts:Dictionary):
 func _on_player_no_he():
 	get_parent().get_node("game_ui/death").show()
 	get_tree().set_deferred("paused",true)
-

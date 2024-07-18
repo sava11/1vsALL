@@ -6,8 +6,8 @@ var game_was_paused:=false
 func _ready():
 	var lvl=null
 	#сделать перемну уровней!
-	if gm.game_prefs.scripts.traied:
-		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
+	if !gm.game_prefs.scripts.traied:
+		lvl=preload("res://mats/UI/map/locs/training/training.tscn").instantiate()
 	else:
 		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
 	locs_cont.add_child(lvl)
@@ -76,6 +76,7 @@ func _on_pause_location_added(n):
 	cur_loc=n
 	show_lvls(false)
 func to_menu():
+	get_tree().set_deferred("paused",false)
 	get_tree().change_scene_to_file("res://game/menu.tscn")
 func exit_from_game():
 	get_tree().quit()
@@ -97,15 +98,15 @@ func _on_retry_button_down():
 	for e in $cl/map.map.get_children():
 		e.runned=false
 	if gm.game_prefs.scripts.traied:
-		$cl/map.set_cur_pos(null)
+		$cl/map/map/cont/locs/map.set_cur_pos(null)
 		gm.game_prefs.seed=randi()
 		fnc.rnd.seed=gm.game_prefs.seed
 		locs_cont.upd()
 	else:
-		$cl/map.set_cur_pos($cl/map/map/cont/locs/map/place)
+		$cl/map/map/cont/locs/map.set_cur_pos($cl/map/map/cont/locs/map/place)
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
 	#await get_tree().process_frame
 	gm.save_file_data()
-	get_tree().current_scene.show_lvls()
+	show_lvls()
 	$cl/game_ui/death.hide()
