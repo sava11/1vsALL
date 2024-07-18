@@ -1,6 +1,12 @@
-extends Control
-signal _load_data(node:Object,path:String)
-signal save_data_changed(dict:Dictionary)
+extends "res://mats/UI/map/locs/map_aditional_script_tamplate.gd"
+func _process(delta):
+	if current_pos!=null:
+		for cur_place in get_children():
+			cur_place.player_here=cur_place==current_pos
+			if cur_place.player_here and !cur_place.last_player_here:
+				set_cur_pos(cur_place)
+			cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
+			
 
 func start_dialog():
 	if !gm.game_prefs.scripts.traied and !gm.game_prefs.scripts.lvl1_runned:

@@ -20,34 +20,37 @@ func set_item_rare():
 signal _load_data(node:Object,path:String)
 signal save_data_changed(dict:Dictionary)
 func save_data():
+	var pos=""
+	if current_pos!=null:
+		pos=str(current_pos.get_path())
 	return {
 		str(get_path()):{
-			"cur_pos":str(current_pos.get_path()),
+			"cur_pos":pos,
 		}
 	}
 func load_data(n:Dictionary):
 	current_pos=get_node(n["cur_pos"])
-func show_death(b:bool=true):
-	for e in map.get_children():
-		if b:
-			e.visible=e.name.contains("death")
-		else:
-			e.visible=!e.name.contains("death")
+#func show_death(b:bool=true):
+	#for e in map.get_children():
+		#if b:
+			#e.visible=e.name.contains("death")
+		#else:
+			#e.visible=!e.name.contains("death")
 func set_cur_pos(pos:place):
-	if pos!=null:
-		current_pos=pos
-	else:
-		current_pos=map.get_children()[fnc.rnd.randi_range(0,map.get_child_count()-1)]
-	current_pos.runned=true
-	var w=current_pos.position.x+$map/cont/locs.get("theme_override_constants/margin_left")/2
-	$map/cont.scroll_horizontal=w
-	var h=current_pos.position.y-$map/cont/locs.get("theme_override_constants/margin_top")/2
-	$map/cont.scroll_vertical=h
+	if map!=null:
+		if pos!=null:current_pos=pos
+		else:current_pos=map.get_children()[
+		fnc.rnd.randi_range(0,map.get_child_count()-1)
+		]
+		current_pos.runned=true
+		var w=pos.position.x+pos.size.x/2
+		$map/cont.scroll_horizontal=w-$map/cont/locs.get("theme_override_constants/margin_left")
+		var h=pos.position.y+pos.size.y/2
+		$map/cont.scroll_vertical=h-$map/cont/locs.get("theme_override_constants/margin_bottom")
 func _ready():
 	if !Engine.is_editor_hint():
 		#rand_lvl_gen(50)
-		map.custom_minimum_size=get_max_map_lenght()
-		set_cur_pos(current_pos)
+		#set_cur_pos(current_pos)
 		connect("save_data_changed",Callable(gm,"_save_node"))
 		connect("_load_data",Callable(gm,"_load_node"))
 		add_to_group("SN")
@@ -86,20 +89,22 @@ func _ready():
 func get_max_map_lenght():
 	var mn:=Vector2(999999999,999999999)
 	var mx=-Vector2(999999999,999999999)
-	for e in map.get_children():
-		if e.visible:
-			if e.position.x+e.size.x<mn.x:
-				mn.x=e.position.x+e.size.x
-			if e.position.y<mn.y:
-				mn.y=e.position.y+(e.size.y)#-20)
-	for e in map.get_children():
-		if e.visible:
-			if e.position.x+e.size.x>mx.x:
-				mx.x=e.position.x+e.size.x
-			if e.position.y>mx.y:
-				mx.y=e.position.y+(e.size.y)#-20)
-	
-	return mx-mn
+	if map!=null:
+		for e in map.get_children():
+			if e.visible:
+				if e.position.x+e.size.x<mn.x:
+					mn.x=e.position.x+e.size.x
+				if e.position.y<mn.y:
+					mn.y=e.position.y+(e.size.y)#-20)
+		for e in map.get_children():
+			if e.visible:
+				if e.position.x+e.size.x>mx.x:
+					mx.x=e.position.x+e.size.x
+				if e.position.y>mx.y:
+					mx.y=e.position.y+(e.size.y)#-20)
+		return mx-mn
+	else:
+		return 0
 var temp_drag:=Vector2.ZERO
 func _process(delta):
 	#if Engine.is_editor_hint():
@@ -114,11 +119,7 @@ func _process(delta):
 		for e in map.get_children():
 			e.player_here=e==current_pos
 			if e.player_here and !e.last_player_here:
-				var w=e.position.x
-				$map/cont.scroll_horizontal=w+e.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")
-				var h=e.position.y
-				$map/cont.scroll_vertical=h+e.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")
-		
+				set_cur_pos(e)
 		var s=fnc.get_prkt_win()
 		var a=get_local_mouse_position() - s * 0.5
 		var cur_drag:Vector2=Vector2($map/cont.scroll_horizontal,$map/cont.scroll_vertical)
@@ -128,9 +129,9 @@ func _process(delta):
 			cur_drag=-a+temp_drag
 			$map/cont.scroll_horizontal=cur_drag.x
 			$map/cont.scroll_vertical=cur_drag.y
-		if current_pos!=null:
-			for cur_place in map.get_children():
-				cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
+		#if current_pos!=null:
+			#for cur_place in map.get_children():
+				#cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1)
 				
 func upd_by_sts():
 	for e in gm.player_data.stats:
@@ -147,12 +148,11 @@ func level_completed(n:place):
 	for e in n.ingame_statuses:
 		temp_d.merge({e.status:e.value})
 	gm.merge_stats(temp_d)
-	print(temp_d)
 	upd_by_sts()
 	gm.player_data.in_action=""
 	current_pos=n
-	gm.save_file_data()
 	emit_signal("place_completed")
+	gm.save_file_data()
 
 func dijkstra(s: int, t: int):
 	var inf =99999999999999999

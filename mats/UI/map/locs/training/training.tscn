@@ -96,7 +96,7 @@ script = ExtResource("5_e34vk")
 status = "hp"
 value = 0.5
 
-[node name="map" type="Control"]
+[node name="map2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

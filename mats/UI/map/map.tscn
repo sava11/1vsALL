@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="15_bd4u6"]
 [ext_resource type="Texture2D" uid="uid://c0xm12txf3qk8" path="res://mats/UI/map/imgs/hero.png" id="15_rt4od"]
 
-[node name="map" type="Control" node_paths=PackedStringArray("current_pos")]
+[node name="map" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -19,7 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gyvyj")
 script = ExtResource("1_3h318")
-current_pos = NodePath("")
 
 [node name="tr" type="TextureRect" parent="."]
 layout_mode = 1

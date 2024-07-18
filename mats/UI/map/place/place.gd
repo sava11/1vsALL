@@ -98,7 +98,7 @@ func _ready():
 			#l.add_point((n.global_position-global_position+size)/2)
 			#$lines.add_child(l)
 	img_think()
-	$nm.text=name
+	$nm.text=name#"place"+str(get_index())
 func _draw():
 	for n in neighbors:
 		if is_instance_valid(n) and n.visible:
@@ -207,7 +207,7 @@ func _time_events(step_id:int):
 	emit_signal("lvl_timed_event",step_id)
 func play():
 	emit_signal("choice_play")
-	var level_container=map.level_container
+	var level_container=get_parent().level_container
 	if level_container!=null and level!="":
 		lvl=load(level).instantiate()
 		lvl.cam=get_tree().current_scene.get_node("cam")
@@ -215,10 +215,8 @@ func play():
 		lvl.enemys_data=arena
 		lvl.completed.connect(Callable(map,"level_completed").bind(self))
 		lvl.uncompleted.connect(
-			Callable(self,"emit_signal").bind("runned_changed",runned)
-			)
-		lvl.uncompleted.connect(
-			Callable(map,"_on_player_no_he"))
+			Callable(self,"emit_signal").bind("runned_changed",runned))
+		lvl.uncompleted.connect(Callable(map,"_on_player_no_he"))
 		emit_signal("lvl_start")
 		lvl.time_events=time_events.duplicate()
 		lvl.time_event.connect(Callable(self,"_time_events"))
@@ -230,9 +228,8 @@ func play():
 	else:
 		emit_signal("lvl_start")
 		runned=true
-		map.current_pos=self
+		get_parent().current_pos=self
 		emit_signal("runned_changed",runned)
-		emit_signal("run_result",runned)
 		emit_signal("lvl_end")
 	place_panel_node.queue_free()
 func cancel():
