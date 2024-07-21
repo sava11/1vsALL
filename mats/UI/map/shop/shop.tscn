@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://v6aje3nln1nf"]
+
+[ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="1_wjrql"]
+[ext_resource type="Script" path="res://mats/UI/map/shop/shop.gd" id="2_qjfrr"]
+[ext_resource type="Script" path="res://mats/UI/map/actions/shop/items/item_data.gd" id="3_jc3ag"]
+[ext_resource type="Script" path="res://mats/UI/map/statuses/random_ingame_status.gd.gd" id="4_b0nmx"]
+
+[sub_resource type="Resource" id="Resource_dyst5"]
+script = ExtResource("4_b0nmx")
+step = 3
+positive_chance = 0.5
+p_value_from = 1.0
+p_value_to = 3.0
+n_value_from = -4.0
+n_value_to = -1.0
+status = "hp"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_tewxc"]
+script = ExtResource("3_jc3ag")
+self_name = ""
+rarity = 0.0
+desc = ""
+statuses = Array[Resource("res://mats/UI/map/statuses/ingame_status.gd")]([SubResource("Resource_dyst5")])
+
+[node name="shop" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wjrql")
+script = ExtResource("2_qjfrr")
+items = Array[ExtResource("3_jc3ag")]([SubResource("Resource_tewxc")])
+
+[node name="shop" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 21.0
+offset_right = -243.0
+offset_bottom = -155.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_constants/h_separation = 2
+columns = 4

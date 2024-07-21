@@ -78,7 +78,6 @@ disabled = true
 
 [node name="nav" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_jxe6f")
-constrain_avoidance = true
 
 [node name="ent" type="Node2D" parent="."]
 y_sort_enabled = true

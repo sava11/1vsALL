@@ -497,33 +497,31 @@ var objs={
 	"updates":{
 		"agility":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"AGILITY_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"regen_stamina_point":{"x":0.05,"y":0.1},
 						"max_stamina":0.01,
 						"run_speed":{"x":2,"y":5},
 						},
-					"rare":Vector2(0,0.5),"value":6
+					"rare":0,"value":6
 				},
-				1:{
+				{
 					"stats":{
 						"regen_stamina_point":{"x":0.1,"y":0.25},
 						"max_stamina":0.02,
 						"run_speed":{"x":6,"y":9},
 						},
-					"rare":Vector2(0.5,1),"value":8
+					"rare":0.5,"value":8
 					},
-				}
+				]
 			},
 		"agility_hp":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"AGILITY-HP_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"hp_regen":{"x":0.2,"y":0.65},
 						"hp":{"x":0.6,"y":1.1},
@@ -531,9 +529,9 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":1,"y":3},
 						},
-					"rare":Vector2(0,0.5),"value":6
+					"rare":0,"value":6
 				},
-				1:{
+				{
 					"stats":{
 						"hp_regen":{"x":0.7,"y":1.75},
 						"hp":{"x":0.6,"y":1.1},
@@ -541,64 +539,61 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":3,"y":8},
 						},
-					"rare":Vector2(0.5,1),"value":8
+					"rare":0.5,"value":8
 					},
-				}
+				]
 			},
 		"agility_def":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"AGILITY-DEF_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"def":{"x":0.15,"y":0.5},
 						"regen_stamina_point":{"x":0.035,"y":0.08},
 						"max_stamina":0.03,
 						"run_speed":{"x":1,"y":3},
 						},
-					"rare":Vector2(0,0.5),"value":6
+					"rare":0,"value":6
 				},
-				1:{
+				{
 					"stats":{
 						"def":{"x":0.45,"y":0.7},
 						"regen_stamina_point":{"x":0.1,"y":0.8},
 						"max_stamina":0.03,
 						"run_speed":{"x":3,"y":8},
 						},
-					"rare":Vector2(0.5,1),"value":8
+					"rare":0.5,"value":8
 					},
-				}
+				]
 			},
 		"hp":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"HP_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"hp_regen":{"x":0.05,"y":0.1},
 						"hp":{"x":0.5,"y":1},
 						"dmg":{"x":0.5,"y":1.5},
 						},
-					"rare":Vector2(0,0.5),"value":7
+					"rare":0,"value":7
 				},
-				1:{
+				{
 					"stats":{
 						"hp_regen":{"x":0.05,"y":0.1},
 						"hp":2,
 						"dmg":{"x":1.5,"y":3},
 						},
-					"rare":Vector2(0.5,1),"value":9
+					"rare":0.5,"value":9
 					},
-				}
+				]
 			},
 		"hp_agility":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"AGILITY-HP_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"hp_regen":{"x":0.2,"y":0.65},
 						"hp":{"x":0.6,"y":1.1},
@@ -606,9 +601,10 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":1,"y":3},
 						},
-					"rare":Vector2(0,0.5),"value":6
+					"rare":0,
+					"value":6
 				},
-				1:{
+				{
 					"stats":{
 						"hp_regen":{"x":0.7,"y":1.75},
 						"hp":{"x":0.6,"y":1.1},
@@ -616,55 +612,53 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":3,"y":8},
 						},
-					"rare":Vector2(0.5,1),"value":8
+					"rare":0.5,"value":8
 					},
-				}
+				]
 			},
 		"def":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"DEF_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"def":{"x":0.1,"y":0.9},
 						"dmg":{"x":0.5,"y":0.9},
 						},
-					"rare":Vector2(0,0.5),"value":10
+					"rare":0,"value":10
 				},
-				1:{
+				{
 					"stats":{
 						"def":{"x":0.9,"y":1.5},
 						"dmg":{"x":1,"y":2},
 						},
-					"rare":Vector2(0.5,1),"value":14
+					"rare":0.5,"value":14
 					},
-				}
+				]
 			},
 		"def_hp":{
 			"i":images.undef,
-			"unlocked":false,
 			"t":"DEF-HP_TEXT",
-			"lvls":{
-				0:{
+			"lvls":[
+				{
 					"stats":{
 						"hp_regen":{"x":0.025,"y":0.08},
 						"hp":{"x":0.25,"y":0.5},
 						"def":{"x":0.09,"y":0.5},
 						"dmg":{"x":0.3,"y":0.5},
 						},
-					"rare":Vector2(0,0.5),"value":10
+					"rare":0,"value":10
 				},
-				1:{
+				{
 					"stats":{
 						"hp_regen":{"x":0.15,"y":0.5},
 						"hp":{"x":0.75,"y":1.5},
 						"def":{"x":0.6,"y":1.3},
 						"dmg":{"x":0.5,"y":1},
 						},
-					"rare":Vector2(0.5,1),"value":14
+					"rare":0.5,"value":14
 					},
-				}
+				]
 			},
 		
 		#"boots update":{

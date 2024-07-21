@@ -9,14 +9,6 @@ func _ready():
 # Called when the node enters the scene tree for the first time.
 func load_item(item_name:String):
 	var data=gm.objs.updates[item_name].duplicate(true)
-	#match lvl:
-		#0:get("theme_override_styles/panel").bg_color=Color(0,0,0,0.5)
-		#1:get("theme_override_styles/panel").bg_color=Color(0,0,0.5,0.5)
-		#2:get("theme_override_styles/panel").bg_color=Color(0,0.5,0,0.5)
-		#2:get("theme_override_styles/panel").bg_color=Color(0.5,0,0.5,0.5)
-		#3:get("theme_override_styles/panel").bg_color=Color(0,0.5,0.5,0.5)
-		#4:get("theme_override_styles/panel").bg_color=Color(0.6,0.5,0,0.5)
-	#data.merge({n:v},true)
 	$whatIs.texture=load(data.i)
 	$txt.text=tr(data.t)
 	$value.text=str(value)

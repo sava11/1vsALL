@@ -4,10 +4,10 @@
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
 [ext_resource type="Texture2D" uid="uid://df16ud3cfcbxw" path="res://mats/UI/map/imgs/map.png" id="3_e6gjm"]
 [ext_resource type="Texture2D" uid="uid://ye383w3epgm" path="res://mats/imgs/icons/undo-arrow.png" id="7_ubhsm"]
+[ext_resource type="PackedScene" uid="uid://v6aje3nln1nf" path="res://mats/UI/map/shop/shop.tscn" id="9_55pfo"]
 [ext_resource type="Texture2D" uid="uid://bfvhd4vvmo1qr" path="res://mats/UI/imgs/scroll.png" id="11_1v8av"]
 [ext_resource type="Texture2D" uid="uid://b843pwetjevm0" path="res://mats/UI/map/imgs/shop.png" id="12_00ogn"]
 [ext_resource type="Texture2D" uid="uid://b4vbj22132bp2" path="res://mats/UI/map/imgs/boss.png" id="13_0rooc"]
-[ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="15_bd4u6"]
 [ext_resource type="Texture2D" uid="uid://c0xm12txf3qk8" path="res://mats/UI/map/imgs/hero.png" id="15_rt4od"]
 
 [node name="map" type="Control"]
@@ -205,31 +205,10 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "BACK"
 
-[node name="shop" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 144.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("15_bd4u6")
-
-[node name="shop" type="GridContainer" parent="shop"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 17.0
-offset_top = 21.0
-offset_right = -243.0
-offset_bottom = -155.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
-theme_override_constants/h_separation = 2
-columns = 4
+[node name="shop" parent="." instance=ExtResource("9_55pfo")]
+visible = true
+layout_mode = 0
+anchors_preset = 0
 
 [connection signal="in_shop" from="." to="." method="_on_in_shop"]
 [connection signal="button_down" from="tr/mc/vbc/HBoxContainer/HBoxContainer/itm4/to_self" to="." method="_on_to_self_button_down"]
