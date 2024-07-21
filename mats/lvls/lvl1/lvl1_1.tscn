@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbkyx2cqwtfoj"]
+[gd_scene load_steps=8 format=3 uid="uid://bbkyx2cqwtfoj"]
 
 [ext_resource type="Script" path="res://mats/lvls/lvl_template.gd" id="1_m77ya"]
 [ext_resource type="TileSet" uid="uid://csc8a81gx41m8" path="res://mats/lvls/sand&rock.tres" id="2_jjidc"]
-[ext_resource type="PackedScene" uid="uid://17bbem04aabd" path="res://mats/contents/fire_tower/ft.tscn" id="3_vtyp0"]
-[ext_resource type="PackedScene" uid="uid://dflu4step70js" path="res://mats/contents/fire_plate/a.tscn" id="4_hfrw6"]
 [ext_resource type="PackedScene" uid="uid://shpfq3okltdw" path="res://mats/player/warrior.tscn" id="5_hn7gj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeni"]
@@ -87,12 +85,6 @@ y_sort_enabled = true
 
 [node name="traps" type="Node2D" parent="ent"]
 y_sort_enabled = true
-
-[node name="r" parent="ent/traps" instance=ExtResource("3_vtyp0")]
-speed = 30
-
-[node name="a" parent="ent/traps" instance=ExtResource("4_hfrw6")]
-position = Vector2(-88, -72)
 
 [node name="enemys" type="Node2D" parent="ent"]
 y_sort_enabled = true

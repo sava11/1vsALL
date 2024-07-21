@@ -118,14 +118,14 @@ func end_dialog():
 		hide()
 
 func _input(_e):
-	if Input.is_action_just_pressed("accept") and dialog!=null:
+	if Input.is_action_just_pressed("accept") and dialog!=null  and btn_cont.get_child_count()<2:
 		end_dialog()
 
 func _on_panel_gui_input(_e):
-	if Input.is_action_just_pressed("lmb"):
+	if Input.is_action_just_pressed("lmb") and btn_cont.get_child_count()<2:
 		end_dialog()
 
 
 func _on_gui_input(_e):
-	if Input.is_action_just_pressed("lmb") and !dialog.interactive:
+	if Input.is_action_just_pressed("lmb") and !dialog.interactive  and btn_cont.get_child_count()<2:
 		end_dialog()

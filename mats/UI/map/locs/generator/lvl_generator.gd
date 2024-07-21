@@ -68,8 +68,9 @@ func create_arena():
 	return arena
 func gen_map_v1(positions,neighbors):
 	for e in positions:
-		var scn=preload("res://mats/UI/map/place/place.tscn").instantiate()
+		var scn:place=preload("res://mats/UI/map/place/place.tscn").instantiate()
 		scn.position=e*48#16+32
+		scn.choice_panel_showed.connect(Callable(self,"set_ingame_stats").bind(scn))
 		var shop_chance=fnc._with_chance(0.1)
 		if shop_chance:
 			scn.shop=shop_action.new()
@@ -165,5 +166,21 @@ func gen_map_v1(positions,neighbors):
 	#print(glob_lengts)
 	#gm.save_file_data()
 
-func _on_player_position_changed(_place:place):
-	pass
+func set_ingame_stats(_place:place):
+	if _place.ingame_statuses.is_empty():
+		var a:Array[ingame_status]=[]
+		var keys:Array=gm.player_data.stats.keys()
+		for e in range(fnc._with_chance_ulti([0.05,0.4,0.35,0.2])):
+			var i_s=ingame_status.new()
+			i_s.status=keys.pick_random()
+			var stat_data:Dictionary=gm.objs.stats[i_s.status]
+			if stat_data.has("v") and stat_data.has("-v"):
+				var v_keys:Array=stat_data.v.keys()
+				var mv_keys:Array=stat_data["-v"].keys()
+				var min=stat_data["-v"][mv_keys[0]].v.x
+				var max=stat_data.v[v_keys[v_keys.size()-1]].v.y
+				i_s.value=snapped(fnc.rnd.randf_range(min,max),0.001)
+			else:
+				i_s.value=fnc.rnd.randi_range(1,5)
+			a.append(i_s)
+		_place.ingame_statuses=a

@@ -24,8 +24,6 @@ func set_cur_pos(pos:place):
 	else:
 		var ps=pos
 		while ps==null or ps.shop!=null or (ps.arena!=null and ps.arena.has_bosses()):
-			if ps!=null:
-				print(ps.shop!=null," ",ps.arena!=null," ",ps.arena.has_bosses())
 			ps=get_children()[fnc.rnd.randi_range(0,get_child_count()-1)]
 		current_pos=ps
 	current_pos.runned=true
@@ -37,7 +35,10 @@ func set_cur_pos(pos:place):
 				var dist_b = b.global_position.distance_to(current_pos.global_position)
 				return dist_a < dist_b)
 		))
-	for e in range(10):
+	var count=10
+	if t.size()<10:
+		count-=t.size()
+	for e in range(count):
 		nearst.append(t[e])
 	for cur_place in nearst:
 		cur_place.player_here=cur_place==current_pos
@@ -90,7 +91,7 @@ func _ready():
 	#print("start setting signals")
 	for e in get_children():
 		if is_instance_valid(e):
-			e.runned_changed.connect(Callable(func(res):if res:set_cur_pos(e)))
+			e.runned_changed.connect(Callable(func(res):if res and current_pos!=e:set_cur_pos(e)))
 			e.get_node("btn").button_down.connect(
 				Callable(
 					func(b:place):
