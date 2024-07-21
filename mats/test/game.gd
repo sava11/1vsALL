@@ -98,15 +98,19 @@ func _on_retry_button_down():
 	for e in $cl/map.map.get_children():
 		e.runned=false
 	if gm.game_prefs.scripts.traied:
-		$cl/map/map/cont/locs/map.set_cur_pos(null)
+		locs_cont.get_child(0).set_cur_pos(null)
 		gm.game_prefs.seed=randi()
 		fnc.rnd.seed=gm.game_prefs.seed
-		locs_cont.upd()
+		locs_cont.get_child(0).upd()
 	else:
 		$cl/map/map/cont/locs/map.set_cur_pos($cl/map/map/cont/locs/map/place)
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
 	#await get_tree().process_frame
+	var temp_data=gm.start_game_prefs.duplicate(true)
+	for e in gm.game_prefs:
+		if ["seed","scripts"].find(e)==-1:
+			gm.game_prefs[e]=temp_data[e]
 	gm.save_file_data()
 	show_lvls()
 	$cl/game_ui/death.hide()

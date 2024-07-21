@@ -18,10 +18,10 @@ func _ready():
 	pol.append(Vector2(0,-4))
 	for e in $dmgs.get_children():
 		e.get_node("c").polygon=pol
-		e.damage=fnc._with_dific(fnc.rnd.randf_range(dmg_from,dmg_to),get_tree().current_scene.get("dif"))
-		e.crit_damage=fnc._with_dific(fnc.rnd.randf_range(crit_dmg_from,crit_dmg_to),get_tree().current_scene.get("dif"))
+		e.damage=fnc._with_dific(fnc.rnd.randf_range(dmg_from,dmg_to),gm.game_prefs.dif)
+		e.crit_damage=fnc._with_dific(fnc.rnd.randf_range(crit_dmg_from,crit_dmg_to),gm.game_prefs.dif)
 	for e in $dmgs.get_children():
-		e.get_node("cp").gravity=fnc.move(e.get_node("cp").rotation_degrees)*196
+		e.get_node("cp").initial_velocity_min=rast
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

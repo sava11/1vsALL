@@ -1262,7 +1262,6 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_x43ur"]
 resource_name = "attack"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1555,6 +1554,7 @@ stop_range_from = 20.0
 stop_range_to = 30.0
 
 [node name="attack" parent="." instance=ExtResource("28_qgx7q")]
+monitoring = false
 monitorable = false
 attack_name = "a1"
 attack_anim_name = "attack"
@@ -1597,7 +1597,6 @@ collision_mask = 9
 material = SubResource("ShaderMaterial_ck7jh")
 sprite_frames = SubResource("SpriteFrames_fysaw")
 animation = &"attack_down"
-frame = 9
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="visual"]

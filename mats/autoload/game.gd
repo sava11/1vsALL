@@ -92,7 +92,7 @@ const enemys={
 }
 
 const bosses={
-	"skelvas":{
+	"res://mats/enemys/b2/enemy.tscn":{
 		"i":images.icons.other.boss_crown1,
 		"dificulty_lvl":{
 			dificulty.easy:{
@@ -107,7 +107,7 @@ const bosses={
 			},
 		}
 	},
-	"skelgener":{
+	"res://mats/enemys/b3/enemy.tscn":{
 		"i":images.icons.other.boss_crown1,
 		"dificulty_lvl":{
 			dificulty.easy:{
@@ -124,8 +124,7 @@ const bosses={
 		"s":"res://mats/bosses/gob_beast/boss.tscn",
 		"i":images.icons.other.boss_crown1
 	},
-	"necromancer":{
-		"s":"res://mats/enemys/b5/enemy.tscn",
+	"res://mats/enemys/b5/enemy.tscn":{
 		"i":images.icons.other.boss_crown1,
 		"dificulty_lvl":{
 			dificulty.easy:{
@@ -140,8 +139,7 @@ const bosses={
 			},
 		}
 	},
-	"fire_women":{
-		"s":"res://mats/enemys/b4/enemy.tscn",
+	"res://mats/enemys/b4/enemy.tscn":{
 		"i":images.icons.other.boss_crown1,
 		"dificulty_lvl":{
 			dificulty.easy:{

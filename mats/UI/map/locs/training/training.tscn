@@ -116,7 +116,7 @@ offset_right = 64.0
 level_time = 2.0
 arena = SubResource("Resource_udkax")
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_cvj4s"), SubResource("Resource_gvf2v"), SubResource("Resource_ucglk"), SubResource("Resource_yrem4")])
-neighbors = [NodePath("../place2")]
+neighbors = [NodePath("../place2"), NodePath("../place6")]
 
 [node name="place2" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 96.0
@@ -146,6 +146,58 @@ offset_right = 256.0
 level_time = 2.0
 secret = true
 neighbors = [NodePath("../place4")]
+
+[node name="place6" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 64.0
+offset_bottom = 64.0
+neighbors = [NodePath("../place1")]
+
+[node name="place7" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 96.0
+offset_top = 48.0
+offset_right = 112.0
+offset_bottom = 64.0
+neighbors = [NodePath("../place8"), NodePath("../place10")]
+
+[node name="place8" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 192.0
+offset_top = 48.0
+offset_right = 208.0
+offset_bottom = 64.0
+neighbors = [NodePath("../place7"), NodePath("../place9")]
+
+[node name="place9" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 192.0
+offset_top = 144.0
+offset_right = 208.0
+offset_bottom = 160.0
+neighbors = [NodePath("../place8"), NodePath("../place10"), NodePath("../place12")]
+
+[node name="place10" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 96.0
+offset_top = 144.0
+offset_right = 112.0
+offset_bottom = 160.0
+neighbors = [NodePath("../place9"), NodePath("../place7")]
+
+[node name="place11" parent="." instance=ExtResource("2_uri1g")]
+offset_top = 112.0
+offset_bottom = 128.0
+
+[node name="place12" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+offset_left = 144.0
+offset_top = 96.0
+offset_right = 160.0
+offset_bottom = 112.0
+neighbors = [NodePath("../place9"), NodePath("../place7")]
+
+[node name="place13" parent="." instance=ExtResource("2_uri1g")]
+offset_left = 144.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 48.0
 
 [connection signal="player_in" from="place0" to="." method="start_dialog"]
 [connection signal="choice_panel_hided" from="place1" to="." method="_on_place_2_choice_panel_hided"]

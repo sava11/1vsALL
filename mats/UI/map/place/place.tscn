@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://mats/UI/map/place/place.gd" id="1_gkxwn"]
 [ext_resource type="Texture2D" uid="uid://bby8f0uw1txpg" path="res://mats/UI/map/imgs/zone.png" id="2_jsxuq"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_g42mb"]
-font_size = 8
+[sub_resource type="LabelSettings" id="LabelSettings_apmv3"]
+resource_local_to_scene = true
+font_size = 14
+font_color = Color(3.12006e-06, 0.644557, 0.266582, 1)
 
 [node name="place0" type="Control" groups=["SN"]]
 layout_mode = 3
@@ -12,8 +14,7 @@ anchors_preset = 0
 offset_right = 16.0
 offset_bottom = 16.0
 script = ExtResource("1_gkxwn")
-level = "res://mats/lvls/lvl1/lvl1_2.tscn"
-time_events = PackedFloat32Array(10)
+level = "res://mats/lvls/lvl1/lvl1_1.tscn"
 unactive = 0.7
 arena_color = Color(1, 1, 1, 1)
 player_color = Color(0.631373, 0.8, 1, 1)
@@ -58,7 +59,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="nm" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -72,7 +72,7 @@ offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "place0"
-label_settings = SubResource("LabelSettings_g42mb")
+label_settings = SubResource("LabelSettings_apmv3")
 horizontal_alignment = 1
 
 [connection signal="runned_changed" from="." to="." method="_on_runned_changed"]

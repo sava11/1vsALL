@@ -11,14 +11,15 @@ func data_to_load(n:Dictionary):
 	exceptions=[]
 	for e in n.p:
 		exceptions.append(Vector2(e[0],e[1]))
-var col=15
-var row=10
-var max_neighbors=[0,0.4,0.3,0.05,0.05]
+var col=25
+var row=25
+var max_neighbors=[0,0.3,0.6,0.05,0.05]
 var neighbors:=[]
 var exceptions:=[]
 func _pre_ready():
+	#fnc.rnd.seed=0
 	upd()
-
+#создать возможномть телепорта к аренам которые не соеденены
 func upd():
 	if exceptions.is_empty() and neighbors.is_empty():
 		var place_count=fnc.rnd.randi_range(col*row/2,col*row)
@@ -34,10 +35,10 @@ func upd():
 				y=fnc.rnd.randi_range(0,row)
 			neighbors.append(clamp(fnc._with_chance_ulti(max_neighbors),0,place_count-1)+1)
 			exceptions.append(Vector2(x,y))
-		exceptions.sort_custom((func(a, b):
-			var dist_a = a.distance_to(Vector2.ZERO)
-			var dist_b = b.distance_to(Vector2.ZERO)
-			return dist_a < dist_b))
+		#exceptions.sort_custom((func(a, b):
+			#var dist_a = a.distance_to(Vector2.ZERO)
+			#var dist_b = b.distance_to(Vector2.ZERO)
+			#return dist_a < dist_b))
 	else:
 		for e in get_children():
 			e.free()
@@ -46,8 +47,9 @@ func upd():
 	emit_signal("map_generated")
 func create_arena():
 	var arena=arena_action.new()
-	arena.enemys=(func():
-		var enemys_path=["res://mats/enemys/e1/enemy.tscn","res://mats/enemys/e2/enemy.tscn","res://mats/enemys/e3/enemy.tscn","res://mats/enemys/e4/enemy.tscn"]
+	var enemys=(func():
+		var enemys_path=["res://mats/enemys/e1/enemy.tscn","res://mats/enemys/e2/enemy.tscn",
+		"res://mats/enemys/e3/enemy.tscn","res://mats/enemys/e4/enemy.tscn"]
 		var select_enemys_percents=[0.5,0.2,0.4,0.1]
 		var count_enemys_percents=[0.1,0.3,0.2,0.2]
 		var ens:Array[empty_entety_data]=[]
@@ -60,6 +62,7 @@ func create_arena():
 			select_enemys_percents.remove_at(e_p_id)
 			ens.append(enemy)
 		return ens).call()
+	arena.enemys=enemys
 	arena.enemys_count_min=fnc.rnd.randi_range(4,18)
 	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,18)
 	return arena
@@ -67,21 +70,21 @@ func gen_map_v1(positions,neighbors):
 	for e in positions:
 		var scn=preload("res://mats/UI/map/place/place.tscn").instantiate()
 		scn.position=e*48#16+32
+		var shop_chance=fnc._with_chance(0.1)
+		if shop_chance:
+			scn.shop=shop_action.new()
+			if fnc._with_chance(0.25):
+				scn.arena=create_arena()
+		else:
+			scn.arena=create_arena()
 		add_child(scn)
 	#print(get_child_count())
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	var mass:=get_children()
 	var d:={}
 	var temp_mass=mass.duplicate(true)
 	
 	for e in mass:
-		var shop_chance=fnc._with_chance(0.1)
-		if shop_chance:
-			e.shop=shop_action.new()
-			if fnc._with_chance(0.25):
-				e.arena=create_arena()
-		else:
-			e.arena=create_arena()
 		temp_mass.sort_custom(Callable(func(a, b):
 			var dist_a = a.global_position.distance_to(e.global_position)
 			var dist_b = b.global_position.distance_to(e.global_position)
@@ -89,41 +92,78 @@ func gen_map_v1(positions,neighbors):
 		var local_angs=[]
 		for k in range(neighbors[e.get_index()]):
 			var ang=fnc.angle(temp_mass[k].global_position.direction_to(e.global_position))
-			if e!=temp_mass[k] and local_angs.find(ang)==-1:
+			if local_angs.find(ang)==-1:
 				local_angs.append(ang)
 				e.neighbors.append(temp_mass[k])
 				temp_mass[k].neighbors.append(e)
 				if len(temp_mass[k].neighbors)<=3 and fnc._with_chance(0.075):
-					#e.secret=true
 					temp_mass[k].secret=true
+					#e.secret=true
+		
+				#if !dijkstra(temp_mass[k].get_index(),0,false):
+					
 				#await get_tree().process_frame
 		#neighbors[e.get_index()]=len(e.neighbors)
-	var bosses=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn","res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
-	var selected_bosses=[]
-	for e in range(len(bosses)):
-		pass
-	var e_id=0
-	while e_id<len(mass):
-		var e=mass[e_id]
-		var local_angs=[]
-		var k_id=0
-		while k_id<len(e.neighbors):
-			var k=e.neighbors[k_id]
-			var ang=fnc.angle(k.global_position.direction_to(e.global_position))
-			if local_angs.find(ang)==-1:
-				local_angs.append(ang)
-			else:
-				e.neighbors.remove_at(k_id)
-				k_id-=1
-			k_id+=1
-		e_id+=1
+	
+	var bosses=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
+	"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
+	var place_with_bosses=[]
+	while !bosses.is_empty():
+		var bd=boss_data.new()
+		bd.boss=bosses[0]
+		bd.name=bosses[0]
+		var filtered_mass=mass.duplicate(true).filter(
+			(func(x): return x.secret==false and x.shop==null #and (place_with_bosses.is_empty() or place_with_bosses.filter((
+				#func(y):
+					#return dijkstra(x.get_index(),y.get_index(),false).size()<5)
+				#).is_empty())
+		))
+		var node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
+		place_with_bosses.append(node)
+		node.arena.enemys.append(bd)
+		bosses.remove_at(0)
+		
+	#var e_id=0
+	#while e_id<len(mass):
+		#var e=mass[e_id]
+		#var local_angs=[]
+		#var k_id=0
+		#while k_id<len(e.neighbors):
+			#var k=e.neighbors[k_id]
+			#var ang=fnc.angle(k.global_position.direction_to(e.global_position))
+			#if local_angs.find(ang)==-1:
+				#local_angs.append(ang)
+			#else:
+				#e.neighbors.remove_at(k_id)
+				#k_id-=1
+			#k_id+=1
+		#e_id+=1
 	#await get_tree().process_frame
+	#print("start")
 	#for e in get_children():
 		#if dijkstra(e.get_index(),0,false).is_empty():
 			#print(e.get_index())
+			#e.get_node("nm").label_settings.font_color=Color(1,1,1,1)
 	#print("ended")
-	gm.save_file_data()
-
+	#var regions=region_detection()
+	#print(regions)
+	#for e in regions.keys():
+		#if regions[e].centr
+	#var glob_lengts=[]
+	#for region in regions:
+		#var r=region.duplicate(true)
+		#var lengts=[]
+		#for e in region:
+			#r.sort_custom(Callable(func(a, b):
+				#var dist_a = a.global_position.distance_to(e.global_position)
+				#var dist_b = b.global_position.distance_to(e.global_position)
+				#return dist_a < dist_b and a!=e and b!=e))
+			#lengts.append([e,e.global_position.distance_to(r[0].global_position),r[0]])
+		#lengts.sort_custom((func(x,y):return x[1]<y[1]))
+		#glob_lengts.append(lengts[0])
+		##print(lengts)
+	#print(glob_lengts)
+	#gm.save_file_data()
 
 func _on_player_position_changed(_place:place):
 	pass

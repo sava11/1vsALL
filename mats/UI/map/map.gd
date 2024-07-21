@@ -192,3 +192,10 @@ func get_end_price(sts:Dictionary):
 func _on_player_no_he():
 	get_parent().get_node("game_ui/death").show()
 	get_tree().set_deferred("paused",true)
+
+
+func _on_to_self_button_down():
+	var w=current_pos.position.x
+	$map/cont.scroll_horizontal=w+current_pos.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")
+	var h=current_pos.position.y
+	$map/cont.scroll_vertical=h+current_pos.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")

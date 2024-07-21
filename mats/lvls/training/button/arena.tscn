@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c45xve6qe5oye"]
-
-[ext_resource type="Script" path="res://mats/lvls/training/button/arena.gd" id="1_46vce"]
-
-[node name="Arena" type="Button"]
-offset_right = 100.0
-offset_bottom = 52.0
-script = ExtResource("1_46vce")

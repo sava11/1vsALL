@@ -34,6 +34,34 @@
 [ext_resource type="PackedScene" uid="uid://uxwpjiuinj83" path="res://mats/contents/boss_mark/boss_mark.tscn" id="32_gqbsw"]
 [ext_resource type="PackedScene" uid="uid://bjq6lohvs8mw1" path="res://mats/contents/drop/drop.tscn" id="33_jy4xr"]
 
+[sub_resource type="Shader" id="Shader_kjx0n"]
+code = "shader_type canvas_item;
+
+uniform vec4 line_color : source_color = vec4(1);
+uniform float line_thickness : hint_range(0, 10) = 1.0;
+
+void fragment() {
+	vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
+	
+	float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+	outline = min(outline, 1.0);
+	
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, line_color, outline - color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t51wf"]
+shader = SubResource("Shader_kjx0n")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.5
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iu3cc"]
 friction = 0.0
 
@@ -1791,34 +1819,6 @@ tracks/3/keys = {
 "values": [false]
 }
 
-[sub_resource type="Shader" id="Shader_kjx0n"]
-code = "shader_type canvas_item;
-
-uniform vec4 line_color : source_color = vec4(1);
-uniform float line_thickness : hint_range(0, 10) = 1.0;
-
-void fragment() {
-	vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
-	
-	float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
-	outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
-	outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
-	outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
-	outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
-	outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
-	outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
-	outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
-	outline = min(outline, 1.0);
-	
-	vec4 color = texture(TEXTURE, UV);
-	COLOR = mix(color, line_color, outline - color.a);
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t51wf"]
-shader = SubResource("Shader_kjx0n")
-shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/line_thickness = 1.5
-
 [sub_resource type="Animation" id="Animation_h7y74"]
 resource_name = "teleporting"
 tracks/0/type = "value"
@@ -1933,6 +1933,7 @@ _data = {
 }
 
 [node name="base" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_t51wf")
 collision_layer = 17
 collision_mask = 17
 physics_material_override = SubResource("PhysicsMaterial_iu3cc")
@@ -1957,7 +1958,7 @@ hp_to = 10.0
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 0
 script = ExtResource("2_x4762")
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]
@@ -2011,6 +2012,7 @@ material = SubResource("ShaderMaterial_qi1p6")
 
 [node name="sp" type="AnimatedSprite2D" parent="visual"]
 material = SubResource("ShaderMaterial_vf0ef")
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_7y68q")
 animation = &"attack1_down"
 frame = 3

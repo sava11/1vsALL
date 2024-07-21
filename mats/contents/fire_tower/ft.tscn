@@ -21,6 +21,7 @@ can_sleep = false
 lock_rotation = true
 freeze = true
 script = ExtResource("1_ovm21")
+rast = 50
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vlxi2")
@@ -48,7 +49,8 @@ lifetime_randomness = 0.5
 local_coords = true
 emission_shape = 1
 emission_sphere_radius = 1.5
-gravity = Vector2(200, 0)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
 orbit_velocity_min = -0.03
 orbit_velocity_max = 0.03
 scale_amount_curve = SubResource("Curve_pgeax")
@@ -57,6 +59,7 @@ color_ramp = SubResource("Gradient_jyee8")
 [node name="u_dmg" parent="dmgs" instance=ExtResource("1_f8h06")]
 position = Vector2(0, -12)
 rotation = -1.5708
+by_time = true
 
 [node name="c" type="CollisionPolygon2D" parent="dmgs/u_dmg"]
 polygon = PackedVector2Array(0, 2, 92, 6, 94, 0, 92, -6, 0, -2)
@@ -68,7 +71,8 @@ lifetime_randomness = 0.5
 local_coords = true
 emission_shape = 1
 emission_sphere_radius = 1.5
-gravity = Vector2(0, -200)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
 orbit_velocity_min = -0.03
 orbit_velocity_max = 0.03
 scale_amount_curve = SubResource("Curve_pgeax")
@@ -92,7 +96,8 @@ lifetime_randomness = 0.5
 local_coords = true
 emission_shape = 1
 emission_sphere_radius = 1.5
-gravity = Vector2(200, 0)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
 orbit_velocity_min = -0.03
 orbit_velocity_max = 0.03
 scale_amount_curve = SubResource("Curve_pgeax")
@@ -116,7 +121,8 @@ lifetime_randomness = 0.5
 local_coords = true
 emission_shape = 1
 emission_sphere_radius = 1.5
-gravity = Vector2(0, -200)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
 orbit_velocity_min = -0.03
 orbit_velocity_max = 0.03
 scale_amount_curve = SubResource("Curve_pgeax")

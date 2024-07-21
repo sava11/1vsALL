@@ -58,7 +58,7 @@ func _on_die():
 	$drop.drop()
 	$boss_mark.emit()
 func teleport():
-	global_position=get_tree().current_scene.get_rand_pos()
+	global_position=get_node("../../../").get_rand_pos()
 
 
 func _on_stages_stage_changed(curent_stage):

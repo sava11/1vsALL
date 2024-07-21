@@ -4,6 +4,7 @@ signal player_in()
 signal choice_panel_showed()
 signal choice_panel_hided()
 signal choice_shop()
+signal choice_shop_out()
 signal choice_play()
 signal choice_cancel()
 signal lvl_start
@@ -40,7 +41,7 @@ var original:Color
 @export var boss_color:Color
 @export var shop_color:Color
 @export var secret_color:Color
-
+#var nearst_unconnected:Array[place]=[]
 var place_panel_node=null
 var map:Node
 var lvl:level_template
@@ -92,6 +93,16 @@ func _ready():
 			emit_signal("save_data_changed",save_data())
 		else:
 			emit_signal("_load_data",self,str(get_path()))
+		var m=get_parent().get_children()
+		var d={}
+		#m.sort_custom(Callable(func(a, b):
+			#var dist_a = a.global_position.distance_to(global_position)
+			#var dist_b = b.global_position.distance_to(global_position)
+			#return dist_a < dist_b and a!=self and b!=self))
+		#m.filter((func(a):
+			#var dist_a = a.global_position.distance_to(global_position)
+			#var dist_b = b.global_position.distance_to(global_position)
+			#))
 		#for n in neighbors:
 			#var l=Line2D.new()
 			#l.width=2
@@ -157,7 +168,7 @@ func _process(delta):
 					return x.player_here and x.neighbors.find(self)>-1)) or player_here:
 				show()
 			else:hide()
-
+	#show()
 var shop_changed:bool=false
 var arena_changed:bool=false
 var secret_changed:bool=false
@@ -228,7 +239,7 @@ func play():
 	else:
 		emit_signal("lvl_start")
 		runned=true
-		get_parent().current_pos=self
+		#get_parent().current_pos=self
 		emit_signal("runned_changed",runned)
 		emit_signal("lvl_end")
 	place_panel_node.queue_free()

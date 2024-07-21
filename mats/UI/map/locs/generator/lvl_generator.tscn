@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/generator/lvl_generator.gd" id="1_sxwos"]
 
-[node name="lvl_generator" type="Control" groups=["SN"]]
+[node name="lvl_generator" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

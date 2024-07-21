@@ -40,4 +40,7 @@ orbit_velocity_max = 0.03
 scale_amount_curve = SubResource("Curve_pgeax")
 color_ramp = SubResource("Gradient_jyee8")
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 14.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
