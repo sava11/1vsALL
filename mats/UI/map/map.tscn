@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
 [ext_resource type="Texture2D" uid="uid://df16ud3cfcbxw" path="res://mats/UI/map/imgs/map.png" id="3_e6gjm"]
 [ext_resource type="Texture2D" uid="uid://ye383w3epgm" path="res://mats/imgs/icons/undo-arrow.png" id="7_ubhsm"]
-[ext_resource type="PackedScene" uid="uid://v6aje3nln1nf" path="res://mats/UI/map/shop/shop.tscn" id="9_55pfo"]
+[ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="9_77n47"]
 [ext_resource type="Texture2D" uid="uid://bfvhd4vvmo1qr" path="res://mats/UI/imgs/scroll.png" id="11_1v8av"]
 [ext_resource type="Texture2D" uid="uid://b843pwetjevm0" path="res://mats/UI/map/imgs/shop.png" id="12_00ogn"]
 [ext_resource type="Texture2D" uid="uid://b4vbj22132bp2" path="res://mats/UI/map/imgs/boss.png" id="13_0rooc"]
@@ -95,19 +95,18 @@ alignment = 1
 layout_mode = 2
 
 [node name="itm2" type="HBoxContainer" parent="tr/mc/vbc/HBoxContainer/HBoxContainer"]
+modulate = Color(1, 0.313726, 0.431373, 1)
 custom_minimum_size = Vector2(2.08165e-12, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="tr" type="TextureRect" parent="tr/mc/vbc/HBoxContainer/HBoxContainer/itm2"]
-self_modulate = Color(1, 0.313726, 0.431373, 1)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("13_0rooc")
 expand_mode = 1
 
 [node name="l" type="Label" parent="tr/mc/vbc/HBoxContainer/HBoxContainer/itm2"]
-self_modulate = Color(1, 0.313726, 0.431373, 1)
 layout_mode = 2
 text = "BOSS_LEGEND"
 
@@ -195,6 +194,7 @@ grow_vertical = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="stats/cont"]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="item_cont" type="VBoxContainer" parent="stats/cont/ScrollContainer"]
 layout_mode = 2
@@ -205,10 +205,35 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "BACK"
 
-[node name="shop" parent="." instance=ExtResource("9_55pfo")]
-visible = true
-layout_mode = 0
-anchors_preset = 0
+[node name="shop" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -496.0
+offset_top = 2.0
+offset_right = -248.0
+offset_bottom = 160.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+texture = ExtResource("9_77n47")
+
+[node name="shop" type="GridContainer" parent="shop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -59.5
+offset_right = 115.0
+offset_bottom = 59.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 2
+columns = 4
 
 [connection signal="in_shop" from="." to="." method="_on_in_shop"]
 [connection signal="button_down" from="tr/mc/vbc/HBoxContainer/HBoxContainer/itm4/to_self" to="." method="_on_to_self_button_down"]

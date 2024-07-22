@@ -16,6 +16,7 @@ var row=25
 var max_neighbors=[0,0.3,0.6,0.05,0.05]
 var neighbors:=[]
 var exceptions:=[]
+var bosses_pos=[]
 func _pre_ready():
 	#fnc.rnd.seed=0
 	upd()
@@ -42,7 +43,6 @@ func upd():
 	else:
 		for e in get_children():
 			e.free()
-		#print("miner")
 	gen_map_v1(exceptions,neighbors)
 	emit_signal("map_generated")
 func create_arena():
@@ -72,19 +72,19 @@ func gen_map_v1(positions,neighbors):
 		scn.position=e*48#16+32
 		scn.choice_panel_showed.connect(Callable(self,"set_ingame_stats").bind(scn))
 		var shop_chance=fnc._with_chance(0.1)
+		scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.2)
 		if shop_chance:
-			scn.shop=shop_action.new()
+			scn.shop=true
 			if fnc._with_chance(0.25):
 				scn.arena=create_arena()
 		else:
 			scn.arena=create_arena()
 		add_child(scn)
+	var mass:=get_children()
 	#print(get_child_count())
 	#await get_tree().process_frame
-	var mass:=get_children()
 	var d:={}
 	var temp_mass=mass.duplicate(true)
-	
 	for e in mass:
 		temp_mass.sort_custom(Callable(func(a, b):
 			var dist_a = a.global_position.distance_to(e.global_position)
@@ -100,12 +100,9 @@ func gen_map_v1(positions,neighbors):
 				if len(temp_mass[k].neighbors)<=3 and fnc._with_chance(0.075):
 					temp_mass[k].secret=true
 					#e.secret=true
-		
 				#if !dijkstra(temp_mass[k].get_index(),0,false):
-					
 				#await get_tree().process_frame
 		#neighbors[e.get_index()]=len(e.neighbors)
-	
 	var bosses=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
 	"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
 	var place_with_bosses=[]
@@ -114,13 +111,14 @@ func gen_map_v1(positions,neighbors):
 		bd.boss=bosses[0]
 		bd.name=bosses[0]
 		var filtered_mass=mass.duplicate(true).filter(
-			(func(x): return x.secret==false and x.shop==null #and (place_with_bosses.is_empty() or place_with_bosses.filter((
+			(func(x): return !x.secret and !x.shop #and (place_with_bosses.is_empty() or place_with_bosses.filter((
 				#func(y):
 					#return dijkstra(x.get_index(),y.get_index(),false).size()<5)
 				#).is_empty())
 		))
 		var node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
 		place_with_bosses.append(node)
+		bosses_pos.append(node.position+node.size/2)
 		node.arena.enemys.append(bd)
 		bosses.remove_at(0)
 		
@@ -184,3 +182,11 @@ func set_ingame_stats(_place:place):
 				i_s.value=fnc.rnd.randi_range(1,5)
 			a.append(i_s)
 		_place.ingame_statuses=a
+
+func _pre_process(delta):
+	queue_redraw()
+
+func _draw():
+	if current_pos!=null:
+		for p in bosses_pos:
+			draw_line(current_pos.position+current_pos.size/2,p,Color(1,0.5,0.5),5)

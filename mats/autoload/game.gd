@@ -214,7 +214,6 @@ func merge_stats(stats:Dictionary):
 	for e in stats.keys():
 		if player_data.stats.get(e)!=null:
 			player_data.stats[e]=clamp(player_data.stats[e]+stats[e],gm.objs.stats[e].min_v,999999999)
-		print(e," ",player_data.stats.get(e))
 const start_game_prefs={
 	"seed":-1,
 	"scripts":{
@@ -505,7 +504,7 @@ var objs={
 						"max_stamina":0.01,
 						"run_speed":{"x":2,"y":5},
 						},
-					"rare":0,"value":6
+					"unlock_from":0,"value":6
 				},
 				{
 					"stats":{
@@ -513,7 +512,7 @@ var objs={
 						"max_stamina":0.02,
 						"run_speed":{"x":6,"y":9},
 						},
-					"rare":0.5,"value":8
+					"unlock_from":0.5,"value":8
 					},
 				]
 			},
@@ -529,7 +528,7 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":1,"y":3},
 						},
-					"rare":0,"value":6
+					"unlock_from":0,"value":6
 				},
 				{
 					"stats":{
@@ -539,7 +538,7 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":3,"y":8},
 						},
-					"rare":0.5,"value":8
+					"unlock_from":0.5,"value":8
 					},
 				]
 			},
@@ -554,7 +553,7 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":1,"y":3},
 						},
-					"rare":0,"value":6
+					"unlock_from":0,"value":6
 				},
 				{
 					"stats":{
@@ -563,7 +562,7 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":3,"y":8},
 						},
-					"rare":0.5,"value":8
+					"unlock_from":0.5,"value":8
 					},
 				]
 			},
@@ -577,7 +576,7 @@ var objs={
 						"hp":{"x":0.5,"y":1},
 						"dmg":{"x":0.5,"y":1.5},
 						},
-					"rare":0,"value":7
+					"unlock_from":0,"value":7
 				},
 				{
 					"stats":{
@@ -585,7 +584,7 @@ var objs={
 						"hp":2,
 						"dmg":{"x":1.5,"y":3},
 						},
-					"rare":0.5,"value":9
+					"unlock_from":0.5,"value":9
 					},
 				]
 			},
@@ -601,7 +600,7 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":1,"y":3},
 						},
-					"rare":0,
+					"unlock_from":0,
 					"value":6
 				},
 				{
@@ -612,7 +611,7 @@ var objs={
 						"max_stamina":0.03,
 						"run_speed":{"x":3,"y":8},
 						},
-					"rare":0.5,"value":8
+					"unlock_from":0.5,"value":8
 					},
 				]
 			},
@@ -625,14 +624,14 @@ var objs={
 						"def":{"x":0.1,"y":0.9},
 						"dmg":{"x":0.5,"y":0.9},
 						},
-					"rare":0,"value":10
+					"unlock_from":0,"value":10
 				},
 				{
 					"stats":{
 						"def":{"x":0.9,"y":1.5},
 						"dmg":{"x":1,"y":2},
 						},
-					"rare":0.5,"value":14
+					"unlock_from":0.5,"value":14
 					},
 				]
 			},
@@ -647,7 +646,7 @@ var objs={
 						"def":{"x":0.09,"y":0.5},
 						"dmg":{"x":0.3,"y":0.5},
 						},
-					"rare":0,"value":10
+					"unlock_from":0,"value":10
 				},
 				{
 					"stats":{
@@ -656,7 +655,7 @@ var objs={
 						"def":{"x":0.6,"y":1.3},
 						"dmg":{"x":0.5,"y":1},
 						},
-					"rare":0.5,"value":14
+					"unlock_from":0.5,"value":14
 					},
 				]
 			},
@@ -732,14 +731,6 @@ var objs={
 		#	},
 	}
 }
-
-func get_item(item_name:String,lvl:int):
-	var stats=objs.items[item_name].lvls[lvl]
-	var s=load(objs.items[item_name].scn).instantiate()
-	s.set_stats(stats)
-	fnc.get_hero().get_node("lvls").add_child(s)
-
-
 
 func save_file_data():
 	for e in get_tree().get_nodes_in_group("SN"):

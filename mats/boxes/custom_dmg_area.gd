@@ -13,9 +13,9 @@ func past_think():pass
 func _ready():
 	pre_ready()
 	if autoset:
-		damage=fnc._with_dific(damage,get_tree().current_scene.dif)
-		crit_damage=fnc._with_dific(crit_damage,get_tree().current_scene.dif)
-		crit_chance=fnc._with_dific(crit_chance,get_tree().current_scene.dif)
+		damage=fnc._with_dific(damage,gm.game_prefs.dif)
+		crit_damage=fnc._with_dific(crit_damage,gm.game_prefs.dif)
+		crit_chance=fnc._with_dific(crit_chance,gm.game_prefs.dif)
 	if del_time!=0.0:
 		$t.autostart=true
 		$t.start(del_time)

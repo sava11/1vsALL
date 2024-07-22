@@ -37,7 +37,7 @@ SPEED,movement speed,скорость движения
 COLLECTING,item collecting range,расстояние сбора предметов
 MONEY,money,деньги
 CHP,health,здровье
-CHP_REGEN,healing,выздоровление
+CHP_REGEN,healing,лечение
 CDMG,damage,урон
 CCRIT_DMG,crit. damage,крит. урон
 C%CRIT_DMG,crit. chance,шанс крит. ур.
@@ -47,12 +47,12 @@ CMAX_STAMINA_VALUE,stamina,выносливость
 CSTAMINA_REGEN_VALUE,regen. stamina,восстановление
 CSPEED,move speed,скорость
 CCOLLECTING,collecting,сбор
-CROLL,roll speed,быстрота переката
+CROLL,roll speed,скорость переката
 THE_SWORD_TEXT,sword upgrade,улучшение меча
 ARMOR_TEXT,armor upgrade,улучшение брони
 BOOTS_TEXT,boots upgrade,улучшение обуви
 item1_TEXT,test upgrade. Don't buy it.,тестовое улучшение. Не покупай его.
-PLAYER_ARENA_POS,You,Ты
+
 
 DEF-HP_TEXT,update kit mixed with defance kit and hp kit,набор улучшений совмещённый с набором защиты и набором здоровья
 DEF_TEXT,defance update kit,набор улучшения защиты

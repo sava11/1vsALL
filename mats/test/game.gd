@@ -22,7 +22,7 @@ func _process(delta):
 	$cl/game_ui/status/hp/value/max.text=str(snapped($cl/game_ui/status/hp.max_value,0.01))
 	$cl/game_ui/status/stamina/value/cur.text=str(snapped($cl/game_ui/status/stamina.value,0.01))
 	$cl/game_ui/status/stamina/value/max.text=str(snapped($cl/game_ui/status/stamina.max_value,0.01))
-	$cl/game_ui/status/money.text=str(gm.player_data.stats.money)
+	$cl/game_ui/status/money.text=str(snapped(gm.player_data.stats.money,1))
 	for i in $cl/map.stat_cont.get_children():
 		if i.get_node("item_name").text==tr("MONEY"):
 			i.set_value(snapped(float($cl/game_ui/status/money.text),0.001))
@@ -76,6 +76,10 @@ func _on_pause_location_added(n):
 	cur_loc=n
 	show_lvls(false)
 func to_menu():
+	if $cl/game_ui/death.visible and gm.game_prefs.scripts.traied:
+		gm.game_prefs.seed=randi()
+		fnc.rnd.seed=gm.game_prefs.seed
+		gm.save_file_data()
 	get_tree().set_deferred("paused",false)
 	get_tree().change_scene_to_file("res://game/menu.tscn")
 func exit_from_game():
@@ -92,17 +96,20 @@ func _on_cnt_button_down():
 	$cl/pause.hide()
 	if game_was_paused:
 		get_tree().set_deferred("paused",false)
-
-
-func _on_retry_button_down():
-	for e in $cl/map.map.get_children():
-		e.runned=false
+# если выйти то будет ошибка, потому что нет того элемента куда встраивается генератор уровней
+func _reload_game():
 	if gm.game_prefs.scripts.traied:
-		locs_cont.get_child(0).set_cur_pos(null)
 		gm.game_prefs.seed=randi()
 		fnc.rnd.seed=gm.game_prefs.seed
-		locs_cont.get_child(0).upd()
+		gm.sn.erase(str(locs_cont.get_child(0).get_path()))
+		locs_cont.get_child(0).queue_free()
+		var lg=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
+		locs_cont.add_child(lg)
+		lg.upd()
+		lg.set_cur_pos(null)
 	else:
+		for e in $cl/map/map/cont/locs/map.get_children():
+			e.runned=false
 		$cl/map/map/cont/locs/map.set_cur_pos($cl/map/map/cont/locs/map/place)
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
@@ -112,5 +119,8 @@ func _on_retry_button_down():
 		if ["seed","scripts"].find(e)==-1:
 			gm.game_prefs[e]=temp_data[e]
 	gm.save_file_data()
+
+func _on_retry_button_down():
+	_reload_game()
 	show_lvls()
 	$cl/game_ui/death.hide()

@@ -9,8 +9,6 @@ var vec:Vector2=Vector2.ZERO
 var target=null
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if target==null:
-		target=fnc.get_hero()
 	$c.emitting=true
 	$hirtbox.damage=damage
 	$hirtbox.crit_damage=crit_damage
@@ -24,10 +22,10 @@ func _process(_delta):
 	last_vec=vec
 	var cur_sqrt=(vec-last_vec).normalized()
 	vec=get_linear_velocity()
-	if target==fnc.get_hero():
-		vec=vec.move_toward((target.global_position-global_position).normalized()*speed,acc_speed*_delta)
-	else:
-		vec=vec.move_toward((target.global_position-global_position).normalized()*speed*(fnc._sqrt(target.global_position-global_position)/50),acc_speed*_delta)
+	#if target==fnc.get_hero():
+	vec=vec.move_toward((target.global_position-global_position).normalized()*speed,acc_speed*_delta)
+	#else:
+	#	vec=vec.move_toward((target.global_position-global_position).normalized()*speed*(fnc._sqrt(target.global_position-global_position)/50),acc_speed*_delta)
 	$c.gravity=cur_sqrt*98
 	set_linear_velocity(vec)
 

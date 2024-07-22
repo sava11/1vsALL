@@ -23,6 +23,7 @@ func set_item_rare():
 			#e.visible=e.name.contains("death")
 		#else:
 			#e.visible=!e.name.contains("death")
+			
 func _ready():
 	if !Engine.is_editor_hint():
 		#rand_lvl_gen(50)
@@ -168,6 +169,18 @@ func _on_in_shop():
 		item.stats=shop_items[current_pos][e].stats
 		item.value=shop_items[current_pos][e].val
 		shop.add_child(item)
+
+func _unlocks():
+	var items=[]
+	for i in gm.objs.updates.keys():
+		var obj=gm.objs.updates[i]
+		for lvl in obj.lvls.keys():
+			var lvl_data=obj.lvls[lvl]
+			if item_rare>=lvl_data.unlock_from:
+				items.append([i,lvl])
+	return items
+		
+
 func _on_shop_exit_down():
 	$map.show()
 	$shop.hide()

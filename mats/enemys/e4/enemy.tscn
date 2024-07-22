@@ -1331,12 +1331,9 @@ tracks/2/path = NodePath("./attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.8),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"aiming"
-}, {
 "args": [],
 "method": &"throw"
 }]

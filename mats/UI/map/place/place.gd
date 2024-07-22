@@ -27,7 +27,7 @@ var last_player_here:bool=false
 @export var local_difficulty_add_step:float=0
 @export_subgroup("statuses")
 @export var arena:arena_action
-@export var shop:shop_action
+@export var shop:bool=false
 @export_group("place")
 @export var ingame_statuses:Array[ingame_status]
 @export var neighbors:Array[place]
@@ -62,7 +62,7 @@ func load_data(n:Dictionary):
 var t:=false
 func img_think():
 	if !player_here and !secret:
-		if shop!=null:
+		if shop:
 			$visual.texture=preload("res://mats/UI/map/imgs/shop.png")
 			if arena!=null and !runned:
 				original=boss_color
@@ -146,10 +146,10 @@ func _process(delta):
 			cancel()
 		
 		last_player_here=player_here
-	if shop!= null and !shop_changed:
+	if shop and !shop_changed:
 		img_think()
 		shop_changed=true
-	if shop==null and shop_changed:
+	if !shop and shop_changed:
 		img_think()
 		shop_changed=false
 	if arena!= null and !arena_changed:
@@ -193,7 +193,7 @@ func _on_button_down():
 					place_panel_node.add_item(load(gm.objs.stats[e.status].i),
 					tr(gm.objs.stats[e.status].ct),e.value,gm.objs.stats[e.status].postfix)
 			place_panel_node.connect_to(self,"play","cancel")
-		elif shop!=null:
+		elif shop:
 			create_panel()
 			runned=true
 			place_panel_node.connect_to(self,"to_shop","shop_cancel")
@@ -206,7 +206,7 @@ func _on_button_down():
 			if map!=null:
 				map.upd_by_sts()
 	else:
-		if shop!=null:
+		if shop:
 			create_panel()
 			runned=true
 			place_panel_node.connect_to(self,"to_shop","shop_cancel")

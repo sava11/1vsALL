@@ -39,10 +39,11 @@ func summon():
 				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
-					"elite":fnc._with_chance(0.1)
+					"elite":fnc._with_chance(0.1),
+					"target":get_parent().get("target")
 				}
 				en.global_position=pos
-				get_tree().current_scene.enemy_path.add_child(en)
+				fnc.get_world_node().get_child(0).add_child(en)
 		1:
 			var spwn_ang=360
 			var ang1=spwn_ang/float(count)
@@ -56,17 +57,19 @@ func summon():
 				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
-					"elite":fnc._with_chance(0.1)
+					"elite":fnc._with_chance(0.1),
+					"target":get_parent().get("target")
 				}
 				en.global_position=pos
-				get_tree().current_scene.enemy_path.add_child(en)
+				fnc.get_world_node().get_child(0).add_child(en)
 		2:
 			var ang=360.0/float(count)
 			for i in range(count):
 				var e=custom_scene.instantiate()
+				custom_data.merge({"target":get_parent().get("target")})
 				fnc.setter(e,custom_data)
 				if auto_rotate:
 					e.rotation_degrees=ang*i+global_rotation_degrees+rotate_offset
 				e.set_deferred("global_position",global_position+fnc.move(rotation_degrees+ang*i)*custom_summon_radius)
-				get_tree().current_scene.ememys_path.add_child(e)
+				fnc.get_world_node().get_child(0).add_child(e)
 	pass

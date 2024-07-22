@@ -1554,7 +1554,6 @@ stop_range_from = 20.0
 stop_range_to = 30.0
 
 [node name="attack" parent="." instance=ExtResource("28_qgx7q")]
-monitoring = false
 monitorable = false
 attack_name = "a1"
 attack_anim_name = "attack"

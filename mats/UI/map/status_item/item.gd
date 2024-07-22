@@ -1,3 +1,4 @@
+@tool
 extends HBoxContainer
 @export var view:=false
 @onready var img=$img
@@ -8,11 +9,23 @@ extends HBoxContainer
 @export var min_value=0
 @export var max_value=0
 @export var value=0
+
 func _ready():
+	upd()
+	set_process(Engine.is_editor_hint())
+		
+func _process(delta):
+	upd()
+func upd():
 	if view: 
 		iname.hide()
 		iname.size_flags_horizontal=1
-		img.size_flags_horizontal=2
+		img.size_flags_horizontal=1
+	else:
+		iname.show()
+		iname.size_flags_horizontal=2
+		img.size_flags_horizontal=1
+	vle.text=str(value)
 func set_tooltip(tt:String):
 	tooltip_text=tt
 func set_image(texture:Texture2D):

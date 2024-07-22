@@ -23,7 +23,7 @@ func set_cur_pos(pos:place):
 		current_pos=pos
 	else:
 		var ps=pos
-		while ps==null or ps.shop!=null or (ps.arena!=null and ps.arena.has_bosses()):
+		while ps==null or ps.shop or (ps.arena!=null and ps.arena.has_bosses()):
 			ps=get_children()[fnc.rnd.randi_range(0,get_child_count()-1)]
 		current_pos=ps
 	current_pos.runned=true
@@ -100,10 +100,12 @@ func _ready():
 				)
 			e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
 	_post_ready()
+
 	set_cur_pos(current_pos)
+
 	var t2=Time.get_time_dict_from_system()
-	#print(t2.minute*60+t2.second-t1.minute*60-t1.second)
-	#print("map_created")
+	print(t2.minute*60+t2.second-t1.minute*60-t1.second)
+	print("map_created")
 
 func _pre_process(delta):pass
 func _post_process(delta):pass
