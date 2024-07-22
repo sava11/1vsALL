@@ -27,7 +27,7 @@ var last_player_here:bool=false
 @export var local_difficulty_add_step:float=0
 @export_subgroup("statuses")
 @export var arena:arena_action
-@export var shop:bool=false
+@export var shop:=false
 @export_group("place")
 @export var ingame_statuses:Array[ingame_status]
 @export var neighbors:Array[place]

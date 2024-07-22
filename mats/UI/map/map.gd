@@ -135,28 +135,27 @@ func get_item_lvl(item_name,rare):
 func _on_in_shop():
 	for e in shop.get_children():
 		e.queue_free()
-	var all_items=gm.objs["updates"].duplicate()
-	var items_names=all_items.keys()
+	var all_items=_unlocks()
+	var items_names=all_items
 	if shop_items[current_pos].has(""):
 		shop_items[current_pos].erase("")
 		for e in range(shop.columns):
-			var n=all_items.keys()[fnc.rnd.randi_range(0,all_items.size()-1)]
-			var item_lvl=get_item_lvl(n,item_rare)
-			var sd=gm.objs.updates[n]
-			var v=fnc._with_dific(sd["lvls"][item_lvl].value,fnc.rnd.randf_range(sd["lvls"][item_lvl].rare.x+gm.game_prefs.dif,sd["lvls"][item_lvl].rare.y+gm.game_prefs.dif))
+			var n=all_items[fnc.rnd.randi_range(0,all_items.size()-1)]
+			var sd=gm.objs.updates[n[0]]
+			#var v=fnc._with_dific(sd.lvls[n[1]].value,sd.lvls[n[1]].unlock_from+gm.game_prefs.dif)
 			#updates.merge({n+"/"+str(e):})
 			#добавить случайные значения
-			var c_stats=sd["lvls"][item_lvl].stats.duplicate(true)
-			for e1 in sd["lvls"][item_lvl].stats:
-				if typeof(sd["lvls"][item_lvl].stats[e1])==TYPE_DICTIONARY:
-					var l=max(len(str(sd["lvls"][item_lvl].stats[e1].x))-2,len(str(sd["lvls"][item_lvl].stats[e1].y))-2)
+			var c_stats=sd.lvls[n[1]].stats.duplicate(true)
+			for e1 in sd.lvls[n[1]].stats:
+				if typeof(sd.lvls[n[1]].stats[e1])==TYPE_DICTIONARY:
+					var l=max(len(str(sd.lvls[n[1]].stats[e1].x))-2,len(str(sd.lvls[n[1]].stats[e1].y))-2)
 					var t=0.0
-					if typeof(sd["lvls"][item_lvl].stats[e1].x)!=TYPE_INT or typeof(sd["lvls"][item_lvl].stats[e1].y)!=TYPE_INT:
-						t=snapped(fnc.rnd.randf_range(sd["lvls"][item_lvl].stats[e1].x,sd["lvls"][item_lvl].stats[e1].y),pow(10,-l))
+					if typeof(sd.lvls[n[1]].stats[e1].x)!=TYPE_INT or typeof(sd.lvls[n[1]].stats[e1].y)!=TYPE_INT:
+						t=snapped(fnc.rnd.randf_range(sd.lvls[n[1]].stats[e1].x,sd.lvls[n[1]].stats[e1].y),pow(10,-l))
 					else:
-						t=fnc.rnd.randi_range(sd["lvls"][item_lvl].stats[e1].x,sd["lvls"][item_lvl].stats[e1].y)
+						t=fnc.rnd.randi_range(sd.lvls[n[1]].stats[e1].x,sd.lvls[n[1]].stats[e1].y)
 					c_stats[e1]=t
-			shop_items[current_pos].merge({n+"/"+str(e):{"lvl":item_lvl,"stats":c_stats,"val":fnc._with_dific(get_end_price(c_stats),gm.game_prefs.dif)}})
+			shop_items[current_pos].merge({n[0]+"/"+str(e):{"lvl":n[1],"stats":c_stats,"val":fnc._with_dific(get_end_price(c_stats),gm.game_prefs.dif)}})
 			
 	$map.hide()
 	$shop.show()
@@ -174,9 +173,8 @@ func _unlocks():
 	var items=[]
 	for i in gm.objs.updates.keys():
 		var obj=gm.objs.updates[i]
-		for lvl in obj.lvls.keys():
-			var lvl_data=obj.lvls[lvl]
-			if item_rare>=lvl_data.unlock_from:
+		for lvl in range(obj.lvls.size()):
+			if item_rare>=obj.lvls[lvl].unlock_from:
 				items.append([i,lvl])
 	return items
 		
@@ -189,14 +187,7 @@ func _on_shop_exit_down():
 		current_pos.runned=true
 	for e in shop.get_children():
 		e.queue_free()
-func _upd_items_values():
-	for shop in shop_items.keys():
-		if !shop_items[shop].has("") and !shop_items[shop].is_empty():
-			for n in shop_items[shop].keys():
-				var item_lvl=shop_items[shop][n].lvl#get_item_lvl(, shop_items[shop])
-				var sd=gm.objs.updates[n.split("/")[0]]["lvls"][item_lvl]
-				var v=fnc._with_dific(sd.value,fnc.rnd.randf_range(sd.rare.x+gm.game_prefs.dif,sd.rare.y+gm.game_prefs.dif))
-				shop_items[shop][n].val=v
+
 func get_end_price(sts:Dictionary):
 	var p=0.0
 	for e in sts.keys():

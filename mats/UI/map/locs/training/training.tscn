@@ -1,11 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://lfervjgmrcn8"]
+[gd_scene load_steps=19 format=3 uid="uid://lfervjgmrcn8"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/training/training.gd" id="1_1vgx1"]
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/map/place/place.tscn" id="2_uri1g"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_enemys_data.gd" id="3_s17os"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/arena.gd" id="4_gl7wn"]
 [ext_resource type="Script" path="res://mats/UI/map/statuses/ingame_status.gd" id="5_e34vk"]
-[ext_resource type="Script" path="res://mats/UI/map/actions/shop/shop.gd" id="6_cvgou"]
 
 [sub_resource type="Resource" id="Resource_outis"]
 script = ExtResource("3_s17os")
@@ -63,13 +62,6 @@ enemys_count_max = 18
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
 
-[sub_resource type="Resource" id="Resource_r8r2q"]
-script = ExtResource("6_cvgou")
-items = Array[Resource("res://mats/UI/map/actions/shop/items/item_data.gd")]([])
-count_min = 4
-count_max = 4
-rarity = 0.0
-
 [sub_resource type="Resource" id="Resource_d4xrw"]
 script = ExtResource("3_s17os")
 name = "sk_sw"
@@ -107,12 +99,14 @@ script = ExtResource("1_1vgx1")
 current_pos = NodePath("place0")
 
 [node name="place0" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+shop = false
 neighbors = [NodePath("../place1")]
 
 [node name="place1" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 48.0
 offset_right = 64.0
 arena = SubResource("Resource_udkax")
+shop = false
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_cvj4s"), SubResource("Resource_gvf2v"), SubResource("Resource_ucglk"), SubResource("Resource_yrem4")])
 neighbors = [NodePath("../place2")]
 
@@ -120,25 +114,28 @@ neighbors = [NodePath("../place2")]
 offset_left = 96.0
 offset_right = 112.0
 arena = SubResource("Resource_bqu0m")
-shop = SubResource("Resource_r8r2q")
+shop = true
 neighbors = [NodePath("../place1"), NodePath("../place3")]
 
 [node name="place3" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 144.0
 offset_right = 160.0
 arena = SubResource("Resource_g8yoc")
+shop = false
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_5snhk")])
 neighbors = [NodePath("../place2"), NodePath("../place4")]
 
 [node name="place4" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 192.0
 offset_right = 208.0
+shop = false
 neighbors = [NodePath("../place3"), NodePath("../place5")]
 
 [node name="place5" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 240.0
 offset_right = 256.0
 secret = true
+shop = false
 neighbors = [NodePath("../place4")]
 
 [connection signal="player_in" from="place0" to="." method="start_dialog"]
