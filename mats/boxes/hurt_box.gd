@@ -83,7 +83,6 @@ func _on_area_entered(area):
 	else:
 		var dmg=area.damage
 		if fnc._with_chance(area.crit_chance):
-			print(area.crit_chance)
 			dmg+=area.crit_damage
 			if area.crit_chance>=1:
 				dmg*=area.crit_chance

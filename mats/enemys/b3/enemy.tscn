@@ -1681,8 +1681,9 @@ count = 12
 type = 1
 
 [node name="drop" parent="." instance=ExtResource("4_0rcjp")]
+money_drop_percent = 0.3
 money_drop_from = 2
-money_drop_to = 5
+money_drop_to = 6
 
 [node name="boss_mark" parent="." instance=ExtResource("5_jgfj0")]
 

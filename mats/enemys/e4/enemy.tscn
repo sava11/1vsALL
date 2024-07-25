@@ -32,7 +32,7 @@ radius = 4.12311
 [sub_resource type="CircleShape2D" id="CircleShape2D_q1cby"]
 radius = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dia3y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djtjx"]
 shader = ExtResource("6_8n5mw")
 shader_parameter/line_color = Color(1, 0.301961, 0, 1)
 shader_parameter/line_thickness = 1.0
@@ -1481,6 +1481,7 @@ attack_anim_name = "attack"
 attack_range = 200.0
 
 [node name="drop" parent="." instance=ExtResource("5_3kdqb")]
+money_drop_percent = 0.025
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_q1cby")
@@ -1497,7 +1498,7 @@ collision_mask = 9
 [node name="visual" type="Node2D" parent="."]
 
 [node name="sp" type="AnimatedSprite2D" parent="visual"]
-material = SubResource("ShaderMaterial_dia3y")
+material = SubResource("ShaderMaterial_djtjx")
 sprite_frames = SubResource("SpriteFrames_f4qu2")
 animation = &"run_down"
 offset = Vector2(0, -15)

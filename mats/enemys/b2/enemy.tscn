@@ -2268,6 +2268,9 @@ hp_to = 6.5
 [node name="stages" parent="." instance=ExtResource("3_0rsdy")]
 
 [node name="drop" parent="." instance=ExtResource("4_31ryj")]
+money_drop_percent = 0.5
+money_drop_from = 3
+money_drop_to = 10
 
 [node name="summon" parent="." instance=ExtResource("5_psr2t")]
 do_name = "s"

@@ -99,14 +99,12 @@ script = ExtResource("1_1vgx1")
 current_pos = NodePath("place0")
 
 [node name="place0" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
-shop = false
 neighbors = [NodePath("../place1")]
 
 [node name="place1" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 48.0
 offset_right = 64.0
 arena = SubResource("Resource_udkax")
-shop = false
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_cvj4s"), SubResource("Resource_gvf2v"), SubResource("Resource_ucglk"), SubResource("Resource_yrem4")])
 neighbors = [NodePath("../place2")]
 
@@ -121,21 +119,18 @@ neighbors = [NodePath("../place1"), NodePath("../place3")]
 offset_left = 144.0
 offset_right = 160.0
 arena = SubResource("Resource_g8yoc")
-shop = false
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_5snhk")])
 neighbors = [NodePath("../place2"), NodePath("../place4")]
 
 [node name="place4" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 192.0
 offset_right = 208.0
-shop = false
 neighbors = [NodePath("../place3"), NodePath("../place5")]
 
 [node name="place5" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 240.0
 offset_right = 256.0
 secret = true
-shop = false
 neighbors = [NodePath("../place4")]
 
 [connection signal="player_in" from="place0" to="." method="start_dialog"]

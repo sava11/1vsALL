@@ -2031,8 +2031,8 @@ active = true
 
 [node name="drop" parent="." instance=ExtResource("33_jy4xr")]
 money_drop_percent = 1.0
-money_drop_from = 3
-money_drop_to = 5
+money_drop_from = 5
+money_drop_to = 7
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered"]
 [connection signal="area_exited" from="hurt_box" to="hurt_box" method="_on_area_exited"]

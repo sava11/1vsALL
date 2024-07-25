@@ -76,6 +76,7 @@ layout_mode = 2
 text = "88"
 
 [node name="seed" type="HBoxContainer" parent="data/cont"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 

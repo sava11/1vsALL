@@ -20,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gyvyj")
 script = ExtResource("1_3h318")
+global_difficulty_add_step = null
 
 [node name="tr" type="TextureRect" parent="."]
 layout_mode = 1

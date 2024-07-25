@@ -1203,6 +1203,7 @@ libraries = {
 }
 
 [node name="drop" parent="." instance=ExtResource("22_p8e2y")]
+money_drop_percent = 0.025
 
 [node name="see" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)

@@ -15,7 +15,6 @@ offset_right = 16.0
 offset_bottom = 16.0
 script = ExtResource("1_gkxwn")
 level = "res://mats/lvls/lvl1/lvl1_1.tscn"
-shop = null
 unactive = 0.7
 arena_color = Color(1, 1, 1, 1)
 player_color = Color(0.631373, 0.8, 1, 1)

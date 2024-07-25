@@ -1,5 +1,10 @@
 extends "res://mats/UI/map/locs/map_aditional_script_tamplate.gd"
 signal map_generated
+func get_rare()->float:
+	var runned:int
+	for e in get_children():
+		runned+=int(e.runned)
+	return float(runned)/float(get_child_count())
 func data_to_save():
 	var pos=[]
 	for e in exceptions:
@@ -13,14 +18,14 @@ func data_to_load(n:Dictionary):
 		exceptions.append(Vector2(e[0],e[1]))
 var col=25
 var row=25
+const distance_betveen_nodes=32
 var max_neighbors=[0,0.3,0.6,0.05,0.05]
 var neighbors:=[]
 var exceptions:=[]
-var bosses_pos=[]
+var bosses_pos:Array[place]=[]
 func _pre_ready():
-	#fnc.rnd.seed=0
 	upd()
-#создать возможномть телепорта к аренам которые не соеденены
+
 func upd():
 	if exceptions.is_empty() and neighbors.is_empty():
 		var place_count=fnc.rnd.randi_range(col*row/2,col*row)
@@ -69,10 +74,10 @@ func create_arena():
 func gen_map_v1(positions,neighbors):
 	for e in positions:
 		var scn:place=preload("res://mats/UI/map/place/place.tscn").instantiate()
-		scn.position=e*48#16+32
+		scn.position=e*(fnc._sqrt(scn.size)+distance_betveen_nodes)#16+32
 		scn.choice_panel_showed.connect(Callable(self,"set_ingame_stats").bind(scn))
 		var shop_chance=fnc._with_chance(0.1)
-		scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.2)
+		scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.5)
 		if shop_chance:
 			scn.shop=true
 			if fnc._with_chance(0.25):
@@ -118,7 +123,7 @@ func gen_map_v1(positions,neighbors):
 		))
 		var node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
 		place_with_bosses.append(node)
-		bosses_pos.append(node.position+node.size/2)
+		bosses_pos.append(node)
 		node.arena.enemys.append(bd)
 		bosses.remove_at(0)
 		
@@ -164,23 +169,63 @@ func gen_map_v1(positions,neighbors):
 	#print(glob_lengts)
 	#gm.save_file_data()
 
+#func set_ingame_stats(_place:place):
+	#if _place.ingame_statuses.is_empty():
+		#var a:Array[ingame_status]=[]
+		#var keys:Array=gm.player_data.stats.keys()
+		#var unlocked_data=[]
+		#for e in range(fnc._with_chance_ulti([0.05,0.4,0.35,0.2])):
+			##var i_s=ingame_status.new()
+			##i_s.status=keys.pick_random()
+			#var stat_data:Dictionary=gm.objs.stats[i_s.status]
+			##"v":{
+			##	0:{"v":{"x":1,"y":2},"%":0,},
+			#print(stat_data)
+			#if stat_data.has("v") and stat_data.has("-v"):
+				#var choiced:=[]
+				#var t="-v"
+				#if fnc._with_chance(0.5):
+					#t="v"
+				#for x in stat_data[t].keys():
+					#print(x," ",stat_data[t][x])
+					#if stat_data[t][x]["%"]<=get_rare():
+						#choiced.append(x)
+				#print(choiced)
+				#var rnd_lvl=choiced.pick_random()
+				##var v_keys:Array=stat_data["v"].keys()
+				##var mv_keys:Array=stat_data["-v"].keys()
+				#var min=stat_data[t][rnd_lvl].v.x
+				#var max=stat_data[t][rnd_lvl].v.y
+				#i_s.value=snapped(fnc.rnd.randf_range(min,max),0.001)
+			#else:
+				#i_s.value=fnc.rnd.randi_range(1,5)
+			#a.append(i_s)
+		#_place.ingame_statuses=a
 func set_ingame_stats(_place:place):
 	if _place.ingame_statuses.is_empty():
 		var a:Array[ingame_status]=[]
 		var keys:Array=gm.player_data.stats.keys()
-		for e in range(fnc._with_chance_ulti([0.05,0.4,0.35,0.2])):
+		for e in range(fnc._with_chance_ulti([0.05,0.3,0.35,0.2,0.1])):
 			var i_s=ingame_status.new()
 			i_s.status=keys.pick_random()
 			var stat_data:Dictionary=gm.objs.stats[i_s.status]
 			if stat_data.has("v") and stat_data.has("-v"):
-				var v_keys:Array=stat_data.v.keys()
+				var v_keys:Array=stat_data["v"].keys()
 				var mv_keys:Array=stat_data["-v"].keys()
-				var min=stat_data["-v"][mv_keys[0]].v.x
-				var max=stat_data.v[v_keys[v_keys.size()-1]].v.y
+				var min=0
+				var max=0
+				if fnc._with_chance(0.5):
+					min=stat_data["v"][mv_keys[0]].v.x
+					max=stat_data["v"][v_keys[v_keys.size()-1]].v.y
+				else:
+					min=stat_data["-v"][mv_keys[0]].v.x
+					max=stat_data["-v"][v_keys[v_keys.size()-1]].v.y
+					
 				i_s.value=snapped(fnc.rnd.randf_range(min,max),0.001)
 			else:
 				i_s.value=fnc.rnd.randi_range(1,5)
 			a.append(i_s)
+			keys.remove_at(keys.find(i_s.status))
 		_place.ingame_statuses=a
 
 func _pre_process(delta):
@@ -189,4 +234,10 @@ func _pre_process(delta):
 func _draw():
 	if current_pos!=null:
 		for p in bosses_pos:
-			draw_line(current_pos.position+current_pos.size/2,p,Color(1,0.5,0.5),5)
+			var bosses_killed=true
+			for e in p.arena.get_bosses():
+				if !e.die:
+					bosses_killed=false
+					break
+			if bosses_killed:
+				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,Color(1,0.5,0.5),5)

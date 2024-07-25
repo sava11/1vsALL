@@ -2077,6 +2077,9 @@ target_position = Vector2(0, 0)
 collision_mask = 9
 
 [node name="drop" parent="." instance=ExtResource("3_2sana")]
+money_drop_percent = 0.2
+money_drop_from = 5
+money_drop_to = 8
 
 [node name="boss_mark" parent="." instance=ExtResource("4_mawdm")]
 

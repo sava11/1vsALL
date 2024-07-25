@@ -14,6 +14,7 @@ func _ready():
 	show_lvls()
 
 func _process(delta):
+	$cl/game_ui/status/dif.text="dif. "+str(gm.game_prefs.dif)
 	$cl/game_ui/status/stamina.max_value=gm.player_data.stats["max_stamina"]
 	$cl/game_ui/status/stamina.value=gm.player_data.prefs["cur_stm"]
 	$cl/game_ui/status/hp.max_value=gm.player_data.stats["hp"]
@@ -98,15 +99,16 @@ func _on_cnt_button_down():
 		get_tree().set_deferred("paused",false)
 # если выйти то будет ошибка, потому что нет того элемента куда встраивается генератор уровней
 func _reload_game():
+	gm.player_data=gm.start_player_data.duplicate(true)
 	if gm.game_prefs.scripts.traied:
 		gm.game_prefs.seed=randi()
 		fnc.rnd.seed=gm.game_prefs.seed
+		
 		gm.sn.erase(str(locs_cont.get_child(0).get_path()))
+		locs_cont.get_child(0).name+="_deled"
 		locs_cont.get_child(0).queue_free()
 		var lg=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
 		locs_cont.add_child(lg)
-		lg.upd()
-		lg.set_cur_pos(null)
 	else:
 		for e in $cl/map/map/cont/locs/map.get_children():
 			e.runned=false
@@ -122,5 +124,7 @@ func _reload_game():
 
 func _on_retry_button_down():
 	_reload_game()
+	for e in $cl/game_ui/st.get_children():
+		e.queue_free()
 	show_lvls()
 	$cl/game_ui/death.hide()
