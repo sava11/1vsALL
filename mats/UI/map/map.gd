@@ -95,15 +95,16 @@ func upd_by_sts():
 				i.set_value(gm.player_data.stats[e],gm.objs.stats[e].postfix)
 
 func level_completed(n:place):
-	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step*int(n.local_difficulty_add_step==0)
+	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step
 	#if gm.game_prefs.dif<0.5:
 		#gm.game_prefs.dif=0.5
 	n.runned=true
 	var temp_d={}
 	for e in n.ingame_statuses:
-		temp_d.merge({e.status:e.value})
-	if n.arena!=null and n.arena.has_bosses():
-		for e in n.arena.get_bosses():
+		if e.status!="":
+			temp_d.merge({e.status:e.value})
+	#if n.arena!=null and n.arena.has_bosses():
+		#for e in n.arena.get_bosses():
 	gm.merge_stats(temp_d)
 	upd_by_sts()
 	gm.player_data.in_action=""

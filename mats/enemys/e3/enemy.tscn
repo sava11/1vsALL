@@ -1594,6 +1594,7 @@ collision_mask = 9
 material = SubResource("ShaderMaterial_q77wr")
 sprite_frames = SubResource("SpriteFrames_fysaw")
 animation = &"attack_down"
+frame = 9
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="visual"]

@@ -67,6 +67,8 @@ func set_cur_pos(pos:place):
 					#_lvl_.enemys_data=ed
 					#
 			#))
+		set_ingame_stats(cur_place)
+		
 		cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1) and !corned_
 	gm.save_file_data()
 	emit_signal("player_position_changed",current_pos)
@@ -206,3 +208,32 @@ func is_on_corner(data:Array[place],to:place):
 		#print(res)
 		return res
 	return false
+
+func set_ingame_stats(_place:place):
+	if _place.ingame_statuses.is_empty():
+		var a:Array[ingame_status]=[]
+		var keys:Array=gm.player_data.stats.keys()
+		for e in range(fnc._with_chance_ulti([0.05,0.3,0.35,0.2,0.1])):
+			var i_s=ingame_status.new()
+			i_s.status=keys.pick_random()
+			var stat_data:Dictionary=gm.objs.stats[i_s.status]
+			if stat_data.has("v") and stat_data.has("-v"):
+				var v_keys:Array=stat_data["v"].keys()
+				var mv_keys:Array=stat_data["-v"].keys()
+				var min=0
+				var max=0
+				if fnc._with_chance(0.5):
+					min=stat_data["v"][mv_keys[0]].v.x
+					max=stat_data["v"][v_keys[v_keys.size()-1]].v.y
+				else:
+					min=stat_data["-v"][mv_keys[0]].v.x
+					max=stat_data["-v"][v_keys[v_keys.size()-1]].v.y
+					
+				i_s.value=snapped(fnc.rnd.randf_range(min,max),0.001)
+			else:
+				i_s.value=fnc.rnd.randi_range(1,5)
+			a.append(i_s)
+			keys.remove_at(keys.find(i_s.status))
+		if a.is_empty():
+			a.append(ingame_status.new())
+		_place.ingame_statuses=a

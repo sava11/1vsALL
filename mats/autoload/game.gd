@@ -329,7 +329,7 @@ var objs={
 			"i":images.icons.stats.hp,
 			"t":"HP",
 			"ct":"CHP",
-			"price":3.5
+			"price":6.2
 			},
 		"hp_regen":{
 			"postfix":"",
@@ -349,7 +349,7 @@ var objs={
 			"i":images.icons.stats.hp_regen,
 			"t":"HP_REGEN",
 			"ct":"CHP_REGEN",
-			"price":4
+			"price":7.8
 			},
 		"dmg":{
 			"postfix":"",
@@ -369,7 +369,7 @@ var objs={
 			"i":images.icons.stats.dmg,
 			"t":"DMG",
 			"ct":"CDMG",
-			"price":5
+			"price":6.7
 			},
 		"crit_dmg":{
 			"postfix":"",
@@ -389,7 +389,7 @@ var objs={
 			"i":images.icons.stats["crit_dmg"],
 			"t":"CRIT_DMG",
 			"ct":"CCRIT_DMG",
-			"price":3.5
+			"price":7.5
 			},
 		"%crit_dmg":{
 			"postfix":"%",
@@ -409,7 +409,7 @@ var objs={
 			"i":images.icons.stats["%crit_dmg"],
 			"t":"%CRIT_DMG",
 			"ct":"C%CRIT_DMG",
-			"price":4
+			"price":8
 			},
 		"def":{
 			"postfix":"",
@@ -429,7 +429,7 @@ var objs={
 			"i":images.icons.stats.def,
 			"t":"DEF",
 			"ct":"CDEF",
-			"price":5.5
+			"price":9.5
 			},
 		"max_stamina":{
 			"postfix":"",
@@ -469,7 +469,7 @@ var objs={
 			"i":images.icons.stats.regen_stamina_point,
 			"t":"STAMINA_REGEN_VALUE",
 			"ct":"CSTAMINA_REGEN_VALUE",
-			"price":4.2
+			"price":7.2
 			},
 		"take_area":{
 			"postfix":"",

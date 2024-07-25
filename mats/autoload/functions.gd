@@ -1,6 +1,11 @@
 extends Node
 
-var rnd=RandomNumberGenerator.new()
+var rnd:=RandomNumberGenerator.new()
+var state:=0
+func load_rnd_state():
+	rnd.state=state
+func rnd_save_state():
+	state=rnd.state
 func get_world_node():
 	return get_tree().current_scene.get_node("world")
 func get_camera():
