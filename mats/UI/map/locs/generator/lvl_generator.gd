@@ -68,8 +68,8 @@ func create_arena():
 			ens.append(enemy)
 		return ens).call()
 	arena.enemys=enemys
-	arena.enemys_count_min=fnc.rnd.randi_range(4,18)
-	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,18)
+	arena.enemys_count_min=fnc.rnd.randi_range(4,7)
+	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,12)
 	return arena
 func gen_map_v1(positions,neighbors):
 	for e in positions:

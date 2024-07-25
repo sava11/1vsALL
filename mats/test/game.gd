@@ -47,14 +47,14 @@ func show_lvls(b:bool=true):
 		$world.hide()
 		$cl/game_ui.hide()
 		$cl/map.show()
-		#$asp_think.play()
-		#$asp_fight.stop()
+		$asp_think.play()
+		$asp_fight.stop()
 	else:
 		$world.show()
 		$cl/game_ui.show()
 		$cl/map.hide()
-		#$asp_think.stop()
-		#$asp_fight.play()
+		$asp_think.stop()
+		$asp_fight.play()
 	get_tree().set_deferred("paused",b)
 
 func start_sound_fight():
