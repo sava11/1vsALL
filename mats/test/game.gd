@@ -129,3 +129,5 @@ func _on_retry_button_down():
 		e.queue_free()
 	show_lvls()
 	$cl/game_ui/death.hide()
+func game_ended():
+	print("ended")

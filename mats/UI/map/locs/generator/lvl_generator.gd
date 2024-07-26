@@ -1,5 +1,6 @@
 extends "res://mats/UI/map/locs/map_aditional_script_tamplate.gd"
 signal map_generated
+signal game_ended
 func get_rare()->float:
 	var runned:int
 	for e in get_children():
@@ -24,6 +25,7 @@ var neighbors:=[]
 var exceptions:=[]
 var bosses_pos:Array[place]=[]
 func _pre_ready():
+	game_ended.connect(Callable(get_tree().current_scene,"game_ended"))
 	upd()
 
 func upd():
@@ -202,17 +204,17 @@ func gen_map_v1(positions,neighbors):
 				#i_s.value=fnc.rnd.randi_range(1,5)
 			#a.append(i_s)
 		#_place.ingame_statuses=a
-
 func _pre_process(delta):
 	queue_redraw()
 
 func _draw():
 	if current_pos!=null:
+		var i:=0
 		for p in bosses_pos:
-			var bosses_killed=true
-			for e in p.arena.get_bosses():
-				if e.die:
-					bosses_killed=false
-					break
-			if bosses_killed:
+			if !p.runned:
 				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,Color(1,0.5,0.5),5)
+			else:
+				i+=1
+		if i==bosses_pos.size():
+			set_process(false)
+			emit_signal("game_ended")

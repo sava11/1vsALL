@@ -103,8 +103,6 @@ func level_completed(n:place):
 	for e in n.ingame_statuses:
 		if e.status!="":
 			temp_d.merge({e.status:e.value})
-	#if n.arena!=null and n.arena.has_bosses():
-		#for e in n.arena.get_bosses():
 	gm.merge_stats(temp_d)
 	upd_by_sts()
 	gm.player_data.in_action=""
