@@ -3,12 +3,12 @@ extends "res://mats/contents/base/charter_tamplate.gd"
 @export_group("fierball stats")
 @export_subgroup("damage")
 @export var static_damage:bool=false
-@export_range(1,999999999) var damage_from:float=1.0
-@export_range(1,999999999) var damage_to:float=2.0
+@export_range(0,999999999) var damage_from:float=1.0
+@export_range(0,999999999) var damage_to:float=2.0
 @export_subgroup("crit_damage")
 @export var static_crit:bool=false
-@export_range(1,999999999) var crit_damage_from:float=1.0
-@export_range(1,999999999) var crit_damage_to:float=4.0
+@export_range(0,999999999) var crit_damage_from:float=1.0
+@export_range(0,999999999) var crit_damage_to:float=4.0
 @export_subgroup("crit_chance")
 @export var static_crit_chance:bool=false
 @export_range(0.0,1.0) var crit_chance_from:float=0

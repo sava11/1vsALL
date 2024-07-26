@@ -1029,6 +1029,7 @@ custom_integrator = true
 contact_monitor = true
 script = ExtResource("1_thpiq")
 stop_range_to = 200.0
+hp_to = 1.8
 
 [node name="see" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)

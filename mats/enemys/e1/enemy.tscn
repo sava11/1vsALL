@@ -1161,6 +1161,7 @@ contact_monitor = true
 script = ExtResource("1_af4n4")
 stop_range_from = 15.0
 stop_range_to = 20.0
+hp_to = 1.95
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
@@ -1174,7 +1175,6 @@ shape = SubResource("CircleShape2D_stnea")
 [node name="Timer" type="Timer" parent="hurt_box"]
 
 [node name="attack" parent="." instance=ExtResource("3_k0fp7")]
-monitoring = false
 monitorable = false
 attack_name = "a1"
 attack_anim_name = "attack"
@@ -1194,6 +1194,7 @@ avoidance_enabled = true
 material = SubResource("ShaderMaterial_kbboe")
 sprite_frames = SubResource("SpriteFrames_0vqqq")
 animation = &"attack_down"
+frame = 7
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="visual"]

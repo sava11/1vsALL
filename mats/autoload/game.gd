@@ -10,7 +10,7 @@ signal save_data_changed(dict:Dictionary)
 enum dificulty{easy,norm,hard}
 enum gameplay_type{clasic,bossrush,inf,train}
 var cur_gameplay_type=gameplay_type.clasic
-var cur_dif=dificulty.easy
+var cur_dif=dificulty.norm
 enum ivents{none,arena,upg_arena,boss_arena,stats_map,shop}
 var cur_font="Puzzle-Tale-Pixel"
 const fonts={
@@ -290,7 +290,7 @@ var objs={
 			"i":images.icons.stats["rsp"],
 			"t":"ROLL",
 			"ct":"CROLL",
-			"price":2.5},
+			"price":9.5},
 		"run_speed":{
 			"postfix":"",
 			"v":{
@@ -309,7 +309,7 @@ var objs={
 			"i":images.icons.stats["%sp"],
 			"t":"SPEED",
 			"ct":"CSPEED",
-			"price":2.5
+			"price":8.5
 			},
 		"hp":{
 			"postfix":"",
@@ -449,7 +449,7 @@ var objs={
 			"i":images.icons.stats.max_stamina,
 			"t":"MAX_STAMINA_VALUE",
 			"ct":"CMAX_STAMINA_VALUE",
-			"price":3.2
+			"price":4.2
 			},
 		"regen_stamina_point":{
 			"postfix":"",
@@ -469,7 +469,7 @@ var objs={
 			"i":images.icons.stats.regen_stamina_point,
 			"t":"STAMINA_REGEN_VALUE",
 			"ct":"CSTAMINA_REGEN_VALUE",
-			"price":7.2
+			"price":6.2
 			},
 		"take_area":{
 			"postfix":"",

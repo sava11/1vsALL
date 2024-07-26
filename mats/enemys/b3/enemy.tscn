@@ -1671,8 +1671,8 @@ attack_name = "a1"
 attack_anim_name = "attack"
 attack_time_period = 1.5
 attack_range = 50.0
-damage_from = 2.0
-damage_to = 3.0
+damage_to = 1.4
+crit_damage_to = 1.9
 
 [node name="summon" parent="." instance=ExtResource("5_4wpdd")]
 do_name = "s"
