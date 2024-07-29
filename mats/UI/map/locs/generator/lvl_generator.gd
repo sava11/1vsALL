@@ -65,13 +65,14 @@ func create_arena():
 			var enemy=enemy_data.new()
 			var e_p_id=fnc._with_chance_ulti(select_enemys_percents)
 			enemy.enemy=enemys_path[e_p_id]
+			enemy.percent=1.0/float(count)
 			enemys_path.remove_at(e_p_id)
 			select_enemys_percents.remove_at(e_p_id)
 			ens.append(enemy)
 		return ens).call()
 	arena.enemys=enemys
-	arena.enemys_count_min=fnc.rnd.randi_range(4,7)
-	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,12)
+	arena.enemys_count_min=fnc.rnd.randi_range(3,5)
+	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,8)
 	return arena
 func gen_map_v1(positions,neighbors):
 	for e in positions:
@@ -207,12 +208,18 @@ func gen_map_v1(positions,neighbors):
 func _pre_process(delta):
 	queue_redraw()
 
+var clrs=[Color("RED"),Color("Silver"),Color("ORANGE"),Color("WHITE")]
 func _draw():
 	if current_pos!=null:
 		var i:=0
 		for p in bosses_pos:
+			var clr:=Color(1,1,1,1)
+			for e in ["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
+			"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]:
+				if e == p.name:
+					clr=clrs[e]
 			if !p.runned:
-				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,Color(1,0.5,0.5),5)
+				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,clr,5)
 			else:
 				i+=1
 		if i==bosses_pos.size():

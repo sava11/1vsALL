@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://lfervjgmrcn8"]
+[gd_scene load_steps=20 format=3 uid="uid://lfervjgmrcn8"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/training/training.gd" id="1_1vgx1"]
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/map/place/place.tscn" id="2_uri1g"]
@@ -16,8 +16,8 @@ percent = 0.0
 script = ExtResource("4_gl7wn")
 enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_outis")])
 spawning = true
-enemys_count_min = 8
-enemys_count_max = 12
+enemys_count_min = 3
+enemys_count_max = 6
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
 
@@ -57,10 +57,15 @@ percent = 0.5
 script = ExtResource("4_gl7wn")
 enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_0rlqj"), SubResource("Resource_1qyqo")])
 spawning = true
-enemys_count_min = 9
-enemys_count_max = 18
+enemys_count_min = 4
+enemys_count_max = 7
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
+
+[sub_resource type="Resource" id="Resource_v5pw2"]
+script = ExtResource("5_e34vk")
+status = "%crit_dmg"
+value = 0.05
 
 [sub_resource type="Resource" id="Resource_d4xrw"]
 script = ExtResource("3_s17os")
@@ -78,8 +83,8 @@ percent = 0.6
 script = ExtResource("4_gl7wn")
 enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_d4xrw"), SubResource("Resource_3qqmk")])
 spawning = true
-enemys_count_min = 4
-enemys_count_max = 12
+enemys_count_min = 2
+enemys_count_max = 6
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
 
@@ -113,6 +118,7 @@ offset_left = 96.0
 offset_right = 112.0
 arena = SubResource("Resource_bqu0m")
 shop = true
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_v5pw2")])
 neighbors = [NodePath("../place1"), NodePath("../place3")]
 
 [node name="place3" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
@@ -138,4 +144,5 @@ neighbors = [NodePath("../place4")]
 [connection signal="choice_panel_showed" from="place1" to="." method="_on_place_2_choice_panel_showed"]
 [connection signal="lvl_start" from="place1" to="." method="_on_place_2_lvl_start"]
 [connection signal="runned_changed" from="place1" to="." method="_on_place_2_runned_changed"]
+[connection signal="runned_changed" from="place2" to="." method="_on_place2_2_runned_changed"]
 [connection signal="runned_changed" from="place4" to="." method="_on_place_5_runned_changed"]

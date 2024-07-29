@@ -183,7 +183,7 @@ const start_player_data={
 	"runned_lvls":0,
 	"stats":{
 		"money":0,
-		"hp":3.0,
+		"hp":8.0,
 		"hp_regen":0.1,
 		"max_stamina":1.5,
 		"regen_stamina_point":0.3,
@@ -271,6 +271,7 @@ var objs={
 			"i":images.icons.other.money,
 			"t":"MONEY",
 			"ct":"MONEY",
+			"step":1
 			},
 		"roll_speed":{
 			"postfix":"",
@@ -290,7 +291,8 @@ var objs={
 			"i":images.icons.stats["rsp"],
 			"t":"ROLL",
 			"ct":"CROLL",
-			"price":9.5},
+			"price":0.7,
+			"step":1},
 		"run_speed":{
 			"postfix":"",
 			"v":{
@@ -309,7 +311,8 @@ var objs={
 			"i":images.icons.stats["%sp"],
 			"t":"SPEED",
 			"ct":"CSPEED",
-			"price":8.5
+			"price":0.5,
+			"step":1
 			},
 		"hp":{
 			"postfix":"",
@@ -329,7 +332,8 @@ var objs={
 			"i":images.icons.stats.hp,
 			"t":"HP",
 			"ct":"CHP",
-			"price":6.2
+			"price":6.2,
+			"step":0.01
 			},
 		"hp_regen":{
 			"postfix":"",
@@ -349,7 +353,8 @@ var objs={
 			"i":images.icons.stats.hp_regen,
 			"t":"HP_REGEN",
 			"ct":"CHP_REGEN",
-			"price":7.8
+			"price":7.8,
+			"step":0.001
 			},
 		"dmg":{
 			"postfix":"",
@@ -369,7 +374,8 @@ var objs={
 			"i":images.icons.stats.dmg,
 			"t":"DMG",
 			"ct":"CDMG",
-			"price":6.7
+			"price":8.5,
+			"step":0.01
 			},
 		"crit_dmg":{
 			"postfix":"",
@@ -389,7 +395,8 @@ var objs={
 			"i":images.icons.stats["crit_dmg"],
 			"t":"CRIT_DMG",
 			"ct":"CCRIT_DMG",
-			"price":7.5
+			"price":7.5,
+			"step":0.01
 			},
 		"%crit_dmg":{
 			"postfix":"%",
@@ -409,7 +416,8 @@ var objs={
 			"i":images.icons.stats["%crit_dmg"],
 			"t":"%CRIT_DMG",
 			"ct":"C%CRIT_DMG",
-			"price":8
+			"price":8,
+			"step":0.01
 			},
 		"def":{
 			"postfix":"",
@@ -429,7 +437,8 @@ var objs={
 			"i":images.icons.stats.def,
 			"t":"DEF",
 			"ct":"CDEF",
-			"price":9.5
+			"price":9.5,
+			"step":0.01
 			},
 		"max_stamina":{
 			"postfix":"",
@@ -449,7 +458,8 @@ var objs={
 			"i":images.icons.stats.max_stamina,
 			"t":"MAX_STAMINA_VALUE",
 			"ct":"CMAX_STAMINA_VALUE",
-			"price":4.2
+			"price":5.5,
+			"step":0.01
 			},
 		"regen_stamina_point":{
 			"postfix":"",
@@ -463,13 +473,14 @@ var objs={
 				0:{"v":{"x":-0.046,"y":-0.065},"%":0.18,},
 				1:{"v":{"x":-0.031,"y":-0.045},"%":0.35,},
 				2:{"v":{"x":-0.015,"y":-0.03},"%":0.46,},
-				3:{"v":{"x":-0.012,"y":-0.006},"%":0.58,},
+				3:{"v":{"x":-0.02,"y":-0.01},"%":0.58,},
 				},
 			"min_v":0.1,
 			"i":images.icons.stats.regen_stamina_point,
 			"t":"STAMINA_REGEN_VALUE",
 			"ct":"CSTAMINA_REGEN_VALUE",
-			"price":6.2
+			"price":7.2,
+			"step":0.01
 			},
 		"take_area":{
 			"postfix":"",
@@ -489,7 +500,8 @@ var objs={
 			"i":images.icons.stats.take_area,
 			"t":"COLLECTING",
 			"ct":"CCOLLECTING",
-			"price":2.6
+			"price":2.6,
+			"step":1
 			}
 		},
 	"updates":{

@@ -9,8 +9,9 @@ func past_ready():
 func _on_t_timeout():
 	delete()
 	var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
-	var ens=get_node("../../../").enemys_data.get_summon_names()
-	var itms_v=get_node("../../../").enemys_data.get_summon_percents()
+	var ens=get_node("../../../").enemys_data.get_summon_enemy_paths()
+	var itms_v=get_node("../../../").enemys_data.get_summon_enemy_percents()
+	print(itms_v)
 	e.load_scene=load(ens[fnc._with_chance_ulti(itms_v)])
 	e.time=0.5
 	e.time_curve=Curve.new()

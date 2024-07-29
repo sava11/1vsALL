@@ -49,7 +49,7 @@ func summon():
 			var ang1=spwn_ang/float(count)
 			for e in range(count):
 				var rast=75
-				var pos=get_tree().current_scene.get_rand_pos()
+				var pos=get_tree().current_scene.get_node("world").get_child(0).get_rand_pos()
 				var en=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 
 				var enemys=get_tree().current_scene.cur_loc.enemys_data.get_enemys()
@@ -71,5 +71,5 @@ func summon():
 				if auto_rotate:
 					e.rotation_degrees=ang*i+global_rotation_degrees+rotate_offset
 				e.set_deferred("global_position",global_position+fnc.move(rotation_degrees+ang*i)*custom_summon_radius)
-				fnc.get_world_node().get_child(0).add_child(e)
+				fnc.get_world_node().get_child(0).get_node("ent/enemys").add_child(e)
 	pass

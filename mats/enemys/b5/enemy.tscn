@@ -2105,6 +2105,7 @@ libraries = {
 material = SubResource("ShaderMaterial_7rcvr")
 sprite_frames = SubResource("SpriteFrames_y8n8u")
 animation = &"attack2_left"
+frame = 6
 offset = Vector2(0, -15)
 
 [node name="summon" parent="." instance=ExtResource("32_wnw2d")]

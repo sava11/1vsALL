@@ -17,8 +17,9 @@ collision_layer = 6
 collision_mask = 0
 script = ExtResource("1_blq2n")
 by_time = true
+damage = 0.9
+crit_damage = 1.2
 del_time = 3.0
-autoset = true
 
 [node name="r" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)

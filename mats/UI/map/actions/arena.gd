@@ -22,16 +22,23 @@ func get_named_summon_percents()->Dictionary:
 							return en.percent 
 						else: return items[en.name]})
 	return items
-func get_summon_percents()->PackedFloat32Array:
+func get_summon_enemy_percents()->PackedFloat32Array:
 	var items:PackedFloat32Array=[]
 	for en in enemys:
 		if en is enemy_data:
 			items.append(en.percent)
 	return items
-func get_summon_names()->PackedFloat32Array:
+func get_summon_enemy_names()->PackedStringArray:
 	var names=PackedStringArray([])
 	for e in enemys:
-		names.append(e.name)
+		if e is enemy_data:
+			names.append(e.name)
+	return names
+func get_summon_enemy_paths()->PackedStringArray:
+	var names=PackedStringArray([])
+	for e in enemys:
+		if e is enemy_data:
+			names.append(e.en)
 	return names
 func get_bosses()->Array[boss_data]:
 	var ens:Array[boss_data] = []

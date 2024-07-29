@@ -228,8 +228,7 @@ func set_ingame_stats(_place:place):
 				else:
 					min=stat_data["-v"][mv_keys[0]].v.x
 					max=stat_data["-v"][v_keys[v_keys.size()-1]].v.y
-					
-				i_s.value=snapped(fnc.rnd.randf_range(min,max),0.001)
+				i_s.value=snapped(fnc.rnd.randf_range(min,max),gm.objs.stats[i_s.status].step)
 			else:
 				i_s.value=fnc.rnd.randi_range(1,5)
 			a.append(i_s)

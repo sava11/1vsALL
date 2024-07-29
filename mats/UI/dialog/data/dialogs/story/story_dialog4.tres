@@ -7,9 +7,13 @@
 script = ExtResource("2_hfiwc")
 name = "NEW_DATA"
 BDI_text = "INGAME_MOVEMANT"
+buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+interactive = false
+large_answers = false
+function_node_path = null
+function_name = ""
+function_arguments = []
 left_char_img = ExtResource("1_knem3")
 left_speeking = true
 right_speeking = false
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
-interactive = false
 paused = 1

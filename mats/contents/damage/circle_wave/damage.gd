@@ -13,9 +13,9 @@ func pre_ready():
 	for e in range(count+1):
 		pols.append(fnc.move(ang*(count)-ang*e)*(radius-width))
 	if autoset:
-		damage=fnc._with_dific(damage,get_tree().current_scene.dif)
-		crit_damage=fnc._with_dific(crit_damage,get_tree().current_scene.dif)
-		crit_chance=fnc._with_dific(crit_chance,get_tree().current_scene.dif)
+		damage=fnc._with_dific(damage,gm.game_prefs.dif)
+		crit_damage=fnc._with_dific(crit_damage,gm.game_prefs.dif)
+		crit_chance=fnc._with_dific(crit_chance,gm.game_prefs.dif)
 	think(pols)
 func _process(delta):
 	queue_redraw()

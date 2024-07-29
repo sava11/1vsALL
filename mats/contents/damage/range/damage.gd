@@ -30,7 +30,7 @@ func throw():
 		a.start_pos=global_position+fnc.move(global_rotation_degrees)*10
 		a.global_rotation_degrees=ang*e+global_rotation_degrees-90
 		a.speed=100
-		a._sqrt=attack_range
+		a.sqrt=attack_range
 		a.active=false
 		get_tree().current_scene.get_node("world").get_child(0).enemy_path.add_child(a)
 	trowed=true

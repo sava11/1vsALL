@@ -6,7 +6,7 @@ var dialog:dialog_data=null
 var tree_real_pause:=false
 func _ready():
 	clean_dialog()
-	#start(preload("res://mats/UI/dialog/data/dialogs/test/dialog1.tres"))
+	#start(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog5.tres"))
 func start(d:dialog_data):
 	await get_tree().process_frame
 	clean_dialog()
@@ -105,8 +105,9 @@ func end_dialog():
 	get_tree().set_deferred("paused",tree_real_pause)
 	if btn_cont.get_child_count()>0 and btn_cont.get_parent_control().visible==false:
 		btn_cont.get_child(0).emit_signal("button_down")
-	if dialog!=null:
+	if dialog!=null and btn_cont.get_child_count()==0:
 		emit_signal("dialog_ended",dialog.name)
+
 		if dialog.function_node_path!=null:
 			var node=get_tree().current_scene.get_node_or_null(dialog.function_node_path)
 			if node!=null:
@@ -118,14 +119,17 @@ func end_dialog():
 		hide()
 
 func _input(_e):
-	if Input.is_action_just_pressed("accept") and dialog!=null  and btn_cont.get_child_count()<2:
+	if Input.is_action_just_pressed("accept") and dialog!=null and btn_cont.get_child_count()<2:
+
 		end_dialog()
 
 func _on_panel_gui_input(_e):
 	if Input.is_action_just_pressed("lmb") and btn_cont.get_child_count()<2:
+
 		end_dialog()
 
 
 func _on_gui_input(_e):
 	if Input.is_action_just_pressed("lmb") and !dialog.interactive  and btn_cont.get_child_count()<2:
+
 		end_dialog()

@@ -12,11 +12,11 @@ extends RigidBody2D
 	}
 @export var doing_chance_list={}
 @export_group("defance")
-@export_range(1,99999) var def_from:float=1
-@export_range(1,99999) var def_to:float=1
+@export_range(0,99999) var def_from:float=1
+@export_range(0,99999) var def_to:float=1
 @export_group("life")
-@export_range(1,99999) var hp_from:float=1
-@export_range(1,99999) var hp_to:float=1
+@export_range(0,99999) var hp_from:float=1
+@export_range(0,99999) var hp_to:float=1
 
 var target
 @onready var hb=$hurt_box

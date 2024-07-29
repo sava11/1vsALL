@@ -73,8 +73,8 @@ color_ramp = SubResource("Gradient_qa3ov")
 [node name="c" type="CollisionShape2D" parent="del_area"]
 shape = SubResource("CircleShape2D_hllfb")
 
-[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended" flags=18]
-[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started" flags=18]
-[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout" flags=18]
-[connection signal="timeout" from="hirtbox/Timer" to="hirtbox" method="_on_Timer_timeout" flags=18]
+[connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended"]
+[connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started"]
+[connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout"]
+[connection signal="timeout" from="hirtbox/Timer" to="hirtbox" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="del_area" to="." method="_on_del_area_body_entered"]

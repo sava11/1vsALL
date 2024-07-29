@@ -8,7 +8,7 @@ func past_ready():
 	$stages.max_value=hb.m_he
 	$stages.max_stage_points=3
 	$stages.think()
-	$hurt_box/healing.heal_per_sec=fnc._with_dific(hb.m_he/$stages.max_stage_points,dif)
+	$hurt_box/healing.heal_per_sec=hb.m_he/$stages.max_stage_points
 func in_status_think():
 	if $attack.active==true and $attack.bs!=[] and current_action=="a1" and attacks_timer>=$attack.attack_time_period and eye_contact_with(target) and state!="h":
 		state=current_action
@@ -34,7 +34,6 @@ func _on_die():
 	$boss_mark.emit()
 func _on_stages_stage_changed(curent_stage):
 	state="h"
-	$hurt_box/healing.healing=true
 	summon()
 
 func _on_healing_healing_end():

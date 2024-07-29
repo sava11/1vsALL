@@ -40,6 +40,7 @@ radius = 4.12311
 radius = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q77wr"]
+resource_local_to_scene = true
 shader = ExtResource("3_2cink")
 shader_parameter/line_color = Color(1, 0.301961, 0, 1)
 shader_parameter/line_thickness = 1.0
@@ -1552,6 +1553,7 @@ contact_monitor = true
 script = ExtResource("1_bc843")
 stop_range_from = 20.0
 stop_range_to = 30.0
+hp_to = 1.6
 
 [node name="attack" parent="." instance=ExtResource("28_qgx7q")]
 monitorable = false
@@ -1602,6 +1604,18 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_qjeva")
 }
+
+[node name="pg" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0, 1)
+z_index = 1
+offset_left = -15.0
+offset_top = -45.0
+offset_right = 285.0
+offset_bottom = 5.0
+scale = Vector2(0.1, 0.1)
+mouse_filter = 2
+value = 61.97
+show_percentage = false
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered"]
 [connection signal="area_exited" from="hurt_box" to="hurt_box" method="_on_area_exited"]

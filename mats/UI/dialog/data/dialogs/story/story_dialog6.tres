@@ -1,18 +1,30 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://dkuvw300skaxx"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=5 format=3 uid="uid://dkuvw300skaxx"]
 
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_gqdqb"]
 [ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="1_wt731"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_jsff8"]
 
+[sub_resource type="Resource" id="Resource_f4cf0"]
+script = ExtResource("1_gqdqb")
+name = "button_name"
+color = Color(1, 1, 1, 1)
+disabled = false
+dialog_data_path = "res://mats/UI/dialog/data/dialogs/story/story_dialog7.tres"
+function_node_path = null
+function_name = ""
+function_arguments = []
+
 [resource]
 script = ExtResource("2_jsff8")
-name = "NEW_DATA"
+name = "nexto2"
 BDI_text = "[color=gold]Работодатели[/color]: хорошо справился"
+buttons = Array[ExtResource("1_gqdqb")]([SubResource("Resource_f4cf0")])
+interactive = false
+large_answers = false
 function_node_path = null
 function_name = ""
 function_arguments = []
 left_char_img = ExtResource("1_wt731")
 left_speeking = true
 right_speeking = false
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
-interactive = false
 paused = 0

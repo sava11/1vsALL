@@ -16,8 +16,8 @@ function_arguments = []
 
 [resource]
 script = ExtResource("2_cmf0k")
-name = "NEW_DATA"
-BDI_text = "[color]Вы[/color]: можете проходить дальше!"
+name = "nexto"
+BDI_text = "[color=3771a1]Вы[/color]: можете проходить дальше!"
 buttons = Array[ExtResource("1_kb734")]([SubResource("Resource_7brsk")])
 interactive = false
 large_answers = false

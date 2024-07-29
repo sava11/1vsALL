@@ -92,7 +92,7 @@ func upd_by_sts():
 	for e in gm.player_data.stats:
 		for i in stat_cont.get_children():
 			if i.get_node("item_name").text==tr(gm.objs.stats[e].ct):
-				i.set_value(gm.player_data.stats[e],gm.objs.stats[e].postfix)
+				i.set_value(snapped(gm.player_data.stats[e],gm.objs.stats[e].step),gm.objs.stats[e].postfix)
 
 func level_completed(n:place):
 	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step
@@ -157,7 +157,7 @@ func _on_in_shop():
 						t=fnc.rnd.randi_range(sd.lvls[n[1]].stats[e1].x,sd.lvls[n[1]].stats[e1].y)
 					c_stats[e1]=t
 			shop_items[current_pos].merge({n[0]+"/"+str(e):{"lvl":n[1],"stats":c_stats,"val":fnc._with_dific(get_end_price(c_stats),gm.game_prefs.dif)}})
-			
+			print(shop_items[current_pos][n[0]+"/"+str(e)],"\n---\n",get_end_price(c_stats))
 	$map.hide()
 	$shop.show()
 	$stats/cont/back.show()

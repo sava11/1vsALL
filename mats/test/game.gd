@@ -121,6 +121,7 @@ func _reload_game():
 		if ["seed","scripts"].find(e)==-1:
 			gm.game_prefs[e]=temp_data[e]
 	gm.player_data=gm.start_player_data.duplicate(true)
+	$cl/map.upd_by_sts()
 	gm.save_file_data()
 
 func _on_retry_button_down():

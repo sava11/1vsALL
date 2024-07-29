@@ -47,3 +47,7 @@ func _on_place_7_lvl_end():
 	gm.make_dialog(preload("res://mats/UI/dialog/data/dialogs/story/train_end.tres"))
 	#gm.game_prefs.scripts.lvl5_runned=true
 	#gm.save_file_data()
+
+
+func _on_place2_2_runned_changed(res):
+	pass # Replace with function body.

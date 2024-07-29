@@ -6,6 +6,8 @@ func in_status_think():
 
 func pre_status():
 	$attack.rotation_degrees=fnc.angle(see.target_position)
+	$pg.value=hb.he
+	$pg.max_value=hb.m_he
 func new_dos(_delta:float):
 	if state=="a1":
 		attacks_timer=0
