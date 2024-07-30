@@ -6,7 +6,7 @@ var dialog:dialog_data=null
 var tree_real_pause:=false
 func _ready():
 	clean_dialog()
-	#start(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog5.tres"))
+	start(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog1.tres"))
 func start(d:dialog_data):
 	await get_tree().process_frame
 	clean_dialog()
@@ -66,7 +66,8 @@ func load_data(d:dialog_data):
 				if ep.dialog_data_path!=null:
 					b.button_down.connect(Callable(self,"load_data").bind(load(ep.dialog_data_path)))
 				else:
-					b.button_down.connect(Callable(self,"end_dialog"))
+					b.button_down.connect(Callable(self,"load_data").bind(null))
+					#b.button_down.connect(Callable(self,"end_dialog"))
 					#b.button_down.connect(Callable(self,"clean_dialog"))
 					#b.button_down.connect(Callable(self,"emit_signal").bind("dialog_ended",ep.name))
 				b.icon_alignment=HORIZONTAL_ALIGNMENT_LEFT
@@ -90,6 +91,20 @@ func load_data(d:dialog_data):
 			if get_tree().paused!=false:
 				tree_real_pause=get_tree().paused
 			get_tree().set_deferred("paused",false)
+	else:
+		end_dialog()
+func end_dialog():
+	if dialog!=null:
+		emit_signal("dialog_ended",dialog.name)
+		if dialog.function_node_path!=null:
+			var node=get_tree().current_scene.get_node_or_null(dialog.function_node_path)
+			if node!=null:
+				if dialog.function_arguments.is_empty():
+					Callable(node,dialog.function_name).call()
+				else:
+					Callable(node,dialog.function_name).callv(dialog.function_arguments)
+		clean_dialog()
+		hide()
 func clean_dialog():
 	dialog=null
 	for e in btn_cont.get_children():
@@ -101,35 +116,21 @@ func clean_dialog():
 	$charR/ap.play("back")
 	$charL/ap.play("back")
 
-func end_dialog():
+func next_dialog():
 	get_tree().set_deferred("paused",tree_real_pause)
 	if btn_cont.get_child_count()>0 and btn_cont.get_parent_control().visible==false:
 		btn_cont.get_child(0).emit_signal("button_down")
-	if dialog!=null and btn_cont.get_child_count()==0:
-		emit_signal("dialog_ended",dialog.name)
-
-		if dialog.function_node_path!=null:
-			var node=get_tree().current_scene.get_node_or_null(dialog.function_node_path)
-			if node!=null:
-				if dialog.function_arguments.is_empty():
-					Callable(node,dialog.function_name).call()
-				else:
-					Callable(node,dialog.function_name).callv(dialog.function_arguments)
-		clean_dialog()
-		hide()
-
-func _input(_e):
-	if Input.is_action_just_pressed("accept") and dialog!=null and btn_cont.get_child_count()<2:
-
+	if btn_cont.get_child_count()==0:
 		end_dialog()
+func _input(_e):
+	if Input.is_action_just_pressed("accept") and dialog!=null:
+		next_dialog()
 
 func _on_panel_gui_input(_e):
-	if Input.is_action_just_pressed("lmb") and btn_cont.get_child_count()<2:
-
-		end_dialog()
+	if Input.is_action_just_pressed("lmb") and dialog!=null:
+		next_dialog()
 
 
 func _on_gui_input(_e):
-	if Input.is_action_just_pressed("lmb") and !dialog.interactive  and btn_cont.get_child_count()<2:
-
-		end_dialog()
+	if Input.is_action_just_pressed("lmb") and dialog!=null:
+		next_dialog()

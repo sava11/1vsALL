@@ -209,14 +209,15 @@ func _pre_process(delta):
 	queue_redraw()
 
 var clrs=[Color("RED"),Color("Silver"),Color("ORANGE"),Color("WHITE")]
+var trs=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
+"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
 func _draw():
 	if current_pos!=null:
 		var i:=0
 		for p in bosses_pos:
 			var clr:=Color(1,1,1,1)
-			for e in ["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
-			"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]:
-				if e == p.name:
+			for e in range(trs.size()):
+				if p.arena.get_boss_by_name(trs[e]):
 					clr=clrs[e]
 			if !p.runned:
 				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,clr,5)

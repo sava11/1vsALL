@@ -65,3 +65,4 @@ func has_enemys()->bool:
 func get_boss_by_name(name:String):
 	for en in enemys:
 		if en is boss_data and en.name==name:return en
+	return ""
