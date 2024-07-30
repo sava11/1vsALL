@@ -1,7 +1,6 @@
 extends Control
 
 var current_pos:place
-@export var global_difficulty_add_step:float=0
 @onready var shop=$shop/shop
 @onready var map
 @onready var stat_cont=$stats/cont/ScrollContainer/item_cont
@@ -95,7 +94,6 @@ func upd_by_sts():
 				i.set_value(snapped(gm.player_data.stats[e],gm.objs.stats[e].step),gm.objs.stats[e].postfix)
 
 func level_completed(n:place):
-	gm.game_prefs.dif+=n.local_difficulty_add_step+global_difficulty_add_step
 	#if gm.game_prefs.dif<0.5:
 		#gm.game_prefs.dif=0.5
 	n.runned=true

@@ -253,6 +253,7 @@ func shop_cancel():
 	emit_signal("choice_panel_hided")
 
 func _on_runned_changed(res:bool):
-	if res:
+	if res and last_runned!=runned:
+		gm.game_prefs.dif+=local_difficulty_add_step
 		gm.player_data.runned_lvls+=1
 	emit_signal("lvl_end")

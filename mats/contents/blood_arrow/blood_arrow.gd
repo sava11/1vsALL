@@ -2,7 +2,7 @@ extends "res://mats/contents/damage/mele/damage.gd"
 var start_pos:Vector2=Vector2.ZERO
 var speed:float=100
 var mvd:Vector2=Vector2.ZERO
-var sqrt=200
+var _sqrt=200
 
 func past_ready():
 	drawing=false
@@ -15,6 +15,6 @@ func delete():
 
 func past_proc(delta):
 	position+=mvd*speed*delta
-	if fnc._sqrt(position-start_pos)>sqrt:
+	if fnc._sqrt(position-start_pos)>_sqrt:
 		delete()
 

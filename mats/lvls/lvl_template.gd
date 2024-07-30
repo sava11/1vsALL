@@ -118,14 +118,14 @@ func summon_bosses():
 				"/boss_mark.scene_to_add":get_tree().current_scene.get_node("cl/game_ui/st"),
 				"/boss_mark.scene_to_func":self,
 				"/boss_mark.scene_func":"boss_die",
-				"/boss_mark.bname":b.name
+				"/boss_mark.bname":b.boss
 				}
-			e.scene_data.merge(gm.bosses[b.name].dificulty_lvl[gm.cur_dif])
+			e.scene_data.merge(gm.bosses[b.boss].dificulty_lvl[gm.cur_dif])
 			#e.target_path=fnc.get_hero().get_path()
 			enemy_path.add_child(e)
 			e.global_position=pos
 func summon(enemys_count=0):
-	var items=enemys_data.get_summon_percents()
+	var items=enemys_data.get_summon_enemy_percents()
 	var enemys=enemys_data.get_enemys()
 	if enemys_count==0:enemys_count=fnc.rnd.randi_range(enemys_data.enemys_count_min,enemys_data.enemys_count_max)
 	for ec in range(enemys_count):

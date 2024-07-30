@@ -35,7 +35,7 @@ func summon():
 				var en=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 
 				var enemys=get_tree().current_scene.cur_loc.enemys_data.get_enemys()
-				var perc=fnc._with_chance_ulti(get_tree().current_scene.cur_loc.enemys_data.get_summon_percents())
+				var perc=fnc._with_chance_ulti(get_tree().current_scene.cur_loc.enemys_data.get_summon_enemy_percents())
 				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
@@ -43,7 +43,7 @@ func summon():
 					"target":get_parent().get("target")
 				}
 				en.global_position=pos
-				fnc.get_world_node().get_child(0).get_child(0).get_node("ent/enemys").add_child(en)
+				fnc.get_world_node().get_child(0).get_node("ent/enemys").add_child(en)
 		1:
 			var spwn_ang=360
 			var ang1=spwn_ang/float(count)
@@ -53,7 +53,7 @@ func summon():
 				var en=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 
 				var enemys=get_tree().current_scene.cur_loc.enemys_data.get_enemys()
-				var perc=fnc._with_chance_ulti(get_tree().current_scene.cur_loc.enemys_data.get_summon_percents())
+				var perc=fnc._with_chance_ulti(get_tree().current_scene.cur_loc.enemys_data.get_summon_enemy_percents())
 				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
@@ -61,7 +61,7 @@ func summon():
 					"target":get_parent().get("target")
 				}
 				en.global_position=pos
-				fnc.get_world_node().get_child(0).get_child(0).get_node("ent/enemys").add_child(en)
+				fnc.get_world_node().get_child(0).get_node("ent/enemys").add_child(en)
 		2:
 			var ang=360.0/float(count)
 			for i in range(count):
