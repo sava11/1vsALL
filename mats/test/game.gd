@@ -11,7 +11,7 @@ func _ready():
 		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
 	locs_cont.add_child(lvl)
 	show_lvls()
-
+var game_end:=false
 func _process(delta):
 	$cl/game_ui/status/dif.text="dif. "+str(gm.game_prefs.dif)
 	$cl/game_ui/status/stamina.max_value=gm.player_data.stats["max_stamina"]
@@ -125,4 +125,5 @@ func _on_retry_button_down():
 	show_lvls()
 	$cl/game_ui/death.hide()
 func game_ended():
+	game_end=true
 	print("ended")
