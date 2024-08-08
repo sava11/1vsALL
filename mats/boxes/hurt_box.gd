@@ -3,7 +3,7 @@ extends Area2D
 @export var m_def:float=1: set = s_m_d
 var def=m_def: set = set_def
 var he=m_he: set = set_he
-@export var tspeed:float=1.0
+@export var tspeed:float=0
 @onready var t=$Timer
 var invi=false: set = set_invi
 var step=0
@@ -45,7 +45,8 @@ func _ready():
 		connect("area_exited",Callable(self,"_on_area_exited"))
 	self.he=m_he
 	self.def=m_def
-	$Timer.wait_time=tspeed
+	if tspeed>0:
+		$Timer.wait_time=tspeed
 
 func set_invi(v):
 	invi=v
@@ -90,6 +91,8 @@ func _on_area_entered(area):
 			get_parent().get_parent().add_child.call_deferred(crit)
 			crit.set_deferred("global_position",global_position+Vector2(-crit.size.x/2,-40))
 		set_he(he-float(dmg)/float(def))
+		if tspeed>0:
+			start_invi(tspeed)
 
 
 func _on_area_exited(area):

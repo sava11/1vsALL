@@ -9,6 +9,7 @@ signal uncompleted()
 var rsize:Vector2
 var rpos:Vector2
 var timer:Timer
+var place_node:place
 @onready var enemy_path=$ent/enemys
 func start_timer(new_time:float):
 	timer.wait_time=new_time
@@ -120,7 +121,7 @@ func summon_bosses():
 				"/boss_mark.scene_func":"boss_die",
 				"/boss_mark.bname":b.boss
 				}
-			e.scene_data.merge(gm.bosses[b.boss].dificulty_lvl[gm.cur_dif])
+			#e.scene_data.merge(gm.bosses[b.boss].dificulty_lvl[gm.cur_dif])
 			#e.target_path=fnc.get_hero().get_path()
 			enemy_path.add_child(e)
 			e.global_position=pos
@@ -158,4 +159,6 @@ func all_bosses_died():
 func boss_die(bname:String):
 	enemys_data.get_boss_by_name(bname).die=true
 	if all_bosses_died():
+		place_node.runned=true
+		place_node.merge_stats()
 		start_timer(10)

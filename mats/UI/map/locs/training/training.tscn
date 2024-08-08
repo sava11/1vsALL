@@ -1,11 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://lfervjgmrcn8"]
+[gd_scene load_steps=42 format=3 uid="uid://lfervjgmrcn8"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/training/training.gd" id="1_1vgx1"]
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/map/place/place.tscn" id="2_uri1g"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_enemys_data.gd" id="3_s17os"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/arena.gd" id="4_gl7wn"]
 [ext_resource type="Script" path="res://mats/UI/map/statuses/ingame_status.gd" id="5_e34vk"]
-[ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_boss_data.gd" id="6_f3hbj"]
+[ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_boss_data.gd" id="6_1y3j1"]
 
 [sub_resource type="Resource" id="Resource_outis"]
 script = ExtResource("3_s17os")
@@ -94,128 +94,133 @@ script = ExtResource("5_e34vk")
 status = "hp"
 value = 0.5
 
-[sub_resource type="Resource" id="Resource_ya15h"]
-script = ExtResource("5_e34vk")
-status = "hp"
-value = 999.0
-
-[sub_resource type="Resource" id="Resource_bawod"]
+[sub_resource type="Resource" id="Resource_bq7i4"]
 script = ExtResource("5_e34vk")
 status = "def"
-value = 4.0
+value = 1.2
 
-[sub_resource type="Resource" id="Resource_ygtq4"]
+[sub_resource type="Resource" id="Resource_8wsoh"]
 script = ExtResource("5_e34vk")
-status = "dmg"
-value = 4.0
+status = "hp"
+value = 2.0
 
-[sub_resource type="Resource" id="Resource_ln1cq"]
+[sub_resource type="Resource" id="Resource_v8qh5"]
 script = ExtResource("5_e34vk")
-status = "crit_dmg"
-value = 3.0
+status = "run_speed"
+value = 25.0
 
-[sub_resource type="Resource" id="Resource_6lpx1"]
-script = ExtResource("6_f3hbj")
+[sub_resource type="Resource" id="Resource_d6y5p"]
+script = ExtResource("5_e34vk")
+status = "%crit_dmg"
+value = 0.1
+
+[sub_resource type="Resource" id="Resource_duiid"]
+script = ExtResource("6_1y3j1")
 name = "res://mats/enemys/b2/enemy.tscn"
 die = false
 boss = "res://mats/enemys/b2/enemy.tscn"
 
-[sub_resource type="Resource" id="Resource_doepm"]
+[sub_resource type="Resource" id="Resource_a2pe2"]
 script = ExtResource("3_s17os")
-name = "sk"
-enemy = "res://mats/enemys/e1/enemy.tscn"
-percent = 0.75
-
-[sub_resource type="Resource" id="Resource_sehfg"]
-script = ExtResource("3_s17os")
-name = ""
+name = "sk_bw"
 enemy = "res://mats/enemys/e2/enemy.tscn"
-percent = 0.25
+percent = 0.3
 
-[sub_resource type="Resource" id="Resource_itub0"]
+[sub_resource type="Resource" id="Resource_vxqaw"]
+script = ExtResource("3_s17os")
+name = "sk_sw"
+enemy = "res://mats/enemys/e1/enemy.tscn"
+percent = 0.7
+
+[sub_resource type="Resource" id="Resource_13jgp"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_6lpx1"), SubResource("Resource_doepm"), SubResource("Resource_sehfg")])
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_duiid"), SubResource("Resource_a2pe2"), SubResource("Resource_vxqaw")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
 
-[sub_resource type="Resource" id="Resource_45ok1"]
-script = ExtResource("6_f3hbj")
+[sub_resource type="Resource" id="Resource_3aevr"]
+script = ExtResource("5_e34vk")
+status = ""
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_gqp5p"]
+script = ExtResource("6_1y3j1")
 name = "res://mats/enemys/b3/enemy.tscn"
 die = false
 boss = "res://mats/enemys/b3/enemy.tscn"
 
-[sub_resource type="Resource" id="Resource_38t3a"]
+[sub_resource type="Resource" id="Resource_ujm2d"]
 script = ExtResource("3_s17os")
-name = "sk"
+name = ""
 enemy = "res://mats/enemys/e1/enemy.tscn"
-percent = 0.75
+percent = 0.0
 
-[sub_resource type="Resource" id="Resource_8v2yk"]
+[sub_resource type="Resource" id="Resource_3oetx"]
 script = ExtResource("3_s17os")
 name = ""
 enemy = "res://mats/enemys/e2/enemy.tscn"
-percent = 0.25
+percent = 0.0
 
-[sub_resource type="Resource" id="Resource_ixtls"]
+[sub_resource type="Resource" id="Resource_h14eo"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_45ok1"), SubResource("Resource_38t3a"), SubResource("Resource_8v2yk")])
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_gqp5p"), SubResource("Resource_ujm2d"), SubResource("Resource_3oetx")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
 
-[sub_resource type="Resource" id="Resource_eye4f"]
-script = ExtResource("6_f3hbj")
+[sub_resource type="Resource" id="Resource_d2drf"]
+script = ExtResource("6_1y3j1")
 name = "res://mats/enemys/b4/enemy.tscn"
 die = false
 boss = "res://mats/enemys/b4/enemy.tscn"
 
-[sub_resource type="Resource" id="Resource_qgmye"]
+[sub_resource type="Resource" id="Resource_kmqf4"]
 script = ExtResource("3_s17os")
-name = "sk"
+name = ""
 enemy = "res://mats/enemys/e1/enemy.tscn"
-percent = 0.75
+percent = 0.5
 
-[sub_resource type="Resource" id="Resource_7347p"]
+[sub_resource type="Resource" id="Resource_3w5ix"]
 script = ExtResource("3_s17os")
 name = ""
 enemy = "res://mats/enemys/e2/enemy.tscn"
-percent = 0.25
+percent = 0.5
 
-[sub_resource type="Resource" id="Resource_jh7ps"]
+[sub_resource type="Resource" id="Resource_dl660"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_eye4f"), SubResource("Resource_qgmye"), SubResource("Resource_7347p")])
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_d2drf"), SubResource("Resource_kmqf4"), SubResource("Resource_3w5ix")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
 time_to_next_enemy_wave_min = 10.0
 time_to_next_enemy_wave_max = 10.0
 
-[sub_resource type="Resource" id="Resource_0snrg"]
-script = ExtResource("6_f3hbj")
+[sub_resource type="Resource" id="Resource_is03b"]
+script = ExtResource("6_1y3j1")
 name = "res://mats/enemys/b5/enemy.tscn"
 die = false
 boss = "res://mats/enemys/b5/enemy.tscn"
 
-[sub_resource type="Resource" id="Resource_c5ybo"]
+[sub_resource type="Resource" id="Resource_pkq4y"]
 script = ExtResource("3_s17os")
 name = ""
 enemy = "res://mats/enemys/e1/enemy.tscn"
-percent = 0.8
+percent = 0.75
 
-[sub_resource type="Resource" id="Resource_bowbc"]
+[sub_resource type="Resource" id="Resource_popij"]
 script = ExtResource("3_s17os")
 name = ""
-enemy = "res://mats/enemys/e4/enemy.tscn"
-percent = 0.2
+enemy = "res://mats/enemys/e2/enemy.tscn"
+percent = 0.25
 
-[sub_resource type="Resource" id="Resource_egkf0"]
+[sub_resource type="Resource" id="Resource_lxkc1"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_0snrg"), SubResource("Resource_c5ybo"), SubResource("Resource_bowbc")])
+enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_is03b"), SubResource("Resource_pkq4y"), SubResource("Resource_popij")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
@@ -269,44 +274,48 @@ secret = true
 neighbors = [NodePath("../place4")]
 
 [node name="place6" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
-offset_left = 72.0
-offset_top = 40.0
-offset_right = 88.0
-offset_bottom = 56.0
+offset_left = 80.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 64.0
 secret = true
-local_difficulty_add_step = 8.0
-ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_ya15h"), SubResource("Resource_bawod"), SubResource("Resource_ygtq4"), SubResource("Resource_ln1cq")])
-neighbors = [NodePath("../place3"), NodePath("../place7"), NodePath("../place0")]
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_bq7i4"), SubResource("Resource_8wsoh"), SubResource("Resource_v8qh5"), SubResource("Resource_d6y5p")])
+neighbors = [NodePath("../place0"), NodePath("../place3"), NodePath("../place7"), NodePath("../place8"), NodePath("../place9"), NodePath("../place10")]
 
 [node name="place7" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
-offset_top = 80.0
-offset_bottom = 96.0
-arena = SubResource("Resource_itub0")
-neighbors = [NodePath("../place8"), NodePath("../place6")]
+offset_top = 96.0
+offset_bottom = 112.0
+local_difficulty_add_step = 2.0
+arena = SubResource("Resource_13jgp")
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_3aevr")])
+neighbors = [NodePath("../place8")]
 
 [node name="place8" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 48.0
-offset_top = 80.0
+offset_top = 96.0
 offset_right = 64.0
-offset_bottom = 96.0
-arena = SubResource("Resource_ixtls")
-neighbors = [NodePath("../place7"), NodePath("../place9")]
+offset_bottom = 112.0
+arena = SubResource("Resource_h14eo")
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_3aevr")])
+neighbors = [NodePath("../place9")]
 
 [node name="place9" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 96.0
-offset_top = 80.0
+offset_top = 96.0
 offset_right = 112.0
-offset_bottom = 96.0
-arena = SubResource("Resource_jh7ps")
-neighbors = [NodePath("../place10"), NodePath("../place8")]
+offset_bottom = 112.0
+arena = SubResource("Resource_dl660")
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_3aevr")])
+neighbors = [NodePath("../place8"), NodePath("../place10")]
 
 [node name="place10" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 144.0
-offset_top = 80.0
+offset_top = 96.0
 offset_right = 160.0
-offset_bottom = 96.0
-arena = SubResource("Resource_egkf0")
-neighbors = [NodePath("../place9")]
+offset_bottom = 112.0
+arena = SubResource("Resource_lxkc1")
+ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_3aevr")])
+neighbors = [NodePath("../place3")]
 
 [connection signal="player_in" from="place0" to="." method="start_dialog"]
 [connection signal="choice_panel_hided" from="place1" to="." method="_on_place_2_choice_panel_hided"]

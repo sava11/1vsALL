@@ -26,6 +26,7 @@ var exceptions:=[]
 var bosses_pos:Array[place]=[]
 func _pre_ready():
 	game_ended.connect(Callable(get_tree().current_scene,"game_ended"))
+	fnc.rnd.seed=int(gm.game_prefs.seed)
 	upd()
 
 func upd():
@@ -75,18 +76,22 @@ func create_arena():
 	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,8)
 	return arena
 func gen_map_v1(positions,neighbors):
+	var lvls=["res://mats/lvls/lvl1/lvl1_1.tscn","res://mats/lvls/lvl1/lvl1_2.tscn"]
 	for e in positions:
 		var scn:place=preload("res://mats/UI/map/place/place.tscn").instantiate()
-		scn.position=e*(fnc._sqrt(scn.size)+distance_betveen_nodes)#16+32
+		scn.position=e*int((fnc._sqrt(scn.size)+distance_betveen_nodes))#16+32
 		#scn.choice_panel_showed.connect(Callable(self,"set_ingame_stats").bind(scn))
 		var shop_chance=fnc._with_chance(0.1)
-		scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.5)
+		scn.level=lvls[fnc._with_chance_ulti([0.75,0.25])]
+		
 		if shop_chance:
 			scn.shop=true
 			if fnc._with_chance(0.25):
 				scn.arena=create_arena()
+				scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.5)
 		else:
 			scn.arena=create_arena()
+			scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.5)
 		add_child(scn)
 	var mass:=get_children()
 	#print(get_child_count())
@@ -208,19 +213,19 @@ func gen_map_v1(positions,neighbors):
 func _pre_process(delta):
 	queue_redraw()
 
-var clrs=[Color("RED"),Color("Silver"),Color("ORANGE"),Color("WHITE")]
-var trs=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
-"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
+#var clrs=[Color("RED"),Color("Silver"),Color("ORANGE"),Color("WHITE")]
+#var trs=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
+#"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
 func _draw():
 	if current_pos!=null:
 		var i:=0
 		for p in bosses_pos:
-			var clr:=Color(1,1,1,1)
-			for e in range(trs.size()):
-				if p.arena.get_boss_by_name(trs[e]):
-					clr=clrs[e]
+			#var clr:=Color(1,1,1,1)
+			#for e in range(trs.size()):
+				#if p.arena.get_boss_by_name(trs[e]):
+					#clr=clrs[e]
 			if !p.runned:
-				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,clr,5)
+				draw_line(current_pos.position+current_pos.size/2,p.position+p.size/2,Color("ff506e"),5)
 			else:
 				i+=1
 		if i==bosses_pos.size():

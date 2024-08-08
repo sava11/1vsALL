@@ -12,11 +12,10 @@ func pre_ready():
 		pols.append(fnc.move(ang*e)*radius)
 	for e in range(count+1):
 		pols.append(fnc.move(ang*(count)-ang*e)*(radius-width))
-	if autoset:
-		damage=fnc._with_dific(damage,gm.game_prefs.dif)
-		crit_damage=fnc._with_dific(crit_damage,gm.game_prefs.dif)
-		crit_chance=fnc._with_dific(crit_chance,gm.game_prefs.dif)
 	think(pols)
+	
+func past_ready():
+	print(damage," ",crit_damage," ",crit_chance)
 func _process(delta):
 	queue_redraw()
 	obj.scale.x+=sqrt_per_sec*delta

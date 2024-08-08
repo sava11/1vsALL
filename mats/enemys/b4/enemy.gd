@@ -23,9 +23,9 @@ func past_ready():
 	$summon.custom_data={
 		"speed":200,
 		"acc_speed":150,
-		"damage":fnc._with_dific(randf_range(damage_from,damage_to),dif),
-		"crit_damage":fnc._with_dific(randf_range(crit_chance_from,crit_chance_to),dif),
-		"crit_chance":fnc._with_dific(randf_range(crit_damage_from,crit_damage_to),dif),
+		"damage":fnc._with_dific(fnc.rnd.randf_range(damage_from,damage_to),dif),
+		"crit_chance":fnc._with_dific(fnc.rnd.randf_range(crit_chance_from,crit_chance_to),dif),
+		"crit_damage":fnc._with_dific(fnc.rnd.randf_range(crit_damage_from,crit_damage_to),dif),
 	}
 func in_status_think():
 	if to_idle():

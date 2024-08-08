@@ -61,26 +61,10 @@ AGILITY-DEF_TEXT,update kit mixed with defance kit and agility kit,набор у
 AGILITY-HP_TEXT,update kit mixed with agility kit and hp kit,набор улучшений совмещённый с набором ловкости и набором здоровья
 AGILITY_TEXT,agility uptade kit,набор улучшения ловкости
 
+RETRY,retry,повторить
+EXIT_TO_MAIN_MENU,exit to main menu,выйти в меню
+CONTINUE,continue,продолжить
 
-SURIKEN_TEXT,stealth assassin throwing weapon,метательное оружие скрытных убийц
-
-ZALLE_VOID_TEXT,you realy want to take it?,те реально хочешь купить это?
-FALLE_VOID_TEXT,sum of words 2,сумма слов 2
-
-CLASSIC,classic mode,классический режим
-BOSSRUSH,bossrush mode,босс за боссом
-INF,endless mode,бесконечный режим
-TRAINING,training,обучение
-
-WELCOME_TO_TRAINING,Welcome to the training. This training was created to introduce players to the experimental version of the `1vsALL` project. In the future some mechanics/visualizations may change.,Добро пожаловать на обучение. Данное обучение создано для ввода игроков в експерементальную версию проекта `1vsALL`. В будующем некоторые механники/визуализации могут измениться.
-THIS_IS_STATS,This menu is intended to provide an overview of the character's current status.,Это меню предназначено для обзора текущего статуса персонажа.
-THIS_IS_INV, This menu is designed to view the character's current equipment. Items need to be integrated into the gameplay. You won't see them yet.,Данное меню предназначено для просмотра текущего снаряжения персонажа. На данный момент предметы нужно интегрировать в игровой процесс. Но вы их пока не увидите.
-THIS_IS_MAP,This menu is designed to review the current position of the character and plan actions.,Это меню предназначено для просмотра текущего положения персонажа и планирования действий.
-THIS_IS_SHOP,This square is a safe store. It acquires new improvements and/or deteriorations in characteristics. In-game items will also be added soon.,Этот квадрат является безопасным магазином. В нем приобретаются новые улучшения и/или ухудшения характеристик. Вскоре также добавятся внутриигровые предметы.
-THIS_IS_OCUPED_SHOP,This square is an occupied store. Kill the enemies in this place to enter it. It acquires new improvements and/or deteriorations in characteristics. In-game items will also be added soon.,Этот квадрат является окупированным магазином. Убейте врагов вэтом месте чтобы войти в него. В нем приобретаются новые улучшения и/или ухудшения характеристик. Вскоре также добавятся внутриигровые предметы.
-THIS_IS_ARENA,This  area is a battlefield. First you will destroy the enemies and only then will you be able to gain safe passage.,Эта территория является полем боя. Сначала вы уничтожите врагов и только тогда сможете получить безопасный проход.
-THIS_IS_EXIT,Your target may be in this area. You must reach the target.,На этой области может находится ваша цель. Вы должны достичь цели.
-TRAINING_END,At this moment you can left-click on the next active battlefield/shop button.,когда это сообщение закроется вы можете щелкнуть левой кнопкой мыши по кнопке следующего активного поля боя/магазина.
 ADD_SAVE,new game,новая игра
 START_TRAIN,I'll go first,я иду первым
 BREAK_TRAIN,I know it,я знаю это
@@ -90,6 +74,6 @@ TRAIN_DIALOG_2,*to start the study you need to press '>'. to cancel the study yo
 OCUPATED_LEGEND,ocupacted shop/altar,захваченный магазин/алтарь
 SHOP_LEGEND,shop/altar,магазин/алтарь
 BOSS_LEGEND,monstr,монстр
-SECRET_LEGEND,hided place,скрытое место
+
 YOU,you,ты
 F_S_D,[color=gold]Employers[/color]: [color=gold]We[/color] hired [color=3771a1]you[/color] to escort [color=gold]us[/color] to the [color=silver]local temple[/color] and lead [color=gold]us[/color] inside [color=silver]it[/color]. It is your duty to ensure [color=gold]our[/color] safety in this [color=silver]temple[/color]. We follow you.,[color=gold]Работодатели[/color]: [color=gold]Мы[/color] наняли [color=3771a1]вас[/color] для сопровождения [color=gold]нас[/color] в [color=silver]местный храм[/color] и провели [color=gold]нас[/color] внутри [color=silver]его[/color]. Ваша обязанность - обеспечить [color=gold]нам[/color] безопасность в этом [color=silver]храмe[/color]. Мы следуем затобой.

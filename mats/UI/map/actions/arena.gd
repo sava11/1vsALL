@@ -38,7 +38,7 @@ func get_summon_enemy_paths()->PackedStringArray:
 	var names=PackedStringArray([])
 	for e in enemys:
 		if e is enemy_data:
-			names.append(e.en)
+			names.append(e.enemy)
 	return names
 func get_bosses()->Array[boss_data]:
 	var ens:Array[boss_data] = []

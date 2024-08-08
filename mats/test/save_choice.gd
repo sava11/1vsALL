@@ -3,6 +3,8 @@ var tp=[]
 var cur_name=""
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	gm.player_data=gm.start_player_data.duplicate(true)
+	gm.game_prefs=gm.start_game_prefs.duplicate(true)
 	for e in DirAccess.get_files_at(gm.save_path):
 		if e.contains(gm.suffix):
 			var f=FileAccess.open(gm.save_path+"/"+e,FileAccess.READ)
@@ -14,6 +16,8 @@ func _ready():
 				save_obj.get_node("data/cont/death/value").text=str(data.player_data.deaths)
 				save_obj.get_node("data/cont/lvls/value").text=str(data.player_data.runned_lvls)
 				save_obj.get_node("data/cont/seed/num").text=str(data.game_prefs.seed)
+				for bss in save_obj.get_node("data/cont/bosses").get_children():
+					bss.visible=bss.get_index()<data.game_prefs.bosses_died
 				save_obj.get_node("Panel/btns/Button").button_down.connect(
 					Callable(func():
 						gm.fname=e.split(".")[0]
@@ -35,7 +39,10 @@ func _ready():
 func _on_button_button_down():
 	gm.fname=cur_name
 	if gm.game_prefs.seed==-1:
-		gm.game_prefs.seed=randi()
+		var t=fnc.rnd.state
+		gm.game_prefs.seed=fnc.rnd.randi()
+		print(gm.game_prefs.seed)
+		fnc.rnd.state=t
 		fnc.rnd.seed=gm.game_prefs.seed
 	
 	gm.save_file_data()

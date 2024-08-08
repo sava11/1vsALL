@@ -5,7 +5,6 @@ var cur_loc=null
 var game_was_paused:=false
 func _ready():
 	var lvl=null
-	#сделать перемну уровней!
 	if !gm.game_prefs.scripts.traied:
 		lvl=preload("res://mats/UI/map/locs/training/training.tscn").instantiate()
 	else:
@@ -103,8 +102,9 @@ func _reload_game():
 	if gm.game_prefs.scripts.traied:
 		gm.game_prefs.seed=randi()
 		fnc.rnd.seed=gm.game_prefs.seed
-		
-		gm.sn.erase(str(locs_cont.get_child(0).get_path()))
+		for e in gm.sn.keys():
+			if e.contains(str(locs_cont.get_child(0).get_path())):
+				gm.sn.erase(e)
 		locs_cont.get_child(0).name+="_deled"
 		locs_cont.get_child(0).queue_free()
 		var lg=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
@@ -112,16 +112,10 @@ func _reload_game():
 	else:
 		for e in $cl/map/map/cont/locs/map.get_children():
 			e.runned=false
-		$cl/map/map/cont/locs/map.set_cur_pos($cl/map/map/cont/locs/map/place)
+		$cl/map/map/cont/locs/map.set_cur_pos($cl/map/map/cont/locs/map.get_child(0))
 	if $world.get_child(0) is level_template:
 		$world.get_child(0).queue_free()
 	#await get_tree().process_frame
-	var temp_data=gm.start_game_prefs.duplicate(true)
-	for e in gm.game_prefs:
-		if ["seed","scripts"].find(e)==-1:
-			gm.game_prefs[e]=temp_data[e]
-	gm.player_data=gm.start_player_data.duplicate(true)
-	$cl/map.upd_by_sts()
 	gm.save_file_data()
 
 func _on_retry_button_down():

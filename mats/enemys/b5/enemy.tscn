@@ -2050,9 +2050,10 @@ script = ExtResource("1_nxatm")
 run_speed = 55.0
 stop_range_from = 150.0
 stop_range_to = 200.0
-def_to = 1.2
-hp_from = 6.5
-hp_to = 8.0
+def_from = 0.8
+def_to = 0.9
+hp_from = 5.5
+hp_to = 7.5
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
@@ -2092,6 +2093,8 @@ attack_anim_name = "attack1"
 drawing = false
 percent = 0.6
 attack_range = 200.0
+damage_from = 0.5
+damage_to = 0.8
 
 [node name="visual" type="Node2D" parent="."]
 

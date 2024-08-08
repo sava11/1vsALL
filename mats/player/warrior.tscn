@@ -1,7 +1,8 @@
-[gd_scene load_steps=160 format=3 uid="uid://shpfq3okltdw"]
+[gd_scene load_steps=162 format=3 uid="uid://shpfq3okltdw"]
 
 [ext_resource type="Script" path="res://mats/player/player_test.gd" id="1_mliog"]
 [ext_resource type="Texture2D" uid="uid://bp75v23tiq8d" path="res://mats/imgs/warrior/Down/WarriorDownAttack01.png" id="2_8hpoa"]
+[ext_resource type="Shader" path="res://mats/shaders/outline.gdshader" id="2_r2m5i"]
 [ext_resource type="Texture2D" uid="uid://cohrueo12es" path="res://mats/imgs/warrior/Left/WarriorLeftAttack01.png" id="3_sfa8l"]
 [ext_resource type="Texture2D" uid="uid://pnjoc0nbh5fv" path="res://mats/imgs/warrior/Right/WarriorRightAttack01.png" id="4_10dtu"]
 [ext_resource type="Texture2D" uid="uid://cj6ly83kliema" path="res://mats/imgs/warrior/Up/WarriorUpAttack01.png" id="5_7hn16"]
@@ -22,6 +23,12 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dyk5m"]
 friction = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_llp7v"]
+resource_local_to_scene = true
+shader = ExtResource("2_r2m5i")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sbg"]
 atlas = ExtResource("2_8hpoa")
@@ -1430,6 +1437,8 @@ value = 61.97
 show_percentage = false
 
 [node name="sp" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_llp7v")
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_53mpi")
 animation = &"idle_right"
 offset = Vector2(0, -15)
@@ -1452,9 +1461,8 @@ monitorable = false
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-monitoring = false
-monitorable = false
 script = ExtResource("19_0i1a1")
+tspeed = 1.0
 
 [node name="col" type="CollisionShape2D" parent="hurt_box"]
 visible = false
@@ -1483,7 +1491,9 @@ shape = SubResource("CircleShape2D_mlw8w")
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered"]
 [connection signal="area_exited" from="hurt_box" to="hurt_box" method="_on_area_exited"]
 [connection signal="h_ch" from="hurt_box" to="." method="_on_hurt_box_h_ch"]
+[connection signal="invi_ended" from="hurt_box" to="." method="_on_hurt_box_invi_ended"]
 [connection signal="invi_ended" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_ended"]
+[connection signal="invi_started" from="hurt_box" to="." method="_on_hurt_box_invi_started"]
 [connection signal="invi_started" from="hurt_box" to="hurt_box" method="_on_hurt_box_invi_started"]
 [connection signal="no_he" from="hurt_box" to="." method="_on_hurt_box_no_he"]
 [connection signal="timeout" from="hurt_box/Timer" to="hurt_box" method="_on_Timer_timeout"]

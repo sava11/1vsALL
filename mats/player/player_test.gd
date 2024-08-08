@@ -291,6 +291,10 @@ func _on_body_exited(b):
 
 func _on_hurt_box_area_entered(area):
 	cd.prefs["cur_hp"]=hb.he
-	pass # Replace with function body.
+
+func _on_hurt_box_invi_started():
+	$sp.use_parent_material=false
 
 
+func _on_hurt_box_invi_ended():
+	$sp.use_parent_material=true

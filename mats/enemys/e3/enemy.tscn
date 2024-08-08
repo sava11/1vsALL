@@ -1561,7 +1561,8 @@ attack_name = "a1"
 attack_anim_name = "attack"
 attack_time_period = 1.5
 attack_range = 40.0
-damage_to = 1.7
+damage_from = 0.7
+damage_to = 1.2
 static_crit_chance = true
 crit_chance_to = 0.1
 

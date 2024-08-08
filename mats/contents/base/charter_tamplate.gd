@@ -108,7 +108,6 @@ func _process(_delta):
 	queue_redraw()
 func _integrate_forces(st):
 	#see.rotation_degrees=fnc.angle(target.global_position-global_position)
-
 	see.target_position=target.global_position-global_position
 	if target.state!="d":
 		if state!="wait_anim" and state!="d":

@@ -216,6 +216,7 @@ func merge_stats(stats:Dictionary):
 			player_data.stats[e]=clamp(player_data.stats[e]+stats[e],gm.objs.stats[e].min_v,999999999)
 const start_game_prefs={
 	"seed":-1,
+	"bosses_died":0,
 	"scripts":{
 		"traied":false,
 		"message_to_train_accepted":false,
@@ -242,6 +243,7 @@ func save_data():
 func load_data(n:Dictionary):
 	player_data=n.player_data
 	game_prefs=n.game_prefs
+	game_prefs.dif=0
 	fnc.rnd.seed=int(game_prefs.seed)
 func _ready():
 	connect("save_data_changed",Callable(gm,"_save_node"))

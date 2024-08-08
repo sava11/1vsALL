@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://75sadqvlf16"]
+[gd_scene load_steps=19 format=3 uid="uid://75sadqvlf16"]
 
 [ext_resource type="Script" path="res://mats/test/game.gd" id="1_tg1vd"]
 [ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/map/map.tscn" id="3_ojpc5"]
@@ -27,6 +27,12 @@ font_color = Color(0.643137, 0.647059, 0.317647, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cj41k"]
 font_color = Color(1, 0.866667, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0yko5"]
+font_size = 14
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
@@ -171,14 +177,17 @@ theme_override_constants/separation = 2
 [node name="time_lbl" type="Label" parent="cl/game_ui/status/time_cont"]
 layout_mode = 2
 text = "TIME_TO_SURVIVE"
+label_settings = SubResource("LabelSettings_0yko5")
 
 [node name="sep" type="Label" parent="cl/game_ui/status/time_cont"]
 layout_mode = 2
 text = ":"
+label_settings = SubResource("LabelSettings_0yko5")
 
 [node name="time" type="Label" parent="cl/game_ui/status/time_cont"]
 layout_mode = 2
 text = "12"
+label_settings = SubResource("LabelSettings_0yko5")
 
 [node name="dif" type="Label" parent="cl/game_ui/status"]
 layout_mode = 0

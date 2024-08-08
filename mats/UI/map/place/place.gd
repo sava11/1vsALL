@@ -51,8 +51,13 @@ func save_data():
 			"runned":runned,
 		}
 	}
+var loaded:=false
 func load_data(n:Dictionary):
 	runned=n["runned"]
+	if runned:
+		gm.game_prefs.dif+=local_difficulty_add_step
+		gm.player_data.runned_lvls+=1
+		loaded=true
 #func add_neighbor(n:place):
 	#neigbors.append(n)
 	#n.neigbors.append(self)
@@ -76,8 +81,11 @@ func img_think():
 			original=arena_color
 	else:
 		if secret and !player_here:
-			$visual.texture=preload("res://mats/UI/map/imgs/secret.png")
 			original=secret_color
+			if shop:
+				$visual.texture=preload("res://mats/UI/map/imgs/shop.png")
+			else:
+				$visual.texture=preload("res://mats/UI/map/imgs/secret.png")
 		else:
 			$visual.texture=preload("res://mats/UI/map/imgs/hero.png")
 			original=player_color
@@ -114,7 +122,7 @@ func _ready():
 func _draw():
 	for n in neighbors:
 		if is_instance_valid(n) and n.visible:
-			draw_line(size/2,(n.global_position-global_position+size)/2,Color.LIGHT_SLATE_GRAY,2)
+			draw_line(size/2.0,(n.global_position-global_position+size)/2.0,Color.LIGHT_SLATE_GRAY,2)
 var stage:bool=false
 var time:float=0
 func _process(delta):
@@ -199,17 +207,22 @@ func _on_button_down():
 			place_panel_node.connect_to(self,"to_shop","shop_cancel")
 		else:
 			runned=true
-			var temp_d={}
-			for e in ingame_statuses:
-				temp_d.merge({e.status:e.value})
-			gm.merge_stats(temp_d)
-			if map!=null:
-				map.upd_by_sts()
+			merge_stats()
 	else:
 		if shop:
 			create_panel()
 			runned=true
 			place_panel_node.connect_to(self,"to_shop","shop_cancel")
+var merged_stats:=false
+func merge_stats():
+	if !merged_stats:
+		var temp_d={}
+		for e in ingame_statuses:
+			temp_d.merge({e.status:e.value})
+		gm.merge_stats(temp_d)
+		merged_stats=true
+		if map!=null:
+			map.upd_by_sts()
 func to_shop():
 	emit_signal("choice_shop")
 	map.shop_items.merge({self:{"":0}})
@@ -222,6 +235,7 @@ func play():
 	var level_container=get_parent().level_container
 	if level_container!=null and level!="":
 		lvl=load(level).instantiate()
+		lvl.place_node=self
 		lvl.time=level_time
 		lvl.enemys_data=arena
 		lvl.completed.connect(Callable(map,"level_completed").bind(self))
@@ -253,7 +267,10 @@ func shop_cancel():
 	emit_signal("choice_panel_hided")
 
 func _on_runned_changed(res:bool):
-	if res and last_runned!=runned:
-		gm.game_prefs.dif+=local_difficulty_add_step
-		gm.player_data.runned_lvls+=1
+	if res:
+		if !loaded:
+			gm.game_prefs.dif+=local_difficulty_add_step
+			gm.player_data.runned_lvls+=1
+			if arena!=null and arena.has_bosses():
+				gm.game_prefs.bosses_died+=1
 	emit_signal("lvl_end")

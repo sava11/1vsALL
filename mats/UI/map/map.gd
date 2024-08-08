@@ -193,6 +193,17 @@ func get_end_price(sts:Dictionary):
 		p+=sts[e]*gm.objs.stats[e].price
 	return p
 func _on_player_no_he():
+	if !gm.game_prefs.scripts.traied:
+		for e in $map/cont/locs/map.get_children():
+			e.runned=false
+		$map/cont/locs/map.set_cur_pos($map/cont/locs/map/place)
+	for e in gm.sn.keys():
+		if e.contains(str($map/cont/locs.get_child(0).get_path())):
+			gm.sn.erase(e)
+	var temp_data=gm.start_game_prefs.duplicate(true)
+	for e in gm.game_prefs:
+		if ["scripts"].find(e)==-1:
+			gm.game_prefs[e]=temp_data[e]
 	get_parent().get_node("game_ui/death").show()
 	get_tree().set_deferred("paused",true)
 

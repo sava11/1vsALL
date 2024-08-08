@@ -1482,7 +1482,7 @@ load_scene = ExtResource("4_6ac1a")
 attack_name = "a1"
 attack_anim_name = "attack"
 attack_range = 200.0
-damage_to = 1.5
+damage_to = 1.2
 
 [node name="drop" parent="." instance=ExtResource("5_3kdqb")]
 money_drop_percent = 0.025

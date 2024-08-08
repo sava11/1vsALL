@@ -39,7 +39,7 @@ func summon():
 				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
-					"elite":fnc._with_chance(0.1),
+					"elite":fnc._with_chance(gm.game_prefs.elite_chance),
 					"target":get_parent().get("target")
 				}
 				en.global_position=pos
@@ -57,7 +57,7 @@ func summon():
 				en.load_scene=load(enemys[perc].enemy)
 				en.scene_data={
 					"global_position":pos,
-					"elite":fnc._with_chance(0.1),
+					"elite":fnc._with_chance(gm.game_prefs.elite_chance),
 					"target":get_parent().get("target")
 				}
 				en.global_position=pos
@@ -66,7 +66,7 @@ func summon():
 			var ang=360.0/float(count)
 			for i in range(count):
 				var e=custom_scene.instantiate()
-				custom_data.merge({"target":get_parent().get("target")})
+				custom_data.merge({"target":get_parent().get("target"),"elite":fnc._with_chance(gm.game_prefs.elite_chance)})
 				fnc.setter(e,custom_data)
 				if auto_rotate:
 					e.rotation_degrees=ang*i+global_rotation_degrees+rotate_offset

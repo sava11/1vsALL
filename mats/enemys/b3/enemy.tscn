@@ -1659,10 +1659,10 @@ statuses = {
 "i": "idle",
 "r": "run"
 }
-def_from = 2.0
-def_to = 4.0
-hp_from = 3.0
-hp_to = 4.0
+def_from = 1.4
+def_to = 1.7
+hp_from = 2.5
+hp_to = 3.3
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0
@@ -1727,7 +1727,7 @@ libraries = {
 material = SubResource("ShaderMaterial_7g0ve")
 sprite_frames = SubResource("SpriteFrames_a6ixc")
 animation = &"heal_left"
-frame = 7
+frame = 6
 offset = Vector2(0, -15)
 
 [connection signal="area_entered" from="hurt_box" to="hurt_box" method="_on_area_entered"]

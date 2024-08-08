@@ -3,11 +3,11 @@ extends "res://mats/contents/base/charter_tamplate.gd"
 @onready var s2=$summon2
 @onready var a=$attack
 func in_status_think():
-	if a.active==true and a.bs!=[] and current_action==a.attack_name and attacks_timer>=a.attack_time_period:
+	if a.active and a.bs!=[] and current_action==a.attack_name and attacks_timer>=a.attack_time_period:
 		state=a.attack_name
-	if s.active==true and current_action==s.do_name and attacks_timer>=s.time_period:
+	if s.active and current_action==s.do_name and attacks_timer>=s.time_period:
 		state=s.do_name
-	if s2.active==true and current_action==s2.do_name and attacks_timer>=s2.time_period:
+	if s2.active and current_action==s2.do_name and attacks_timer>=s2.time_period:
 		state=s2.do_name
 func past_ready():
 	s.custom_data={
@@ -17,15 +17,15 @@ func past_ready():
 		"collision_layer":2,
 		"collision_mask":8,
 		"autoset":true,
-		"damage":fnc._with_dific(0.8,dif),
-		"crit_damage":fnc._with_dific(2.0,dif),
-		"crit_chance":0.3,
-		"sqrt_per_sec":12.5,
+		"damage":0.34,
+		"crit_damage":0.05,
+		"crit_chance":0,
+		"sqrt_per_sec":12,
 		"del_sqrt":632,
 	}
-	s2.custom_data={
+	s2.custom_data.merge({
 		"dif":dif,
-	}
+	})
 func pre_status():
 	a.rotation_degrees=fnc.angle(global_position.direction_to(target.global_position))
 func new_dos(_delta:float):

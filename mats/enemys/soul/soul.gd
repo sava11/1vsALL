@@ -11,7 +11,6 @@ func _on_t_timeout():
 	var e=preload("res://mats/contents/summoner/summoner.tscn").instantiate()
 	var ens=get_node("../../../").enemys_data.get_summon_enemy_paths()
 	var itms_v=get_node("../../../").enemys_data.get_summon_enemy_percents()
-	print(itms_v)
 	e.load_scene=load(ens[fnc._with_chance_ulti(itms_v)])
 	e.time=0.5
 	e.time_curve=Curve.new()
@@ -21,7 +20,8 @@ func _on_t_timeout():
 	e.scene_data={
 		"global_position":global_position,
 		"dif":dif,
-		"elite":gm.game_prefs.elite_chance
+		"elite":elite,
+		"target":target
 		}
 	#e.target_path=fnc.get_hero().get_path()
 	e.global_position=global_position

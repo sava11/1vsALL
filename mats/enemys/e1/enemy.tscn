@@ -1179,6 +1179,8 @@ monitorable = false
 attack_name = "a1"
 attack_anim_name = "attack"
 attack_range = 20.0
+damage_from = 0.5
+damage_to = 1.05
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_q1cby")

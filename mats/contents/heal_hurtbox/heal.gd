@@ -1,5 +1,5 @@
 extends Node
-@export var active:bool=false
+@export var active:bool=true
 @export var healing:bool=false
 @export var hurtbox_path:NodePath="../"
 @export_range(0.01,100) var heal_per_sec:float=1
