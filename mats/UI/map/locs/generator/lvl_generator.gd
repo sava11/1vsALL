@@ -1,11 +1,7 @@
 extends "res://mats/UI/map/locs/map_aditional_script_tamplate.gd"
 signal map_generated
 signal game_ended
-func get_rare()->float:
-	var runned:int
-	for e in get_children():
-		runned+=int(e.runned)
-	return float(runned)/float(get_child_count())
+
 func data_to_save():
 	var pos=[]
 	for e in exceptions:
@@ -88,10 +84,10 @@ func gen_map_v1(positions,neighbors):
 			scn.shop=true
 			if fnc._with_chance(0.25):
 				scn.arena=create_arena()
-				scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.5)
+				scn.local_difficulty_add_step=fnc.rnd.randf_range(0.2,0.25)
 		else:
 			scn.arena=create_arena()
-			scn.local_difficulty_add_step=fnc.rnd.randf_range(-0.15,0.5)
+			scn.local_difficulty_add_step=fnc.rnd.randf_range(0.2,0.25)
 		add_child(scn)
 	var mass:=get_children()
 	#print(get_child_count())
@@ -119,21 +115,20 @@ func gen_map_v1(positions,neighbors):
 	var bosses=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
 	"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
 	var place_with_bosses=[]
-	while !bosses.is_empty():
+	var filtered_mass=mass.duplicate(true).filter((func(x): return !x.secret and !x.shop))
+	filtered_mass.sort_custom((func(x,y):return x.global_position.distance_to(y.global_position)>=10*(x.size.x+distance_betveen_nodes)))
+	for e in range(bosses.size()):
 		var bd=boss_data.new()
 		bd.boss=bosses[0]
 		bd.name=bosses[0]
-		var filtered_mass=mass.duplicate(true).filter(
-			(func(x): return !x.secret and !x.shop #and (place_with_bosses.is_empty() or place_with_bosses.filter((
-				#func(y):
-					#return dijkstra(x.get_index(),y.get_index(),false).size()<5)
-				#).is_empty())
-		))
 		var node:place=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
+		while dijkstra(node.get_index(),0,false).is_empty():
+			node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
 		place_with_bosses.append(node)
 		bosses_pos.append(node)
 		node.arena.enemys.append(bd)
 		node.arena.spawning=false
+		node.ingame_statuses.clear()
 		bosses.remove_at(0)
 		
 	#var e_id=0

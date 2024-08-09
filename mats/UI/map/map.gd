@@ -10,11 +10,15 @@ var item_rare:float=0
 signal in_shop()
 signal location_added(n:level_template)
 signal place_completed()
-func set_item_rare():
-	var runned:int
+func get_dif()->float:
+	var max_dif:float=0
+	var cur_dif:float=0
 	for e in map.get_children():
-		runned+=int(e.runned)
-	item_rare=float(runned)/float(map.get_child_count())
+		max_dif+=e.local_difficulty_add_step
+		if e.runned:cur_dif+=e.local_difficulty_add_step
+	return cur_dif/max_dif
+func set_item_rare():
+	item_rare=get_dif()
 
 #func show_death(b:bool=true):
 	#for e in map.get_children():
@@ -112,7 +116,7 @@ func set_cur_pos(p:place):
 	var w=p.position.x
 	$map/cont.scroll_horizontal=w+p.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")
 	var h=p.position.y
-	$map/cont.scroll_vertical=h+p.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")
+	$map/cont.scroll_vertical=h+p.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")/2
 var shop_items={}#object:[item1,...]
 func cr_stats():
 	var d0:Dictionary={}
@@ -155,7 +159,7 @@ func _on_in_shop():
 						t=fnc.rnd.randi_range(sd.lvls[n[1]].stats[e1].x,sd.lvls[n[1]].stats[e1].y)
 					c_stats[e1]=t
 			shop_items[current_pos].merge({n[0]+"/"+str(e):{"lvl":n[1],"stats":c_stats,"val":fnc._with_dific(get_end_price(c_stats),gm.game_prefs.dif)}})
-			print(shop_items[current_pos][n[0]+"/"+str(e)],"\n---\n",get_end_price(c_stats))
+			#print(shop_items[current_pos][n[0]+"/"+str(e)],"\n---\n",get_end_price(c_stats))
 	$map.hide()
 	$shop.show()
 	$stats/cont/back.show()
@@ -212,4 +216,4 @@ func _on_to_self_button_down():
 	var w=current_pos.position.x
 	$map/cont.scroll_horizontal=w+current_pos.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")
 	var h=current_pos.position.y
-	$map/cont.scroll_vertical=h+current_pos.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")
+	$map/cont.scroll_vertical=h+current_pos.size.y/2-$map/cont/locs.get("theme_override_constants/margin_bottom")/2

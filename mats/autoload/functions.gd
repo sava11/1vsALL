@@ -35,14 +35,7 @@ func sqrtV(v:Vector2):
 	return Vector2(sqrt(v.x),sqrt(v.y))
 func move(ang):
 	return Vector2(cos(deg_to_rad(ang)),sin(deg_to_rad(ang)))
-func jos(a,b):
-	if b!=0:return b*round(a/b)
-	else:return 0
-func circ(a,mn,mx):
-	return abs(mx+a)%abs(mx)+mn
-#func circf(a:float,mn,mx):
-#	var inta=int(a)
-#	return abs(inta)%abs(mx+1)+mn+float(a-inta)
+
 func i_search(a,i):
 	var inte=0
 	for k in a:

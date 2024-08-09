@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bi0tc3pn6sgha"]
+[gd_scene load_steps=11 format=3 uid="uid://bi0tc3pn6sgha"]
 
 [ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
 [ext_resource type="Texture2D" uid="uid://df16ud3cfcbxw" path="res://mats/UI/map/imgs/map.png" id="3_e6gjm"]
 [ext_resource type="Texture2D" uid="uid://ye383w3epgm" path="res://mats/imgs/icons/undo-arrow.png" id="7_ubhsm"]
+[ext_resource type="PackedScene" uid="uid://d2iylodnns5c3" path="res://mats/UI/map/place/place_item_panel.tscn" id="9_7ny7t"]
 [ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="9_77n47"]
 [ext_resource type="Texture2D" uid="uid://bfvhd4vvmo1qr" path="res://mats/UI/imgs/scroll.png" id="11_1v8av"]
 [ext_resource type="Texture2D" uid="uid://b843pwetjevm0" path="res://mats/UI/map/imgs/shop.png" id="12_00ogn"]
@@ -170,9 +171,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 117
-theme_override_constants/margin_top = 62
+theme_override_constants/margin_top = 96
 theme_override_constants/margin_right = 117
-theme_override_constants/margin_bottom = 62
+theme_override_constants/margin_bottom = 96
+
+[node name="panel" type="Control" parent="map"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" parent="map/panel" instance=ExtResource("9_7ny7t")]
+visible = false
+layout_mode = 0
 
 [node name="stats" type="Panel" parent="."]
 layout_mode = 0

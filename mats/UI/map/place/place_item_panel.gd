@@ -29,6 +29,7 @@ func clean():
 		#hide()
 var in_:=false
 func add_item(img:Texture2D,iname:String,value:float,value_suffix:String=""):
+	size.y=0
 	var itm=preload("res://mats/UI/map/status_item/item.tscn").instantiate()
 	itm.value_type=3
 	itm.view=true

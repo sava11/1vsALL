@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuuh64aph61qq"]
+[gd_scene load_steps=3 format=3 uid="uid://cuuh64aph61qq"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/generator/lvl_generator.gd" id="1_sxwos"]
+
+[sub_resource type="Curve" id="Curve_feuch"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="lvl_generator" type="Control"]
 layout_mode = 3
@@ -10,3 +14,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sxwos")
+curve_dificulty = SubResource("Curve_feuch")

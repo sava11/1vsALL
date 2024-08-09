@@ -2,6 +2,19 @@ extends Control
 signal _load_data(node:Object,path:String)
 signal save_data_changed(dict:Dictionary)
 signal player_position_changed(_place:place)
+@export var curve_dificulty:Curve
+func _get_dif()->float:
+	var max_dif:float=0
+	var cur_dif:float=0
+	for e in get_children():
+		max_dif+=e.local_difficulty_add_step
+		if e.runned:cur_dif+=e.local_difficulty_add_step
+	return curve_dificulty.sample(cur_dif/max_dif)
+func get_dif(value:float)->float:
+	var max_dif:float=0
+	for e in get_children():
+		max_dif+=e.local_difficulty_add_step
+	return curve_dificulty.sample(value/max_dif)
 func data_to_save()->Dictionary:return{}
 func save_data():
 	var pos=""
@@ -27,25 +40,25 @@ func set_cur_pos(pos:place):
 			ps=get_children()[fnc.rnd.randi_range(0,get_child_count()-1)]
 		current_pos=ps
 	current_pos.runned=true
-	var nearst:Array[place]=[]
+	#var nearst:Array[place]=[]
 	var t=get_children()
-	t.sort_custom(
-			(Callable(func(a, b):
-				var dist_a = a.global_position.distance_to(current_pos.global_position)
-				var dist_b = b.global_position.distance_to(current_pos.global_position)
-				return dist_a < dist_b)
-		))
-	var count=10
-	if t.size()<10:
-		count-=t.size()
-	for e in range(count):
-		nearst.append(t[e])
-	for cur_place in nearst:
+	#t.sort_custom(
+			#(Callable(func(a, b):
+				#var dist_a = a.global_position.distance_to(current_pos.global_position)
+				#var dist_b = b.global_position.distance_to(current_pos.global_position)
+				#return dist_a < dist_b)
+		#))
+	#var count=8
+	#if t.size()<8:
+		#count-=t.size()
+	#for e in range(count):
+		#nearst.append(t[e])
+	for cur_place in t:
 		cur_place.player_here=cur_place==current_pos
-		var corned_=is_on_corner(nearst,cur_place)
-		if corned_:
-			cur_place.neighbors.append(current_pos)
-			current_pos.neighbors.append(cur_place)
+		#var corned_=is_on_corner(nearst,cur_place)
+		#if corned_:
+			#cur_place.neighbors.append(current_pos)
+			#current_pos.neighbors.append(cur_place)
 			#cur_place.choice_play.connect((
 				#func():
 					#var _lvl_:level_template=preload("res://mats/lvls/lvl1/lvl1_2.tscn").instantiate()
@@ -68,8 +81,7 @@ func set_cur_pos(pos:place):
 					#
 			#))
 		set_ingame_stats(cur_place)
-		
-		cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1) and !corned_
+		cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1) #and !corned_
 	gm.save_file_data()
 	emit_signal("player_position_changed",current_pos)
 func _pre_ready():pass
@@ -98,12 +110,16 @@ func _ready():
 				Callable(
 					func(b:place):
 						if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
+							current_pos.player_here=false
 							set_cur_pos(b)).bind(e)
 				)
 			e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
+	for e in get_children():
+		if e is place:
+			e.place_panel_node=get_node("../../../panel/Panel")
+	set_cur_pos(current_pos)
 	_post_ready()
 
-	set_cur_pos(current_pos)
 
 	var t2=Time.get_time_dict_from_system()
 	print(t2.minute*60+t2.second-t1.minute*60-t1.second)
@@ -210,7 +226,7 @@ func is_on_corner(data:Array[place],to:place):
 	return false
 
 func set_ingame_stats(_place:place):
-	if _place.ingame_statuses.is_empty():
+	if _place.ingame_statuses.is_empty() and !_place.shop and _place.arena!=null and _place.arena.get_bosses().is_empty():
 		var a:Array[ingame_status]=[]
 		var keys:Array=gm.player_data.stats.keys()
 		for e in range(fnc._with_chance_ulti([0.05,0.3,0.35,0.2,0.1])):

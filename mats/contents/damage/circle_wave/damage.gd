@@ -13,9 +13,6 @@ func pre_ready():
 	for e in range(count+1):
 		pols.append(fnc.move(ang*(count)-ang*e)*(radius-width))
 	think(pols)
-	
-func past_ready():
-	print(damage," ",crit_damage," ",crit_chance)
 func _process(delta):
 	queue_redraw()
 	obj.scale.x+=sqrt_per_sec*delta

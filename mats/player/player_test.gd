@@ -1,4 +1,4 @@
-extends RigidBody2D
+class_name player extends RigidBody2D
 @export_group("parametrs")
 @export var elite:bool=false
 @export_range(0,100) var dif:float=1

@@ -1,5 +1,6 @@
 extends RigidBody2D
 @export_group("parametrs")
+@export var target:player
 @export var dif:float=0
 @export var elite:bool=false
 @export var run_speed:float=25.0
@@ -18,11 +19,10 @@ extends RigidBody2D
 @export_range(0,99999) var hp_from:float=1
 @export_range(0,99999) var hp_to:float=1
 
-var target
 @onready var hb=$hurt_box
 @onready var na=$na
 @onready var sp=get_node_or_null("visual/sp")
-@onready var ap=get_node_or_null("visual/ap")
+@onready var ap:AnimationPlayer=get_node_or_null("visual/ap")
 @onready var see=$see
 var doings_times=[]
 var cur_target_pos=Vector2.ZERO
@@ -37,7 +37,7 @@ func get_sqrt(obj):
 	return fnc._sqrt(obj.global_position-global_position)
 var last_anim:int=0
 func set_anim(anim_name:String,to_target:Vector2=na.get_next_path_position(),oneshoot:bool=false,changeing_pos:bool=true):
-	if anim_name!="" and fnc._sqrt(to_target-global_position)>1 and sp!=null and ap!=null:
+	if anim_name!="" and sp!=null and ap!=null:#and fnc._sqrt(to_target-global_position)>1
 		var tname=""
 		var anim=get_ang_move(rad_to_deg((to_target-global_position).angle())+180,90)*int(changeing_pos)+last_anim*int(!changeing_pos)
 		last_anim=anim
@@ -109,22 +109,23 @@ func _process(_delta):
 func _integrate_forces(st):
 	#see.rotation_degrees=fnc.angle(target.global_position-global_position)
 	see.target_position=target.global_position-global_position
-	if target.state!="d":
-		if state!="wait_anim" and state!="d":
-			if eye_contact_with(target) and get_sqrt(target)<stop_range_to:
-				cur_target_pos=target.global_position
-				if to_idle() and state!="wait_anim" :
-					state="i"
-			if (get_sqrt(target)>=stop_range_to ) and to_idle():
-				cur_target_pos=target.global_position
-				state="r"
-			if get_sqrt(target)<stop_range_from and eye_contact_with(target) and to_idle():
-				cur_target_pos=global_position+(global_position-target.global_position).normalized()*stop_range_from
-				state="r"
-			in_status_think()
-			na.target_position=cur_target_pos
-	else:
-		state="i"
+	if state!="d":
+		if target.state!="d":
+			if state!="wait_anim":
+				if eye_contact_with(target) and get_sqrt(target)<stop_range_to:
+					cur_target_pos=target.global_position
+					if to_idle() and state!="wait_anim" :
+						state="i"
+				if (get_sqrt(target)>=stop_range_to ) and to_idle():
+					cur_target_pos=target.global_position
+					state="r"
+				if get_sqrt(target)<stop_range_from and eye_contact_with(target) and to_idle():
+					cur_target_pos=global_position+(global_position-target.global_position).normalized()*stop_range_from
+					state="r"
+				in_status_think()
+				na.target_position=cur_target_pos
+		else:
+			state="i"
 	pre_status()
 	find_status(st.get_step())
 	post_status()
@@ -145,7 +146,7 @@ func find_status(_delta:float):
 		na.max_speed=run_speed
 		var cvec=global_position.direction_to(na.get_next_path_position())*run_speed
 		na.set_velocity(cvec)
-		if na.is_navigation_finished() and (get_sqrt(target)<=stop_range_to):
+		if na.is_navigation_finished() and (get_sqrt(target)<=stop_range_to) and state!="d":
 			state="i"
 			return
 	if state=="i":
@@ -158,7 +159,7 @@ func find_status(_delta:float):
 		timers(_delta)
 		thinker()
 	if state=="d":
-		na.max_speed=run_speed
+		na.max_speed=0
 		set_anim(statuses[state])
 		na.set_velocity(Vector2.ZERO)
 	new_dos(_delta)

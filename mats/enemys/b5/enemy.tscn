@@ -2091,7 +2091,7 @@ count = 12
 attack_name = "a1"
 attack_anim_name = "attack1"
 drawing = false
-percent = 0.6
+percent = 0.5
 attack_range = 200.0
 damage_from = 0.5
 damage_to = 0.8
@@ -2114,7 +2114,7 @@ offset = Vector2(0, -15)
 [node name="summon" parent="." instance=ExtResource("32_wnw2d")]
 do_name = "a3"
 do_anim_name = "attack3"
-percent = 0.4
+percent = 0.2
 count = 64
 time_period = 3.0
 auto_rotate = true
@@ -2126,7 +2126,7 @@ custom_summon_radius = 1.0
 [node name="summon2" parent="." instance=ExtResource("32_wnw2d")]
 do_name = "a2"
 do_anim_name = "attack2"
-percent = 1.0
+percent = 0.3
 count = 3
 type = 2
 custom_scene = ExtResource("34_yjbhk")

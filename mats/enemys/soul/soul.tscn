@@ -33,6 +33,8 @@ lock_rotation = true
 custom_integrator = true
 contact_monitor = true
 script = ExtResource("1_nigp6")
+life_time_from = 2.0
+life_time_to = 5.0
 
 [node name="t" type="Timer" parent="."]
 

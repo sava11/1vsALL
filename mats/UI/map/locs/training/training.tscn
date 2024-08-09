@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://lfervjgmrcn8"]
+[gd_scene load_steps=43 format=3 uid="uid://lfervjgmrcn8"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/training/training.gd" id="1_1vgx1"]
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/map/place/place.tscn" id="2_uri1g"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://mats/UI/map/actions/arena.gd" id="4_gl7wn"]
 [ext_resource type="Script" path="res://mats/UI/map/statuses/ingame_status.gd" id="5_e34vk"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_boss_data.gd" id="6_1y3j1"]
+
+[sub_resource type="Curve" id="Curve_swmqv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Resource" id="Resource_outis"]
 script = ExtResource("3_s17os")
@@ -235,6 +239,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1vgx1")
+curve_dificulty = SubResource("Curve_swmqv")
 current_pos = NodePath("place0")
 
 [node name="place0" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
