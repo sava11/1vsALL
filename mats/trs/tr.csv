@@ -12,7 +12,7 @@ TITLE_KEY_HUMANS,key people:,ключевые люди:
 TITLE_SPECIAL_THANKS_TO,special thanks to:,большое спасибо:
 TITLE_DISIGNERS,disigners:,дизайнеры:
 TITLE_COMPOSITORS,composers:,композитор:
-
+THANKS_FOR_PLAYING,thanks for playing!,спасибо за игру!
 SCR_SZ,window size,размер окна
 FULL_SCREEN_MODE,fullscreen,полноэкранный
 LANG,language,язык
@@ -52,7 +52,6 @@ THE_SWORD_TEXT,sword upgrade,улучшение меча
 ARMOR_TEXT,armor upgrade,улучшение брони
 BOOTS_TEXT,boots upgrade,улучшение обуви
 item1_TEXT,test upgrade. Don't buy it.,тестовое улучшение. Не покупай его.
-
 
 DEF-HP_TEXT,update kit mixed with defance kit and hp kit,набор улучшений совмещённый с набором защиты и набором здоровья
 DEF_TEXT,defance update kit,набор улучшения защиты

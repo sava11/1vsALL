@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://75sadqvlf16"]
+[gd_scene load_steps=20 format=3 uid="uid://75sadqvlf16"]
 
 [ext_resource type="Script" path="res://mats/test/game.gd" id="1_tg1vd"]
 [ext_resource type="PackedScene" uid="uid://bi0tc3pn6sgha" path="res://mats/UI/map/map.tscn" id="3_ojpc5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cslmpv017rsb7" path="res://mats/imgs/warrior/hpbar_ico_fill.png" id="7_k67qa"]
 [ext_resource type="Texture2D" uid="uid://bg6gelhbbihsc" path="res://mats/imgs/warrior/staminabar_ico.png" id="8_i041s"]
 [ext_resource type="Texture2D" uid="uid://b8jiivuuv46l4" path="res://mats/imgs/warrior/staminabar_ico_fill.png" id="9_lfoli"]
+[ext_resource type="PackedScene" uid="uid://ejyfxg6ejh5b" path="res://game/auth/humans.tscn" id="11_qcw04"]
 [ext_resource type="Texture2D" uid="uid://btuulcxcyw3im" path="res://mats/imgs/warrior/money.png" id="11_stwkl"]
 [ext_resource type="PackedScene" uid="uid://113bvm1ichd2" path="res://mats/UI/dialog/dialog.tscn" id="11_usu0i"]
 
@@ -246,6 +247,51 @@ visible = false
 [node name="dialog" parent="cl" instance=ExtResource("11_usu0i")]
 visible = false
 
+[node name="end" type="MarginContainer" parent="cl"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_ukj6c")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="cl/end"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="cl/end"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="cl/end/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="cl/end/VBoxContainer"]
+layout_mode = 2
+text = "THANKS_FOR_PLAYING"
+horizontal_alignment = 1
+
+[node name="auth" parent="cl/end/VBoxContainer" instance=ExtResource("11_qcw04")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="cl/end"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="cl/end/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 76.0
+grow_vertical = 0
+text = "EXIT_TO_MENU"
+
 [node name="pause" type="ColorRect" parent="cl"]
 visible = false
 z_index = 3
@@ -301,6 +347,7 @@ bus = &"game"
 [connection signal="button_down" from="cl/game_ui/death/vbc/etm" to="." method="to_menu"]
 [connection signal="location_added" from="cl/map" to="." method="_on_pause_location_added"]
 [connection signal="place_completed" from="cl/map" to="." method="_on_place_completed"]
+[connection signal="button_down" from="cl/end/Control/Button" to="." method="to_menu"]
 [connection signal="button_down" from="cl/pause/vbc/cnt" to="." method="_on_cnt_button_down"]
 [connection signal="button_down" from="cl/pause/vbc/settings" to="." method="to_settings"]
 [connection signal="button_down" from="cl/pause/vbc/etm" to="." method="to_menu"]

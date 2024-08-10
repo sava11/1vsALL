@@ -126,4 +126,8 @@ func _on_retry_button_down():
 	$cl/game_ui/death.hide()
 func game_ended():
 	game_end=true
+	$cl/dialog.hide()
+	$cl/map.hide()
+	$cl/game_ui.hide()
+	$cl/end.show()
 	print("ended")
