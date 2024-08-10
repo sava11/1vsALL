@@ -1161,9 +1161,8 @@ contact_monitor = true
 script = ExtResource("1_af4n4")
 stop_range_from = 15.0
 stop_range_to = 20.0
-def_from = 0.5
-def_to = 0.8
-hp_to = 1.95
+hp_from = 1.5
+hp_to = 1.7
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0

@@ -79,7 +79,6 @@ func gen_map_v1(positions,neighbors):
 		#scn.choice_panel_showed.connect(Callable(self,"set_ingame_stats").bind(scn))
 		var shop_chance=fnc._with_chance(0.1)
 		scn.level=lvls[fnc._with_chance_ulti([0.75,0.25])]
-		
 		if shop_chance:
 			scn.shop=true
 			if fnc._with_chance(0.25):
@@ -116,7 +115,7 @@ func gen_map_v1(positions,neighbors):
 	"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
 	var place_with_bosses=[]
 	var filtered_mass=mass.duplicate(true).filter((func(x): return !x.secret and !x.shop))
-	filtered_mass.sort_custom((func(x,y):return x.global_position.distance_to(y.global_position)>=10*(x.size.x+distance_betveen_nodes)))
+	filtered_mass.sort_custom((func(x,y):return x.global_position.distance_to(y.global_position)>=20*(x.size.x+distance_betveen_nodes)))
 	for e in range(bosses.size()):
 		var bd=boss_data.new()
 		bd.boss=bosses[0]
@@ -206,6 +205,7 @@ func gen_map_v1(positions,neighbors):
 			#a.append(i_s)
 		#_place.ingame_statuses=a
 func _pre_process(delta):
+	if Input.is_action_just_pressed("ui_left"):print(_get_dif()," ",_get_process_ratio())
 	queue_redraw()
 
 #var clrs=[Color("RED"),Color("Silver"),Color("ORANGE"),Color("WHITE")]

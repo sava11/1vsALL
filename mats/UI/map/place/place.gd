@@ -55,7 +55,7 @@ var loaded:=false
 func load_data(n:Dictionary):
 	runned=n["runned"]
 	if runned:
-		gm.game_prefs.dif+=local_difficulty_add_step
+		gm.game_prefs.dif=get_parent()._get_dif()
 		gm.player_data.runned_lvls+=1
 		loaded=true
 #func add_neighbor(n:place):
@@ -165,7 +165,6 @@ func _process(delta):
 			emit_signal("player_in")
 		if place_panel_node!=null and !player_here:
 			cancel()
-		
 		last_player_here=player_here
 	if shop and !shop_changed:
 		img_think()
@@ -194,18 +193,21 @@ var shop_changed:bool=false
 var arena_changed:bool=false
 var secret_changed:bool=false
 func create_panel():
-	place_panel_node.size.y=0
-	for e in place_panel_node.get_node("mc/cont/stats").get_children():
-		e.queue_free()
-	var pnl_glb_size=Vector2(place_panel_node.size.x,place_panel_node.size.y)*place_panel_node.scale
-	var p_pos=global_position-Vector2(pnl_glb_size.x/2,-pnl_glb_size.y/2)+Vector2(size.x/2,size.y/2)
-	place_panel_node.global_position=p_pos
-	if place_panel_node.visible:
-		place_panel_node.hide()
-		emit_signal("choice_panel_hided")
-	elif !place_panel_node.visible:
-		place_panel_node.show()
+	if place_panel_node==null:
+		place_panel_node=preload("res://mats/UI/map/place/place_item_panel.tscn").instantiate()
+		var pnl_glb_size=Vector2(place_panel_node.size.x,place_panel_node.size.y)*place_panel_node.scale
+		var p_pos=Vector2(-pnl_glb_size.x/2,pnl_glb_size.y/2)-Vector2(-size.x/2,size.y/2-16)
+		place_panel_node.global_position=p_pos
+		#print("crs")
+		if map!=null:
+			if map.choice_panel!=null:
+				map.choice_panel.queue_free()
+			map.choice_panel=place_panel_node
+		add_child(place_panel_node)
 		emit_signal("choice_panel_showed")
+	else:
+		place_panel_node.queue_free()
+		emit_signal("choice_panel_hided")
 
 func _on_button_down():
 	if !runned:
@@ -271,17 +273,14 @@ func play():
 		#get_parent().current_pos=self
 		emit_signal("runned_changed",runned)
 		emit_signal("lvl_end")
-	place_panel_node.size.y=0
-	place_panel_node.hide()
+	place_panel_node.queue_free()
 func cancel():
 	emit_signal("choice_cancel")
-	place_panel_node.size.y=0
-	place_panel_node.hide()
+	place_panel_node.queue_free()
 	emit_signal("choice_panel_hided")
 func shop_cancel():
 	emit_signal("choice_shop_out")
-	place_panel_node.size.y=0
-	place_panel_node.hide()
+	place_panel_node.queue_free()
 	emit_signal("choice_panel_hided")
 
 func _on_runned_changed(res:bool):

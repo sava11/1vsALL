@@ -1463,8 +1463,8 @@ contact_monitor = true
 script = ExtResource("1_pdlpu")
 stop_range_from = 150.0
 stop_range_to = 200.0
-hp_from = 0.9
-hp_to = 1.4
+hp_from = 1.3
+hp_to = 1.78
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0

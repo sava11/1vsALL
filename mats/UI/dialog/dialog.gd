@@ -117,11 +117,12 @@ func clean_dialog():
 	$charL/ap.play("back")
 
 func next_dialog():
-	get_tree().set_deferred("paused",tree_real_pause)
-	if btn_cont.get_child_count()>0 and btn_cont.get_parent_control().visible==false:
-		btn_cont.get_child(0).emit_signal("button_down")
-	if btn_cont.get_child_count()==0:
-		end_dialog()
+	if dialog!=null and visible:
+		get_tree().set_deferred("paused",tree_real_pause)
+		if btn_cont.get_child_count()>0 and btn_cont.get_parent_control().visible==false:
+			btn_cont.get_child(0).emit_signal("button_down")
+		if btn_cont.get_child_count()==0:
+			end_dialog()
 func _input(_e):
 	if Input.is_action_just_pressed("accept") and dialog!=null:
 		next_dialog()

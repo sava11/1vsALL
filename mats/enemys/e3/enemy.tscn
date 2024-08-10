@@ -1553,7 +1553,8 @@ contact_monitor = true
 script = ExtResource("1_bc843")
 stop_range_from = 20.0
 stop_range_to = 30.0
-hp_to = 1.6
+hp_from = 1.8
+hp_to = 1.95
 
 [node name="attack" parent="." instance=ExtResource("28_qgx7q")]
 monitorable = false

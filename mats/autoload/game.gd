@@ -561,7 +561,7 @@ var objs={
 			"lvls":[
 				{
 					"stats":{
-						"def":{"x":0.015,"y":0.03},
+						"def":{"x":0.01,"y":0.03},
 						"regen_stamina_point":{"x":0.005,"y":0.02},
 						"max_stamina":0.03,
 						},
@@ -586,7 +586,6 @@ var objs={
 					"stats":{
 						"hp_regen":{"x":0.005,"y":0.01},
 						"hp":{"x":0.05,"y":1},
-						"dmg":{"x":0.05,"y":0.15},
 						},
 					"unlock_from":0,"value":7
 				},
@@ -594,7 +593,6 @@ var objs={
 					"stats":{
 						"hp_regen":{"x":0.01,"y":0.02},
 						"hp":1.5,
-						"dmg":{"x":0.15,"y":0.3},
 						},
 					"unlock_from":0.5,"value":9
 					},
@@ -633,14 +631,14 @@ var objs={
 				{
 					"stats":{
 						"def":{"x":0.025,"y":0.09},
-						"dmg":{"x":0.1,"y":0.4},
+						"dmg":{"x":0.01,"y":0.1},
 						},
 					"unlock_from":0,"value":10
 				},
 				{
 					"stats":{
 						"def":{"x":0.09,"y":0.22},
-						"dmg":{"x":0.4,"y":0.9},
+						"dmg":{"x":0.1,"y":0.3},
 						},
 					"unlock_from":0.5,"value":14
 					},
@@ -655,7 +653,6 @@ var objs={
 						"hp_regen":{"x":0.005,"y":0.02},
 						"hp":{"x":0.02,"y":0.05},
 						"def":{"x":0.09,"y":0.12},
-						"dmg":{"x":0.12,"y":0.25},
 						},
 					"unlock_from":0,"value":10
 				},

@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://mats/UI/map/locs/generator/lvl_generator.gd" id="1_sxwos"]
 
 [sub_resource type="Curve" id="Curve_feuch"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+max_value = 50.0
+_data = [Vector2(2.08165e-12, 2.08165e-12), 0.0, 90.0, 0, 0, Vector2(0.5, 25), 25.0, 25.0, 0, 0, Vector2(1, 50), 90.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="lvl_generator" type="Control"]
 layout_mode = 3

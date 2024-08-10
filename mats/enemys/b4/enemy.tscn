@@ -1955,8 +1955,8 @@ statuses = {
 }
 def_from = 1.1
 def_to = 1.4
-hp_from = 5.0
-hp_to = 6.0
+hp_from = 20.0
+hp_to = 25.0
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0

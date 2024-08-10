@@ -4,17 +4,19 @@ signal save_data_changed(dict:Dictionary)
 signal player_position_changed(_place:place)
 @export var curve_dificulty:Curve
 func _get_dif()->float:
-	var max_dif:float=0
-	var cur_dif:float=0
-	for e in get_children():
-		max_dif+=e.local_difficulty_add_step
-		if e.runned:cur_dif+=e.local_difficulty_add_step
-	return curve_dificulty.sample(cur_dif/max_dif)
+	return curve_dificulty.sample(_get_process_ratio())
 func get_dif(value:float)->float:
 	var max_dif:float=0
 	for e in get_children():
 		max_dif+=e.local_difficulty_add_step
 	return curve_dificulty.sample(value/max_dif)
+func _get_process_ratio():
+	var max_dif:float=0
+	var cur_dif:float=0
+	for e in get_children():
+		max_dif+=e.local_difficulty_add_step
+		if e.runned:cur_dif+=e.local_difficulty_add_step
+	return cur_dif/max_dif
 func data_to_save()->Dictionary:return{}
 func save_data():
 	var pos=""
@@ -114,9 +116,6 @@ func _ready():
 							set_cur_pos(b)).bind(e)
 				)
 			e.get_node("btn").disabled=!e.runned and !e.neighbors.any(Callable(func(x):if is_instance_valid(x):return x.runned))
-	for e in get_children():
-		if e is place:
-			e.place_panel_node=get_node("../../../panel/Panel")
 	set_cur_pos(current_pos)
 	_post_ready()
 

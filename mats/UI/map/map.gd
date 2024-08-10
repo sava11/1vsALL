@@ -7,18 +7,13 @@ var current_pos:place
 
 var cur_loc:level_template
 var item_rare:float=0
+var choice_panel=null
 signal in_shop()
 signal location_added(n:level_template)
 signal place_completed()
-func get_dif()->float:
-	var max_dif:float=0
-	var cur_dif:float=0
-	for e in map.get_children():
-		max_dif+=e.local_difficulty_add_step
-		if e.runned:cur_dif+=e.local_difficulty_add_step
-	return cur_dif/max_dif
+
 func set_item_rare():
-	item_rare=get_dif()
+	item_rare=map._get_process_ratio()
 
 #func show_death(b:bool=true):
 	#for e in map.get_children():

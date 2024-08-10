@@ -2051,9 +2051,9 @@ run_speed = 55.0
 stop_range_from = 150.0
 stop_range_to = 200.0
 def_from = 0.8
-def_to = 0.9
-hp_from = 5.5
-hp_to = 7.5
+def_to = 1.2
+hp_from = 4.5
+hp_to = 6.0
 
 [node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 0

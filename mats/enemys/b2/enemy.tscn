@@ -2260,8 +2260,8 @@ script = ExtResource("1_q66c6")
 stop_range_to = 20.0
 def_from = 1.25
 def_to = 1.45
-hp_from = 3.0
-hp_to = 4.0
+hp_from = 23.0
+hp_to = 29.0
 
 [node name="boss_mark" parent="." instance=ExtResource("2_46w52")]
 
@@ -2295,8 +2295,7 @@ attack_name = "a1"
 attack_anim_name = "attack"
 attack_time_period = 1.2
 percent = 0.5
-damage_from = 0.9
-damage_to = 1.3
+damage_to = 1.35
 
 [node name="attack2" parent="." instance=ExtResource("7_w7gfq")]
 monitoring = false
