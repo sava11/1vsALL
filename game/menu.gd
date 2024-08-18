@@ -54,4 +54,3 @@ func _on_credits_button_down():
 
 func _on_asp_finished():
 	$asp.play()
-

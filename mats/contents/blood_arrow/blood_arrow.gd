@@ -17,4 +17,3 @@ func past_proc(delta):
 	position+=mvd*speed*delta
 	if fnc._sqrt(position-start_pos)>_sqrt:
 		delete()
-

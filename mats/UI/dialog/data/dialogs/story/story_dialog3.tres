@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://bi6gnquqbwt5l"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=4 format=3 uid="uid://bi6gnquqbwt5l"]
 
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_b78q1"]
 [ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="1_gjbr8"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_67a5g"]
 
@@ -7,7 +8,7 @@
 script = ExtResource("2_67a5g")
 name = "STORY_DIALOG3"
 BDI_text = "TRAIN_DIALOG_2"
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+buttons = Array[ExtResource("1_b78q1")]([])
 interactive = true
 large_answers = false
 function_node_path = NodePath("cl/map/map/cont/locs/map")

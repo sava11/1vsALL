@@ -17,4 +17,3 @@ class_name dialog_data extends Resource
 @export var right_char_img:Texture2D
 @export var right_speeking:bool=false
 @export_enum("Tree_based","Paused","Unpaused") var paused:=0
-

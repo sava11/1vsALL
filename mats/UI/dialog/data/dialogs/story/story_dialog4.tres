@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://c26seorhw4ti4"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=4 format=3 uid="uid://c26seorhw4ti4"]
 
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_fhhs4"]
 [ext_resource type="Texture2D" uid="uid://ooocfvijfysb" path="res://mats/imgs/icons/Warrior Icon.png" id="1_knem3"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_hfiwc"]
 
@@ -7,7 +8,7 @@
 script = ExtResource("2_hfiwc")
 name = "NEW_DATA"
 BDI_text = "INGAME_MOVEMANT"
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+buttons = Array[ExtResource("1_fhhs4")]([])
 interactive = false
 large_answers = false
 function_node_path = null

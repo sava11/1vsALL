@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://ct8xn1k8kacn0"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=4 format=3 uid="uid://ct8xn1k8kacn0"]
 
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_cnpec"]
 [ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="2_xvwjs"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_womhu"]
 
@@ -7,7 +8,7 @@
 script = ExtResource("3_womhu")
 name = "END_TRAIN"
 BDI_text = "[color]Вы[/color]: наказать предателей..."
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+buttons = Array[ExtResource("1_cnpec")]([])
 interactive = false
 large_answers = false
 function_node_path = NodePath("cl/map/map/cont/locs/map")

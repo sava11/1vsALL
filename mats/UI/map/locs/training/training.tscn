@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://lfervjgmrcn8"]
+[gd_scene load_steps=44 format=3 uid="uid://lfervjgmrcn8"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/training/training.gd" id="1_1vgx1"]
 [ext_resource type="PackedScene" uid="uid://bwst4slo578yk" path="res://mats/UI/map/place/place.tscn" id="2_uri1g"]
+[ext_resource type="Script" path="res://mats/UI/map/actions/sub/empty_entety_data.gd" id="3_6kkge"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/sub/summon_enemys_data.gd" id="3_s17os"]
 [ext_resource type="Script" path="res://mats/UI/map/actions/arena.gd" id="4_gl7wn"]
 [ext_resource type="Script" path="res://mats/UI/map/statuses/ingame_status.gd" id="5_e34vk"]
@@ -19,7 +20,7 @@ percent = 0.0
 
 [sub_resource type="Resource" id="Resource_udkax"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_outis")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_outis")])
 spawning = true
 enemys_count_min = 3
 enemys_count_max = 6
@@ -60,7 +61,7 @@ percent = 0.5
 
 [sub_resource type="Resource" id="Resource_bqu0m"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_0rlqj"), SubResource("Resource_1qyqo")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_0rlqj"), SubResource("Resource_1qyqo")])
 spawning = true
 enemys_count_min = 4
 enemys_count_max = 7
@@ -86,7 +87,7 @@ percent = 0.6
 
 [sub_resource type="Resource" id="Resource_g8yoc"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_d4xrw"), SubResource("Resource_3qqmk")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_d4xrw"), SubResource("Resource_3qqmk")])
 spawning = true
 enemys_count_min = 2
 enemys_count_max = 6
@@ -138,7 +139,7 @@ percent = 0.7
 
 [sub_resource type="Resource" id="Resource_13jgp"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_duiid"), SubResource("Resource_a2pe2"), SubResource("Resource_vxqaw")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_duiid"), SubResource("Resource_a2pe2"), SubResource("Resource_vxqaw")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
@@ -170,7 +171,7 @@ percent = 0.0
 
 [sub_resource type="Resource" id="Resource_h14eo"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_gqp5p"), SubResource("Resource_ujm2d"), SubResource("Resource_3oetx")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_gqp5p"), SubResource("Resource_ujm2d"), SubResource("Resource_3oetx")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
@@ -197,7 +198,7 @@ percent = 0.5
 
 [sub_resource type="Resource" id="Resource_dl660"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_d2drf"), SubResource("Resource_kmqf4"), SubResource("Resource_3w5ix")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_d2drf"), SubResource("Resource_kmqf4"), SubResource("Resource_3w5ix")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1
@@ -224,7 +225,7 @@ percent = 0.25
 
 [sub_resource type="Resource" id="Resource_lxkc1"]
 script = ExtResource("4_gl7wn")
-enemys = Array[Resource("res://mats/UI/map/actions/sub/empty_entety_data.gd")]([SubResource("Resource_is03b"), SubResource("Resource_pkq4y"), SubResource("Resource_popij")])
+enemys = Array[ExtResource("3_6kkge")]([SubResource("Resource_is03b"), SubResource("Resource_pkq4y"), SubResource("Resource_popij")])
 spawning = false
 enemys_count_min = 1
 enemys_count_max = 1

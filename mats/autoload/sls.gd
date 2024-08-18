@@ -14,5 +14,3 @@ func load_data(path:String):
 		save_game.close()
 	else:
 		print("save isn't exists")
-
-
