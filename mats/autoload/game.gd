@@ -183,7 +183,7 @@ const start_player_data={
 	"runned_lvls":0,
 	"stats":{
 		"money":0,
-		"hp":10000.0,
+		"hp":8.0,
 		"hp_regen":0.1,
 		"max_stamina":1.5,
 		"regen_stamina_point":0.3,

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://mats/UI/map/map.gd" id="1_3h318"]
 [ext_resource type="Theme" uid="uid://de15vct77vcwe" path="res://mats/UI/UI.tres" id="1_gyvyj"]
+[ext_resource type="Texture2D" uid="uid://0fonupdlahbl" path="res://mats/UI/map/imgs/scroll_.png" id="3_2xkmp"]
 [ext_resource type="Texture2D" uid="uid://df16ud3cfcbxw" path="res://mats/UI/map/imgs/map.png" id="3_e6gjm"]
 [ext_resource type="Texture2D" uid="uid://ye383w3epgm" path="res://mats/imgs/icons/undo-arrow.png" id="7_ubhsm"]
 [ext_resource type="Texture2D" uid="uid://f220t7uqarsa" path="res://mats/UI/imgs/panel.png" id="9_77n47"]
-[ext_resource type="Texture2D" uid="uid://bfvhd4vvmo1qr" path="res://mats/UI/imgs/scroll.png" id="11_1v8av"]
 [ext_resource type="Texture2D" uid="uid://b843pwetjevm0" path="res://mats/UI/map/imgs/shop.png" id="12_00ogn"]
 [ext_resource type="Texture2D" uid="uid://b4vbj22132bp2" path="res://mats/UI/map/imgs/boss.png" id="13_0rooc"]
 [ext_resource type="Texture2D" uid="uid://c0xm12txf3qk8" path="res://mats/UI/map/imgs/hero.png" id="15_rt4od"]
@@ -29,10 +29,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 144.0
 offset_top = -52.0
+offset_right = -218.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("11_1v8av")
-expand_mode = 1
+texture = ExtResource("3_2xkmp")
 
 [node name="mc" type="MarginContainer" parent="tr"]
 layout_mode = 1

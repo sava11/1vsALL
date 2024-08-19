@@ -191,6 +191,7 @@ text = "12"
 label_settings = SubResource("LabelSettings_0yko5")
 
 [node name="dif" type="Label" parent="cl/game_ui/status"]
+visible = false
 layout_mode = 0
 offset_left = 30.0
 offset_top = 62.0
