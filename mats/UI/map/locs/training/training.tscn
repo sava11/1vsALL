@@ -107,48 +107,47 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1vgx1")
 curve_dificulty = SubResource("Curve_swmqv")
-current_pos = NodePath("place0")
+current_pos = NodePath("pl0")
 
-[node name="place0" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
-neighbors = [NodePath("../place1")]
+[node name="pl0" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+neighbors = [NodePath("../pl1")]
 
-[node name="place1" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+[node name="pl1" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 48.0
 offset_right = 64.0
 arena = SubResource("Resource_udkax")
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_cvj4s"), SubResource("Resource_gvf2v"), SubResource("Resource_ucglk"), SubResource("Resource_yrem4")])
-neighbors = [NodePath("../place2")]
+neighbors = [NodePath("../pl2")]
 
-[node name="place2" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+[node name="pl2" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 96.0
 offset_right = 112.0
 arena = SubResource("Resource_bqu0m")
 shop = true
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_v5pw2")])
-neighbors = [NodePath("../place1"), NodePath("../place3")]
+neighbors = [NodePath("../pl1"), NodePath("../pl3")]
 
-[node name="place3" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+[node name="pl3" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 144.0
 offset_right = 160.0
 arena = SubResource("Resource_g8yoc")
 ingame_statuses = Array[ExtResource("5_e34vk")]([SubResource("Resource_5snhk")])
-neighbors = [NodePath("../place2"), NodePath("../place4")]
+neighbors = [NodePath("../pl4"), NodePath("../pl2")]
 
-[node name="place4" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+[node name="pl4" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 offset_left = 192.0
 offset_right = 208.0
-neighbors = [NodePath("../place3"), NodePath("../place5")]
+neighbors = [NodePath("../pl5"), null]
 
-[node name="place5" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
+[node name="pl5" parent="." instance=ExtResource("2_uri1g")]
 offset_left = 240.0
 offset_right = 256.0
 secret = true
-neighbors = [NodePath("../place4")]
 
-[connection signal="player_in" from="place0" to="." method="start_dialog"]
-[connection signal="choice_panel_hided" from="place1" to="." method="_on_place_2_choice_panel_hided"]
-[connection signal="choice_panel_showed" from="place1" to="." method="_on_place_2_choice_panel_showed"]
-[connection signal="lvl_start" from="place1" to="." method="_on_place_2_lvl_start"]
-[connection signal="runned_changed" from="place1" to="." method="_on_place_2_runned_changed"]
-[connection signal="runned_changed" from="place2" to="." method="_on_place2_2_runned_changed"]
-[connection signal="runned_changed" from="place4" to="." method="_on_place_5_runned_changed"]
+[connection signal="player_in" from="pl0" to="." method="start_dialog"]
+[connection signal="choice_panel_hided" from="pl1" to="." method="_on_place_2_choice_panel_hided"]
+[connection signal="choice_panel_showed" from="pl1" to="." method="_on_place_2_choice_panel_showed"]
+[connection signal="lvl_start" from="pl1" to="." method="_on_place_2_lvl_start"]
+[connection signal="runned_changed" from="pl1" to="." method="_on_place_2_runned_changed"]
+[connection signal="runned_changed" from="pl2" to="." method="_on_place2_2_runned_changed"]
+[connection signal="runned_changed" from="pl4" to="." method="_on_place_5_runned_changed"]

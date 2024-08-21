@@ -46,6 +46,7 @@ script = ExtResource("1_tg1vd")
 process_mode = 1
 
 [node name="cl" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="game_ui" type="Control" parent="cl"]
 layout_mode = 3

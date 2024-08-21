@@ -3,14 +3,24 @@ extends Node
 @onready var locs_cont=$cl/map/map/cont/locs
 var cur_loc=null
 var game_was_paused:=false
+#func _enter_tree() -> void:
+	#var cr:ColorRect=get_tree().root.get_node_or_null("darkness_bg").get_node("darkness")
+	#cr.get_parent().move_child(cr,cr.get_parent().get_child_count()-1)
 func _ready():
-	var lvl=null
+	var lvl:Game_map=null
 	if !gm.game_prefs.scripts.traied:
 		lvl=preload("res://mats/UI/map/locs/training/training.tscn").instantiate()
 	else:
 		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
 	locs_cont.add_child(lvl)
 	show_lvls()
+	get_tree().set_deferred("paused",false)
+	if !lvl.map_is_generated:
+		await lvl.map_generated
+	gm.set_dark(false)
+	await gm.darked
+	get_tree().set_deferred("paused",true)
+	gm.save_file_data()
 var game_end:=false
 func _process(delta):
 	$cl/game_ui/status/dif.text="dif. "+str(gm.game_prefs.dif)
@@ -117,6 +127,7 @@ func _reload_game():
 		$world.get_child(0).queue_free()
 	#await get_tree().process_frame
 	gm.save_file_data()
+	
 
 func _on_retry_button_down():
 	_reload_game()

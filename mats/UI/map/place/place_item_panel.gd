@@ -1,7 +1,7 @@
 class_name status_panel extends MarginContainer
-@export var cur_place:place
+@export var cur_place:Place
 
-func connect_to(n:place,play:String,cancel:String):
+func connect_to(n:Place,play:String,cancel:String):
 	for e in $mc/cont/btns/play.get_signal_connection_list("button_down"):
 		$mc/cont/btns/play.disconnect("button_down",e.callable)
 	for e in $mc/cont/btns/cancel.get_signal_connection_list("button_down"):

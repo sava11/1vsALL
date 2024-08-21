@@ -37,7 +37,7 @@ func _on_play_button_down():
 	$main_menu.hide()
 
 func _on_settings_button_down():
-	$bg.hide()
+	#$bg.hide()
 	$main_menu.hide()
 	$settings.show()
 

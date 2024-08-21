@@ -1,6 +1,6 @@
 extends Control
 
-var current_pos:place
+var current_pos:Place
 @onready var shop=$shop/shop
 @onready var map
 @onready var stat_cont=$stats/cont/ScrollContainer/item_cont
@@ -92,7 +92,7 @@ func upd_by_sts():
 			if i.get_node("item_name").text==tr(gm.objs.stats[e].ct):
 				i.set_value(snapped(gm.player_data.stats[e],gm.objs.stats[e].step),gm.objs.stats[e].postfix)
 
-func level_completed(n:place):
+func level_completed(n:Place):
 	#if gm.game_prefs.dif<0.5:
 		#gm.game_prefs.dif=0.5
 	n.runned=true
@@ -106,7 +106,7 @@ func level_completed(n:place):
 	set_cur_pos(n)
 	emit_signal("place_completed")
 	gm.save_file_data()
-func set_cur_pos(p:place):
+func set_cur_pos(p:Place):
 	current_pos=p
 	var w=p.position.x
 	$map/cont.scroll_horizontal=w+p.size.x/2-$map/cont/locs.get("theme_override_constants/margin_left")

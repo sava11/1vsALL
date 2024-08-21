@@ -8,22 +8,22 @@ resource_local_to_scene = true
 font_size = 14
 font_color = Color(3.12006e-06, 0.644557, 0.266582, 1)
 
-[node name="place0" type="Control" groups=["SN"]]
+[node name="pl0" type="Control" groups=["SN"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 16.0
 offset_bottom = 16.0
 script = ExtResource("1_gkxwn")
 level = "res://mats/lvls/lvl1/lvl1_1.tscn"
-unactive = 0.7
-arena_color = Color(1, 1, 1, 1)
-player_color = Color(0.631373, 0.8, 1, 1)
-boss_color = Color(1, 0.317647, 0.431373, 1)
-shop_color = Color(0, 0.752941, 0.733333, 1)
-secret_color = Color(0.682353, 0.478431, 1, 1)
+unactive = 0.8
+arena_color = Color(0.615422, 0.615422, 0.615422, 1)
+player_color = Color(0.290262, 0.627879, 0.999997, 1)
+boss_color = Color(0.890896, 0, 0.297433, 1)
+shop_color = Color(2.40654e-07, 0.581352, 0.565908, 1)
+secret_color = Color(0.412596, 0.00212651, 0.736014, 1)
 
 [node name="visual" type="TextureRect" parent="."]
-self_modulate = Color(0.7, 0.7, 0.7, 1)
+self_modulate = Color(0.8, 0.8, 0.8, 1)
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -59,7 +59,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="nm" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -72,7 +71,7 @@ offset_right = 20.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "place0"
+text = "-1pl0"
 label_settings = SubResource("LabelSettings_apmv3")
 horizontal_alignment = 1
 

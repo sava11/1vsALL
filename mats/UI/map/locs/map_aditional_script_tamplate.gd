@@ -1,7 +1,25 @@
-extends Control
+class_name Game_map extends Control
+signal map_generated
 signal _load_data(node:Object,path:String)
 signal save_data_changed(dict:Dictionary)
-signal player_position_changed(_place:place)
+signal player_position_changed(place:Place)
+@export var regions:Array[Region]
+func get_region_where_boss_scene_path_is(scn_path:String)->int:
+	for i in range(regions.size()):
+		var e:Region=regions[i]
+		if e.boss_path==scn_path:
+			return i
+	return -1
+func get_regions_colors()->Array[Color]:
+	var clrs:Array[Color]=[]
+	for e in regions:
+		clrs.append(e.color)
+	return clrs
+func get_regions_positions()->Array[Vector2]:
+	var clrs:Array[Vector2]=[]
+	for e in regions:
+		clrs.append(e.pos)
+	return clrs
 @export var curve_dificulty:Curve
 func _get_dif()->float:
 	return curve_dificulty.sample(_get_process_ratio())
@@ -16,7 +34,9 @@ func _get_process_ratio():
 	for e in get_children():
 		max_dif+=e.local_difficulty_add_step
 		if e.runned:cur_dif+=e.local_difficulty_add_step
-	return cur_dif/max_dif
+	if max_dif>0:
+		return cur_dif/max_dif
+	else:return 0
 func data_to_save()->Dictionary:return{}
 func save_data():
 	var pos=""
@@ -31,19 +51,20 @@ func data_to_load(n:Dictionary)->void:pass
 func load_data(n:Dictionary):
 	current_pos=get_node(n["cur_pos"])
 	data_to_load(n)
-@export var current_pos:place
+@export var current_pos:Place
 @export var level_container:Node2D
-func set_cur_pos(pos:place):
+var map_is_generated:=false
+func set_cur_pos(pos:Place):
+	var t=get_children()
 	if pos!=null:
 		current_pos=pos
 	else:
 		var ps=pos
 		while ps==null or ps.shop or (ps.arena!=null and ps.arena.has_bosses()):
-			ps=get_children()[fnc.rnd.randi_range(0,get_child_count()-1)]
+			ps=t[fnc.rnd.randi_range(0,get_child_count()-1)]
 		current_pos=ps
 	current_pos.runned=true
 	#var nearst:Array[place]=[]
-	var t=get_children()
 	#t.sort_custom(
 			#(Callable(func(a, b):
 				#var dist_a = a.global_position.distance_to(current_pos.global_position)
@@ -86,13 +107,17 @@ func set_cur_pos(pos:place):
 		cur_place.get_node("btn").disabled=!(cur_place.runned or current_pos.neighbors.find(cur_place)>-1) #and !corned_
 	gm.save_file_data()
 	emit_signal("player_position_changed",current_pos)
-func _pre_ready():pass
+func _pre_ready():
+	map_is_generated=true
+	emit_signal("map_generated")
 func _post_ready():pass
 func _ready():
 	level_container=get_node_or_null("../../../../../../world")
 	var map=get_node_or_null("../../../../")
 	var t1=Time.get_time_dict_from_system()
 	_pre_ready()
+	if !map_is_generated:
+		await map_generated
 	add_to_group("SN")
 	connect("save_data_changed",Callable(gm,"_save_node"))
 	connect("_load_data",Callable(gm,"_load_node"))
@@ -110,7 +135,7 @@ func _ready():
 			e.runned_changed.connect(Callable(func(res):if res and current_pos!=e:set_cur_pos(e)))
 			e.get_node("btn").button_down.connect(
 				Callable(
-					func(b:place):
+					func(b:Place):
 						if b.runned and !dijkstra(current_pos.get_index(),b.get_index()).is_empty():
 							current_pos.player_here=false
 							set_cur_pos(b)).bind(e)
@@ -202,7 +227,7 @@ func region_detection()->Array:
 		if unjoined.size()>0:
 			i=(i+1)%unjoined.size()
 	return regions
-func is_on_corner(data:Array[place],to:place):
+func is_on_corner(data:Array[Place],to:Place):
 	if dijkstra(current_pos.get_index(),to.get_index(),false).is_empty():
 		var port=data.duplicate()
 		var nearsts=[]
@@ -224,8 +249,8 @@ func is_on_corner(data:Array[place],to:place):
 		return res
 	return false
 
-func set_ingame_stats(_place:place):
-	if _place.ingame_statuses.is_empty() and !_place.shop and _place.arena!=null and _place.arena.get_bosses().is_empty():
+func set_ingame_stats(place:Place):
+	if place.ingame_statuses.is_empty() and !place.shop and place.arena!=null and place.arena.get_bosses().is_empty():
 		var a:Array[ingame_status]=[]
 		var keys:Array=gm.player_data.stats.keys()
 		for e in range(fnc._with_chance_ulti([0.05,0.3,0.35,0.2,0.1])):
@@ -250,4 +275,4 @@ func set_ingame_stats(_place:place):
 			keys.remove_at(keys.find(i_s.status))
 		if a.is_empty():
 			a.append(ingame_status.new())
-		_place.ingame_statuses=a
+		place.ingame_statuses=a

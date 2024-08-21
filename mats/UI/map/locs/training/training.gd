@@ -1,4 +1,4 @@
-extends "res://mats/UI/map/locs/map_aditional_script_tamplate.gd"
+extends Game_map
 
 func start_dialog():
 	if !gm.game_prefs.scripts.traied and !gm.game_prefs.scripts.lvl1_runned:
@@ -17,6 +17,7 @@ func train_dialog(trained:bool,message_to_train_accepted:bool):
 		remove_from_group("SN")
 		queue_free()
 	gm.save_file_data()
+
 func _on_place_2_choice_panel_showed():
 	gm.make_dialog(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog3.tres"))
 

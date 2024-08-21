@@ -1,6 +1,7 @@
-extends "res://mats/UI/map/locs/map_aditional_script_tamplate.gd"
-signal map_generated
+extends Game_map
 signal game_ended
+@export var col=25
+@export var row=25
 
 func data_to_save():
 	var pos=[]
@@ -13,13 +14,12 @@ func data_to_load(n:Dictionary):
 	exceptions=[]
 	for e in n.p:
 		exceptions.append(Vector2(e[0],e[1]))
-var col=25
-var row=25
+
 const distance_betveen_nodes=32
 var max_neighbors=[0,0.3,0.6,0.05,0.05]
 var neighbors:=[]
 var exceptions:=[]
-var bosses_pos:Array[place]=[]
+var bosses_pos:Array[Place]=[]
 func _pre_ready():
 	game_ended.connect(Callable(get_tree().current_scene,"game_ended"))
 	fnc.rnd.seed=int(gm.game_prefs.seed)
@@ -71,14 +71,34 @@ func create_arena():
 	arena.enemys_count_min=fnc.rnd.randi_range(3,5)
 	arena.enemys_count_max=fnc.rnd.randi_range(arena.enemys_count_min,8)
 	return arena
-func gen_map_v1(positions,neighbors):
+
+func gen_map_v1(positions:Array,neighbors:Array):
 	var lvls=["res://mats/lvls/lvl1/lvl1_1.tscn","res://mats/lvls/lvl1/lvl1_2.tscn"]
+	var nearst_points:=get_regions_positions()
+	for i in range(nearst_points.size()):
+		var e:Vector2=nearst_points[i]
+		positions.sort_custom((func(a,b):
+			var dist_a = a.distance_to(e)
+			var dist_b = b.distance_to(e)
+			return dist_a < dist_b))
+		nearst_points[i]=positions[0]
+		
+	var regions_color:=get_regions_colors()
+	var regions_places:={}
+	var setted:Array[Place]=[]
 	for e in positions:
-		var scn:place=preload("res://mats/UI/map/place/place.tscn").instantiate()
+		var scn:Place=preload("res://mats/UI/map/place/place.tscn").instantiate()
 		scn.position=e*int((fnc._sqrt(scn.size)+distance_betveen_nodes))#16+32
+		#if e in nearst_points:
+		scn.zone=fnc.i_search(nearst_points,e)
+		if scn.zone!=-1:
+			print(scn.zone)
+			regions_places.merge({scn.zone:[scn]})
+			scn.level=regions[scn.zone].get_level()
+			scn.set_region(regions[scn.zone])
+			setted.append(scn)
 		#scn.choice_panel_showed.connect(Callable(self,"set_ingame_stats").bind(scn))
 		var shop_chance=fnc._with_chance(0.1)
-		scn.level=lvls[fnc._with_chance_ulti([0.75,0.25])]
 		if shop_chance:
 			scn.shop=true
 			if fnc._with_chance(0.25):
@@ -88,12 +108,13 @@ func gen_map_v1(positions,neighbors):
 			scn.arena=create_arena()
 			scn.local_difficulty_add_step=fnc.rnd.randf_range(0.2,0.25)
 		add_child(scn)
+	print("arenas created")
+	await get_tree().process_frame
+	
 	var mass:=get_children()
-	#print(get_child_count())
-	#await get_tree().process_frame
 	var d:={}
 	var temp_mass=mass.duplicate(true)
-	for e in mass:
+	for e:Place in mass:
 		temp_mass.sort_custom(Callable(func(a, b):
 			var dist_a = a.global_position.distance_to(e.global_position)
 			var dist_b = b.global_position.distance_to(e.global_position)
@@ -101,35 +122,75 @@ func gen_map_v1(positions,neighbors):
 		var local_angs=[]
 		for k in range(neighbors[e.get_index()]):
 			var ang=fnc.angle(temp_mass[k].global_position.direction_to(e.global_position))
-			if local_angs.find(ang)==-1:
+			if local_angs.find(ang)==-1 and e.neighbors.find(temp_mass[k])==-1:
 				local_angs.append(ang)
 				e.neighbors.append(temp_mass[k])
 				temp_mass[k].neighbors.append(e)
 				if len(temp_mass[k].neighbors)<=3 and fnc._with_chance(0.075):
 					temp_mass[k].secret=true
-					#e.secret=true
-				#if !dijkstra(temp_mass[k].get_index(),0,false):
-				#await get_tree().process_frame
-		#neighbors[e.get_index()]=len(e.neighbors)
-	var bosses=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
+	print("neighbors applyed")
+	await get_tree().process_frame
+	
+	while !setted.is_empty():
+		var temped:=[]
+		for e in setted[0].neighbors:
+			if e.zone==-1:
+				e.zone=setted[0].zone
+				regions_places[e.zone].append(e)
+				e.level=regions[e.zone].get_level()
+				e.set_region(regions[e.zone])
+				setted.append(e)
+		setted.remove_at(0)
+	print("regions applyed")
+	await get_tree().process_frame
+	
+	var bosses:Array[String]=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
 	"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
-	var place_with_bosses=[]
-	var filtered_mass=mass.duplicate(true).filter((func(x): return !x.secret and !x.shop))
-	filtered_mass.sort_custom((func(x,y):return x.global_position.distance_to(y.global_position)>=20*(x.size.x+distance_betveen_nodes)))
+	#var place_with_bosses=[]
+	var filtered_mass=mass.duplicate(true).filter((func(x):
+		return !x.secret and !x.shop))
+	#var start_node:Place=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
+	for e in regions_places.keys():
+		#var i:=0
+		regions_places[e]=regions_places[e].filter((func(x):
+			return !x.secret and !x.shop))
+		#var cur_node:Place=arr[i]
+		#var ended:=false
+		#while !ended:
+			#arr=arr.filter((func(x:Place):
+				#return x==cur_node or cur_node.global_position.distance_to(x.global_position)>4*(x.size.x+distance_betveen_nodes)
+			#))
+			# regions_places[e]=arr
+			#i=arr.find(cur_node)+1
+			#cur_node=arr[i%arr.size()]
+			#if cur_node==arr[0]:
+				#ended=true
+				#print("zone ",e," is complete")
+	
+	#print("testing regions")
+	#await get_tree().process_frame
+	print(regions_places.keys())
 	for e in range(bosses.size()):
 		var bd=boss_data.new()
 		bd.boss=bosses[0]
 		bd.name=bosses[0]
-		var node:place=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
-		while dijkstra(node.get_index(),0,false).is_empty():
-			node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
-		place_with_bosses.append(node)
+		var cur_region:Array=regions_places[get_region_where_boss_scene_path_is(bd.boss)]
+		var node:Place=cur_region[fnc.rnd.randi_range(0,cur_region.size()-1)]
+		#while dijkstra(node.get_index(),0,false).is_empty() or node.arena.has_bosses():
+			#node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
+		#place_with_bosses.append(node)
 		bosses_pos.append(node)
 		node.arena.enemys.append(bd)
 		node.arena.spawning=false
 		node.ingame_statuses.clear()
+		node.img_think()
 		bosses.remove_at(0)
-		
+	
+	
+	map_is_generated=true
+	emit_signal("map_generated")
+	print("bosses created")
+	#await get_tree().process_frame
 	#var e_id=0
 	#while e_id<len(mass):
 		#var e=mass[e_id]
@@ -212,7 +273,7 @@ func _pre_process(delta):
 #var trs=["res://mats/enemys/b2/enemy.tscn","res://mats/enemys/b3/enemy.tscn",
 #"res://mats/enemys/b4/enemy.tscn","res://mats/enemys/b5/enemy.tscn"]
 func _draw():
-	if current_pos!=null:
+	if current_pos!=null and map_is_generated:
 		var i:=0
 		for p in bosses_pos:
 			#var clr:=Color(1,1,1,1)

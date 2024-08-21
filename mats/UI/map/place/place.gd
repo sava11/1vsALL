@@ -1,5 +1,5 @@
 @tool
-class_name place extends Control
+class_name Place extends Control
 signal player_in()
 signal choice_panel_showed()
 signal choice_panel_hided()
@@ -17,6 +17,7 @@ var player_here:bool=false
 var last_player_here:bool=false
 
 @export_group("level_params")
+@export var zone:int=-1
 @export_file("*.tscn") var level:String
 @export var level_time:float=45.0
 @export var time_events:PackedFloat32Array
@@ -30,7 +31,7 @@ var last_player_here:bool=false
 @export var shop:=false
 @export_group("place")
 @export var ingame_statuses:Array[ingame_status]
-@export var neighbors:Array[place]
+@export var neighbors:Array[Place]
 @export_group("colors")
 var original:Color
 @export var active:float=1
@@ -102,12 +103,22 @@ func img_think():
 			#$visual.texture=preload("res://mats/UI/map/imgs/secret.png")
 			#original=player_color
 			#$visual.texture=preload("res://mats/UI/map/imgs/hero.png")
+func set_region(_region:Region=null):
+	if _region==null:
+		var regions:Array[Region]=get_parent().regions
+		if regions!=null and !regions.is_empty() and regions.size()<zone:
+			var region:Region=regions[zone]
+			arena_color=region.color
+	else:
+		arena_color=_region.color
+	img_think()
 func _ready():
-	name="place"+str(get_index())
+	name="pl"+str(get_index())
 	map=get_node_or_null("../../../../../")
 	if !Engine.is_editor_hint():
 		if map!=null:
 			map.connect("location_added",Callable(func(lvl):map.cur_loc=lvl))
+			#set_region()
 		connect("save_data_changed",Callable(gm,"_save_node"))
 		connect("_load_data",Callable(gm,"_load_node"))
 		if !gm.sn.has(str(get_path())):
@@ -131,14 +142,16 @@ func _ready():
 			#l.add_point((n.global_position-global_position+size)/2)
 			#$lines.add_child(l)
 	img_think()
-	$nm.text=name#"place"+str(get_index())
+	$nm.text=name#str(zone)+" place"+str(get_index())
 func _draw():
 	for n in neighbors:
 		if is_instance_valid(n) and n.visible:
 			draw_line(size/2.0,(n.global_position-global_position+size)/2.0,Color.LIGHT_SLATE_GRAY,2)
 var stage:bool=false
 var time:float=0
+
 func _process(delta):
+	$nm.text=str(zone)+"pl"+str(get_index())
 	if !Engine.is_editor_hint():
 		time+=delta
 	queue_redraw()
@@ -184,7 +197,7 @@ func _process(delta):
 	if !Engine.is_editor_hint():
 		if secret:
 			if neighbors.any(Callable(
-				func(x:place):
+				func(x:Place):
 					return x.player_here and x.neighbors.find(self)>-1)) or player_here:
 				show()
 			else:hide()

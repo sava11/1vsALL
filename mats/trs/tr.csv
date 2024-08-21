@@ -70,8 +70,8 @@ BREAK_TRAIN,I know it,я знаю это
 INGAME_MOVEMANT,To move in battle use wasd. To dodge use shift or right mouse button.,Для движения в битве используйте wasd. Для уворота используйте shift или правую кнопку мыши.
 TRAIN_DIALOG_1,To move around the map use the left mouse button on the adjacent square.,Для движения по карте используйте левую кнопку мыши на соседнем квадрате.
 TRAIN_DIALOG_2,*to start the study you need to press '>'. to cancel the study you need to press 'X'*,*для начала исследования нужно нажать '>'. для отмены исследования нужно нажать 'X'*
-OCUPATED_LEGEND,ocupacted shop/altar,захваченный магазин/алтарь
-SHOP_LEGEND,shop/altar,магазин/алтарь
+OCUPATED_LEGEND,ocupacted shop,захваченный магазин
+SHOP_LEGEND,shop,магазин
 BOSS_LEGEND,monstr,монстр
 
 YOU,you,ты

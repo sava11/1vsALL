@@ -1,11 +1,12 @@
 extends Node
+signal darked(result:bool)
+signal _load_data(node:Object,path:String)
+signal save_data_changed(dict:Dictionary)
 
 var sn:={}
 var fname:="save"
 const suffix=".json"
 var save_path:="saves"
-signal _load_data(node:Object,path:String)
-signal save_data_changed(dict:Dictionary)
 
 enum dificulty{easy,norm,hard}
 enum gameplay_type{clasic,bossrush,inf,train}
@@ -246,6 +247,7 @@ func load_data(n:Dictionary):
 	game_prefs.dif=0
 	fnc.rnd.seed=int(game_prefs.seed)
 func _ready():
+	#PhysicsServer2D.set_active(true)
 	connect("save_data_changed",Callable(gm,"_save_node"))
 	connect("_load_data",Callable(gm,"_load_node"))
 	if !sn.has(str(get_path())):
@@ -770,9 +772,27 @@ func _load_node(n,path):
 	var d=sn[path]
 	n.load_data(d)
 
-#func dict_to_array(d:Dictionary)
-#
-#func dict_to_buf(d:Dictionary):
-	#return PackedByteArray([d.values()])
-#func buf_to_dict(b:PackedByteArray):
-	#return Array(b)[0]
+func set_dark(r:bool=true):
+	var cl:CanvasLayer=get_tree().root.get_node_or_null("darkness_bg")
+	if r and cl==null:
+		cl=CanvasLayer.new()
+		cl.layer=3
+		cl.name="darkness_bg"
+		var cr=ColorRect.new()
+		cr.name="darkness"
+		cr.set_anchors_preset(Control.PRESET_FULL_RECT)
+		cr.color=Color(0,0,0,0)
+		cl.add_child(cr)
+		get_tree().root.add_child(cl)
+		var tween = get_tree().create_tween().bind_node(cr).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(cr, "color", Color(0,0,0,1), 2)
+		tween.tween_callback((func():
+			emit_signal("darked",r)))
+	elif cl!=null:
+		var cr=cl.get_node("darkness")
+		cr.color=Color(0,0,0,1)
+		var tween = get_tree().create_tween().bind_node(cr).set_trans(Tween.TRANS_EXPO)
+		tween.tween_property(cr, "color", Color(0,0,0,0), 2)
+		tween.tween_callback((func():
+			emit_signal("darked",r)
+			cl.queue_free()))

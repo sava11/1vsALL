@@ -1,6 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuuh64aph61qq"]
+[gd_scene load_steps=8 format=3 uid="uid://cuuh64aph61qq"]
 
 [ext_resource type="Script" path="res://mats/UI/map/locs/generator/lvl_generator.gd" id="1_sxwos"]
+[ext_resource type="Script" path="res://mats/UI/map/region_script.gd" id="2_eyyyn"]
+
+[sub_resource type="Resource" id="Resource_0j4oo"]
+script = ExtResource("2_eyyyn")
+color = Color(1, 0, 0, 1)
+pos = Vector2(0, 0)
+levels = Array[String](["res://mats/lvls/lvl1/lvl1_1.tscn", "res://mats/lvls/lvl1/lvl1_2.tscn"])
+level_chances = Array[float]([0.75, 0.25])
+boss_path = "res://mats/enemys/b2/enemy.tscn"
+
+[sub_resource type="Resource" id="Resource_wnrys"]
+script = ExtResource("2_eyyyn")
+color = Color(0, 0.67451, 0.227451, 1)
+pos = Vector2(24, 24)
+levels = Array[String](["res://mats/lvls/lvl1/lvl1_1.tscn", "res://mats/lvls/lvl1/lvl1_2.tscn"])
+level_chances = Array[float]([0.75, 0.25])
+boss_path = "res://mats/enemys/b5/enemy.tscn"
+
+[sub_resource type="Resource" id="Resource_wpnj8"]
+script = ExtResource("2_eyyyn")
+color = Color(1, 0.584314, 0, 1)
+pos = Vector2(24, 0)
+levels = Array[String](["res://mats/lvls/lvl1/lvl1_1.tscn", "res://mats/lvls/lvl1/lvl1_2.tscn"])
+level_chances = Array[float]([0.75, 0.25])
+boss_path = "res://mats/enemys/b4/enemy.tscn"
+
+[sub_resource type="Resource" id="Resource_uvly1"]
+script = ExtResource("2_eyyyn")
+color = Color(0.521569, 0.521569, 0.521569, 1)
+pos = Vector2(0, 24)
+levels = Array[String](["res://mats/lvls/lvl1/lvl1_1.tscn", "res://mats/lvls/lvl1/lvl1_2.tscn"])
+level_chances = Array[float]([0.75, 0.25])
+boss_path = "res://mats/enemys/b3/enemy.tscn"
 
 [sub_resource type="Curve" id="Curve_feuch"]
 max_value = 50.0
@@ -15,4 +48,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sxwos")
+regions = Array[ExtResource("2_eyyyn")]([SubResource("Resource_0j4oo"), SubResource("Resource_wnrys"), SubResource("Resource_wpnj8"), SubResource("Resource_uvly1")])
 curve_dificulty = SubResource("Curve_feuch")

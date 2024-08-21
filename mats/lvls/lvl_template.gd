@@ -9,7 +9,7 @@ signal uncompleted()
 var rsize:Vector2
 var rpos:Vector2
 var timer:Timer
-var place_node:place
+var place_node:Place
 @onready var enemy_path=$ent/enemys
 func start_timer(new_time:float):
 	timer.wait_time=new_time

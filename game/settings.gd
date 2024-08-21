@@ -56,7 +56,7 @@ func _on_aply_button_down():
 func _on_bc_button_down():
 	set_data(sls.load_data("settings.json"))
 	if get_parent().scene_file_path=="res://game/menu.tscn":
-		get_parent().get_node("bg").show()
+		#get_parent().get_node("bg").show()
 		get_parent().get_node("main_menu").show()
 		hide()
 	else:queue_free()
