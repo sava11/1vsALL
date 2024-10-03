@@ -247,6 +247,7 @@ func load_data(n:Dictionary):
 	game_prefs.dif=0
 	fnc.rnd.seed=int(game_prefs.seed)
 func _ready():
+	process_mode=PROCESS_MODE_ALWAYS
 	#PhysicsServer2D.set_active(true)
 	connect("save_data_changed",Callable(gm,"_save_node"))
 	connect("_load_data",Callable(gm,"_load_node"))
@@ -778,6 +779,7 @@ func set_dark(r:bool=true):
 		cl=CanvasLayer.new()
 		cl.layer=3
 		cl.name="darkness_bg"
+		cl.process_mode=Node.PROCESS_MODE_ALWAYS
 		var cr=ColorRect.new()
 		cr.name="darkness"
 		cr.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -788,6 +790,7 @@ func set_dark(r:bool=true):
 		tween.tween_property(cr, "color", Color(0,0,0,1), 2)
 		tween.tween_callback((func():
 			emit_signal("darked",r)))
+		print(tween.is_running())
 	elif cl!=null:
 		var cr=cl.get_node("darkness")
 		cr.color=Color(0,0,0,1)

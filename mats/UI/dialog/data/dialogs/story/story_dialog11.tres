@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=6 format=3 uid="uid://brdpp67foj6hn"]
+
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_68qg6"]
+[ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="2_dg5u2"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_hhe0n"]
+
+[sub_resource type="Resource" id="Resource_tkk3a"]
+script = ExtResource("1_68qg6")
+name = "SURE"
+color = Color(1, 1, 1, 1)
+disabled = false
+dialog_data_path = null
+function_node_path = NodePath("cl/map/map/cont/locs/map")
+function_name = "train_dialog"
+function_arguments = [true, true]
+
+[sub_resource type="Resource" id="Resource_d2qhs"]
+script = ExtResource("1_68qg6")
+name = "YES"
+color = Color(1, 1, 1, 1)
+disabled = false
+dialog_data_path = null
+function_node_path = NodePath("cl/map/map/cont/locs/map")
+function_name = "train_dialog"
+function_arguments = [true, true]
+
+[resource]
+script = ExtResource("3_hhe0n")
+name = "NEW_DATA"
+BDI_text = "SD7"
+buttons = Array[ExtResource("1_68qg6")]([SubResource("Resource_tkk3a"), SubResource("Resource_d2qhs")])
+interactive = false
+large_answers = false
+function_node_path = null
+function_name = ""
+function_arguments = []
+left_char_img = ExtResource("2_dg5u2")
+left_speeking = true
+right_speeking = false
+paused = 0

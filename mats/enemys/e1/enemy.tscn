@@ -1197,7 +1197,6 @@ avoidance_enabled = true
 material = SubResource("ShaderMaterial_kbboe")
 sprite_frames = SubResource("SpriteFrames_0vqqq")
 animation = &"attack_down"
-frame = 7
 offset = Vector2(0, -15)
 
 [node name="ap" type="AnimationPlayer" parent="visual"]

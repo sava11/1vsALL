@@ -163,11 +163,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
 theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 22
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 24
-theme_override_font_sizes/mono_font_size = 20
 bbcode_enabled = true
 text = "[u][i][b]998bv[/b][/i][color=light green]HELLO_TEXT[/color][/u] ehjdbkadfwhiqwhiru hwi rwi3uhr iuw3rhiuw3hriuwq3hrwqhriq3rhiuwhriuqhriuqhiugqwiurgqiurgiuwgriugtiuy2rtkjq3joirq398r25928qrorrwiurhiuwhiuwgtiuu goiehiuwriq3wor w4i 9w4gh owh iowh oiwia4ytqy98ty ai"
 

@@ -28,7 +28,7 @@ function_arguments = [true, false]
 [resource]
 script = ExtResource("2_vludt")
 name = "FIRST_STORY_DIALOG"
-BDI_text = "F_S_D"
+BDI_text = "SD0"
 buttons = Array[ExtResource("1_27ra1")]([SubResource("Resource_8rtkp"), SubResource("Resource_ek0am")])
 interactive = false
 large_answers = false

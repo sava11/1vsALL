@@ -92,7 +92,6 @@ func gen_map_v1(positions:Array,neighbors:Array):
 		#if e in nearst_points:
 		scn.zone=fnc.i_search(nearst_points,e)
 		if scn.zone!=-1:
-			print(scn.zone)
 			regions_places.merge({scn.zone:[scn]})
 			scn.level=regions[scn.zone].get_level()
 			scn.set_region(regions[scn.zone])
@@ -103,10 +102,10 @@ func gen_map_v1(positions:Array,neighbors:Array):
 			scn.shop=true
 			if fnc._with_chance(0.25):
 				scn.arena=create_arena()
-				scn.local_difficulty_add_step=fnc.rnd.randf_range(0.2,0.25)
+				scn.local_difficulty_add_step=fnc.rnd.randf_range(0,0.2)
 		else:
 			scn.arena=create_arena()
-			scn.local_difficulty_add_step=fnc.rnd.randf_range(0.2,0.25)
+			scn.local_difficulty_add_step=fnc.rnd.randf_range(0.05,0.2)
 		add_child(scn)
 	print("arenas created")
 	await get_tree().process_frame
@@ -121,12 +120,14 @@ func gen_map_v1(positions:Array,neighbors:Array):
 			return dist_a < dist_b and a!=e and b!=e))
 		var local_angs=[]
 		for k in range(neighbors[e.get_index()]):
-			var ang=fnc.angle(temp_mass[k].global_position.direction_to(e.global_position))
-			if local_angs.find(ang)==-1 and e.neighbors.find(temp_mass[k])==-1:
+			var ang=snapped(fnc.angle(temp_mass[k].global_position.direction_to(e.global_position)),0.01)
+			#var dist:=int((fnc._sqrt(e.size)+distance_betveen_nodes))
+			#var dist=temp_mass[k].global_position.distance_to(e.global_position)>=fnc._sqrt(Vector2(dist,dist))
+			if fnc.i_search(local_angs,ang)==-1 and e.neighbors.find(temp_mass[k])==-1:
 				local_angs.append(ang)
 				e.neighbors.append(temp_mass[k])
 				temp_mass[k].neighbors.append(e)
-				if len(temp_mass[k].neighbors)<=3 and fnc._with_chance(0.075):
+				if len(temp_mass[k].neighbors)>=2 and fnc._with_chance(0.075):
 					temp_mass[k].secret=true
 	print("neighbors applyed")
 	await get_tree().process_frame
@@ -169,21 +170,22 @@ func gen_map_v1(positions:Array,neighbors:Array):
 	
 	#print("testing regions")
 	#await get_tree().process_frame
-	print(regions_places.keys())
+	#print(regions_places.keys())
 	for e in range(bosses.size()):
-		var bd=boss_data.new()
-		bd.boss=bosses[0]
-		bd.name=bosses[0]
-		var cur_region:Array=regions_places[get_region_where_boss_scene_path_is(bd.boss)]
-		var node:Place=cur_region[fnc.rnd.randi_range(0,cur_region.size()-1)]
-		#while dijkstra(node.get_index(),0,false).is_empty() or node.arena.has_bosses():
-			#node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
-		#place_with_bosses.append(node)
-		bosses_pos.append(node)
-		node.arena.enemys.append(bd)
-		node.arena.spawning=false
-		node.ingame_statuses.clear()
-		node.img_think()
+		if bosses[0]!="":
+			var bd=boss_data.new()
+			bd.boss=bosses[0]
+			bd.name=bosses[0]
+			var cur_region:Array=regions_places[get_region_where_boss_scene_path_is(bd.boss)]
+			var node:Place=cur_region[fnc.rnd.randi_range(0,cur_region.size()-1)]
+			#while dijkstra(node.get_index(),0,false).is_empty() or node.arena.has_bosses():
+				#node=filtered_mass[fnc.rnd.randi_range(0,len(filtered_mass)-1)]
+			#place_with_bosses.append(node)
+			bosses_pos.append(node)
+			node.arena.enemys.append(bd)
+			node.arena.spawning=false
+			node.ingame_statuses.clear()
+			node.img_think()
 		bosses.remove_at(0)
 	
 	

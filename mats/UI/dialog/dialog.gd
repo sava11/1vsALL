@@ -6,7 +6,7 @@ var dialog:dialog_data=null
 var tree_real_pause:=false
 func _ready():
 	clean_dialog()
-	start(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog1.tres"))
+	start(preload("res://mats/UI/dialog/data/dialogs/story/story_dialog8.tres"))
 func start(d:dialog_data):
 	await get_tree().process_frame
 	clean_dialog()

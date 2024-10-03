@@ -112,6 +112,8 @@ func _pre_ready():
 	emit_signal("map_generated")
 func _post_ready():pass
 func _ready():
+	get_tree().set_deferred("paused",false)
+	gm.set_dark(true)
 	level_container=get_node_or_null("../../../../../../world")
 	var map=get_node_or_null("../../../../")
 	var t1=Time.get_time_dict_from_system()
@@ -148,7 +150,9 @@ func _ready():
 	var t2=Time.get_time_dict_from_system()
 	print(t2.minute*60+t2.second-t1.minute*60-t1.second)
 	print("map_created")
-
+	gm.set_dark(false)
+	await gm.darked
+	get_tree().set_deferred("paused",true)
 func _pre_process(delta):pass
 func _post_process(delta):pass
 func _process(delta):

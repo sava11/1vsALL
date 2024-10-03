@@ -23,7 +23,7 @@ shop_color = Color(2.40654e-07, 0.581352, 0.565908, 1)
 secret_color = Color(0.412596, 0.00212651, 0.736014, 1)
 
 [node name="visual" type="TextureRect" parent="."]
-self_modulate = Color(0.8, 0.8, 0.8, 1)
+self_modulate = Color(0.492338, 0.492338, 0.492338, 1)
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -35,6 +35,7 @@ offset_bottom = -0.8
 grow_horizontal = 2
 
 [node name="arena" type="TextureRect" parent="."]
+self_modulate = Color(0.615422, 0.615422, 0.615422, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -59,6 +60,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="nm" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,7 +73,7 @@ offset_right = 20.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "-1pl0"
+text = "pl0"
 label_settings = SubResource("LabelSettings_apmv3")
 horizontal_alignment = 1
 

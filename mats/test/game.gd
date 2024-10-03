@@ -12,14 +12,9 @@ func _ready():
 		lvl=preload("res://mats/UI/map/locs/training/training.tscn").instantiate()
 	else:
 		lvl=preload("res://mats/UI/map/locs/generator/lvl_generator.tscn").instantiate()
-	locs_cont.add_child(lvl)
 	show_lvls()
-	get_tree().set_deferred("paused",false)
-	if !lvl.map_is_generated:
-		await lvl.map_generated
-	gm.set_dark(false)
-	await gm.darked
-	get_tree().set_deferred("paused",true)
+	locs_cont.add_child(lvl)
+	#gm.set_dark(false)
 	gm.save_file_data()
 var game_end:=false
 func _process(delta):

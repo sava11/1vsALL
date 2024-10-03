@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="1_w8ekv"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_cmf0k"]
 
-[sub_resource type="Resource" id="Resource_7brsk"]
+[sub_resource type="Resource" id="Resource_ih4o5"]
 script = ExtResource("1_kb734")
 name = "button_name"
 color = Color(1, 1, 1, 1)
@@ -17,8 +17,8 @@ function_arguments = []
 [resource]
 script = ExtResource("2_cmf0k")
 name = "nexto"
-BDI_text = "[color=3771a1]Вы[/color]: можете проходить дальше!"
-buttons = Array[ExtResource("1_kb734")]([SubResource("Resource_7brsk")])
+BDI_text = "SD1"
+buttons = Array[ExtResource("1_kb734")]([SubResource("Resource_ih4o5")])
 interactive = false
 large_answers = false
 function_node_path = null

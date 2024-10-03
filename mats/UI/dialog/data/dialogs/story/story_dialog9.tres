@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="dialog_data" load_steps=5 format=3 uid="uid://d0cihyskuw5im"]
+
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_noj3c"]
+[ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="2_x4lrd"]
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_dlped"]
+
+[sub_resource type="Resource" id="Resource_81b14"]
+script = ExtResource("1_noj3c")
+name = "button_name"
+color = Color(1, 1, 1, 1)
+disabled = false
+dialog_data_path = "res://mats/UI/dialog/data/dialogs/story/story_dialog10.tres"
+function_node_path = null
+function_name = ""
+function_arguments = []
+
+[resource]
+script = ExtResource("3_dlped")
+name = "NEW_DATA"
+BDI_text = "SD5"
+buttons = Array[ExtResource("1_noj3c")]([SubResource("Resource_81b14")])
+interactive = false
+large_answers = false
+function_node_path = null
+function_name = ""
+function_arguments = []
+left_char_img = ExtResource("2_x4lrd")
+left_speeking = true
+right_speeking = false
+paused = 0

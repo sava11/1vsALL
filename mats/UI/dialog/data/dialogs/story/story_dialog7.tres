@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://bhri1br8h85co"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=4 format=3 uid="uid://bhri1br8h85co"]
 
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_khecp"]
 [ext_resource type="Texture2D" uid="uid://baovqehpykp2b" path="res://mats/imgs/icons/Warrior head.png" id="2_x8mn8"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="3_16ybe"]
 
 [resource]
 script = ExtResource("3_16ybe")
 name = "NEW_DATA"
-BDI_text = "[color]Вы[/color]: здесь находится захваченный алтарь. я отвлеку врагов на себя."
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+BDI_text = "SD3"
+buttons = Array[ExtResource("1_khecp")]([])
 interactive = false
 large_answers = false
 function_node_path = null

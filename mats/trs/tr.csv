@@ -59,9 +59,9 @@ HP_TEXT,hp uptade kit,набор улучшения здоровья
 AGILITY-DEF_TEXT,update kit mixed with defance kit and agility kit,набор улучшений совмещённый с набором защиты и набором ловкости
 AGILITY-HP_TEXT,update kit mixed with agility kit and hp kit,набор улучшений совмещённый с набором ловкости и набором здоровья
 AGILITY_TEXT,agility uptade kit,набор улучшения ловкости
-
+DEATHS,deaths:,смерти:
+RUNNED_LVLS,runned levels:,уровней пройдено:
 RETRY,retry,повторить
-
 CONTINUE,continue,продолжить
 
 ADD_SAVE,new game,новая игра
@@ -75,4 +75,13 @@ SHOP_LEGEND,shop,магазин
 BOSS_LEGEND,monstr,монстр
 
 YOU,you,ты
-F_S_D,[color=gold]Employers[/color]: [color=gold]We[/color] hired [color=3771a1]you[/color] to escort [color=gold]us[/color] to the [color=silver]local temple[/color] and lead [color=gold]us[/color] inside [color=silver]it[/color]. It is your duty to ensure [color=gold]our[/color] safety in this [color=silver]temple[/color]. We follow you.,[color=gold]Работодатели[/color]: [color=gold]Мы[/color] наняли [color=3771a1]вас[/color] для сопровождения [color=gold]нас[/color] в [color=silver]местный храм[/color] и провели [color=gold]нас[/color] внутри [color=silver]его[/color]. Ваша обязанность - обеспечить [color=gold]нам[/color] безопасность в этом [color=silver]храмe[/color]. Мы следуем затобой.
+SD0,[color=gold]Employers[/color]: [color=gold]We[/color] hired [color=3771a1]you[/color] to escort [color=gold]us[/color] to the [color=silver]local temple[/color] and lead [color=gold]us[/color] inside [color=silver]it[/color]. It is your duty to ensure [color=gold]our[/color] safety in this [color=silver]temple[/color]. We follow you.,[color=gold]Работодатели[/color]: [color=gold]Мы[/color] наняли [color=3771a1]вас[/color] для сопровождения [color=gold]нас[/color] в [color=silver]местный храм[/color] и провели [color=gold]нас[/color] внутри [color=silver]его[/color]. Ваша обязанность - обеспечить [color=gold]нам[/color] безопасность в этом [color=silver]храмe[/color]. Мы следуем затобой.
+SD1,[color=3771a1]we can go further![/color],[color=3771a1]можно проходить дальше![/color]
+SD2,[color=3771a1]there is an occupied store on the way. I will have to help[/color],[color=3771a1]на пути оккупированный магазин. Мне прийдётся помочь[/color]
+SD3,[color=3771a1]the store is now safe.[/color],[color=3771a1]магазин теперь безопасен.[/color]
+SD4,[color=gold]thanks for your help.[/color] *stab in the back*,[color=gold]спасибо за помощь.[/color] *удар ножом в спину*
+SD5,do you want revenge?),хочешь отомстить?)
+SURE,sure,конечно
+YES,yes,да
+SD6,your spirit will be immortal until you take revenge.,пока ты не отомстишь - твой дух бессмертен
+SD7,do you agree to this?,согласен на такое?

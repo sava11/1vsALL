@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="dialog_data" load_steps=2 format=3 uid="uid://cfdn2sfjbb0r1"]
+[gd_resource type="Resource" script_class="dialog_data" load_steps=3 format=3 uid="uid://cfdn2sfjbb0r1"]
 
+[ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_button.gd" id="1_j6ujw"]
 [ext_resource type="Script" path="res://mats/UI/dialog/data/scripts/dialog_data.gd" id="2_t1v80"]
 
 [resource]
 script = ExtResource("2_t1v80")
 name = "STORY_DIALOG2"
 BDI_text = "TRAIN_DIALOG_1"
-buttons = Array[Resource("res://mats/UI/dialog/data/scripts/dialog_button.gd")]([])
+buttons = Array[ExtResource("1_j6ujw")]([])
 interactive = false
-short_answers = false
+large_answers = false
 function_node_path = NodePath("cl/map/map/cont/locs/map")
 function_name = "start_dialog_ended"
 function_arguments = []

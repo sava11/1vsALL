@@ -20,7 +20,7 @@ func load_item(item_name:String):
 		$cont/cnt.add_child(item)
 		item.set_image(load(gm.objs.stats[e].i))
 		item.set_item_name(tr(gm.objs.stats[e].ct))
-		item.set_value(stats[e],gm.objs.stats[e].postfix)
+		item.set_value(snapped(stats[e],gm.objs.stats[e].step),gm.objs.stats[e].postfix)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$buy.disabled=!gm.player_data.stats.money>=value

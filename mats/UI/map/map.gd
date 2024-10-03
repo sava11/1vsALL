@@ -62,6 +62,11 @@ func get_max_map_lenght():
 	else:
 		return 0
 var temp_drag:=Vector2.ZERO
+
+func _input(e: InputEvent) -> void:
+	if e is InputEventMagnifyGesture:
+		clamp(e.factor,-999,999)
+
 func _process(delta):
 	#if Engine.is_editor_hint():
 		#for e in map.get_children():
