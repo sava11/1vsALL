@@ -107,7 +107,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1vgx1")
 curve_dificulty = SubResource("Curve_swmqv")
-current_pos = NodePath("pl4")
+current_pos = NodePath("pl0")
 
 [node name="pl0" parent="." node_paths=PackedStringArray("neighbors") instance=ExtResource("2_uri1g")]
 level = "res://mats/lvls/lvl2/lvl2_1.tscn"
